@@ -73,6 +73,9 @@
     <Compile Include="Account\Views\AddOrUpdateUserWindow.xaml.cs">
       <DependentUpon>AddOrUpdateUserWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Account\Views\UsersWindow.xaml.cs">
+      <DependentUpon>UsersWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -82,6 +85,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Account\Views\AddOrUpdateUserWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Account\Views\UsersWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
