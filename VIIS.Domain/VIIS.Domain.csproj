@@ -42,8 +42,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="Orders\Orders.cs" />
     <Compile Include="Orders\OrderTime.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\ElegantLib\ElegantLib\ElegantLib.csproj">
+      <Project>{4AEFDB59-CAD9-4FD0-954E-F2C686200A55}</Project>
+      <Name>ElegantLib</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

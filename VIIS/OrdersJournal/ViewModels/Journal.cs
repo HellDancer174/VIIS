@@ -3,19 +3,43 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using VIIS.App.OrdersJournal.Models.OrdersDecorators;
+using VIIS.Domain.Orders;
+using VIMVVM;
 
 namespace VIIS.App.OrdersJournal.ViewModels
 {
-    public class Journal
+    public class Journal: ViewModel<Orders>
     {
-        public string Admin { get; set; }
-        public List<JournalPage> JournalPages { get; set; }
+        private Staff staff;
+        private readonly Orders orders;
+        private DateTime currentDate;
 
-        public Journal(string admin, List<JournalPage> journalPages)
+        public Journal(Staff staff, Orders orders)
         {
-            Admin = admin;
-            JournalPages = journalPages;
+            this.staff = staff;
+            this.orders = new ViewTrasferableOrders(this, orders);
+            currentDate = DateTime.Now;
         }
+
+        public Staff Staff => staff;
+
+        public DateTime CurrentDate
+        {
+            get => currentDate;
+            set
+            {
+                currentDate = value;
+                new RelayCommand(async (obj) => await orders.Transfer()).Execute(this);
+            }
+        }
+
+        public void ChangeStaff(Staff staff)
+        {
+            this.staff = staff;
+        }
+
 
     }
 }

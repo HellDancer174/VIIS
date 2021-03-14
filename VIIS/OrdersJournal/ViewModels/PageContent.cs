@@ -7,7 +7,7 @@ using VIIS.Domain.Orders;
 
 namespace VIIS.App.OrdersJournal.ViewModels
 {
-    public class JournalPageContent
+    public class PageContent
     {
         public string Customer { get; set; }
         public string Phone { get; set; }
@@ -16,7 +16,7 @@ namespace VIIS.App.OrdersJournal.ViewModels
         private OrderTime time = new Domain.Orders.OrderTime(new TimeSpan(), new TimeSpan());
         
 
-        public JournalPageContent(string customer, string phone, string orderInfo, TimeSpan orderTime)
+        public PageContent(string customer, string phone, string orderInfo, TimeSpan orderTime)
         {
             Customer = customer;
             Phone = phone;
@@ -34,7 +34,7 @@ namespace VIIS.App.OrdersJournal.ViewModels
             return index == OrderTime.Hours;
         }
 
-        public bool CheckOrders(JournalPageContent other)
+        public bool CheckOrders(PageContent other)
         {
            return time.CheckYourSelf(other.time);
         }

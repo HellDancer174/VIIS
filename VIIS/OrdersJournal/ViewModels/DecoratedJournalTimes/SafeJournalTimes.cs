@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace VIIS.App.OrdersJournal.ViewModels.DecoratedJournalTimes
 {
-    public class SafeJournalTimes : JournalTimes
+    public class SafeJournalTimes : PageTimes
     {
-        private readonly JournalTimes other;
+        private readonly PageTimes other;
 
-        public SafeJournalTimes(JournalTimes other) : base(other)
+        public SafeJournalTimes(PageTimes other) : base(other)
         {
             this.other = other;
         }
 
-        public override void AddContent(JournalPageContent content)
+        public override void AddContent(PageContent content)
         {
             int counter = 0;
             try

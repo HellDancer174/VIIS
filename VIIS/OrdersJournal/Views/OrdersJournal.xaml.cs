@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ElegantLib.Collections;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -14,6 +15,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using VIIS.App.OrdersJournal.ViewModels;
 using VIIS.App.OrdersJournal.ViewModels.DecoratedJournalTimes;
+using VIIS.App.OrdersJournal.ViewModels.Fake;
+using VIIS.Domain.Orders;
 
 namespace VIIS.App.OrdersJournal.Views
 {
@@ -22,27 +25,13 @@ namespace VIIS.App.OrdersJournal.Views
     /// </summary>
     public partial class OrdersJournal : Window
     {
+        private Journal journal;
         public OrdersJournal()
         {
             InitializeComponent();
-        }
-
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            
-            var list = new List<JournalTime>() { new JournalTime(8), new JournalTime(9), new JournalTime(10), new JournalTime(11), new JournalTime(12), new JournalTime(13), new JournalTime(14), new JournalTime(15), new JournalTime(16), new JournalTime(17), new JournalTime(18), new JournalTime(19) };
-
-            JournalTimes content = new SafeJournalTimes(new JournalTimes(8, 20, list));
-            content.AddContent(new JournalPageContent("Игнатьев В.А", "455476", "", new TimeSpan(9, 00, 0)));
-            content.AddContent(new JournalPageContent("Игнатьев В.А", "455476", "", new TimeSpan(9, 30, 0)));
-
-            DataContext = new JournalPage("Игнатьева В.И", content);
-            
-        }
-
-        private void StackPanel_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-
+            var orders = new Orders();
+            DataContext = journal = new Journal(new Staff(new List<string>(), new List<string>(), new List<string>() { "Иванова И.И." }, new FakePage(new WorkDaysPage("", new List<MastersPage>())).Fake()), new Domain.Orders.Orders());
+            journal.Staff.DaysPage.ChangePage("Иванова И.И.");
         }
     }
 }

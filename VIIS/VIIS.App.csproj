@@ -99,12 +99,16 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="OrdersJournal\Models\OrdersDecorators\ViewTrasferableOrders.cs" />
+    <Compile Include="OrdersJournal\ViewModels\Fake\FakePage.cs" />
     <Compile Include="OrdersJournal\ViewModels\Journal.cs" />
-    <Compile Include="OrdersJournal\ViewModels\JournalPage.cs" />
-    <Compile Include="OrdersJournal\ViewModels\JournalPageContent.cs" />
-    <Compile Include="OrdersJournal\ViewModels\JournalTime.cs" />
-    <Compile Include="OrdersJournal\ViewModels\JournalTimes.cs" />
+    <Compile Include="OrdersJournal\ViewModels\WorkDaysPage.cs" />
+    <Compile Include="OrdersJournal\ViewModels\MastersPage.cs" />
+    <Compile Include="OrdersJournal\ViewModels\PageContent.cs" />
+    <Compile Include="OrdersJournal\ViewModels\PageTime.cs" />
+    <Compile Include="OrdersJournal\ViewModels\PageTimes.cs" />
     <Compile Include="OrdersJournal\ViewModels\DecoratedJournalTimes\SafeJournalTimes.cs" />
+    <Compile Include="OrdersJournal\ViewModels\Staff.cs" />
     <Compile Include="OrdersJournal\Views\OrdersJournal.xaml.cs">
       <DependentUpon>OrdersJournal.xaml</DependentUpon>
     </Compile>
@@ -142,6 +146,10 @@
     <Resource Include="Resources\VIIS_Logo.ico" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\ElegantLib\ElegantLib\ElegantLib.csproj">
+      <Project>{4aefdb59-cad9-4fd0-954e-f2c686200a55}</Project>
+      <Name>ElegantLib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\VIMVVM\VIMVVM\VIMVVM.csproj">
       <Project>{b6da2fa6-aca9-4881-bd84-de94bfed2286}</Project>
       <Name>VIMVVM</Name>

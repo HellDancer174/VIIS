@@ -8,18 +8,21 @@ using VIMVVM;
 
 namespace VIIS.App.OrdersJournal.ViewModels
 {
-    public class JournalPage: ViewModel<string>, IEquatable<JournalPage>
+    /// <summary>
+    /// Является сущностью страницы журнала
+    /// </summary>
+    public class MastersPage: ViewModel<string>, IEquatable<MastersPage>
     {
         public string Master { get; set; } //Возможно стоит создать класс "Master";
-        public ObservableCollection<JournalTime> Times { get; set; }
+        public ObservableCollection<PageTime> Times { get; set; }
 
-        public JournalPage(string master, JournalTimes content)
+        public MastersPage(string master, PageTimes times)
         {
             Master = master;
-            Times = new ObservableCollection<JournalTime>(content);
+            Times = new ObservableCollection<PageTime>(times);
         }
 
-        public bool Equals(JournalPage other)
+        public bool Equals(MastersPage other)
         {
             return Master == other.Master;
         }

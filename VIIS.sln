@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VIIS.Domain", "VIIS.Domain\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VIMVVM", "..\VIMVVM\VIMVVM\VIMVVM.csproj", "{B6DA2FA6-ACA9-4881-BD84-DE94BFED2286}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElegantLib", "..\ElegantLib\ElegantLib\ElegantLib.csproj", "{4AEFDB59-CAD9-4FD0-954E-F2C686200A55}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{B6DA2FA6-ACA9-4881-BD84-DE94BFED2286}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B6DA2FA6-ACA9-4881-BD84-DE94BFED2286}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B6DA2FA6-ACA9-4881-BD84-DE94BFED2286}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4AEFDB59-CAD9-4FD0-954E-F2C686200A55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4AEFDB59-CAD9-4FD0-954E-F2C686200A55}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4AEFDB59-CAD9-4FD0-954E-F2C686200A55}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4AEFDB59-CAD9-4FD0-954E-F2C686200A55}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
