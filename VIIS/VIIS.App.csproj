@@ -93,8 +93,21 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="OrdersJournal\Views\OrdersJournal.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="OrdersJournal\ViewModels\Journal.cs" />
+    <Compile Include="OrdersJournal\ViewModels\JournalPage.cs" />
+    <Compile Include="OrdersJournal\ViewModels\JournalPageContent.cs" />
+    <Compile Include="OrdersJournal\ViewModels\JournalTime.cs" />
+    <Compile Include="OrdersJournal\ViewModels\JournalTimes.cs" />
+    <Compile Include="OrdersJournal\ViewModels\DecoratedJournalTimes\SafeJournalTimes.cs" />
+    <Compile Include="OrdersJournal\Views\OrdersJournal.xaml.cs">
+      <DependentUpon>OrdersJournal.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -127,6 +140,16 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\VIIS_Logo.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\VIMVVM\VIMVVM\VIMVVM.csproj">
+      <Project>{b6da2fa6-aca9-4881-bd84-de94bfed2286}</Project>
+      <Name>VIMVVM</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VIIS.Domain\VIIS.Domain.csproj">
+      <Project>{ed40e2cf-c64a-474e-8e47-e5394889285d}</Project>
+      <Name>VIIS.Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.4.0.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.4.0.0\build\MaterialDesignThemes.targets')" />
