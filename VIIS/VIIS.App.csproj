@@ -96,6 +96,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="OrdersJournal\OrderDetail\Views\OrderDetail.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="OrdersJournal\Views\OrdersJournal.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -103,6 +107,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="OrdersJournal\Models\OrdersDecorators\ViewTrasferableOrders.cs" />
+    <Compile Include="OrdersJournal\OrderDetail\Views\OrderDetail.xaml.cs">
+      <DependentUpon>OrderDetail.xaml</DependentUpon>
+    </Compile>
     <Compile Include="OrdersJournal\ViewModels\Fake\FakePage.cs" />
     <Compile Include="OrdersJournal\ViewModels\Journal.cs" />
     <Compile Include="OrdersJournal\ViewModels\WorkDaysPage.cs" />

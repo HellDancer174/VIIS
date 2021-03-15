@@ -21,6 +21,8 @@ namespace VIIS.App.OrdersJournal.Models.OrdersDecorators
 
         public override async Task Transfer()
         {
+            await Task.CompletedTask; 
+            throw new NotImplementedException();
             ////////////journal.ChangeStaff
         }
     }
