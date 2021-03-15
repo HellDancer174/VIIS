@@ -31,5 +31,7 @@ namespace VIIS.App.OrdersJournal.ViewModels
         {
             return Master == master;
         }
+
+        public KeyValuePair<string, ObservableCollection<PageTime>> KeyValue => new KeyValuePair<string, ObservableCollection<PageTime>>(Master, Times);
     }
 }

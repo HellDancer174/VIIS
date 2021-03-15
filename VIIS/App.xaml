@@ -10,6 +10,7 @@
             <FontFamily x:Key="Champagne">pack://application:,,,/Resources/#Champagne &amp; Limousines</FontFamily>
             <FontFamily x:Key="ChampagneSymbols">pack://application:,,,/Resources/#Champagne &amp; Limousines Symbols</FontFamily>
             <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/FluentWPF;component/Styles/Controls.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
                 <!--<ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />

@@ -11,7 +11,7 @@ namespace VIIS.App.OrdersJournal.ViewModels
     {
         private readonly WorkDaysPage daysPage;
 
-        public Staff(List<string> manicure, List<string> pedicure, List<string> masters, WorkDaysPage daysPage)
+        public Staff(List<string> manicure, List<string> pedicure, List<string> masters, WorkDaysPage daysPage) //МБ добавить словарь с мастерами
         {
             Manicure = manicure;
             Pedicure = pedicure;

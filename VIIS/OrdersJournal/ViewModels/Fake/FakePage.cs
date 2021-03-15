@@ -1,6 +1,7 @@
 ﻿using ElegantLib.Collections;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,7 +25,7 @@ namespace VIIS.App.OrdersJournal.ViewModels.Fake
             PageTimes content = new SafeJournalTimes(new PageTimes(8, 20, list));
             content.AddContent(new PageContent("Игнатьев В.А", "455476", "", new TimeSpan(9, 00, 0)));
             content.AddContent(new PageContent("Игнатьев В.А", "455476", "", new TimeSpan(9, 30, 0)));
-            return new WorkDaysPage("Иванова В.В.", new List<MastersPage>() { new MastersPage("Иванова И.И.", content) });
+            return new WorkDaysPage("Иванова В.В.", new Dictionary<string, ObservableCollection<PageTime>> { { "Иванова И.И.", new ObservableCollection<PageTime>(content) } });
         }
     }
 }

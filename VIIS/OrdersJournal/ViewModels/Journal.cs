@@ -30,8 +30,9 @@ namespace VIIS.App.OrdersJournal.ViewModels
             get => currentDate;
             set
             {
+                if (value == currentDate) return;
                 currentDate = value;
-                new RelayCommand(async (obj) => await orders.Transfer()).Execute(this);
+                Task.Run(async () => await orders.Transfer());
             }
         }
 

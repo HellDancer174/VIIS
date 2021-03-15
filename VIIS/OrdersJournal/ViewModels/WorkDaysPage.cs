@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,13 +8,16 @@ using VIMVVM;
 
 namespace VIIS.App.OrdersJournal.ViewModels
 {
-    public class WorkDaysPage: ViewModel<string>
+    public class WorkDaysPage : ViewModel<string>
     {
         public string Admin { get; set; } // Возможно стоит сделать класс Admin
-        public MastersPage CurrentPage { get; set; }
-        protected List<MastersPage> journalPages;
 
-        public WorkDaysPage(string admin, List<MastersPage> journalPages)
+        public string CurrentMaster { get; set; }
+        public ObservableCollection<PageTime> CurrentTimes { get; set; }
+
+        protected Dictionary<string, ObservableCollection<PageTime>> journalPages;
+
+        public WorkDaysPage(string admin, Dictionary<string, ObservableCollection<PageTime>> journalPages)
         {
             Admin = admin;
             this.journalPages = journalPages;
@@ -24,7 +28,8 @@ namespace VIIS.App.OrdersJournal.ViewModels
 
         public void ChangePage(string master)
         {
-            CurrentPage = journalPages.Single(page => page.IsOwner(master));
+            CurrentTimes = journalPages[master];
+            CurrentMaster = master;
         }
 
     }
