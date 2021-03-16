@@ -1,0 +1,26 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using VIMVVM;
+
+namespace VIIS.App.OrdersJournal.OrderDetail.ViewModels
+{
+    public class ClientName: ViewModel<string>
+    {
+        public ClientName(string firstName, string middleName, string lastName)
+        {
+            FirstName = firstName;
+            MiddleName = middleName;
+            LastName = lastName;
+        }
+        public ClientName(): this(string.Empty, string.Empty, string.Empty)
+        {
+        }
+        public string FirstName { get; set; }
+        public string MiddleName { get; set; }
+        public string LastName { get; set; }
+
+    }
+}

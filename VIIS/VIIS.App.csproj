@@ -70,6 +70,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Staff\Views\EmployeeDetail.xaml.cs">
+      <DependentUpon>EmployeeDetail.xaml</DependentUpon>
+    </Compile>
     <Page Include="Account\Views\LoginWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -104,9 +107,16 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Staff\Views\EmployeeDetail.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="OrdersJournal\Models\OrdersDecorators\ViewTrasferableOrders.cs" />
+    <Compile Include="OrdersJournal\OrderDetail\ViewModels\ClientName.cs" />
+    <Compile Include="OrdersJournal\OrderDetail\ViewModels\OrderDetailVM.cs" />
+    <Compile Include="OrdersJournal\OrderDetail\ViewModels\Service.cs" />
     <Compile Include="OrdersJournal\OrderDetail\Views\OrderDetail.xaml.cs">
       <DependentUpon>OrderDetail.xaml</DependentUpon>
     </Compile>
@@ -168,6 +178,10 @@
       <Project>{ed40e2cf-c64a-474e-8e47-e5394889285d}</Project>
       <Name>VIIS.Domain</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Clients\" />
+    <Folder Include="Finance\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.4.0.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.4.0.0\build\MaterialDesignThemes.targets')" />

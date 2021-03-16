@@ -11,20 +11,17 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using VIIS.App.OrdersJournal.OrderDetail.ViewModels;
 
-namespace VIIS.App.OrdersJournal.OrderDetail.Views
+namespace VIIS.App.Staff.Views
 {
     /// <summary>
-    /// Логика взаимодействия для OrderDetail.xaml
+    /// Логика взаимодействия для EmployeeDetail.xaml
     /// </summary>
-    public partial class OrderDetail : Window
+    public partial class EmployeeDetail : Window
     {
-        private OrderDetailVM viewModel;
-        public OrderDetail()
+        public EmployeeDetail()
         {
             InitializeComponent();
-            DataContext = viewModel = new OrderDetailVM();
         }
     }
 }
