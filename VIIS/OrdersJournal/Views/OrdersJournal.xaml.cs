@@ -30,7 +30,7 @@ namespace VIIS.App.OrdersJournal.Views
         {
             InitializeComponent();
             var orders = new Orders();
-            DataContext = journal = new Journal(new Staff(new List<string>(), new List<string>(), new List<string>() { "Иванова И.И." }, new FakePage(new WorkDaysPage("", new Dictionary<string, ObservableCollection<PageTime>>())).Fake()), new Domain.Orders.Orders());
+            DataContext = journal = new Journal(new ViewModels.Staff(new List<string>(), new List<string>(), new List<string>() { "Иванова И.И." }, new FakePage(new WorkDaysPage("", new Dictionary<string, ObservableCollection<PageTime>>())).Fake()), new Domain.Orders.Orders());
             journal.Staff.DaysPage.ChangePage("Иванова И.И.");
         }
     }

@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace VIIS.App.Staff.Views
+namespace VIIS.App.Employees.Views
 {
     /// <summary>
     /// Логика взаимодействия для EmployeeDetail.xaml
