@@ -7,7 +7,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:ViewModels="clr-namespace:VIIS.App.OrdersJournal.OrderDetail.ViewModels" x:Name="window" x:Class="VIIS.App.OrdersJournal.OrderDetail.Views.OrderDetail"
         mc:Ignorable="d"
-        Title="" Height="700" Width="700" SizeToContent="Width" ResizeMode="NoResize">
+        Title="" Height="700" Width="700" ResizeMode="NoResize">
     <Window.Resources>
         <Style TargetType="{x:Type TextBlock}">
             <Setter Property="FontSize" Value="16"/>
@@ -42,23 +42,22 @@
             <RowDefinition Height="80*"/>
             <RowDefinition Height="20*"/>
         </Grid.RowDefinitions>
-        <ScrollViewer x:Name="scrollViewer" Grid.Row="0">
+        <ScrollViewer Grid.Row="0">
             <StackPanel Margin="0,20,0,5">
-                <Grid DataContext="{Binding ClientName}" Margin="5">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="10*"/>
-                        <ColumnDefinition Width="20*"/>
-                        <ColumnDefinition Width="10*"/>
-                        <ColumnDefinition Width="20*"/>
-                        <ColumnDefinition Width="10*"/>
-                        <ColumnDefinition Width="20*"/>
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Column="0" Text="Фамилия" HorizontalAlignment="Center"/>
-                    <TextBlock Grid.Column="2" Text="Имя" HorizontalAlignment="Center"/>
-                    <TextBlock Grid.Column="4" Text="Отчество" HorizontalAlignment="Center"/>
-                    <TextBox Grid.Column="1" Text="{Binding FirstName}"/>
-                    <TextBox Grid.Column="3" Text="{Binding LastName}"/>
-                    <TextBox Grid.Column="5" Text="{Binding MiddleName}"/>
+                <Grid DataContext="{Binding ClientNames}" Margin="5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="10*"/>
+                        <RowDefinition Height="90*"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="Клиент" Grid.Row="0" HorizontalAlignment="Center"/>
+                    <TabControl Grid.Row="1">
+                        <TabItem Header="Новый">
+                            <Frame Content="{Binding New}"/>
+                        </TabItem>
+                        <TabItem Header="Существующий">
+                            <Frame Content="{Binding Exist}"/>
+                        </TabItem>
+                    </TabControl>
                 </Grid>
                 <Grid>
                     <Grid.RowDefinitions>
@@ -66,7 +65,7 @@
                         <RowDefinition Height="90*"/>
                     </Grid.RowDefinitions>
                     <TextBlock Text="Услуги" Grid.Row="0" HorizontalAlignment="Center"/>
-                    <ListBox x:Name="listBox" Grid.Row="1" ItemsSource="{Binding Services}">
+                    <ListBox Grid.Row="1" ItemsSource="{Binding Services}">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <Grid Width="650">

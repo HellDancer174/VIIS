@@ -34,120 +34,138 @@
         </Style>
     </Window.Resources>
     <Grid>
-        <StackPanel>
-            <Grid>
-                <TextBlock Text="Общее" HorizontalAlignment="Center" TextDecorations="Underline"/>
-            </Grid>
-            <Grid DataContext="{Binding Name}" Margin="5">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="10*"/>
-                    <ColumnDefinition Width="20*"/>
-                    <ColumnDefinition Width="10*"/>
-                    <ColumnDefinition Width="20*"/>
-                    <ColumnDefinition Width="10*"/>
-                    <ColumnDefinition Width="20*"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0" Text="Фамилия" HorizontalAlignment="Center"/>
-                <TextBlock Grid.Column="2" Text="Имя" HorizontalAlignment="Center"/>
-                <TextBlock Grid.Column="4" Text="Отчество" HorizontalAlignment="Center"/>
-                <TextBox Grid.Column="1" Text="{Binding FirstName}"/>
-                <TextBox Grid.Column="3" Text="{Binding LastName}"/>
-                <TextBox Grid.Column="5" Text="{Binding MiddleName}"/>
-            </Grid>
-            <Grid Margin="5">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="10*"/>
-                    <ColumnDefinition Width="20*"/>
-                    <ColumnDefinition Width="10*"/>
-                    <ColumnDefinition Width="20*"/>
-                    <ColumnDefinition Width="10*"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0" Text="День рождения" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
-                <DatePicker Grid.Column="1" SelectedDate="{Binding BirthDay}"/>
-            </Grid>
-            <Grid Margin="5">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="10*"/>
-                    <ColumnDefinition Width="20*"/>
-                    <ColumnDefinition Width="10*"/>
-                    <ColumnDefinition Width="20*"/>
-                    <ColumnDefinition Width="10*"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0" Text="Телефон" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
-                <TextBox Grid.Column="1" Text="{Binding Phone}"/>
-            </Grid>
-            <Grid Margin="5">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="10*"/>
-                    <ColumnDefinition Width="20*"/>
-                    <ColumnDefinition Width="10*"/>
-                    <ColumnDefinition Width="20*"/>
-                    <ColumnDefinition Width="10*"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0" Text="Email" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
-                <TextBox Grid.Column="1" Text="{Binding Email}"/>
-            </Grid>
-            <Grid>
-                <TextBlock Text="Трудовой договор" HorizontalAlignment="Center" TextDecorations="Underline"/>
-            </Grid>
-            <Grid Margin="5">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="10*"/>
-                    <ColumnDefinition Width="20*"/>
-                    <ColumnDefinition Width="10*"/>
-                    <ColumnDefinition Width="20*"/>
-                    <ColumnDefinition Width="10*"/>
-                    <ColumnDefinition Width="20*"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0" Text="Дата приема" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
-                <TextBlock Grid.Column="2" Text="Номер" HorizontalAlignment="Center"/>
-                <DatePicker Grid.Column="1" SelectedDate="{Binding Start}"/>
-                <TextBox Grid.Column="3" Text="{Binding Id}"/>
-            </Grid>
-            <Grid Margin="5">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="10*"/>
-                    <ColumnDefinition Width="20*"/>
-                    <ColumnDefinition Width="10*"/>
-                    <ColumnDefinition Width="20*"/>
-                    <ColumnDefinition Width="10*"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0" Text="Должность" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
-                <TextBox Grid.Column="1" Text="{Binding Position}"/>
-            </Grid>
-            <Grid>
-                <TextBlock Text="Реквизиты" HorizontalAlignment="Center" TextDecorations="Underline"/>
-            </Grid>
-            <Grid Margin="5">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="10*"/>
-                    <ColumnDefinition Width="10*"/>
-                    <ColumnDefinition Width="20*"/>
-                    <ColumnDefinition Width="20*"/>
-                    <ColumnDefinition Width="10*"/>
-                    <ColumnDefinition Width="10*"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0" Text="Адрес" HorizontalAlignment="Center"/>
-                <TextBox Grid.Column="1" Text="{Binding Index}"/>
-                <TextBox Grid.Column="2" Text="{Binding City}" />
-                <TextBox Grid.Column="3" Text="{Binding Street}"/>
-                <TextBox Grid.Column="4" Text="{Binding House}" />
-                <TextBox Grid.Column="5" Text="{Binding Flat}"/>
-            </Grid>
-            <Grid Margin="5">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="10*"/>
-                    <ColumnDefinition Width="10*"/>
-                    <ColumnDefinition Width="20*"/>
-                    <ColumnDefinition Width="10*"/>
-                    <ColumnDefinition Width="20*"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0" Text="Паспорт" HorizontalAlignment="Center"/>
-                <TextBox Grid.Column="1" Text="{Binding Seria}"/>
-                <TextBox Grid.Column="2" Text="{Binding Id}" />
-                <TextBox Grid.Column="3" Text="{Binding Date}"/>
-                <TextBox Grid.Column="4" Text="{Binding Organization}" />
-            </Grid>
-        </StackPanel>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="90*"/>
+            <RowDefinition Height="10*"/>
+        </Grid.RowDefinitions>
+        <ScrollViewer Grid.Row="0">
+            <StackPanel>
+                <Grid>
+                    <TextBlock Text="Общее" HorizontalAlignment="Center" TextDecorations="Underline"/>
+                </Grid>
+                <Grid DataContext="{Binding Name}" Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="10*"/>
+                        <ColumnDefinition Width="20*"/>
+                        <ColumnDefinition Width="10*"/>
+                        <ColumnDefinition Width="20*"/>
+                        <ColumnDefinition Width="10*"/>
+                        <ColumnDefinition Width="20*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="Фамилия" HorizontalAlignment="Center"/>
+                    <TextBlock Grid.Column="2" Text="Имя" HorizontalAlignment="Center"/>
+                    <TextBlock Grid.Column="4" Text="Отчество" HorizontalAlignment="Center"/>
+                    <TextBox Grid.Column="1" Text="{Binding FirstName}"/>
+                    <TextBox Grid.Column="3" Text="{Binding LastName}"/>
+                    <TextBox Grid.Column="5" Text="{Binding MiddleName}"/>
+                </Grid>
+                <Grid Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="10*"/>
+                        <ColumnDefinition Width="20*"/>
+                        <ColumnDefinition Width="10*"/>
+                        <ColumnDefinition Width="20*"/>
+                        <ColumnDefinition Width="10*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="День рождения" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+                    <DatePicker Grid.Column="1" SelectedDate="{Binding BirthDay}"/>
+                </Grid>
+                <Grid Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="10*"/>
+                        <ColumnDefinition Width="20*"/>
+                        <ColumnDefinition Width="10*"/>
+                        <ColumnDefinition Width="20*"/>
+                        <ColumnDefinition Width="10*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="Телефон" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+                    <TextBox Grid.Column="1" Text="{Binding Phone}"/>
+                </Grid>
+                <Grid Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="10*"/>
+                        <ColumnDefinition Width="20*"/>
+                        <ColumnDefinition Width="10*"/>
+                        <ColumnDefinition Width="20*"/>
+                        <ColumnDefinition Width="10*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="Email" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+                    <TextBox Grid.Column="1" Text="{Binding Email}"/>
+                </Grid>
+                <Grid>
+                    <TextBlock Text="Трудовой договор" HorizontalAlignment="Center" TextDecorations="Underline"/>
+                </Grid>
+                <Grid Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="10*"/>
+                        <ColumnDefinition Width="20*"/>
+                        <ColumnDefinition Width="10*"/>
+                        <ColumnDefinition Width="20*"/>
+                        <ColumnDefinition Width="10*"/>
+                        <ColumnDefinition Width="20*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="Дата приема" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
+                    <TextBlock Grid.Column="2" Text="Номер" HorizontalAlignment="Center"/>
+                    <DatePicker Grid.Column="1" SelectedDate="{Binding Start}"/>
+                    <TextBox Grid.Column="3" Text="{Binding Id}"/>
+                </Grid>
+                <Grid Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="10*"/>
+                        <ColumnDefinition Width="20*"/>
+                        <ColumnDefinition Width="10*"/>
+                        <ColumnDefinition Width="20*"/>
+                        <ColumnDefinition Width="10*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="Должность" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+                    <TextBox Grid.Column="1" Text="{Binding Position}"/>
+                </Grid>
+                <Grid>
+                    <TextBlock Text="Реквизиты" HorizontalAlignment="Center" TextDecorations="Underline"/>
+                </Grid>
+                <Grid Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="10*"/>
+                        <ColumnDefinition Width="10*"/>
+                        <ColumnDefinition Width="20*"/>
+                        <ColumnDefinition Width="20*"/>
+                        <ColumnDefinition Width="10*"/>
+                        <ColumnDefinition Width="10*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="Адрес" HorizontalAlignment="Center"/>
+                    <TextBox Grid.Column="1" Text="{Binding Index}"/>
+                    <TextBox Grid.Column="2" Text="{Binding City}" />
+                    <TextBox Grid.Column="3" Text="{Binding Street}"/>
+                    <TextBox Grid.Column="4" Text="{Binding House}" />
+                    <TextBox Grid.Column="5" Text="{Binding Flat}"/>
+                </Grid>
+                <Grid Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="10*"/>
+                        <ColumnDefinition Width="10*"/>
+                        <ColumnDefinition Width="20*"/>
+                        <ColumnDefinition Width="10*"/>
+                        <ColumnDefinition Width="20*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="Паспорт" HorizontalAlignment="Center"/>
+                    <TextBox Grid.Column="1" Text="{Binding Seria}"/>
+                    <TextBox Grid.Column="2" Text="{Binding Id}" />
+                    <TextBox Grid.Column="3" Text="{Binding Date}"/>
+                    <TextBox Grid.Column="4" Text="{Binding Organization}" />
+                </Grid>
+            </StackPanel>
+        </ScrollViewer>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Style="{StaticResource Material}" Margin="10, 0, 10, 0">
+                <TextBlock Text="Сохранить"/>
+            </Button>
+            <Button Grid.Column="1" Style="{StaticResource Material}" Margin="10, 0, 10, 0"> 
+                <TextBlock Text="Удалить" />
+            </Button>
+        </Grid>
     </Grid>
 </Window>

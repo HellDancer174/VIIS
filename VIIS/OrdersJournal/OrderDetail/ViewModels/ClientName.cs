@@ -22,5 +22,7 @@ namespace VIIS.App.OrdersJournal.OrderDetail.ViewModels
         public string MiddleName { get; set; }
         public string LastName { get; set; }
 
+        public virtual string FullName => String.Format("{0} {1} {2}", LastName, FirstName, MiddleName);
+
     }
 }

@@ -42,6 +42,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="Clients\Client.cs" />
+    <Compile Include="Clients\Clients.cs" />
     <Compile Include="Orders\Orders.cs" />
     <Compile Include="Orders\OrderTime.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,0 +1,33 @@
+﻿<Page
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:VIIS.App.OrdersJournal.OrderDetail.Views.ClientNamePages"
+      xmlns:ViewModels="clr-namespace:VIIS.App.OrdersJournal.OrderDetail.ViewModels" x:Class="VIIS.App.OrdersJournal.OrderDetail.Views.ClientNamePages.NewClient"
+      mc:Ignorable="d" d:DesignWidth="800"
+      Title="NewClient" Background="White" Height="30">
+
+    <Page.DataContext>
+        <ViewModels:ClientName/>
+    </Page.DataContext>
+
+    <Grid>
+        <Grid DataContext="{Binding ClientName}" Margin="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="10*"/>
+                <ColumnDefinition Width="20*"/>
+                <ColumnDefinition Width="10*"/>
+                <ColumnDefinition Width="20*"/>
+                <ColumnDefinition Width="10*"/>
+                <ColumnDefinition Width="20*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0" Text="Фамилия" HorizontalAlignment="Center" Style="{StaticResource Default}"/>
+            <TextBlock Grid.Column="2" Text="Имя" HorizontalAlignment="Center" Style="{StaticResource Default}"/>
+            <TextBlock Grid.Column="4" Text="Отчество" HorizontalAlignment="Center" Style="{StaticResource Default}"/>
+            <TextBox Grid.Column="1" Text="{Binding FirstName}" Style="{StaticResource DefaultTextBox}"/>
+            <TextBox Grid.Column="3" Text="{Binding LastName}" Style="{StaticResource DefaultTextBox}"/>
+            <TextBox Grid.Column="5" Text="{Binding MiddleName}" Style="{StaticResource DefaultTextBox}"/>
+        </Grid>
+    </Grid>
+</Page>
