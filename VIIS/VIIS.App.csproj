@@ -70,6 +70,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Employees\ViewModels\EmployeesViewModels\ViewAddress.cs" />
+    <Compile Include="Employees\ViewModels\EmployeesViewModels\ViewEmployeeDetail.cs" />
+    <Compile Include="Employees\ViewModels\EmployeesViewModels\ViewPassport.cs" />
+    <Compile Include="Employees\ViewModels\ViewEmployee.cs" />
+    <Compile Include="Employees\ViewModels\ViewEmployees.cs" />
     <Compile Include="Employees\Views\EmployeeDetail.xaml.cs">
       <DependentUpon>EmployeeDetail.xaml</DependentUpon>
     </Compile>
@@ -99,6 +104,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Employees\Views\EmployeesList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Employees\Views\EmployeesPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="OrdersJournal\OrderDetail\Views\ClientNamePages\ExistingClient.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -121,9 +134,17 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Employees\Views\EmployeesList.xaml.cs">
+      <DependentUpon>EmployeesList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Employees\Views\EmployeesPage.xaml.cs">
+      <DependentUpon>EmployeesPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GlobalViewModel\Converters\DateConverter.cs" />
     <Compile Include="OrdersJournal\Models\OrdersDecorators\ViewTrasferableOrders.cs" />
-    <Compile Include="OrdersJournal\OrderDetail\ViewModels\ExistingClientName.cs" />
     <Compile Include="OrdersJournal\OrderDetail\ViewModels\ClientName.cs" />
+    <Compile Include="OrdersJournal\OrderDetail\ViewModels\ExistingClientName.cs" />
+    <Compile Include="GlobalViewModel\ViewName.cs" />
     <Compile Include="OrdersJournal\OrderDetail\ViewModels\ClientNames.cs" />
     <Compile Include="OrdersJournal\OrderDetail\ViewModels\OrderDetailVM.cs" />
     <Compile Include="OrdersJournal\OrderDetail\ViewModels\Service.cs" />

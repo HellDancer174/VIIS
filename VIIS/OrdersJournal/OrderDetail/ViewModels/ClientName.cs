@@ -3,26 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using VIMVVM;
+using VIIS.App.GlobalViewModel;
 
 namespace VIIS.App.OrdersJournal.OrderDetail.ViewModels
 {
-    public class ClientName: ViewModel<string>
+    public class ClientName : ViewName
     {
-        public ClientName(string firstName, string middleName, string lastName)
-        {
-            FirstName = firstName;
-            MiddleName = middleName;
-            LastName = lastName;
-        }
-        public ClientName(): this(string.Empty, string.Empty, string.Empty)
+        public ClientName():this(string.Empty, string.Empty, string.Empty)
         {
         }
-        public string FirstName { get; set; }
-        public string MiddleName { get; set; }
-        public string LastName { get; set; }
 
-        public virtual string FullName => String.Format("{0} {1} {2}", LastName, FirstName, MiddleName);
-
+        public ClientName(string firstName, string middleName, string lastName) : base(firstName, middleName, lastName)
+        {
+        }
     }
 }
