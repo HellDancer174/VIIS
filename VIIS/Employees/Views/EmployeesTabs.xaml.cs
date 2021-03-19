@@ -18,9 +18,9 @@ namespace VIIS.App.Employees.Views
     /// <summary>
     /// Логика взаимодействия для EmployeesPage.xaml
     /// </summary>
-    public partial class EmployeesPage : Page
+    public partial class EmployeesTabs : Page
     {
-        public EmployeesPage()
+        public EmployeesTabs()
         {
             InitializeComponent();
         }
