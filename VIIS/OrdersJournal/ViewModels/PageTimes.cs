@@ -9,15 +9,15 @@ using System.Threading.Tasks;
 
 namespace VIIS.App.OrdersJournal.ViewModels
 {
-    public class PageTimes: VirtualCollection<PageTime>
+    public class PageTimes: VirtualObservableCollection<PageTime>
     {
         private int startIndex;
         private int finishIndex;
         private Action<int> validIndex;
 
-        public VirtualCollection<PageTime> Content { get; }
+        public VirtualObservableCollection<PageTime> Content { get; }
 
-        public PageTimes(int startIndex, int finishIndex, VirtualCollection<PageTime> content): base(content)
+        public PageTimes(int startIndex, int finishIndex, VirtualObservableCollection<PageTime> content): base(content)
         {
             if (content.Count > 12) throw new ArgumentException("В коллекции должно быть не больше 12 элементов");
             Content = content;
@@ -29,7 +29,7 @@ namespace VIIS.App.OrdersJournal.ViewModels
                     throw new ArgumentOutOfRangeException(String.Format("index должен быть >= {0} и {1} <=", startIndex, finishIndex));
             };
         }
-        public PageTimes(TimeSpan start, TimeSpan finish): this(start.Hours, finish.Hours, new VirtualCollection<PageTime>(12))
+        public PageTimes(TimeSpan start, TimeSpan finish): this(start.Hours, finish.Hours, new VirtualObservableCollection<PageTime>(new PageTime[12]))
         {
         }
 

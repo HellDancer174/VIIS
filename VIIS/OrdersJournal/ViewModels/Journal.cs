@@ -41,6 +41,7 @@ namespace VIIS.App.OrdersJournal.ViewModels
             this.staff = staff;
         }
 
+        public RelayCommand Add => new RelayCommand((obj) => staff.CreateOrder());
 
     }
 }

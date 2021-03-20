@@ -7,7 +7,7 @@
       xmlns:ViewModels="clr-namespace:VIIS.App.Employees.ViewModels" x:Class="VIIS.App.Employees.Views.EmployeesTabs"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="" Background="White" MinWidth="800" MinHeight="450">
+      Title="" MinWidth="800" MinHeight="450">
 
     <Page.DataContext>
         <ViewModels:ViewEmployeesTabs/>

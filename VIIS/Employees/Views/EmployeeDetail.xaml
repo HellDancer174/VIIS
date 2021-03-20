@@ -34,9 +34,9 @@
             <Setter Property="Background" Value="#FF007ACC"/>
         </Style>
     </Window.Resources>
-    <Window.DataContext>
+    <!--<Window.DataContext>
         <ViewModels:ViewEmployee/>
-    </Window.DataContext>
+    </Window.DataContext>-->
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="90*"/>

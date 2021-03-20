@@ -35,5 +35,7 @@ namespace VIIS.App.OrdersJournal.ViewModels
         }
 
         public WorkDaysPage DaysPage => daysPage;
+
+        public void CreateOrder() => daysPage.CreateOrder();
     }
 }

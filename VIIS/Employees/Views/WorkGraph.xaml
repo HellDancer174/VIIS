@@ -34,7 +34,7 @@
                     <ColumnDefinition Width="80*"/>
                 </Grid.ColumnDefinitions>-->
                 <!--<TextBlock Grid.Column="0" Text="Выберите месяц" Style="{StaticResource Default}" HorizontalAlignment="Center" VerticalAlignment="Center"/>-->
-                <Calendar x:Name="Calendar" DisplayMode="Year" DisplayDateChanged="Calendar_DisplayDateChanged" DisplayModeChanged="Calendar_DisplayModeChanged" SelectionMode="SingleDate" Margin="0,0,0,159"/>
+                <Calendar x:Name="Calendar" DisplayMode="Year" DisplayDateChanged="Calendar_DisplayDateChanged" DisplayModeChanged="Calendar_DisplayModeChanged" SelectionMode="None" Margin="0,0,0,159"/>
                 <!--<ComboBox Grid.Column="1" ItemsSource="{Binding Months}" Style="{StaticResource DefaultDefaultComboBox}" SelectedItem="{Binding Mouth}" VerticalAlignment="Center"/>-->
             </Grid>
             <Grid Grid.Column="0" DataContext="{Binding MastersList, Mode=OneWay}" Width="800" HorizontalAlignment="Left">

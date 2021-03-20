@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using VIIS.App.Employees.ViewModels;
 
 namespace VIIS.App.Employees.Views
 {
@@ -19,9 +20,17 @@ namespace VIIS.App.Employees.Views
     /// </summary>
     public partial class EmployeeDetail : Window
     {
+        private readonly ViewEmployee employee;
+
         public EmployeeDetail()
         {
             InitializeComponent();
+            DataContext = employee = new ViewEmployee();
+        }
+        public EmployeeDetail(ViewEmployee employee)
+        {
+            InitializeComponent();
+            DataContext = this.employee = employee;
         }
     }
 }

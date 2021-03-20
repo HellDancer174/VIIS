@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using VIIS.App.Main.ViewModels;
 
 namespace VIIS.App.Main.Views
 {
@@ -22,6 +23,7 @@ namespace VIIS.App.Main.Views
         public MainView()
         {
             InitializeComponent();
+            DataContext = new ViewMain(this);
         }
     }
 }

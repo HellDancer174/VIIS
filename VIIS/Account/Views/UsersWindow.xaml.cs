@@ -17,7 +17,7 @@ namespace VIIS.App.Account.Views
     /// <summary>
     /// Логика взаимодействия для UsersWindow.xaml
     /// </summary>
-    public partial class UsersWindow : Window
+    public partial class UsersWindow : Page
     {
         public UsersWindow()
         {

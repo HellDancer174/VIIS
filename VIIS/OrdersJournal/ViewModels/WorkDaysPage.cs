@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ElegantLib.Collections;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -13,11 +14,11 @@ namespace VIIS.App.OrdersJournal.ViewModels
         public string Admin { get; set; } // Возможно стоит сделать класс Admin
 
         public string CurrentMaster { get; set; }
-        public ObservableCollection<PageTime> CurrentTimes { get; set; }
+        public VirtualObservableCollection<PageTime> CurrentTimes { get; set; }
 
-        protected Dictionary<string, ObservableCollection<PageTime>> journalPages;
+        protected Dictionary<string, VirtualObservableCollection<PageTime>> journalPages;
 
-        public WorkDaysPage(string admin, Dictionary<string, ObservableCollection<PageTime>> journalPages)
+        public WorkDaysPage(string admin, Dictionary<string, VirtualObservableCollection<PageTime>> journalPages)
         {
             Admin = admin;
             this.journalPages = journalPages;
@@ -32,5 +33,9 @@ namespace VIIS.App.OrdersJournal.ViewModels
             CurrentMaster = master;
         }
 
+        public void CreateOrder()
+        {
+            new OrderDetail.Views.OrderDetail();
+        }
     }
 }

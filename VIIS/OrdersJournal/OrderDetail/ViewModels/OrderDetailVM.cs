@@ -40,8 +40,8 @@ namespace VIIS.App.OrdersJournal.OrderDetail.ViewModels
         public RelayCommand Add => new RelayCommand((obl) => Services.Add(new Service(new ObservableCollection<string>(servicesNames))));
         public RelayCommand Remove => new RelayCommand((obl) => { if (Services.Count == 0) return; Services.RemoveAt(Services.Count - 1); });
 
-        public RelayCommand Save => new RelayCommand((obl) => throw new NotImplementedException());
-        public RelayCommand End => new RelayCommand((obl) => throw new NotImplementedException());
+        public virtual RelayCommand Save => new RelayCommand((obl) => throw new NotImplementedException());
+        public virtual RelayCommand End => new RelayCommand((obl) => throw new NotImplementedException());
 
 
 

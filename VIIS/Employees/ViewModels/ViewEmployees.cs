@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VIIS.App.Employees.Views;
 using VIMVVM;
 
 namespace VIIS.App.Employees.ViewModels
@@ -26,9 +27,9 @@ namespace VIIS.App.Employees.ViewModels
 
         public ObservableCollection<ViewEmployee> Employees => employees;
 
-        public RelayCommand Add => new RelayCommand((obj) => throw new NotImplementedException());
-        public RelayCommand Change => new RelayCommand((obj) => throw new NotImplementedException());
-        public RelayCommand Remove => new RelayCommand((obj) => throw new NotImplementedException());
+        public RelayCommand Add => new RelayCommand((obj) => new EmployeeDetail().Show());
+        public RelayCommand Change => new RelayCommand((obj) => new EmployeeDetail(Selected).Show());
+        public RelayCommand Remove => new RelayCommand((obj) => { Employees.Remove(Selected); Selected = new ViewEmployee(); });
 
     }
 }

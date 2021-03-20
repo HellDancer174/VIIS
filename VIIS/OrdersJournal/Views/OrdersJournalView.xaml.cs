@@ -23,14 +23,14 @@ namespace VIIS.App.OrdersJournal.Views
     /// <summary>
     /// Логика взаимодействия для OrdersJournal.xaml
     /// </summary>
-    public partial class OrdersJournal : Window
+    public partial class OrdersJournalView : Page
     {
         private Journal journal;
-        public OrdersJournal()
+        public OrdersJournalView()
         {
             InitializeComponent();
             var orders = new Orders();
-            DataContext = journal = new Journal(new ViewModels.Staff(new List<string>(), new List<string>(), new List<string>() { "Иванова И.И." }, new FakePage(new WorkDaysPage("", new Dictionary<string, ObservableCollection<PageTime>>())).Fake()), new Domain.Orders.Orders());
+            DataContext = journal = new Journal(new ViewModels.Staff(new List<string>(), new List<string>(), new List<string>() { "Иванова И.И." }, new FakePage(new WorkDaysPage("", new Dictionary<string, VirtualObservableCollection<PageTime>>())).Fake()), new Domain.Orders.Orders());
             journal.Staff.DaysPage.ChangePage("Иванова И.И.");
         }
     }

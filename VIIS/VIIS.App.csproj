@@ -134,7 +134,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="OrdersJournal\Views\OrdersJournal.xaml">
+    <Page Include="OrdersJournal\Views\OrdersJournalView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -162,7 +162,10 @@
     <Compile Include="Main\Views\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="OrdersJournal\Models\OrdersDecorators\ViewTransferableOrder.cs" />
+    <Compile Include="OrdersJournal\Models\OrdersDecorators\ViewTransferableService.cs" />
     <Compile Include="OrdersJournal\Models\OrdersDecorators\ViewTrasferableOrders.cs" />
+    <Compile Include="OrdersJournal\OrderDetail\Models\ViewTransferableClient.cs" />
     <Compile Include="OrdersJournal\OrderDetail\ViewModels\ClientName.cs" />
     <Compile Include="OrdersJournal\OrderDetail\ViewModels\ExistingClientName.cs" />
     <Compile Include="GlobalViewModel\ViewName.cs" />
@@ -187,8 +190,8 @@
     <Compile Include="OrdersJournal\ViewModels\PageTimes.cs" />
     <Compile Include="OrdersJournal\ViewModels\DecoratedJournalTimes\SafeJournalTimes.cs" />
     <Compile Include="OrdersJournal\ViewModels\Staff.cs" />
-    <Compile Include="OrdersJournal\Views\OrdersJournal.xaml.cs">
-      <DependentUpon>OrdersJournal.xaml</DependentUpon>
+    <Compile Include="OrdersJournal\Views\OrdersJournalView.xaml.cs">
+      <DependentUpon>OrdersJournalView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

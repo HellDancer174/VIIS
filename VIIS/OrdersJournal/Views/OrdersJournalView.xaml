@@ -1,12 +1,13 @@
-﻿<Window x:Class="VIIS.App.OrdersJournal.Views.OrdersJournal"
+﻿<Page x:Class="VIIS.App.OrdersJournal.Views.OrdersJournalView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VIIS.App.OrdersJournal.Views"
         mc:Ignorable="d"
-        Title="" Height="450" Width="800">
-    <Window.Resources>
+        d:DesignHeight="450" d:DesignWidth="800"
+        Title="" MinHeight="450" MinWidth="800">
+    <Page.Resources>
         <Style TargetType="TextBlock" x:Key="Default" >
             <Setter Property="FontSize" Value="14"/>
             <Setter Property="FontFamily" Value="{StaticResource Champagne}"/>
@@ -43,7 +44,7 @@
         <Style TargetType="Button" x:Key="Blue" BasedOn="{StaticResource BaseButton}">
             <Setter Property="Background" Value="#FF007ACC"/>
         </Style>
-    </Window.Resources>
+    </Page.Resources>
     <Grid>
         <DatePicker x:Name="Date" SelectedDate="{Binding CurrentDate}" Visibility="Hidden"/>
         <Grid DataContext="{Binding Staff}" Grid.Row="1">
@@ -110,11 +111,11 @@
                         <TextBlock Text="Педикюр" Style="{StaticResource Header}"/>
                         <ListBox ItemsSource="{Binding Pedicure}" SelectedItem="{Binding SelectedMaster}"/>
                     </StackPanel>
-                    <Button VerticalAlignment="Center" Style="{StaticResource Blue}" Grid.Row="1" Margin="10,0">
+                    <Button VerticalAlignment="Center" Style="{StaticResource Material}" Command="{Binding Add}" Grid.Row="1" Margin="10,0">
                         <TextBlock Text="Добавить" FontSize="18" Style="{StaticResource Default}"/>
                     </Button>
                 </Grid>
             </Border>
         </Grid>
     </Grid>
-</Window>
+</Page>

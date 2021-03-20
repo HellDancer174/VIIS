@@ -3,25 +3,31 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VIIS.App.OrdersJournal.Models.OrdersDecorators;
 using VIIS.Domain.Orders;
+using VIIS.Domain.Services;
 
 namespace VIIS.App.OrdersJournal.ViewModels
 {
     public class PageContent
     {
+        private readonly Service service;
+
         public string Customer { get; set; }
         public string Phone { get; set; }
         public string OrderInfo { get; set; }
         public TimeSpan OrderTime { get; set; }
-        private OrderTime time = new Domain.Orders.OrderTime(new TimeSpan(), new TimeSpan());
         
 
         public PageContent(string customer, string phone, string orderInfo, TimeSpan orderTime)
         {
-            Customer = customer;
-            Phone = phone;
-            OrderInfo = orderInfo;
-            OrderTime = orderTime;
+            ChangeContent(customer, phone, orderInfo, orderTime);
+        }
+
+        public PageContent(string customer, string phone, string orderInfo, Service service):this(customer, phone, orderInfo, new TimeSpan())
+        {
+            this.service = new ViewTransferableService(service, this);
+            service.Transfer();
         }
 
         public int ContentIndex()
@@ -36,8 +42,21 @@ namespace VIIS.App.OrdersJournal.ViewModels
 
         public bool CheckOrders(PageContent other)
         {
-           return time.CheckYourSelf(other.time);
+           return service.CheckYourSelf(other.service);
         }
+
+        public void ChangeContent(string customer, string phone, string orderInfo, TimeSpan orderTime)
+        {
+            Customer = customer;
+            Phone = phone;
+            OrderInfo = orderInfo;
+            OrderTime = orderTime;
+        }
+        public void ChangeContent(TimeSpan orderTime)
+        {
+            OrderTime = orderTime;
+        }
+
 
         public override string ToString()
         {
