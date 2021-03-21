@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using VIIS.Domain.Clients;
+using VIIS.Domain.Employees;
 using VIIS.Domain.Services;
 
 namespace VIIS.Domain.Orders
@@ -13,12 +14,14 @@ namespace VIIS.Domain.Orders
     {
         protected readonly Client client;
         protected readonly List<Service> services;
+        protected readonly Master master;
         protected string comment;
 
-        public Order(Client client, List<Service> services, string comment)
+        public Order(Client client, List<Service> services, Master master, string comment)
         {
             this.client = client;
             this.services = services;
+            this.master = master;
             this.comment = comment;
         }
 
@@ -27,6 +30,7 @@ namespace VIIS.Domain.Orders
             client = other.client;
             services = other.services;
             comment = other.comment;
+            master = other.master;
         }
 
         public bool CheckYourSelf(Order other)
@@ -38,7 +42,12 @@ namespace VIIS.Domain.Orders
                     if(service.CheckYourSelf(otherServices) == false) return false;
                 }
             }
-            return !client.Equals(other.client);
+            return !client.Equals(other.client) && !master.Equals(other.master);
+        }
+
+        public virtual KeyValuePair<string, Order> KeyValue()
+        {
+            return new KeyValuePair<string, Order>(master.ToString(), this);
         }
 
         public virtual void Transfer()

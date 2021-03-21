@@ -6,28 +6,40 @@
       xmlns:local="clr-namespace:VIIS.App.OrdersJournal.OrderDetail.Views.ClientNamePages"
       xmlns:ViewModels="clr-namespace:VIIS.App.OrdersJournal.OrderDetail.ViewModels" x:Class="VIIS.App.OrdersJournal.OrderDetail.Views.ClientNamePages.NewClient"
       mc:Ignorable="d" d:DesignWidth="800"
-      Title="NewClient" Background="White" Height="30">
+      Title="NewClient" Background="White" Height="60">
 
     <Page.DataContext>
         <ViewModels:ClientName/>
     </Page.DataContext>
 
     <Grid>
-        <Grid DataContext="{Binding ClientName}" Margin="5">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="10*"/>
-                <ColumnDefinition Width="20*"/>
-                <ColumnDefinition Width="10*"/>
-                <ColumnDefinition Width="20*"/>
-                <ColumnDefinition Width="10*"/>
-                <ColumnDefinition Width="20*"/>
-            </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" Text="Фамилия" HorizontalAlignment="Center" Style="{StaticResource Default}"/>
-            <TextBlock Grid.Column="2" Text="Имя" HorizontalAlignment="Center" Style="{StaticResource Default}"/>
-            <TextBlock Grid.Column="4" Text="Отчество" HorizontalAlignment="Center" Style="{StaticResource Default}"/>
-            <TextBox Grid.Column="1" Text="{Binding FirstName}" Style="{StaticResource DefaultTextBox}"/>
-            <TextBox Grid.Column="3" Text="{Binding LastName}" Style="{StaticResource DefaultTextBox}"/>
-            <TextBox Grid.Column="5" Text="{Binding MiddleName}" Style="{StaticResource DefaultTextBox}"/>
-        </Grid>
+        <StackPanel>
+            <Grid DataContext="{Binding ClientName}" Margin="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="10*"/>
+                    <ColumnDefinition Width="20*"/>
+                    <ColumnDefinition Width="10*"/>
+                    <ColumnDefinition Width="20*"/>
+                    <ColumnDefinition Width="10*"/>
+                    <ColumnDefinition Width="20*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Text="Фамилия" HorizontalAlignment="Center" Style="{StaticResource Default}"/>
+                <TextBlock Grid.Column="2" Text="Имя" HorizontalAlignment="Center" Style="{StaticResource Default}"/>
+                <TextBlock Grid.Column="4" Text="Отчество" HorizontalAlignment="Center" Style="{StaticResource Default}"/>
+                <TextBox Grid.Column="1" Text="{Binding FirstName}" Style="{StaticResource DefaultTextBox}"/>
+                <TextBox Grid.Column="3" Text="{Binding LastName}" Style="{StaticResource DefaultTextBox}"/>
+                <TextBox Grid.Column="5" Text="{Binding MiddleName}" Style="{StaticResource DefaultTextBox}"/>
+            </Grid>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="10*"/>
+                    <ColumnDefinition Width="30*"/>
+                    <ColumnDefinition Width="60*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Телефон" Grid.Column="0" Style="{StaticResource Default}"
+                           HorizontalAlignment="Center"/>
+                <TextBox Text="{Binding Phone}" Style="{StaticResource DefaultTextBox}" Grid.Column="1"/>
+            </Grid>
+        </StackPanel>
     </Grid>
 </Page>

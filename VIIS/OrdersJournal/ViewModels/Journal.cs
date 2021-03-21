@@ -19,7 +19,6 @@ namespace VIIS.App.OrdersJournal.ViewModels
         public Journal(Staff staff, Orders orders)
         {
             this.staff = staff;
-            this.orders = new ViewTrasferableOrders(this, orders);
             currentDate = DateTime.Now;
         }
 

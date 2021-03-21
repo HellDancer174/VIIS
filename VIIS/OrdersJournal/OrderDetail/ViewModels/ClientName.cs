@@ -9,29 +9,39 @@ using VIIS.Domain.Clients;
 
 namespace VIIS.App.OrdersJournal.OrderDetail.ViewModels
 {
-    public class ClientName : ViewName
+    public class ClientName : ViewName<Client>
     {
         private readonly Client model;
 
-        public ClientName():this(string.Empty, string.Empty, string.Empty)
+        public ClientName():this(string.Empty, string.Empty, string.Empty, string.Empty)
         {
-            model = new Client(string.Empty, string.Empty, string.Empty);
+            Phone = string.Empty;
+            model = new Client(string.Empty, string.Empty, string.Empty, string.Empty);
         }
 
-        public ClientName(string firstName, string middleName, string lastName) : base(firstName, middleName, lastName)
+        public ClientName(string firstName, string middleName, string lastName, string phone) : base(firstName, middleName, lastName)
         {
-            model = new Client(firstName, lastName, middleName);
+            Phone = phone;
+            model = new Client(firstName, lastName, middleName, phone);
         }
         public ClientName(Client model)
         {
             this.model = new ViewTransferableClient(model, this);
             model.Transfer();
         }
-        public void ChangeName(string firstName, string middleName, string lastName)
+        public void ChangeName(string firstName, string middleName, string lastName, string phone)
         {
             FirstName = firstName;
             MiddleName = middleName;
             LastName = lastName;
+            Phone = phone;
         }
+
+        public override Client Model()
+        {
+            return new Client(FirstName, LastName, MiddleName, Phone);
+        }
+
+        public string Phone { get; set; }
     }
 }

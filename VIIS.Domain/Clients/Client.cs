@@ -13,9 +13,9 @@ namespace VIIS.Domain.Clients
         protected readonly string firstName;
         protected readonly string lastName;
         protected readonly string middleName;
-        protected readonly int phone;
+        protected readonly string phone;
 
-        public Client(string firstName, string lastName, string middleName, int phone)
+        public Client(string firstName, string lastName, string middleName, string phone)
         {
             this.firstName = firstName;
             this.lastName = lastName;
@@ -29,6 +29,8 @@ namespace VIIS.Domain.Clients
             lastName = other.lastName;
             phone = other.phone;
         }
+
+        public virtual string FullName => String.Format("{0} {1} {2}", lastName, firstName, middleName);
 
         public override string ToString()
         {

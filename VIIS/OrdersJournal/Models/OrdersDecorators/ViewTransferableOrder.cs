@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VIIS.App.OrdersJournal.OrderDetail.ViewModels;
 using VIIS.App.OrdersJournal.ViewModels;
 using VIIS.Domain.Clients;
 using VIIS.Domain.Orders;
@@ -13,19 +14,21 @@ namespace VIIS.App.OrdersJournal.Models.OrdersDecorators
     public class ViewTransferableOrder : Order
     {
         private readonly Order other;
-        private readonly PageTimes times;
+        private readonly Dictionary<string, PageTimes> masterTimes;
 
-        public ViewTransferableOrder(Order other, PageTimes times) : base(other)
+        public ViewTransferableOrder(Order other, Dictionary<string, PageTimes> masterTimes) : base(other)
         {
             this.other = other;
-            this.times = times;
+            this.masterTimes = masterTimes;
         }
 
         public override void Transfer()
         {
+            var times = masterTimes[master.FullName];
             foreach(var service in services)
             {
-                times.AddContent(new PageContent(client.ToString(), "", comment, service));
+                var clientName = new ClientName(client);
+                times.AddContent(new PageContent(clientName.FullName, clientName.Phone, comment, service));
             }
             //Сервисы будут делать PageContent, а этот класс будет добавлять их в PageTimes.
         }

@@ -29,7 +29,14 @@ namespace VIIS.App.OrdersJournal.ViewModels
                     throw new ArgumentOutOfRangeException(String.Format("index должен быть >= {0} и {1} <=", startIndex, finishIndex));
             };
         }
-        public PageTimes(TimeSpan start, TimeSpan finish): this(start.Hours, finish.Hours, new VirtualObservableCollection<PageTime>(new PageTime[12]))
+        public PageTimes(int startIndex, int finishIndex) : this(startIndex, finishIndex, new VirtualObservableCollection<PageTime>(new PageTime[12]))
+        {
+            for(int i = 0; i < 12; i++)
+            {
+                Content.Add(new PageTime(i + startIndex));
+            }
+        }
+        public PageTimes(TimeSpan start, TimeSpan finish): this(start.Hours, finish.Hours)
         {
         }
 

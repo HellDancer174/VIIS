@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VIIS.Domain.Orders;
 using VIMVVM;
 
 namespace VIIS.App.OrdersJournal.ViewModels
@@ -17,6 +18,15 @@ namespace VIIS.App.OrdersJournal.ViewModels
             Pedicure = pedicure;
             Masters = masters;
             this.daysPage = daysPage;
+        }
+        public Staff(List<string> manicure, List<string> pedicure, List<string> masters, Orders orders)
+        {
+            Manicure = manicure;
+            Pedicure = pedicure;
+            Masters = masters;
+            daysPage = new WorkDaysPage(Manicure.Concat(Pedicure).Concat(Masters).ToList());
+
+
         }
 
         public List<string> Manicure { get; }

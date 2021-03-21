@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Clients\Client.cs" />
     <Compile Include="Clients\Clients.cs" />
+    <Compile Include="Employees\Master.cs" />
     <Compile Include="Orders\Order.cs" />
     <Compile Include="Orders\Orders.cs" />
     <Compile Include="Orders\OrderTime.cs" />

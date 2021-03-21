@@ -4,26 +4,29 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using VIIS.App.OrdersJournal.ViewModels;
+using VIIS.Domain.Employees;
 using VIIS.Domain.Orders;
 
 namespace VIIS.App.OrdersJournal.Models.OrdersDecorators
 {
     public class ViewTrasferableOrders : Orders
     {
-        private readonly Journal journal;
+        private readonly WorkDaysPage workDaysPage;
         private readonly Orders orders;
 
-        public ViewTrasferableOrders(Journal journal, Orders orders)
+        public ViewTrasferableOrders(WorkDaysPage workDaysPage, Orders orders): base(orders)
         {
-            this.journal = journal;
+            this.workDaysPage = workDaysPage;
             this.orders = orders;
         }
 
-        public override async Task Transfer()
+        public override Task Transfer()
         {
-            await Task.CompletedTask; 
-            throw new NotImplementedException();
-            ////////////journal.ChangeStaff
+            foreach(var order in ordersList)
+            {
+                workDaysPage.AddOrder(order);
+            }
+            return Task.CompletedTask;
         }
     }
 }

@@ -14,7 +14,6 @@ namespace VIIS.App.OrdersJournal.ViewModels
     public class PageTime: VirtualObservableCollection<PageContent>
     {
         private readonly int timeIndex;
-        private readonly Orders orders;
 
         public string TimeIndex => string.Format("{0}:00",timeIndex);
 
@@ -30,13 +29,12 @@ namespace VIIS.App.OrdersJournal.ViewModels
 
         public ObservableCollection<PageContent> Content { get; }
 
-        public PageTime(List<PageContent> content, int timeIndex, Orders orders)
+        public PageTime(List<PageContent> content, int timeIndex)
         {
             this.Content = new ObservableCollection<PageContent>(content);
             this.timeIndex = timeIndex;
-            this.orders = orders;
         }
-        public PageTime(int timeIndex, Orders orders):this(new List<PageContent>(), timeIndex, orders)
+        public PageTime(int timeIndex):this(new List<PageContent>(), timeIndex)
         {
         }
 
