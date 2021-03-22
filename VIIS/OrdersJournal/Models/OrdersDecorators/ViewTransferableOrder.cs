@@ -27,7 +27,7 @@ namespace VIIS.App.OrdersJournal.Models.OrdersDecorators
             var times = masterTimes[master.FullName];
             foreach(var service in services)
             {
-                var clientName = new ClientName(client);
+                var clientName = new ViewClient(client);
                 times.AddContent(new PageContent(clientName.FullName, clientName.Phone, comment, service));
             }
             //Сервисы будут делать PageContent, а этот класс будет добавлять их в PageTimes.

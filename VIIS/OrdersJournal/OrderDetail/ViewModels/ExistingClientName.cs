@@ -10,20 +10,20 @@ namespace VIIS.App.OrdersJournal.OrderDetail.ViewModels
 {
     public class ExistingClientName: ViewModel<string>
     {
-        public ExistingClientName(ObservableCollection<ClientName> clientNames, ClientName selectedClient)
+        public ExistingClientName(ObservableCollection<ViewClient> clientNames, ViewClient selectedClient)
         {
             ClientNames = clientNames;
             SelectedClient = selectedClient;
         }
-        public ExistingClientName(ObservableCollection<ClientName> clientNames):this(clientNames, new ClientName())
+        public ExistingClientName(ObservableCollection<ViewClient> clientNames):this(clientNames, new ViewClient())
         {
         }
-        public ExistingClientName(): this(new ObservableCollection<ClientName>())
+        public ExistingClientName(): this(new ObservableCollection<ViewClient>())
         {
         }
 
 
-        public ObservableCollection<ClientName> ClientNames { get; }
-        public ClientName SelectedClient { get; set; }
+        public ObservableCollection<ViewClient> ClientNames { get; }
+        public ViewClient SelectedClient { get; set; }
     }
 }

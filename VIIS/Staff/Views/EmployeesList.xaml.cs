@@ -12,23 +12,22 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using VIIS.App.OrdersJournal.OrderDetail.ViewModels;
 
-namespace VIIS.App.OrdersJournal.OrderDetail.Views.ClientNamePages
+namespace VIIS.App.Staff.Views
 {
     /// <summary>
-    /// Логика взаимодействия для NewClient.xaml
+    /// Логика взаимодействия для EmployeesList.xaml
     /// </summary>
-    public partial class NewClient : Page
+    public partial class EmployeesList : Page
     {
-        private ViewClient clientName;
-        public NewClient():this(new ViewClient())
-        {
-        }
-        public NewClient(ViewClient clientName)
+        public EmployeesList()
         {
             InitializeComponent();
-            DataContext = this.clientName = clientName;
+        }
+
+        private void DataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+
         }
     }
 }

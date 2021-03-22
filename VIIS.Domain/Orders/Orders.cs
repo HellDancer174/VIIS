@@ -7,8 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using VIIS.Domain.Clients;
-using VIIS.Domain.Employees;
+using VIIS.Domain.Staff;
 using VIIS.Domain.Services;
+using VIIS.Domain.Staff.ValueClasses;
 
 namespace VIIS.Domain.Orders
 {
@@ -28,15 +29,15 @@ namespace VIIS.Domain.Orders
         {
             ordersList = new VirtualCollection<Order>(new List<Order>()
             {
-                new Order(new Client("Виктор", "Игнатьев", "", "265664699589"), new List<Service>() { new Service("Стрижка", 500, DateTime.Now.Date+new TimeSpan(9,10,0), new TimeSpan(0,30,0)) }, new Master("Игнатьева", "Валентина", "Иониктовна", ""), ""),
-                new Order(new Client("Виктор", "Кот", "", "16542389"), new List<Service>() { new Service("Стрижка", 500, DateTime.Now.Date+new TimeSpan(9,40,0), new TimeSpan(0,30,0)) }, new Master("Игнатьева", "Валентина", "Иониктовна", ""),""),
-                new Order(new Client("Виктор", "Игнатов", "", "268596564"), new List<Service>() { new Service("Стрижка", 500, DateTime.Now.Date+new TimeSpan(10,10,0), new TimeSpan(0,30,0)) }, new Master("Игнатьева", "Валентина", "Иониктовна", ""),"")
+                new Order(new Client("Виктор", "Игнатьев", "", "265664699589"), new List<Service>() { new Service("Стрижка", 500, new TimeSpan(9,10,0), new TimeSpan(0,30,0)) }, new Master(), "", DateTime.Now.Date),
+                new Order(new Client("Виктор", "Кот", "", "16542389"), new List<Service>() { new Service("Стрижка", 500, new TimeSpan(9,40,0), new TimeSpan(0,30,0)) }, new Master(),"", DateTime.Now.Date),
+                new Order(new Client("Виктор", "Игнатов", "", "268596564"), new List<Service>() { new Service("Стрижка", 500, new TimeSpan(10,10,0), new TimeSpan(0,30,0)) }, new Master(),"", DateTime.Now.Date)
 
             });
         }
-        public virtual async Task Transfer()
+        public virtual Task Transfer()
         {
-            await new AnyAsyncDocument().Transfer();
+            return Task.CompletedTask;
         }
     }
 }

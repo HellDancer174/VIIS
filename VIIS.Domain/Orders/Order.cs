@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using VIIS.Domain.Clients;
-using VIIS.Domain.Employees;
+using VIIS.Domain.Staff;
 using VIIS.Domain.Services;
 
 namespace VIIS.Domain.Orders
@@ -16,13 +16,15 @@ namespace VIIS.Domain.Orders
         protected readonly List<Service> services;
         protected readonly Master master;
         protected string comment;
+        protected readonly DateTime ordersDate;
 
-        public Order(Client client, List<Service> services, Master master, string comment)
+        public Order(Client client, List<Service> services, Master master, string comment, DateTime ordersDate)
         {
             this.client = client;
             this.services = services;
             this.master = master;
             this.comment = comment;
+            this.ordersDate = ordersDate;
         }
 
         public Order(Order other)
@@ -31,6 +33,7 @@ namespace VIIS.Domain.Orders
             services = other.services;
             comment = other.comment;
             master = other.master;
+            ordersDate = other.ordersDate;
         }
 
         public bool CheckYourSelf(Order other)

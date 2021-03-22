@@ -27,7 +27,7 @@ namespace VIIS.App.OrdersJournal.ViewModels
         public PageContent(string customer, string phone, string orderInfo, Service service):this(customer, phone, orderInfo, new TimeSpan())
         {
             this.service = new ViewTransferableService(service, this);
-            service.Transfer();
+            this.service.Transfer();
         }
 
         public int ContentIndex()

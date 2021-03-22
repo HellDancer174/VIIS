@@ -17,6 +17,7 @@ using VIIS.App.OrdersJournal.ViewModels;
 using VIIS.App.OrdersJournal.ViewModels.DecoratedJournalTimes;
 using VIIS.App.OrdersJournal.ViewModels.Fake;
 using VIIS.Domain.Orders;
+using VIIS.Domain.Staff;
 
 namespace VIIS.App.OrdersJournal.Views
 {
@@ -25,13 +26,11 @@ namespace VIIS.App.OrdersJournal.Views
     /// </summary>
     public partial class OrdersJournalView : Page
     {
-        private Journal journal;
+        //private Journal journal;
         public OrdersJournalView()
         {
             InitializeComponent();
-            var orders = new Orders();
-            DataContext = journal = new Journal(new ViewModels.Staff(new List<string>(), new List<string>(), new List<string>() { "Иванова И.И." }, new FakePage(new WorkDaysPage("", new Dictionary<string, VirtualObservableCollection<PageTime>>())).Fake()), new Domain.Orders.Orders());
-            journal.Staff.DaysPage.ChangePage("Иванова И.И.");
+            //DataContext = journal = new Journal();
         }
     }
 }

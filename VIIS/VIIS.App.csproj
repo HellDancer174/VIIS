@@ -67,17 +67,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Employees\ViewModels\EmployeesViewModels\ViewAddress.cs" />
-    <Compile Include="Employees\ViewModels\EmployeesViewModels\ViewEmployeeDetail.cs" />
-    <Compile Include="Employees\ViewModels\EmployeesViewModels\ViewPassport.cs" />
-    <Compile Include="Employees\ViewModels\ViewEmployee.cs" />
-    <Compile Include="Employees\ViewModels\ViewEmployees.cs" />
-    <Compile Include="Employees\ViewModels\ViewEmployeesTabs.cs" />
-    <Compile Include="Employees\ViewModels\ViewWorkGraph.cs" />
-    <Compile Include="Employees\ViewModels\WorkGraphViewModels\ViewBooleanWorkDay.cs" />
-    <Compile Include="Employees\ViewModels\WorkGraphViewModels\ViewMastersList.cs" />
-    <Compile Include="Employees\ViewModels\WorkGraphViewModels\ViewWorkDaysList.cs" />
-    <Compile Include="Employees\Views\EmployeeDetail.xaml.cs">
+    <Compile Include="Staff\ViewModels\EmployeesViewModels\ViewAddress.cs" />
+    <Compile Include="Staff\ViewModels\EmployeesViewModels\ViewEmployeeDetail.cs" />
+    <Compile Include="Staff\ViewModels\EmployeesViewModels\ViewPassport.cs" />
+    <Compile Include="Staff\ViewModels\ViewEmployee.cs" />
+    <Compile Include="Staff\ViewModels\ViewEmployees.cs" />
+    <Compile Include="Staff\ViewModels\ViewEmployeesTabs.cs" />
+    <Compile Include="Staff\ViewModels\ViewWorkGraph.cs" />
+    <Compile Include="Staff\ViewModels\WorkGraphViewModels\ViewBooleanWorkDay.cs" />
+    <Compile Include="Staff\ViewModels\WorkGraphViewModels\ViewMastersList.cs" />
+    <Compile Include="Staff\ViewModels\WorkGraphViewModels\ViewWorkDaysList.cs" />
+    <Compile Include="Staff\Views\EmployeeDetail.xaml.cs">
       <DependentUpon>EmployeeDetail.xaml</DependentUpon>
     </Compile>
     <Page Include="Account\Views\LoginWindow.xaml">
@@ -106,15 +106,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Employees\Views\EmployeesList.xaml">
+    <Page Include="Staff\Views\EmployeesList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Employees\Views\EmployeesTabs.xaml">
+    <Page Include="Staff\Views\EmployeesTabs.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Employees\Views\WorkGraph.xaml">
+    <Page Include="Staff\Views\WorkGraph.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -138,7 +138,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Employees\Views\EmployeeDetail.xaml">
+    <Page Include="Staff\Views\EmployeeDetail.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -148,13 +148,13 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Employees\Views\EmployeesList.xaml.cs">
+    <Compile Include="Staff\Views\EmployeesList.xaml.cs">
       <DependentUpon>EmployeesList.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Employees\Views\EmployeesTabs.xaml.cs">
+    <Compile Include="Staff\Views\EmployeesTabs.xaml.cs">
       <DependentUpon>EmployeesTabs.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Employees\Views\WorkGraph.xaml.cs">
+    <Compile Include="Staff\Views\WorkGraph.xaml.cs">
       <DependentUpon>WorkGraph.xaml</DependentUpon>
     </Compile>
     <Compile Include="GlobalViewModel\Converters\DateConverter.cs" />
@@ -162,14 +162,15 @@
     <Compile Include="Main\Views\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="OrdersJournal\Models\EmployeesDecorators\GroupedEmployees.cs" />
     <Compile Include="OrdersJournal\Models\OrdersDecorators\ViewTransferableOrder.cs" />
     <Compile Include="OrdersJournal\Models\OrdersDecorators\ViewTransferableService.cs" />
     <Compile Include="OrdersJournal\Models\OrdersDecorators\ViewTrasferableOrders.cs" />
     <Compile Include="OrdersJournal\OrderDetail\Models\ViewTransferableClient.cs" />
-    <Compile Include="OrdersJournal\OrderDetail\ViewModels\ClientName.cs" />
+    <Compile Include="OrdersJournal\OrderDetail\ViewModels\ViewClient.cs" />
     <Compile Include="OrdersJournal\OrderDetail\ViewModels\ExistingClientName.cs" />
     <Compile Include="GlobalViewModel\ViewName.cs" />
-    <Compile Include="OrdersJournal\OrderDetail\ViewModels\ClientNames.cs" />
+    <Compile Include="OrdersJournal\OrderDetail\ViewModels\ViewClients.cs" />
     <Compile Include="OrdersJournal\OrderDetail\ViewModels\OrderDetailVM.cs" />
     <Compile Include="OrdersJournal\OrderDetail\ViewModels\Service.cs" />
     <Compile Include="OrdersJournal\OrderDetail\Views\ClientNamePages\ExistingClient.xaml.cs">
@@ -189,7 +190,7 @@
     <Compile Include="OrdersJournal\ViewModels\PageTime.cs" />
     <Compile Include="OrdersJournal\ViewModels\PageTimes.cs" />
     <Compile Include="OrdersJournal\ViewModels\DecoratedJournalTimes\SafeJournalTimes.cs" />
-    <Compile Include="OrdersJournal\ViewModels\Staff.cs" />
+    <Compile Include="OrdersJournal\ViewModels\ViewJournalEmployees.cs" />
     <Compile Include="OrdersJournal\Views\OrdersJournalView.xaml.cs">
       <DependentUpon>OrdersJournalView.xaml</DependentUpon>
     </Compile>

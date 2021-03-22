@@ -33,7 +33,7 @@ namespace VIIS.App.OrdersJournal.ViewModels
         {
             for(int i = 0; i < 12; i++)
             {
-                Content.Add(new PageTime(i + startIndex));
+                Content[i] = new PageTime(i + startIndex);
             }
         }
         public PageTimes(TimeSpan start, TimeSpan finish): this(start.Hours, finish.Hours)

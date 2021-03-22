@@ -4,29 +4,39 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using VIIS.App.OrdersJournal.ViewModels;
-using VIIS.Domain.Employees;
+using VIIS.Domain.Staff;
 using VIIS.Domain.Orders;
+using VIIS.Domain.Orders.Decorators;
+using VIIS.App.OrdersJournal.Models.EmployeesDecorators;
 
 namespace VIIS.App.OrdersJournal.Models.OrdersDecorators
 {
     public class ViewTrasferableOrders : Orders
     {
-        private readonly WorkDaysPage workDaysPage;
+        private readonly Journal journal;
+        private readonly GroupedEmployees employees;
         private readonly Orders orders;
 
-        public ViewTrasferableOrders(WorkDaysPage workDaysPage, Orders orders): base(orders)
+        public ViewTrasferableOrders(Journal journal, Employees employees, Orders orders): base(orders)
         {
-            this.workDaysPage = workDaysPage;
+            this.journal = journal;
+            this.employees = new GroupedEmployees(employees);
             this.orders = orders;
         }
 
-        public override Task Transfer()
+        public virtual void Transfer(DateTime workDay)
         {
-            foreach(var order in ordersList)
+            var currentOrders = ordersList.Where(order => new DateCheckableOrder(order).CheckDate(workDay.Date)).ToList();
+            Transfer(currentOrders, employees.ViewEmployees(workDay.Date));
+
+        }
+        public void Transfer(IEnumerable<Order> orders, ViewJournalEmployees staff)
+        {
+            foreach (var order in orders)
             {
-                workDaysPage.AddOrder(order);
+                staff.DaysPage.AddOrder(order);
             }
-            return Task.CompletedTask;
+            journal.ChangeStaff(staff);
         }
     }
 }

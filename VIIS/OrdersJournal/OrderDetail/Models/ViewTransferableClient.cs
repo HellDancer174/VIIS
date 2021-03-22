@@ -11,9 +11,9 @@ namespace VIIS.App.OrdersJournal.OrderDetail.Models
     public class ViewTransferableClient : Client
     {
         private readonly Client other;
-        private readonly ClientName media;
+        private readonly ViewClient media;
 
-        public ViewTransferableClient(Client other, ClientName media) : base(other)
+        public ViewTransferableClient(Client other, ViewClient media) : base(other)
         {
             this.other = other;
             this.media = media;
@@ -21,7 +21,7 @@ namespace VIIS.App.OrdersJournal.OrderDetail.Models
 
         public override void Transfer()
         {
-            media.ChangeName(firstName, middleName, lastName);
+            media.ChangeName(firstName, middleName, lastName, this.phone);
         }
     }
 }

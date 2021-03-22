@@ -10,25 +10,27 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-using VIIS.App.OrdersJournal.OrderDetail.ViewModels;
+using VIIS.App.Staff.ViewModels;
 
-namespace VIIS.App.OrdersJournal.OrderDetail.Views.ClientNamePages
+namespace VIIS.App.Staff.Views
 {
     /// <summary>
-    /// Логика взаимодействия для NewClient.xaml
+    /// Логика взаимодействия для EmployeeDetail.xaml
     /// </summary>
-    public partial class NewClient : Page
+    public partial class EmployeeDetail : Window
     {
-        private ViewClient clientName;
-        public NewClient():this(new ViewClient())
-        {
-        }
-        public NewClient(ViewClient clientName)
+        private readonly ViewEmployee employee;
+
+        public EmployeeDetail()
         {
             InitializeComponent();
-            DataContext = this.clientName = clientName;
+            DataContext = employee = new ViewEmployee();
+        }
+        public EmployeeDetail(ViewEmployee employee)
+        {
+            InitializeComponent();
+            DataContext = this.employee = employee;
         }
     }
 }

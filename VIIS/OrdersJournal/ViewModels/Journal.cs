@@ -6,23 +6,27 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using VIIS.App.OrdersJournal.Models.OrdersDecorators;
 using VIIS.Domain.Orders;
+using VIIS.Domain.Staff;
 using VIMVVM;
 
 namespace VIIS.App.OrdersJournal.ViewModels
 {
     public class Journal: ViewModel<Orders>
     {
-        private Staff staff;
-        private readonly Orders orders;
+        private ViewJournalEmployees staff;
+        private readonly ViewTrasferableOrders orders;
         private DateTime currentDate;
 
-        public Journal(Staff staff, Orders orders)
+        public Journal(Orders orders, Employees employees)
         {
-            this.staff = staff;
-            currentDate = DateTime.Now;
+            this.orders = new ViewTrasferableOrders(this, employees, orders);
+            currentDate = DateTime.Now.Date;
+            this.orders.Transfer(currentDate);
         }
-
-        public Staff Staff => staff;
+        public Journal():this(new Orders(), new Employees())
+        {
+        }
+        public ViewJournalEmployees Staff => staff;
 
         public DateTime CurrentDate
         {
@@ -31,13 +35,14 @@ namespace VIIS.App.OrdersJournal.ViewModels
             {
                 if (value == currentDate) return;
                 currentDate = value;
-                Task.Run(async () => await orders.Transfer());
+                orders.Transfer(currentDate);
             }
         }
 
-        public void ChangeStaff(Staff staff)
+        public void ChangeStaff(ViewJournalEmployees staff)
         {
             this.staff = staff;
+            ChangeProperty(nameof(Staff));
         }
 
         public RelayCommand Add => new RelayCommand((obj) => staff.CreateOrder());

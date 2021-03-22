@@ -10,11 +10,11 @@ namespace VIIS.Domain.Services
     public class Service: IDocument
     {
         private readonly string name;
-        protected readonly DateTime start;
+        protected readonly TimeSpan start;
         private readonly TimeSpan timeSpan;
         private readonly decimal sale;
 
-        public Service(string name, decimal sale, DateTime start, TimeSpan timeSpan)
+        public Service(string name, decimal sale, TimeSpan start, TimeSpan timeSpan)
         {
             this.name = name;
             this.sale = sale;
@@ -31,7 +31,7 @@ namespace VIIS.Domain.Services
 
         public bool CheckTime(int timeIndex)
         {
-            return start.Hour == timeIndex;
+            return start.Hours == timeIndex;
         }
 
         public bool CheckYourSelf(Service other)

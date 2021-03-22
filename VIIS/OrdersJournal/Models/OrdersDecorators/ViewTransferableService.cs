@@ -21,7 +21,7 @@ namespace VIIS.App.OrdersJournal.Models.OrdersDecorators
 
         public override void Transfer()
         {
-            pageContent.ChangeContent(start.TimeOfDay);
+            pageContent.ChangeContent(start);
         }
     }
 }

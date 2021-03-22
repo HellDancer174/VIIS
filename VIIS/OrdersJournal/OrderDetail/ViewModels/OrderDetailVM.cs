@@ -12,10 +12,12 @@ namespace VIIS.App.OrdersJournal.OrderDetail.ViewModels
     public class OrderDetailVM: ViewModel<string>
     {
         private readonly List<string> servicesNames;
+        private readonly DateTime ordersDate;
 
-        public OrderDetailVM(ClientNames clientNames, ObservableCollection<Service> services, string comment, string sale, string saveButtonName, string endButtonName, List<string> servicesNames)
+        public OrderDetailVM(ViewClients clientNames, DateTime ordersDate, ObservableCollection<Service> services, string comment, string sale, string saveButtonName, string endButtonName, List<string> servicesNames)
         {
             ClientNames = clientNames;
+            this.ordersDate = ordersDate;
             Services = services;
             Comment = comment;
             Sale = sale;
@@ -25,11 +27,11 @@ namespace VIIS.App.OrdersJournal.OrderDetail.ViewModels
             Services.Add(new Service(new ObservableCollection<string>(servicesNames)));
 
         }
-        public OrderDetailVM():this(new ClientNames(new NewClient(), new ExistingClient()), new ObservableCollection<Service>(), string.Empty, "0", "Сохранить", "Удалить", new List<string>())
+        public OrderDetailVM():this(new ViewClients(new NewClient(), new ExistingClient()), DateTime.Now, new ObservableCollection<Service>(), string.Empty, "0", "Сохранить", "Удалить", new List<string>())
         {
         }
 
-        public ClientNames ClientNames { get; }
+        public ViewClients ClientNames { get; }
         public ObservableCollection<Service> Services { get; set; }
         public string Comment { get; set; }
         public string Sale { get; set; }
@@ -43,7 +45,6 @@ namespace VIIS.App.OrdersJournal.OrderDetail.ViewModels
         public virtual RelayCommand Save => new RelayCommand((obl) => throw new NotImplementedException());
         public virtual RelayCommand End => new RelayCommand((obl) => throw new NotImplementedException());
 
-
-
+        public DateTime OrdersDate => ordersDate;
     }
 }

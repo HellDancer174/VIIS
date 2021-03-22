@@ -29,10 +29,11 @@ namespace VIIS.App.OrdersJournal.ViewModels
 
         public ObservableCollection<PageContent> Content { get; }
 
-        public PageTime(List<PageContent> content, int timeIndex)
+        public PageTime(List<PageContent> content, int timeIndex): base(content)
         {
             this.Content = new ObservableCollection<PageContent>(content);
             this.timeIndex = timeIndex;
+            ChangeProperty(nameof(TimeIndex));
         }
         public PageTime(int timeIndex):this(new List<PageContent>(), timeIndex)
         {

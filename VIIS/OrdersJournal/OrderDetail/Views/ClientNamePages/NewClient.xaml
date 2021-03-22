@@ -9,7 +9,7 @@
       Title="NewClient" Background="White" Height="60">
 
     <Page.DataContext>
-        <ViewModels:ClientName/>
+        <ViewModels:ViewClient/>
     </Page.DataContext>
 
     <Grid>

@@ -7,7 +7,7 @@ using System.Windows.Controls;
 using VIIS.App.OrdersJournal.Views;
 using VIIS.App.Account.Views;
 using VIMVVM;
-using VIIS.App.Employees.Views;
+using VIIS.App.Staff.Views;
 using VIIS.App.Main.Views;
 
 namespace VIIS.App.Main.ViewModels
