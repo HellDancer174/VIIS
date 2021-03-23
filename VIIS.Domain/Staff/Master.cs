@@ -24,7 +24,7 @@ namespace VIIS.Domain.Staff
             this.position = position;
             this.workDaysList = workDaysList;
         }
-        public Master(): this("Игнатьева", "Валентина", "Иониктовна", "", new Position(), new WorkDaysList())
+        public Master(): this("Валентина", "Игнатьева", "Иониктовна", "", new Position(), new WorkDaysList())
         {
         }
 

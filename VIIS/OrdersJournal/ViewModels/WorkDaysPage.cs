@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using VIIS.App.OrdersJournal.Models.OrdersDecorators;
+using VIIS.App.OrdersJournal.OrderDetail.Views;
 using VIIS.Domain.Orders;
 using VIMVVM;
 
@@ -52,7 +53,7 @@ namespace VIIS.App.OrdersJournal.ViewModels
         }
         public void CreateOrder()
         {
-            new OrderDetail.Views.OrderDetail();
+            var orderDetail = new OrderDetailView();//Передать во ViewModel this(WorkDaysPage).
         }
     }
 }

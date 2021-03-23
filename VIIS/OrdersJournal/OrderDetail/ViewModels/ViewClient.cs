@@ -38,6 +38,13 @@ namespace VIIS.App.OrdersJournal.OrderDetail.ViewModels
             Phone = phone;
         }
 
+        public void Clear()
+        {
+            FirstName = "";
+            MiddleName = "";
+            LastName = "";
+            Phone = "";
+        }
         public Client Model()
         {
             return new Client(FirstName, LastName, MiddleName, Phone);

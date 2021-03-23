@@ -10,7 +10,7 @@
       Title="ExistingClient" Background="White">
 
     <Page.DataContext>
-        <ViewModels:ExistingClientName/>
+        <ViewModels:ExistingViewClient/>
     </Page.DataContext>
 
     <Grid>

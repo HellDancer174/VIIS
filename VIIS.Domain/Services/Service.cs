@@ -7,24 +7,23 @@ using System.Threading.Tasks;
 
 namespace VIIS.Domain.Services
 {
-    public class Service: IDocument
+    public class Service: ServiceValue, IDocument
     {
-        private readonly string name;
         protected readonly TimeSpan start;
-        private readonly TimeSpan timeSpan;
-        private readonly decimal sale;
+        protected readonly TimeSpan timeSpan;
 
-        public Service(string name, decimal sale, TimeSpan start, TimeSpan timeSpan)
+        public Service(string name, decimal sale, TimeSpan start, TimeSpan timeSpan): base(name, sale)
         {
-            this.name = name;
-            this.sale = sale;
             this.start = start;
             this.timeSpan = timeSpan;
         }
-        public Service(Service other)
+        public Service(ServiceValue serviceValue, TimeSpan start, TimeSpan timeSpan): base(serviceValue)
         {
-            name = other.name;
-            sale = other.sale;
+            this.start = start;
+            this.timeSpan = timeSpan;
+        }
+        public Service(Service other) : base(other.name, other.sale)
+        {
             start = other.start;
             timeSpan = other.timeSpan;
         }
@@ -38,14 +37,14 @@ namespace VIIS.Domain.Services
         {
             var finish = start + timeSpan;
             var otherFinish = other.start + timeSpan;
-            return !(start >= other.start && start <= otherFinish) && !(finish >= other.start && finish <= otherFinish);
+            return !(start >= other.start && start < otherFinish) && !(finish > other.start && finish <= otherFinish);
         }
 
-        public decimal Sale => sale;
 
         public virtual void Transfer()
         {
             return;
         }
+
     }
 }

@@ -58,10 +58,16 @@ namespace VIIS.App.OrdersJournal.ViewModels
             }
         }
 
-        public virtual void AddContent(PageContent content)
+        public virtual void AddContent(PageViewService service)
         {
-            validIndex(content.ContentIndex());
-            Content[content.ContentIndex() - startIndex].Add(content);
+            validIndex(service.ContentIndex());
+            Content[service.ContentIndex() - startIndex].Add(service);
+        }
+
+        public virtual void RemoveContent(PageViewService service)
+        {
+            validIndex(service.ContentIndex());
+            Content[service.ContentIndex() - startIndex].Remove(service);
         }
 
         public override int IndexOf(PageTime item)

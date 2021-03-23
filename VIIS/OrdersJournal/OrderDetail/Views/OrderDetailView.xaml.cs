@@ -18,13 +18,18 @@ namespace VIIS.App.OrdersJournal.OrderDetail.Views
     /// <summary>
     /// Логика взаимодействия для OrderDetail.xaml
     /// </summary>
-    public partial class OrderDetail : Window
+    public partial class OrderDetailView : Window
     {
         private OrderDetailVM viewModel;
-        public OrderDetail()
+        public OrderDetailView()
         {
             InitializeComponent();
             DataContext = viewModel = new OrderDetailVM();
+        }
+        public OrderDetailView(OrderDetailVM viewModel)
+        {
+            InitializeComponent();
+            DataContext = this.viewModel = viewModel;
         }
     }
 }

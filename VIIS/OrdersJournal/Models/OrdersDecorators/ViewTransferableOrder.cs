@@ -28,7 +28,7 @@ namespace VIIS.App.OrdersJournal.Models.OrdersDecorators
             foreach(var service in services)
             {
                 var clientName = new ViewClient(client);
-                times.AddContent(new PageContent(clientName.FullName, clientName.Phone, comment, service));
+                times.AddContent(new PageViewService(clientName.FullName, clientName.Phone, new ViewServiceValue(service), service, this));
             }
             //Сервисы будут делать PageContent, а этот класс будет добавлять их в PageTimes.
         }

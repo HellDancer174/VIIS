@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using VIIS.App.OrdersJournal.ViewModels;
+using VIIS.App.Services.ViewModel;
 using VIIS.Domain.Services;
 
 namespace VIIS.App.OrdersJournal.Models.OrdersDecorators
@@ -11,17 +12,17 @@ namespace VIIS.App.OrdersJournal.Models.OrdersDecorators
     public class ViewTransferableService : Service
     {
         private readonly Service other;
-        private readonly PageContent pageContent;
+        private readonly BaseViewService viewService;
 
-        public ViewTransferableService(Service other, PageContent pageContent) : base(other)
+        public ViewTransferableService(Service other, BaseViewService viewService) : base(other)
         {
             this.other = other;
-            this.pageContent = pageContent;
+            this.viewService = viewService;
         }
 
         public override void Transfer()
         {
-            pageContent.ChangeContent(start);
+            viewService.ChangeContent(start, timeSpan);
         }
     }
 }

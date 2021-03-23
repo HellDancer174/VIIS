@@ -41,8 +41,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Clients\AnyClient.cs" />
     <Compile Include="Clients\Client.cs" />
     <Compile Include="Clients\Clients.cs" />
+    <Compile Include="Services\ServiceValueList.cs" />
+    <Compile Include="Services\ServiceValue.cs" />
     <Compile Include="Staff\Employees.cs" />
     <Compile Include="Staff\Master.cs" />
     <Compile Include="Staff\ValueClasses\Position.cs" />

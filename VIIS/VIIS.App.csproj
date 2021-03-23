@@ -67,6 +67,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="OrdersJournal\OrderDetail\Models\NamingClient.cs" />
+    <Compile Include="OrdersJournal\OrderDetail\Models\DetailTransferableOrder.cs" />
+    <Compile Include="OrdersJournal\OrderDetail\Models\ViewTransferableServiceValueList.cs" />
+    <Compile Include="OrdersJournal\OrderDetail\ViewModels\ViewServiceValue.cs" />
+    <Compile Include="Services\ViewModel\BaseViewService.cs" />
     <Compile Include="Staff\ViewModels\EmployeesViewModels\ViewAddress.cs" />
     <Compile Include="Staff\ViewModels\EmployeesViewModels\ViewEmployeeDetail.cs" />
     <Compile Include="Staff\ViewModels\EmployeesViewModels\ViewPassport.cs" />
@@ -130,7 +135,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="OrdersJournal\OrderDetail\Views\OrderDetail.xaml">
+    <Page Include="OrdersJournal\OrderDetail\Views\OrderDetailView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -168,25 +173,25 @@
     <Compile Include="OrdersJournal\Models\OrdersDecorators\ViewTrasferableOrders.cs" />
     <Compile Include="OrdersJournal\OrderDetail\Models\ViewTransferableClient.cs" />
     <Compile Include="OrdersJournal\OrderDetail\ViewModels\ViewClient.cs" />
-    <Compile Include="OrdersJournal\OrderDetail\ViewModels\ExistingClientName.cs" />
+    <Compile Include="OrdersJournal\OrderDetail\ViewModels\ExistingViewClient.cs" />
     <Compile Include="GlobalViewModel\ViewName.cs" />
     <Compile Include="OrdersJournal\OrderDetail\ViewModels\ViewClients.cs" />
     <Compile Include="OrdersJournal\OrderDetail\ViewModels\OrderDetailVM.cs" />
-    <Compile Include="OrdersJournal\OrderDetail\ViewModels\Service.cs" />
+    <Compile Include="OrdersJournal\OrderDetail\ViewModels\ViewService.cs" />
     <Compile Include="OrdersJournal\OrderDetail\Views\ClientNamePages\ExistingClient.xaml.cs">
       <DependentUpon>ExistingClient.xaml</DependentUpon>
     </Compile>
     <Compile Include="OrdersJournal\OrderDetail\Views\ClientNamePages\NewClient.xaml.cs">
       <DependentUpon>NewClient.xaml</DependentUpon>
     </Compile>
-    <Compile Include="OrdersJournal\OrderDetail\Views\OrderDetail.xaml.cs">
-      <DependentUpon>OrderDetail.xaml</DependentUpon>
+    <Compile Include="OrdersJournal\OrderDetail\Views\OrderDetailView.xaml.cs">
+      <DependentUpon>OrderDetailView.xaml</DependentUpon>
     </Compile>
     <Compile Include="OrdersJournal\ViewModels\Fake\FakePage.cs" />
     <Compile Include="OrdersJournal\ViewModels\Journal.cs" />
     <Compile Include="OrdersJournal\ViewModels\WorkDaysPage.cs" />
     <Compile Include="OrdersJournal\ViewModels\MastersPage.cs" />
-    <Compile Include="OrdersJournal\ViewModels\PageContent.cs" />
+    <Compile Include="OrdersJournal\ViewModels\PageViewService.cs" />
     <Compile Include="OrdersJournal\ViewModels\PageTime.cs" />
     <Compile Include="OrdersJournal\ViewModels\PageTimes.cs" />
     <Compile Include="OrdersJournal\ViewModels\DecoratedJournalTimes\SafeJournalTimes.cs" />

@@ -21,13 +21,13 @@ namespace VIIS.App.OrdersJournal.OrderDetail.Views.ClientNamePages
     /// </summary>
     public partial class ExistingClient : Page
     {
-        private ExistingClientName viewModel;
-        public ExistingClient(ExistingClientName viewModel)
+        private ExistingViewClient viewModel;
+        public ExistingClient(ExistingViewClient viewModel)
         {
             InitializeComponent();
             DataContext = this.viewModel = viewModel;
         }
-        public ExistingClient(): this(new ExistingClientName())
+        public ExistingClient(): this(new ExistingViewClient())
         {
         }
     }
