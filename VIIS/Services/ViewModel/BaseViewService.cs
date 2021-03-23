@@ -11,9 +11,11 @@ namespace VIIS.App.Services.ViewModel
 {
     public class BaseViewService : ViewServiceValue, IViewModel<Service>, IEquatable<BaseViewService>
     {
+        private readonly Service service;
         private ViewServiceValue selectedService;
-        public BaseViewService(ServiceValue service, TimeSpan start, TimeSpan timeSpan) : base(service)
+        public BaseViewService(Service service, TimeSpan start, TimeSpan timeSpan) : base(service)
         {
+            this.service = service;
             Start = start;
             TimeSpan = timeSpan;
             SelectedService = this;
@@ -41,6 +43,11 @@ namespace VIIS.App.Services.ViewModel
         public virtual bool Equals(BaseViewService other)
         {
             return Start == other.Start;
+        }
+
+        public Service OldModel()
+        {
+            return service;
         }
 
         public new Service Model()

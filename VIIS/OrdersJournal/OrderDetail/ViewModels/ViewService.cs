@@ -15,18 +15,18 @@ namespace VIIS.App.OrdersJournal.OrderDetail.ViewModels
     {
         private readonly ObservableCollection<ViewServiceValue> names;
 
-        public ViewService(ObservableCollection<ViewServiceValue> names, TimeSpan start, TimeSpan timeSpan): this(names, names.First(), start, timeSpan)
+        public ViewService(ObservableCollection<ViewServiceValue> names, TimeSpan start, TimeSpan timeSpan): this(names, new Service(names.First().Model(), start, timeSpan), start, timeSpan)
         {
         }
-        public ViewService(ObservableCollection<ViewServiceValue> names, ViewServiceValue current, TimeSpan start, TimeSpan timeSpan): base(current.Model(),  start, timeSpan)
+        public ViewService(ObservableCollection<ViewServiceValue> names, Service current, TimeSpan start, TimeSpan timeSpan): base(current,  start, timeSpan)
         {
-            SelectedService = current;
+            SelectedService = new ViewServiceValue(current);
             this.names = names;
         }
-        public ViewService(ObservableCollection<ViewServiceValue> names, ViewServiceValue current, Service service):this(names, current, new TimeSpan(), new TimeSpan())
+        public ViewService(ObservableCollection<ViewServiceValue> names, Service current):this(names, current, new TimeSpan(), new TimeSpan())
         {
-            service = new ViewTransferableService(service, this);
-            service.Transfer();
+            current = new ViewTransferableService(current, this);
+            current.Transfer();
         }
 
         public ObservableCollection<ViewServiceValue> Names => names;

@@ -59,7 +59,7 @@ namespace VIIS.App.OrdersJournal.OrderDetail.ViewModels
             if (ViewServices.Count == 0) return;
             var viewClient = new ViewClient(ClientNames.Model());
             var viewService = ViewServices.Last();
-            page.RemoveContent(new PageViewService(viewClient.FullName, viewClient.Phone, viewService, viewService.Model(), order));
+            page.RemoveContent(viewService.OldModel());
             ViewServices.RemoveAt(ViewServices.Count - 1);
             //Еще надо отправить запрос на сервер.
         });

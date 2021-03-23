@@ -6,6 +6,8 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VIIS.App.OrdersJournal.OrderDetail.Models;
+using VIIS.Domain.Services;
 
 namespace VIIS.App.OrdersJournal.ViewModels
 {
@@ -69,6 +71,13 @@ namespace VIIS.App.OrdersJournal.ViewModels
             validIndex(service.ContentIndex());
             Content[service.ContentIndex() - startIndex].Remove(service);
         }
+        public virtual void RemoveContent(Service service)
+        {
+            var indexed = new IndexedService(service);
+            validIndex(indexed.TimeIndex());
+            Content[indexed.TimeIndex() - startIndex].Remove(Content[indexed.TimeIndex() - startIndex].Single(pageService => pageService.Equals(service)));
+        }
+
 
         public override int IndexOf(PageTime item)
         {

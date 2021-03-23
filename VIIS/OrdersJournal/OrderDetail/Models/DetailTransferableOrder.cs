@@ -33,7 +33,7 @@ namespace VIIS.App.OrdersJournal.OrderDetail.Models
             if (clients.Find(client) == new AnyClient()) existingClient = new ExistingViewClient();
             else existingClient = new ExistingViewClient(new ObservableCollection<ViewClient>(clients.ViewNames()), newClient);
             detailVM.ChangeContent(new ViewClients(new NewClient(newClient), new ExistingClient(existingClient), newClient, existingClient), ordersDate,
-                new ObservableCollection<ViewService>(services.Select(service => new ViewService(serviceValueList.ViewServices, new ViewServiceValue(service), service))),
+                new ObservableCollection<ViewService>(services.Select(service => new ViewService(serviceValueList.ViewServices, service))),
                 comment, "Сохранить", "Удалить", serviceValueList.ViewServices.ToList());
         }
     }

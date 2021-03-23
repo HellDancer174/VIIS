@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace VIIS.Domain.Services
 {
-    public class Service: ServiceValue, IDocument
+    public class Service: ServiceValue, IDocument, IEquatable<Service>
     {
         protected readonly TimeSpan start;
         protected readonly TimeSpan timeSpan;
@@ -46,5 +46,9 @@ namespace VIIS.Domain.Services
             return;
         }
 
+        public bool Equals(Service other)
+        {
+            return other.start == start && other.timeSpan == timeSpan && other.name == name;
+        }
     }
 }

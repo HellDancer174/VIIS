@@ -10,7 +10,7 @@ using VIIS.Domain.Services;
 
 namespace VIIS.Domain.Orders
 {
-    public class Order: IDocument
+    public class Order: IDocument, IEquatable<Order>
     {
         protected readonly Client client;
         protected readonly List<Service> services;
@@ -56,6 +56,12 @@ namespace VIIS.Domain.Orders
         public virtual void Transfer()
         {
             client.Transfer();
+        }
+
+        public bool Equals(Order other)
+        {
+            //Проверить сервисы
+            return client == other.client && master == other.master && client == other.client;
         }
     }
 }

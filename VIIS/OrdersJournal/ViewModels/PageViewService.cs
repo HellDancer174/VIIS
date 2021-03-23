@@ -12,7 +12,7 @@ using VIIS.Domain.Services;
 
 namespace VIIS.App.OrdersJournal.ViewModels
 {
-    public class PageViewService: BaseViewService
+    public class PageViewService: BaseViewService, IEquatable<Order>, IEquatable<Service>
     {
         private readonly Service service;
         private readonly Order order;
@@ -20,14 +20,14 @@ namespace VIIS.App.OrdersJournal.ViewModels
         public string Customer { get; set; }
         public string Phone { get; set; }
 
-        public PageViewService(string customer, string phone, ViewServiceValue selectedService, TimeSpan start, TimeSpan timeSpan, Order order): base(selectedService.Model(), start, timeSpan)
+        public PageViewService(string customer, string phone, ViewService selectedService, TimeSpan start, TimeSpan timeSpan, Order order): base(selectedService.Model(), start, timeSpan)
         {
             
             ChangeContent(customer, phone, selectedService, start, timeSpan);
             this.order = order;
         }
 
-        public PageViewService(string customer, string phone, ViewServiceValue selectedService, Service service, Order order):this(customer, phone, selectedService, new TimeSpan(), new TimeSpan(), order)
+        public PageViewService(string customer, string phone, ViewService selectedService, Service service, Order order):this(customer, phone, selectedService, new TimeSpan(), new TimeSpan(), order)
         {
             this.service = new ViewTransferableService(service, this);
             this.service.Transfer();
@@ -63,13 +63,19 @@ namespace VIIS.App.OrdersJournal.ViewModels
         {
             new OrderDetailView(new OrderDetailVM()).Show();//Прокинуть туда currentTime и this(PageContent).
         }
-        public void Remove()
-        {
-            //удалить Order на сервере.
-        }
         public override string ToString()
         {
             return String.Format("Заказ: {0}, {1}, {2}, {3}", Start, Customer, Phone, SelectedService);
+        }
+
+        public bool Equals(Order other)
+        {
+           return order.Equals(other);
+        }
+
+        public bool Equals(Service other)
+        {
+            return service.Equals(other);
         }
     }
 }
