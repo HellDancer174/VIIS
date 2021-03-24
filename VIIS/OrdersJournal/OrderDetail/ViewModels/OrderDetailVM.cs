@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,7 +16,7 @@ using VIMVVM;
 
 namespace VIIS.App.OrdersJournal.OrderDetail.ViewModels
 {
-    public class OrderDetailVM: OrderDecorator
+    public class OrderDetailVM: OrderDecorator, INotifyPropertyChanged
     {
         private readonly PageTimes masterPage;
         private readonly ViewServiceValueList serviceValueList;

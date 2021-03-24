@@ -46,6 +46,7 @@
     <Compile Include="Clients\Clients.cs" />
     <Compile Include="Clients\Decorators\ClientDecorator.cs" />
     <Compile Include="Clients\Decorators\ClientsDecorator.cs" />
+    <Compile Include="Global\Person.cs" />
     <Compile Include="Orders\Decorators\OrdersDecorator.cs" />
     <Compile Include="Services\Decorators\ServiceDecorator.cs" />
     <Compile Include="Services\ServiceValueList.cs" />

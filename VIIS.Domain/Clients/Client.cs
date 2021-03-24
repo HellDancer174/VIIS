@@ -46,9 +46,25 @@ namespace VIIS.Domain.Clients
             new AnyDocument().Transfer();
         }
 
+        public override bool Equals(object obj)
+        {
+            var client = obj as Client;
+            if (client == null) return false;
+            else return Equals(client);
+        }
         public bool Equals(Client other)
         {
             return other.firstName == firstName && other.middleName == middleName && other.lastName == lastName;
+        }
+
+        public override int GetHashCode()
+        {
+            var hashCode = -1592923394;
+            hashCode = hashCode * -1521134295 + firstName.GetHashCode();
+            hashCode = hashCode * -1521134295 + lastName.GetHashCode();
+            hashCode = hashCode * -1521134295 + middleName.GetHashCode();
+            hashCode = hashCode * -1521134295 + phone.GetHashCode();
+            return hashCode;
         }
     }
 }

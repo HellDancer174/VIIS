@@ -6,29 +6,30 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using VIIS.App.OrdersJournal.Models.OrdersDecorators;
+using VIIS.App.OrdersJournal.OrderDetail.ViewModels;
 using VIIS.App.OrdersJournal.OrderDetail.Views;
 using VIIS.Domain.Clients;
 using VIIS.Domain.Orders;
 using VIIS.Domain.Services;
+using VIIS.Domain.Staff;
 using VIMVVM;
 
 namespace VIIS.App.OrdersJournal.ViewModels
 {
     public class WorkDaysPage : Notifier<string>
     {
-        public string CurrentMaster { get; set; }
-        //private VirtualObservableCollection<PageTime> currentTimes;
+        public Master CurrentMaster { get; set; }
 
         public VirtualObservableCollection<PageTime> CurrentTimes { get; set; }
 
-        protected Dictionary<string, PageTimes> journalPages;
+        protected Dictionary<Master, PageTimes> journalPages;
 
-        public WorkDaysPage(Dictionary<string, PageTimes> journalPages)
+        public WorkDaysPage(Dictionary<Master, PageTimes> journalPages)
         {
             this.journalPages = journalPages;
             if(journalPages.Count != 0) ChangeMaster(journalPages.Keys.First());
         }
-        public WorkDaysPage(List<string> masters) :
+        public WorkDaysPage(List<Master> masters) :
             this(masters.ToDictionary(master => master, master => new PageTimes(new TimeSpan(8, 0, 0), new TimeSpan(19, 0, 0))))
         {
         }
@@ -37,12 +38,12 @@ namespace VIIS.App.OrdersJournal.ViewModels
         }
         public virtual void AddOrder(Order order, ServiceValueList serviceValueList, Clients clients)
         {
-            var master = order.MasterName();
-            var pageOrders = new JournalOrder(order, serviceValueList, clients).PageOrders;
+            var masterPageOrders = new JournalOrder(order, serviceValueList, clients).PageOrders;
+            var pageOrders = masterPageOrders.Value;
             foreach (var pageOrder in pageOrders)
-                journalPages[master].AddContent(pageOrder);
+                journalPages[masterPageOrders.Key].AddContent(pageOrder);
         }
-        public void ChangeMaster(string master)
+        public void ChangeMaster(Master master)
         {
             CurrentTimes = journalPages[master].Content;
             ChangeProperty(nameof(CurrentTimes));

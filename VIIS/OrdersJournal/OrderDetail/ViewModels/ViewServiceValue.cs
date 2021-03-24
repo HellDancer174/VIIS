@@ -17,7 +17,12 @@ namespace VIIS.App.OrdersJournal.OrderDetail.ViewModels
             this.serviceValue = service;
         }
 
-        public string Name => serviceValue.ToString();
+        public string Name { get => name; set => name = value; }
 
+        public override bool Equals(object obj)
+        {
+            var value = obj as ViewServiceValue;
+            return value != null && name == value.name;
+        }
     }
 }

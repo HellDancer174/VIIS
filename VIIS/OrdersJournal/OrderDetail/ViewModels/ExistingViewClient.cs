@@ -18,15 +18,24 @@ namespace VIIS.App.OrdersJournal.OrderDetail.ViewModels
 
         public ExistingViewClient(Clients other) : base(other)
         {
-            ClientNames = new ObservableCollection<ViewClient>(clients.Select(client => new ViewClient(client)).ToList());
+            Clients = new ObservableCollection<ViewClient>(clients.Select(client => new ViewClient(client)).ToList());
         }
         public ExistingViewClient(Clients other, Client current): this(other)
         {
             SelectedClient = new ViewClient(current);
         }
 
-        public ObservableCollection<ViewClient> ClientNames { get; }
-        public ViewClient SelectedClient { get; set; }
+        public ObservableCollection<ViewClient> Clients { get; }
+        private ViewClient selectedClient;
+        public ViewClient SelectedClient
+        {
+            get => selectedClient;
+            set
+            {
+                selectedClient = value;
+                ChangeProperty();
+            }
+        }
 
         public void Clear()
         {

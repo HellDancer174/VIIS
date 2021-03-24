@@ -8,6 +8,7 @@ using VIIS.Domain.Clients;
 using VIIS.Domain.Orders;
 using VIIS.Domain.Orders.Decorators;
 using VIIS.Domain.Services;
+using VIIS.Domain.Staff;
 
 namespace VIIS.App.OrdersJournal.Models.OrdersDecorators
 {
@@ -22,6 +23,7 @@ namespace VIIS.App.OrdersJournal.Models.OrdersDecorators
             this.clients = clients;
         }
 
-        public List<PageOrder> PageOrders => services.Select(service => new PageOrder(this, service, serviceValueList, clients)).ToList();
+        public KeyValuePair<Master, List<PageOrder>> PageOrders => 
+            new KeyValuePair<Master, List<PageOrder>>(master, services.Select(service => new PageOrder(this, service, serviceValueList, clients)).ToList());
     }
 }

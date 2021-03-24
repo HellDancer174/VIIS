@@ -23,18 +23,18 @@ namespace VIIS.App.OrdersJournal.ViewModels
             var mastersPosition = new Position("Мастер - парикмахер");
             var manicurePosition = new Position("Мастер маникюра");
             var pedicurePosition = new Position("Мастер педикюра");
-            Masters = masters.Where(master => master.Equals(mastersPosition) && master.IsWork(workDay)).Select(master => master.FullName).ToList();
-            Manicure = masters.Where(master => master.Equals(manicurePosition) && master.IsWork(workDay)).Select(master => master.FullName).ToList();
-            Pedicure = masters.Where(master => master.Equals(pedicurePosition) && master.IsWork(workDay)).Select(master => master.FullName).ToList();
-            daysPage = new WorkDaysPage(masters.Select(master => master.FullName).ToList());
+            Masters = masters.Where(master => master.Equals(mastersPosition) && master.IsWork(workDay)).ToList();
+            Manicure = masters.Where(master => master.Equals(manicurePosition) && master.IsWork(workDay)).ToList();
+            Pedicure = masters.Where(master => master.Equals(pedicurePosition) && master.IsWork(workDay)).ToList();
+            daysPage = new WorkDaysPage(masters);
         }
 
-        public List<string> Manicure { get; }
-        public List<string> Pedicure { get; }
-        public List<string> Masters { get; }
+        public List<Master> Manicure { get; }
+        public List<Master> Pedicure { get; }
+        public List<Master> Masters { get; }
 
-        private string selectedMaster;
-        public string SelectedMaster
+        private Master selectedMaster;
+        public Master SelectedMaster
         {
             get => selectedMaster;
             set

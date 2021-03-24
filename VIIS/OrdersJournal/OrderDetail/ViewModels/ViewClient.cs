@@ -32,7 +32,11 @@ namespace VIIS.App.OrdersJournal.OrderDetail.ViewModels
             LastName = "";
         }
 
-
+        public override bool Equals(object obj)
+        {
+            var client = obj as ViewClient;
+            return client != null && Equals(client);
+        }
 
         public string FirstName
         {

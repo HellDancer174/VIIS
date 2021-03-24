@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,14 +11,15 @@ using VIMVVM;
 
 namespace VIIS.App.Services.ViewModel
 {
-    public class BaseViewService : ServiceDecorator
+    public class BaseViewService : ServiceDecorator, INotifyPropertyChanged
     {
         public BaseViewService(Service service) : base(service)
         {
         }
 
-        public TimeSpan Start { get => start; set => start = value; }
-        public TimeSpan TimeSpan { get => timeSpan; set => timeSpan = value; }
+        public string Name { get => name; set => name = value; }
+        public DateTime Start { get => new DateTime()+start; set => start = value.TimeOfDay; }
+        public DateTime TimeSpan { get => new DateTime() + timeSpan; set => timeSpan = value.TimeOfDay; }
 
     }
 }

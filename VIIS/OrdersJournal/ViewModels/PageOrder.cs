@@ -31,17 +31,17 @@ namespace VIIS.App.OrdersJournal.ViewModels
 
         public string Customer => viewClient.FullName;
         public string Phone => viewClient.Phone;
-
+        public string OrderInfo => service.ToString();
         
 
         public int ContentIndex()
         {
-            return service.Start.Hours;
+            return service.Start.TimeOfDay.Hours;
         }
 
         public bool IsOwnerIndex(int index)
         {
-            return index == service.Start.Hours;
+            return index == service.Start.TimeOfDay.Hours;
         }
 
         public bool CheckOrders(PageOrder other)

@@ -34,11 +34,29 @@ namespace VIIS.Domain.Staff
         }
 
 
+        
+
         public bool Equals(Master other)
         {
-            return base.Equals(other);
+            return base.Equals(other) && Equals(other.position);
         }
 
         public bool Equals(Position other) => position.Equals(other);
+
+        public override bool Equals(object obj)
+        {
+            var master = obj as Master;
+            if (master == null) return false;
+            else return Equals(master);
+        }
+
+        public override int GetHashCode()
+        {
+            var hashCode = 480875773;
+            hashCode = hashCode * -1521134295 + firstName.GetHashCode();
+            hashCode = hashCode * -1521134295 + lastName.GetHashCode();
+            hashCode = hashCode * -1521134295 + middleName.GetHashCode();
+            return hashCode;
+        }
     }
 }

@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VIMVVM;
 
 namespace VIIS.Domain.Clients
 {
-    public class Clients
+    public class Clients: Notifier
     {
         protected readonly List<Client> clients;
 
