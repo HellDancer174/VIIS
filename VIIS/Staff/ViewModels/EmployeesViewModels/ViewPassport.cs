@@ -7,7 +7,7 @@ using VIMVVM;
 
 namespace VIIS.App.Staff.ViewModels.EmployeesViewModels
 {
-    public class ViewPassport: ViewModel<String>
+    public class ViewPassport: Notifier
     {
         public ViewPassport(int seria, int passportID, DateTime date, string organization)
         {

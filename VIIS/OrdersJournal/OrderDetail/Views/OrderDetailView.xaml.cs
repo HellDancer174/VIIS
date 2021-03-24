@@ -24,7 +24,7 @@ namespace VIIS.App.OrdersJournal.OrderDetail.Views
         public OrderDetailView()
         {
             InitializeComponent();
-            DataContext = viewModel = new OrderDetailVM();
+            //DataContext = viewModel = new OrderDetailVM();
         }
         public OrderDetailView(OrderDetailVM viewModel)
         {

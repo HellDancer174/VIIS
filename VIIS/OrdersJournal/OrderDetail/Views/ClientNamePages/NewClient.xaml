@@ -8,9 +8,6 @@
       mc:Ignorable="d" d:DesignWidth="800"
       Title="NewClient" Background="White" Height="60">
 
-    <Page.DataContext>
-        <ViewModels:ViewClient/>
-    </Page.DataContext>
 
     <Grid>
         <StackPanel>

@@ -22,7 +22,7 @@ namespace VIIS.App.OrdersJournal.Models.OrdersDecorators
 
         public override void Transfer()
         {
-            viewService.ChangeContent(start, timeSpan);
+            return;
         }
     }
 }

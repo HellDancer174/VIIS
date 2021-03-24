@@ -15,7 +15,7 @@ namespace VIIS.App.OrdersJournal.ViewModels.DecoratedJournalTimes
             this.other = other;
         }
 
-        public override void AddContent(PageViewService content)
+        public override void AddContent(PageOrder content)
         {
             int counter = 0;
             try

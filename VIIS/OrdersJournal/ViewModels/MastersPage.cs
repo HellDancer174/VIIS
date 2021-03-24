@@ -11,7 +11,7 @@ namespace VIIS.App.OrdersJournal.ViewModels
     /// <summary>
     /// Является сущностью страницы журнала
     /// </summary>
-    public class MastersPage: ViewModel<string>, IEquatable<MastersPage>
+    public class MastersPage: Notifier, IEquatable<MastersPage>
     {
         public string Master { get; set; } //Возможно стоит создать класс "Master";
         public ObservableCollection<PageTime> Times { get; set; }

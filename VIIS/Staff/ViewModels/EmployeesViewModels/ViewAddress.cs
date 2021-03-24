@@ -7,7 +7,7 @@ using VIMVVM;
 
 namespace VIIS.App.Staff.ViewModels.EmployeesViewModels
 {
-    public class ViewAddress: ViewModel<String>
+    public class ViewAddress: Notifier
     {
         public ViewAddress(int index, string city, string street, string house, string flat)
         {

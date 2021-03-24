@@ -12,7 +12,7 @@ using VIIS.App.Main.Views;
 
 namespace VIIS.App.Main.ViewModels
 {
-    public class ViewMain: ViewModel<string>
+    public class ViewMain: Notifier
     {
         private readonly Page journal;
         private readonly Page clients;

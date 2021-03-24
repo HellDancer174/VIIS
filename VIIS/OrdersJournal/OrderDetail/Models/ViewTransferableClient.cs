@@ -21,7 +21,7 @@ namespace VIIS.App.OrdersJournal.OrderDetail.Models
 
         public override void Transfer()
         {
-            media.ChangeName(firstName, middleName, lastName, this.phone);
+            return;
         }
     }
 }

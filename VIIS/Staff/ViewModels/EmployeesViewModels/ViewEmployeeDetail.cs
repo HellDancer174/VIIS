@@ -7,7 +7,7 @@ using VIMVVM;
 
 namespace VIIS.App.Staff.ViewModels.EmployeesViewModels
 {
-    public class ViewEmployeeDetail: ViewModel<string>
+    public class ViewEmployeeDetail: Notifier
     {
         private readonly ViewAddress address;
         private readonly ViewPassport passport;

@@ -7,10 +7,11 @@ using System.Threading.Tasks;
 using VIIS.Domain.Clients;
 using VIIS.Domain.Staff;
 using VIIS.Domain.Services;
+using VIMVVM;
 
 namespace VIIS.Domain.Orders
 {
-    public class Order: IDocument, IEquatable<Order>
+    public class Order: Notifier, IDocument, IEquatable<Order>
     {
         protected readonly Client client;
         protected readonly List<Service> services;
@@ -25,6 +26,10 @@ namespace VIIS.Domain.Orders
             this.master = master;
             this.comment = comment;
             this.ordersDate = ordersDate;
+        }
+
+        public Order(Master master, DateTime orderDate): this(new Client(), new List<Service>(), master, "", orderDate.Date)
+        {
         }
 
         public Order(Order other)
@@ -46,6 +51,12 @@ namespace VIIS.Domain.Orders
                 }
             }
             return !client.Equals(other.client) && !master.Equals(other.master);
+        }
+        public bool CheckDate(DateTime date) => ordersDate.Date == date.Date;
+
+        public string MasterName()
+        {
+            return master.FullName;
         }
 
         public virtual KeyValuePair<string, Order> KeyValue()

@@ -24,12 +24,7 @@ namespace VIIS.App.OrdersJournal.Models.OrdersDecorators
 
         public override void Transfer()
         {
-            var times = masterTimes[master.FullName];
-            foreach(var service in services)
-            {
-                var clientName = new ViewClient(client);
-                times.AddContent(new PageViewService(clientName.FullName, clientName.Phone, new ViewServiceValue(service), service, this));
-            }
+            return;
             //Сервисы будут делать PageContent, а этот класс будет добавлять их в PageTimes.
         }
     }

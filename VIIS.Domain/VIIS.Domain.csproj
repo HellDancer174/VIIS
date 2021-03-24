@@ -44,8 +44,13 @@
     <Compile Include="Clients\AnyClient.cs" />
     <Compile Include="Clients\Client.cs" />
     <Compile Include="Clients\Clients.cs" />
+    <Compile Include="Clients\Decorators\ClientDecorator.cs" />
+    <Compile Include="Clients\Decorators\ClientsDecorator.cs" />
+    <Compile Include="Orders\Decorators\OrdersDecorator.cs" />
+    <Compile Include="Services\Decorators\ServiceDecorator.cs" />
     <Compile Include="Services\ServiceValueList.cs" />
     <Compile Include="Services\ServiceValue.cs" />
+    <Compile Include="Staff\Decorators\EmployeesDecorator.cs" />
     <Compile Include="Staff\Employees.cs" />
     <Compile Include="Staff\Master.cs" />
     <Compile Include="Staff\ValueClasses\Position.cs" />
@@ -62,6 +67,10 @@
     <ProjectReference Include="..\..\ElegantLib\ElegantLib\ElegantLib.csproj">
       <Project>{4AEFDB59-CAD9-4FD0-954E-F2C686200A55}</Project>
       <Name>ElegantLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\VIMVVM\VIMVVM\VIMVVM.csproj">
+      <Project>{B6DA2FA6-ACA9-4881-BD84-DE94BFED2286}</Project>
+      <Name>VIMVVM</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

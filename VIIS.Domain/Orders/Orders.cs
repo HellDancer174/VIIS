@@ -10,10 +10,11 @@ using VIIS.Domain.Clients;
 using VIIS.Domain.Staff;
 using VIIS.Domain.Services;
 using VIIS.Domain.Staff.ValueClasses;
+using VIMVVM;
 
 namespace VIIS.Domain.Orders
 {
-    public class Orders : IDocumentAsync
+    public class Orders : Notifier, IDocumentAsync
     {
         protected readonly VirtualCollection<Order> ordersList;
 

@@ -67,10 +67,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="OrdersJournal\Models\OrdersDecorators\JournalOrder.cs" />
     <Compile Include="OrdersJournal\OrderDetail\Models\IndexedService.cs" />
     <Compile Include="OrdersJournal\OrderDetail\Models\NamingClient.cs" />
     <Compile Include="OrdersJournal\OrderDetail\Models\DetailTransferableOrder.cs" />
-    <Compile Include="OrdersJournal\OrderDetail\Models\ViewTransferableServiceValueList.cs" />
+    <Compile Include="OrdersJournal\OrderDetail\Models\ViewServiceValueList.cs" />
     <Compile Include="OrdersJournal\OrderDetail\ViewModels\ViewServiceValue.cs" />
     <Compile Include="Services\ViewModel\BaseViewService.cs" />
     <Compile Include="Staff\ViewModels\EmployeesViewModels\ViewAddress.cs" />
@@ -192,7 +193,7 @@
     <Compile Include="OrdersJournal\ViewModels\Journal.cs" />
     <Compile Include="OrdersJournal\ViewModels\WorkDaysPage.cs" />
     <Compile Include="OrdersJournal\ViewModels\MastersPage.cs" />
-    <Compile Include="OrdersJournal\ViewModels\PageViewService.cs" />
+    <Compile Include="OrdersJournal\ViewModels\PageOrder.cs" />
     <Compile Include="OrdersJournal\ViewModels\PageTime.cs" />
     <Compile Include="OrdersJournal\ViewModels\PageTimes.cs" />
     <Compile Include="OrdersJournal\ViewModels\DecoratedJournalTimes\SafeJournalTimes.cs" />

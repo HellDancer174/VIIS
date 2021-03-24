@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VIIS.App.OrdersJournal.Views"
-        xmlns:ViewModels="clr-namespace:VIIS.App.OrdersJournal.ViewModels" x:Class="VIIS.App.OrdersJournal.Views.OrdersJournalView"
+        x:Class="VIIS.App.OrdersJournal.Views.OrdersJournalView"
         mc:Ignorable="d"
         d:DesignHeight="450" d:DesignWidth="800"
         Title="" MinHeight="450" MinWidth="800">
@@ -46,12 +46,7 @@
             <Setter Property="Background" Value="#FF007ACC"/>
         </Style>
     </Page.Resources>
-    <Page.DataContext>
-        <ViewModels:Journal/>
-    </Page.DataContext>
-    <!--<Page.DataContext>
-        <ViewModels:Journal/>
-    </Page.DataContext>-->
+
     <Grid>
         <DatePicker x:Name="Date" SelectedDate="{Binding CurrentDate}" Visibility="Hidden"/>
         <Grid DataContext="{Binding Staff}" Grid.Row="1">

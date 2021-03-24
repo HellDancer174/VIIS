@@ -5,24 +5,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using VIIS.Domain.Clients;
+using VIIS.Domain.Clients.Decorators;
 using VIMVVM;
 
 namespace VIIS.App.OrdersJournal.OrderDetail.ViewModels
 {
-    public class ExistingViewClient: ViewModel<Client>
+    public class ExistingViewClient: ClientsDecorator
     {
-        public ExistingViewClient(ObservableCollection<ViewClient> clientNames, ViewClient selectedClient)
-        {
-            ClientNames = clientNames;
-            SelectedClient = selectedClient;
-        }
-        public ExistingViewClient(ObservableCollection<ViewClient> clientNames):this(clientNames, new ViewClient(new AnyClient()))
-        {
-        }
-        public ExistingViewClient(): this(new ObservableCollection<ViewClient>())
+        public ExistingViewClient(): this(new Clients())
         {
         }
 
+        public ExistingViewClient(Clients other) : base(other)
+        {
+            ClientNames = new ObservableCollection<ViewClient>(clients.Select(client => new ViewClient(client)).ToList());
+        }
+        public ExistingViewClient(Clients other, Client current): this(other)
+        {
+            SelectedClient = new ViewClient(current);
+        }
 
         public ObservableCollection<ViewClient> ClientNames { get; }
         public ViewClient SelectedClient { get; set; }
@@ -32,7 +33,7 @@ namespace VIIS.App.OrdersJournal.OrderDetail.ViewModels
             SelectedClient = new ViewClient(new AnyClient());
         }
 
-        public override Client Model()
+        public Client Model()
         {
             return SelectedClient.Model();
         }

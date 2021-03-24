@@ -9,7 +9,7 @@ using VIMVVM;
 
 namespace VIIS.App.Staff.ViewModels
 {
-    public class ViewEmployeesTabs: ViewModel<string>
+    public class ViewEmployeesTabs: Notifier
     {
         private readonly EmployeesList employees;
         private readonly WorkGraph graph;

@@ -5,15 +5,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VIMVVM;
 
 namespace VIIS.Domain.Clients
 {
-    public class Client: IDocument, IEquatable<Client>
+    public class Client: Notifier, IDocument, IEquatable<Client>
     {
-        protected readonly string firstName;
-        protected readonly string lastName;
-        protected readonly string middleName;
-        protected readonly string phone;
+        protected string firstName;
+        protected string lastName;
+        protected string middleName;
+        protected string phone;
 
         public Client(string firstName, string lastName, string middleName, string phone)
         {
@@ -21,6 +22,9 @@ namespace VIIS.Domain.Clients
             this.lastName = lastName;
             this.middleName = middleName;
             this.phone = phone;
+        }
+        public Client(): this("", "", "", "")
+        {
         }
         public Client(Client other)
         {

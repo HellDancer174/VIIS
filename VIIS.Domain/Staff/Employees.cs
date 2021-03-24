@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VIMVVM;
 
 namespace VIIS.Domain.Staff
 {
-    public class Employees
+    public class Employees: Notifier
     {
         protected readonly List<Master> masters;
 

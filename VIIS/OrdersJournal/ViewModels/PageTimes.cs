@@ -1,12 +1,9 @@
 ﻿using ElegantLib.Collections;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using VIIS.App.OrdersJournal.OrderDetail.Models;
+using VIIS.Domain.Orders;
 using VIIS.Domain.Services;
 
 namespace VIIS.App.OrdersJournal.ViewModels
@@ -35,7 +32,7 @@ namespace VIIS.App.OrdersJournal.ViewModels
         {
             for(int i = 0; i < 12; i++)
             {
-                Content[i] = new PageTime(i + startIndex);
+                Content[i] = new PageTime(i + startIndex, this);
             }
         }
         public PageTimes(TimeSpan start, TimeSpan finish): this(start.Hours, finish.Hours)
@@ -60,16 +57,29 @@ namespace VIIS.App.OrdersJournal.ViewModels
             }
         }
 
-        public virtual void AddContent(PageViewService service)
+        public virtual void AddContent(PageOrder order)
         {
-            validIndex(service.ContentIndex());
-            Content[service.ContentIndex() - startIndex].Add(service);
+            validIndex(order.ContentIndex());
+            Content[order.ContentIndex() - startIndex].Add(order);
         }
 
-        public virtual void RemoveContent(PageViewService service)
+        public virtual void RemoveContent(PageOrder order)
         {
-            validIndex(service.ContentIndex());
-            Content[service.ContentIndex() - startIndex].Remove(service);
+            validIndex(order.ContentIndex());
+            Content[order.ContentIndex() - startIndex].Remove(order);
+        }
+        public virtual void RemoveContent(Order order)
+        {
+            var list = new List<PageOrder>();
+            foreach(var time in Content)
+            {
+                foreach(var pageOrder in time)
+                {
+                    if (pageOrder.Equals(order)) list.Add(pageOrder);
+                }
+            }
+            foreach (var pageOrder in list)
+                RemoveContent(pageOrder);
         }
         public virtual void RemoveContent(Service service)
         {

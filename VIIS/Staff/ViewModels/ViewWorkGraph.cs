@@ -9,7 +9,7 @@ using VIMVVM;
 
 namespace VIIS.App.Staff.ViewModels
 {
-    public class ViewWorkGraph: ViewModel<string>
+    public class ViewWorkGraph: Notifier
     {
         private readonly List<string> months;
         private readonly ViewMastersList mastersList;

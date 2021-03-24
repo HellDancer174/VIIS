@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using VIIS.App.OrdersJournal.OrderDetail.ViewModels;
+using VIIS.Domain.Clients;
 
 namespace VIIS.App.OrdersJournal.OrderDetail.Views.ClientNamePages
 {
@@ -22,7 +23,7 @@ namespace VIIS.App.OrdersJournal.OrderDetail.Views.ClientNamePages
     public partial class NewClient : Page
     {
         private ViewClient clientName;
-        public NewClient():this(new ViewClient())
+        public NewClient():this(new ViewClient(new Client()))
         {
         }
         public NewClient(ViewClient clientName)

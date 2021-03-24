@@ -9,7 +9,7 @@ using VIMVVM;
 
 namespace VIIS.App.Staff.ViewModels
 {
-    public class ViewEmployees : ViewModel<string>
+    public class ViewEmployees : Notifier<string>
     {
         private readonly ObservableCollection<ViewEmployee> employees;
 

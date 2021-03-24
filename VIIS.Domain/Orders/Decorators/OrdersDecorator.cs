@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 
 namespace VIIS.Domain.Orders.Decorators
 {
-    public class DateCheckableOrder : OrderDecorator
+    public class OrdersDecorator : Orders
     {
-        public DateCheckableOrder(Order other) : base(other)
+        private readonly Orders other;
+
+        public OrdersDecorator(Orders other) : base(other)
         {
+            this.other = new Orders(other);
         }
-
-
     }
 }

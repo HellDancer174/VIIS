@@ -9,8 +9,8 @@ namespace VIIS.Domain.Services
 {
     public class Service: ServiceValue, IDocument, IEquatable<Service>
     {
-        protected readonly TimeSpan start;
-        protected readonly TimeSpan timeSpan;
+        protected TimeSpan start;
+        protected TimeSpan timeSpan;
 
         public Service(string name, decimal sale, TimeSpan start, TimeSpan timeSpan): base(name, sale)
         {
@@ -21,6 +21,9 @@ namespace VIIS.Domain.Services
         {
             this.start = start;
             this.timeSpan = timeSpan;
+        }
+        public Service(ServiceValue serviceValue): this(serviceValue, new TimeSpan(), new TimeSpan())
+        {
         }
         public Service(Service other) : base(other.name, other.sale)
         {

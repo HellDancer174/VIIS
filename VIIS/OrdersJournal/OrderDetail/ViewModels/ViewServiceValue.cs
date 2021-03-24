@@ -8,22 +8,16 @@ using VIMVVM;
 
 namespace VIIS.App.OrdersJournal.OrderDetail.ViewModels
 {
-    public class ViewServiceValue : ViewModel<ServiceValue>
+    public class ViewServiceValue: ServiceValue
     {
         protected ServiceValue serviceValue;
 
-        public ViewServiceValue(ServiceValue service)
+        public ViewServiceValue(ServiceValue service): base(service)
         {
             this.serviceValue = service;
         }
 
         public string Name => serviceValue.ToString();
 
-        public virtual decimal Sale => serviceValue.Sale;
-
-        public override ServiceValue Model()
-        {
-            return serviceValue;
-        }
     }
 }

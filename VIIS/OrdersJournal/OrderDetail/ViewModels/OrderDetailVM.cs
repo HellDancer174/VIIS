@@ -9,64 +9,49 @@ using VIIS.App.OrdersJournal.OrderDetail.Views.ClientNamePages;
 using VIIS.App.OrdersJournal.ViewModels;
 using VIIS.Domain.Clients;
 using VIIS.Domain.Orders;
+using VIIS.Domain.Orders.Decorators;
 using VIIS.Domain.Services;
 using VIMVVM;
 
 namespace VIIS.App.OrdersJournal.OrderDetail.ViewModels
 {
-    public class OrderDetailVM: ViewModel<Order>
+    public class OrderDetailVM: OrderDecorator
     {
-        private List<ViewServiceValue> viewServices;
-        private DetailTransferableOrder order;
-        private DateTime ordersDate;
-        private readonly PageTimes page;
+        private readonly PageTimes masterPage;
+        private readonly ViewServiceValueList serviceValueList;
 
-        public OrderDetailVM(ViewClients clientNames, DateTime ordersDate, ObservableCollection<ViewService> services, string comment, List<ViewServiceValue> viewServices)
+        public OrderDetailVM(Order order, PageTimes masterPage, ServiceValueList serviceValueList, Clients clients): base(order)
         {
-            ChangeContent(clientNames, ordersDate, services, comment, "Сохранить", "Удалить", viewServices);
-            ViewServices.Add(new ViewService(new ObservableCollection<ViewServiceValue>(viewServices), new TimeSpan(), new TimeSpan()));
+            this.masterPage = masterPage;
+            this.serviceValueList = new ViewServiceValueList(serviceValueList);
+            ClientNames = new ViewClients(new ViewClient(client), new ExistingViewClient(clients));
+            ViewServices = new ObservableCollection<ViewService>(services.Select(service => new ViewService(this.serviceValueList.ViewServices, service)));
+            Sale = "0";
+
         }
-        public OrderDetailVM(Order order,PageTimes page)
-        {
-            this.page = page;
-            this.order = new DetailTransferableOrder(order, this, new Clients(), new ServiceValueList());
-            order.Transfer();
-        }
-        public OrderDetailVM():this(new ViewClients(new NewClient(), new ExistingClient(), new ViewClient(), new ExistingViewClient()), DateTime.Now, new ObservableCollection<ViewService>(), string.Empty, new List<ViewServiceValue>())
-        {
-        }
-        public void ChangeContent(ViewClients clientNames, DateTime ordersDate, ObservableCollection<ViewService> services, string comment, string saveButtonName, string endButtonName, List<ViewServiceValue> viewServices)
-        {
-            ClientNames = clientNames;
-            this.ordersDate = ordersDate;
-            ViewServices = services;
-            Comment = comment;
-            SaveButtonName = saveButtonName;
-            EndButtonName = endButtonName;
-            this.viewServices = viewServices;
-        }
+        //public OrderDetailVM():this(new ViewClients(new NewClient(), new ExistingClient(), new ViewClient(), new ExistingViewClient()), DateTime.Now, new ObservableCollection<ViewService>(), string.Empty, new List<ViewServiceValue>())
+        //{
+        //}
         public ViewClients ClientNames { get; private set; }
+        public DateTime OrdersDate => ordersDate;
         public ObservableCollection<ViewService> ViewServices { get; set; }
-        public string Comment { get; set; }
-        public string Sale => ViewServices.Select(newSevices => newSevices.Sale).Sum().ToString();
+        public string Comment { get => comment; set => comment = value; }
+        public string ServicesSale => ViewServices.Select(viewServices => viewServices.Sale).Sum().ToString();
+
+        public string Sale { get; set; }
 
         public string SaveButtonName { get; private set; }
         public string EndButtonName { get; private set; }
 
-        public RelayCommand Add => new RelayCommand((obl) => ViewServices.Add(new ViewService(new ObservableCollection<ViewServiceValue>(viewServices), new TimeSpan(), new TimeSpan())));
+        public RelayCommand Add => new RelayCommand((obl) => ViewServices.Add(new ViewService(serviceValueList.ViewServices, new Service(new ServiceValue()))));
         public RelayCommand Remove => new RelayCommand((obl) => 
         {
             if (ViewServices.Count == 0) return;
-            var viewClient = new ViewClient(ClientNames.Model());
-            var viewService = ViewServices.Last();
-            page.RemoveContent(viewService.OldModel());
-            ViewServices.RemoveAt(ViewServices.Count - 1);
-            //Еще надо отправить запрос на сервер.
+            else ViewServices.RemoveAt(ViewServices.Count - 1);
         });
 
         public virtual RelayCommand Save => new RelayCommand((obl) => throw new NotImplementedException());
         public virtual RelayCommand End => new RelayCommand((obl) => throw new NotImplementedException());
 
-        public DateTime OrdersDate => ordersDate;
     }
 }

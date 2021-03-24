@@ -8,11 +8,11 @@ namespace VIIS.Domain.Orders.Decorators
 {
     public class OrderDecorator : Order
     {
-        protected readonly Order primary;
+        protected readonly Order other;
 
         public OrderDecorator(Order other) : base(other)
         {
-            this.primary = other;
+            this.other = new Order(other);
         }
     }
 }

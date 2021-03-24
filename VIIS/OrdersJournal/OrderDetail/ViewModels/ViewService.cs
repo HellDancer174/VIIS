@@ -15,25 +15,35 @@ namespace VIIS.App.OrdersJournal.OrderDetail.ViewModels
     {
         private readonly ObservableCollection<ViewServiceValue> names;
 
-        public ViewService(ObservableCollection<ViewServiceValue> names, TimeSpan start, TimeSpan timeSpan): this(names, new Service(names.First().Model(), start, timeSpan), start, timeSpan)
+        public ViewService(List<ServiceValue> serviceValues, Service other): this(serviceValues.Select(service => new ViewServiceValue(service)).ToList(), other)
         {
         }
-        public ViewService(ObservableCollection<ViewServiceValue> names, Service current, TimeSpan start, TimeSpan timeSpan): base(current,  start, timeSpan)
+
+        public ViewService(List<ViewServiceValue> serviceValues, Service other) : base(other)
         {
-            SelectedService = new ViewServiceValue(current);
-            this.names = names;
+            SelectedService = new ViewServiceValue(other);
+            this.names = new ObservableCollection<ViewServiceValue>(serviceValues);
         }
-        public ViewService(ObservableCollection<ViewServiceValue> names, Service current):this(names, current, new TimeSpan(), new TimeSpan())
+        public ViewService(List<ViewServiceValue> serviceValues, ViewService other) : base(other)
         {
-            current = new ViewTransferableService(current, this);
-            current.Transfer();
+            SelectedService = new ViewServiceValue(other);
+            this.names = new ObservableCollection<ViewServiceValue>(serviceValues);
         }
+
+        public ViewServiceValue SelectedService
+        {
+            get => new ViewServiceValue(this);
+            set
+            {
+                name = value.Name;
+                sale = value.Sale;
+            }
+        }
+
 
         public ObservableCollection<ViewServiceValue> Names => names;
 
         public RelayCommand Execute => new RelayCommand((obj) => throw new NotImplementedException(String.Format("NotImplemented property {0}", nameof(Execute))));
-
-        public override decimal Sale => SelectedService.Sale;
 
     }
 }

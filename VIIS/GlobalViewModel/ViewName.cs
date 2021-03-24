@@ -7,7 +7,7 @@ using VIMVVM;
 
 namespace VIIS.App.GlobalViewModel
 {
-    public class ViewName: ViewModel
+    public class ViewName: Notifier
     {
         public ViewName(string firstName, string middleName, string lastName)
         {

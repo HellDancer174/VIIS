@@ -27,16 +27,11 @@ namespace VIIS.App.OrdersJournal.Models.OrdersDecorators
         public virtual void Transfer(DateTime workDay)
         {
             var currentOrders = ordersList.Where(order => new DateCheckableOrder(order).CheckDate(workDay.Date)).ToList();
-            Transfer(currentOrders, employees.ViewEmployees(workDay.Date));
-
+            return;
         }
         public void Transfer(IEnumerable<Order> orders, ViewJournalEmployees staff)
         {
-            foreach (var order in orders)
-            {
-                staff.DaysPage.AddOrder(order);
-            }
-            journal.ChangeStaff(staff);
+            return;
         }
     }
 }

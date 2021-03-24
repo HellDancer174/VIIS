@@ -6,50 +6,71 @@ using System.Threading.Tasks;
 using VIIS.App.GlobalViewModel;
 using VIIS.App.OrdersJournal.OrderDetail.Models;
 using VIIS.Domain.Clients;
+using VIIS.Domain.Clients.Decorators;
 using VIMVVM;
 
 namespace VIIS.App.OrdersJournal.OrderDetail.ViewModels
 {
-    public class ViewClient : ViewName, IViewModel<Client>
+    public class ViewClient : ClientDecorator
     {
-        private readonly Client model;
 
-        public ViewClient():this(string.Empty, string.Empty, string.Empty, string.Empty)
+        public ViewClient(Client other): base(other)
         {
-            Phone = string.Empty;
-            model = new Client(string.Empty, string.Empty, string.Empty, string.Empty);
-        }
 
-        public ViewClient(string firstName, string middleName, string lastName, string phone) : base(firstName, middleName, lastName)
-        {
-            Phone = phone;
-            model = new Client(firstName, lastName, middleName, phone);
-        }
-        public ViewClient(Client model)
-        {
-            this.model = new ViewTransferableClient(model, this);
-            this.model.Transfer();
-        }
-        public void ChangeName(string firstName, string middleName, string lastName, string phone)
-        {
-            FirstName = firstName;
-            MiddleName = middleName;
-            LastName = lastName;
-            Phone = phone;
-        }
-
-        public void Clear()
-        {
-            FirstName = "";
-            MiddleName = "";
-            LastName = "";
-            Phone = "";
         }
         public Client Model()
         {
             return new Client(FirstName, LastName, MiddleName, Phone);
         }
 
-        public string Phone { get; set; }
+
+
+        public void Clear()
+        {
+            FirstName = "";
+            MiddleName = "";
+            LastName = "";
+        }
+
+
+
+        public string FirstName
+        {
+            get => firstName;
+            set
+            {
+                firstName = value;
+                ChangeProperty();
+            }
+        }
+        public string MiddleName
+        {
+            get => middleName;
+            set
+            {
+                middleName = value;
+                ChangeProperty();
+            }
+        }
+        public string LastName
+        {
+            get => lastName;
+            set
+            {
+                lastName = value;
+                ChangeProperty();
+            }
+        }
+
+
+        public string Phone
+        {
+            get => phone;
+            set
+            {
+                phone = value;
+                ChangeProperty();
+            }
+        }
     }
 }

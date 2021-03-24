@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VIMVVM;
 
 namespace VIIS.Domain.Services
 {
-    public class ServiceValue
+    public class ServiceValue: Notifier
     {
-        protected readonly string name;
-        protected readonly decimal sale;
+        protected string name;
+        protected decimal sale;
 
         public ServiceValue(string name, decimal sale)
         {
@@ -20,6 +21,9 @@ namespace VIIS.Domain.Services
         {
             name = other.name;
             sale = other.sale;
+        }
+        public ServiceValue(): this("", 0)
+        {
         }
         public decimal Sale => sale;
 

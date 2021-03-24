@@ -26,11 +26,11 @@ namespace VIIS.App.OrdersJournal.Views
     /// </summary>
     public partial class OrdersJournalView : Page
     {
-        //private Journal journal;
+        private Journal journal;
         public OrdersJournalView()
         {
             InitializeComponent();
-            //DataContext = journal = new Journal();
+            DataContext = journal = new Journal();
         }
     }
 }

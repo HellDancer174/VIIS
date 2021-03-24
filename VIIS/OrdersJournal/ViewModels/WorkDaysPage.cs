@@ -7,12 +7,14 @@ using System.Text;
 using System.Threading.Tasks;
 using VIIS.App.OrdersJournal.Models.OrdersDecorators;
 using VIIS.App.OrdersJournal.OrderDetail.Views;
+using VIIS.Domain.Clients;
 using VIIS.Domain.Orders;
+using VIIS.Domain.Services;
 using VIMVVM;
 
 namespace VIIS.App.OrdersJournal.ViewModels
 {
-    public class WorkDaysPage : ViewModel<string>
+    public class WorkDaysPage : Notifier<string>
     {
         public string CurrentMaster { get; set; }
         //private VirtualObservableCollection<PageTime> currentTimes;
@@ -33,10 +35,12 @@ namespace VIIS.App.OrdersJournal.ViewModels
         public WorkDaysPage(WorkDaysPage other) : this(other.journalPages)
         {
         }
-        public virtual void AddOrder(Order order)
+        public virtual void AddOrder(Order order, ServiceValueList serviceValueList, Clients clients)
         {
-            order = new ViewTransferableOrder(order, journalPages);
-            order.Transfer();
+            var master = order.MasterName();
+            var pageOrders = new JournalOrder(order, serviceValueList, clients).PageOrders;
+            foreach (var pageOrder in pageOrders)
+                journalPages[master].AddContent(pageOrder);
         }
         public void ChangeMaster(string master)
         {

@@ -5,54 +5,19 @@ using System.Text;
 using System.Threading.Tasks;
 using VIIS.App.OrdersJournal.OrderDetail.ViewModels;
 using VIIS.Domain.Services;
+using VIIS.Domain.Services.Decorators;
 using VIMVVM;
 
 namespace VIIS.App.Services.ViewModel
 {
-    public class BaseViewService : ViewServiceValue, IViewModel<Service>, IEquatable<BaseViewService>
+    public class BaseViewService : ServiceDecorator
     {
-        private readonly Service service;
-        private ViewServiceValue selectedService;
-        public BaseViewService(Service service, TimeSpan start, TimeSpan timeSpan) : base(service)
+        public BaseViewService(Service service) : base(service)
         {
-            this.service = service;
-            Start = start;
-            TimeSpan = timeSpan;
-            SelectedService = this;
         }
 
-        public ViewServiceValue SelectedService
-        {
-            get => selectedService;
-            set
-            {
-                selectedService = value;
-                serviceValue = selectedService.Model();
-            }
-        }
+        public TimeSpan Start { get => start; set => start = value; }
+        public TimeSpan TimeSpan { get => timeSpan; set => timeSpan = value; }
 
-        public TimeSpan Start { get; set; }
-        public TimeSpan TimeSpan { get; set; }
-
-        public void ChangeContent(TimeSpan orderTime, TimeSpan timeSpan)
-        {
-            Start = orderTime;
-            TimeSpan = timeSpan;
-        }
-
-        public virtual bool Equals(BaseViewService other)
-        {
-            return Start == other.Start;
-        }
-
-        public Service OldModel()
-        {
-            return service;
-        }
-
-        public new Service Model()
-        {
-            return new Service(SelectedService.Model(), Start, TimeSpan);
-        }
     }
 }

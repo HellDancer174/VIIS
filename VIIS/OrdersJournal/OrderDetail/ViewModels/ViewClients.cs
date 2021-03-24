@@ -10,21 +10,20 @@ using VIMVVM;
 
 namespace VIIS.App.OrdersJournal.OrderDetail.ViewModels
 {
-    public class ViewClients: ViewModel<Client>
+    public class ViewClients: Notifier<Client>
     {
         private readonly NewClient newClientPage;
         private readonly ExistingClient existingClientPage;
         private readonly ViewClient newClient;
         private readonly ExistingViewClient existingClient;
 
-        public ViewClients(NewClient newClientPage, ExistingClient existingClientPage, ViewClient newClient, ExistingViewClient existingClient)
+        public ViewClients(ViewClient newClient, ExistingViewClient existingClient)
         {
-            this.newClientPage = newClientPage;
-            this.existingClientPage = existingClientPage;
+            this.newClientPage = new NewClient(newClient);
+            this.existingClientPage = new ExistingClient(existingClient);
             this.newClient = newClient;
             this.existingClient = existingClient;
         }
-        //public Page Current { get; set; }
         public Page New => (Page)newClientPage;
         public Page Exist => (Page)existingClientPage;
 

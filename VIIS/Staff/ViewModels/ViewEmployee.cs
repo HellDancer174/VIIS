@@ -9,7 +9,7 @@ using VIMVVM;
 
 namespace VIIS.App.Staff.ViewModels
 {
-    public class ViewEmployee: ViewModel<String>
+    public class ViewEmployee: Notifier
     {
         private readonly ViewEmployeeDetail detail;
 

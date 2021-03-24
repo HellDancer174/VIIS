@@ -4,27 +4,29 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using VIIS.App.OrdersJournal.Models.OrdersDecorators;
+using VIIS.Domain.Clients;
 using VIIS.Domain.Orders;
+using VIIS.Domain.Services;
+using VIIS.Domain.Staff;
+using VIIS.Domain.Staff.Decorators;
+using VIIS.Domain.Staff.ValueClasses;
 using VIMVVM;
 
 namespace VIIS.App.OrdersJournal.ViewModels
 {
-    public class ViewJournalEmployees: ViewModel<string>
+    public class ViewJournalEmployees: EmployeesDecorator
     {
         private readonly WorkDaysPage daysPage;
-        public ViewJournalEmployees(List<string> manicure, List<string> pedicure, List<string> masters, WorkDaysPage daysPage) //МБ добавить словарь с мастерами
+
+        public ViewJournalEmployees(Employees other, DateTime workDay) : base(other)
         {
-            Manicure = manicure;
-            Pedicure = pedicure;
-            Masters = masters;
-            this.daysPage = daysPage;
-        }
-        public ViewJournalEmployees(List<string> manicure, List<string> pedicure, List<string> masters)
-        {
-            Manicure = manicure;
-            Pedicure = pedicure;
-            Masters = masters;
-            daysPage = new WorkDaysPage(Manicure.Concat(Pedicure).Concat(Masters).ToList());
+            var mastersPosition = new Position("Мастер - парикмахер");
+            var manicurePosition = new Position("Мастер маникюра");
+            var pedicurePosition = new Position("Мастер педикюра");
+            Masters = masters.Where(master => master.Equals(mastersPosition) && master.IsWork(workDay)).Select(master => master.FullName).ToList();
+            Manicure = masters.Where(master => master.Equals(manicurePosition) && master.IsWork(workDay)).Select(master => master.FullName).ToList();
+            Pedicure = masters.Where(master => master.Equals(pedicurePosition) && master.IsWork(workDay)).Select(master => master.FullName).ToList();
+            daysPage = new WorkDaysPage(masters.Select(master => master.FullName).ToList());
         }
 
         public List<string> Manicure { get; }
@@ -40,6 +42,12 @@ namespace VIIS.App.OrdersJournal.ViewModels
                 selectedMaster = value;
                 DaysPage.ChangeMaster(selectedMaster);
             }
+        }
+
+        public void AddOrdersList(List<Order> orders, ServiceValueList serviceValueList, Clients clients)
+        {
+            foreach (var order in orders)
+                daysPage.AddOrder(order, serviceValueList, clients);
         }
 
         public WorkDaysPage DaysPage => daysPage;

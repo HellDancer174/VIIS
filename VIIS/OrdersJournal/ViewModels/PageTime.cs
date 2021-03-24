@@ -12,36 +12,38 @@ using VIIS.Domain.Orders;
 
 namespace VIIS.App.OrdersJournal.ViewModels
 {
-    public class PageTime: VirtualObservableCollection<PageViewService>
+    public class PageTime: VirtualObservableCollection<PageOrder>
     {
         private readonly int timeIndex;
+        private readonly PageTimes pageTimes;
 
         public string TimeIndex => string.Format("{0}:00",timeIndex);
 
-        private PageViewService selected;
-        public PageViewService Selected
+        private PageOrder selected;
+        public PageOrder Selected
         {
             get => selected;
             set
             {
                 selected = value;
-                selected.ShowDetail(this);
+                selected.ShowDetail(pageTimes);
             }
         }
 
-        public ObservableCollection<PageViewService> Content { get; }
+        public ObservableCollection<PageOrder> Content { get; }
 
-        public PageTime(List<PageViewService> content, int timeIndex): base(content)
+        public PageTime(List<PageOrder> content, int timeIndex, PageTimes pageTimes): base(content)
         {
-            this.Content = new ObservableCollection<PageViewService>(content);
+            this.Content = new ObservableCollection<PageOrder>(content);
             this.timeIndex = timeIndex;
+            this.pageTimes = pageTimes;
             ChangeProperty(nameof(TimeIndex));
         }
-        public PageTime(int timeIndex):this(new List<PageViewService>(), timeIndex)
+        public PageTime(int timeIndex, PageTimes pageTimes):this(new List<PageOrder>(), timeIndex, pageTimes)
         {
         }
 
-        public override void Add(PageViewService item)
+        public override void Add(PageOrder item)
         {
             if (!item.IsOwnerIndex(timeIndex)) throw new ArgumentOutOfRangeException(String.Format("timeIndex content-а не соответствует timeIndex-у коллекции"));
             foreach(var element in Content)
