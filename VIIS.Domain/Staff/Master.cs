@@ -10,8 +10,13 @@ namespace VIIS.Domain.Staff
 {
     public class Master : Client, IEquatable<Master>, IEquatable<Position>
     {
-        private readonly Position position;
-        private readonly WorkDaysList workDaysList;
+        protected Position position;
+        protected WorkDaysList workDaysList;
+        protected Address address;
+        protected Passport passport;
+        protected EmployeeDetail detail;
+        protected DateTime birthday;
+        protected string email;
 
         public Master(Master other) : base(other)
         {
@@ -19,12 +24,18 @@ namespace VIIS.Domain.Staff
             workDaysList = other.workDaysList;
         }
 
-        public Master(string firstName, string lastName, string middleName, string phone, Position position, WorkDaysList workDaysList) : base(firstName, lastName, middleName, phone)
+        public Master(string firstName, string lastName, string middleName, string phone, Position position, WorkDaysList workDaysList, Address address, Passport passport, EmployeeDetail detail, DateTime birthday, string email):
+            base(firstName, lastName, middleName, phone)
         {
             this.position = position;
             this.workDaysList = workDaysList;
+            this.address = address;
+            this.passport = passport;
+            this.detail = detail;
+            this.birthday = birthday;
+            this.email = email;
         }
-        public Master(): this("Валентина", "Игнатьева", "Иониктовна", "", new Position(), new WorkDaysList())
+        public Master(): this("Валентина", "Игнатьева", "Иониктовна", "", new Position(), new WorkDaysList(), new Address(), new Passport(), new EmployeeDetail(), DateTime.Now.Date, "@mail")
         {
         }
 
@@ -33,7 +44,7 @@ namespace VIIS.Domain.Staff
             return workDaysList.IsWorkDay(date.Date);
         }
 
-
+        public override bool IsIncomplete => base.IsIncomplete || position.IsEmpty;
         
 
         public bool Equals(Master other)

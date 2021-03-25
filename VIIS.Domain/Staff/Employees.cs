@@ -1,4 +1,5 @@
 ﻿using ElegantLib;
+using ElegantLib.Collections;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,20 +9,35 @@ using VIMVVM;
 
 namespace VIIS.Domain.Staff
 {
-    public class Employees: Notifier
+    public class Employees: VirtualCollection<Master>
     {
-        protected readonly List<Master> masters;
 
-        public Employees(List<Master> masters)
+        public Employees(List<Master> masters): base(masters)
         {
-            this.masters = masters;
         }
-        public Employees(Employees other)
+        public Employees(Employees other): this(other.ToList())
         {
-            masters = other.masters;
         }
         public Employees(): this(new List<Master>() { new Master()})
         {
+        }
+
+        public override async void Add(Master item)
+        {
+            base.Add(item);
+            await Task.CompletedTask;
+        }
+
+        public virtual async Task Update(Master oldItem, Master item)
+        {
+            this[IndexOf(oldItem)] = item;
+            await Task.CompletedTask;
+        }
+
+        public virtual async Task RemoveAsync(Master item)
+        {
+            base.Remove(item);
+            await Task.CompletedTask;
         }
     }
 }

@@ -52,9 +52,16 @@
     <Compile Include="Services\Decorators\ServiceDecorator.cs" />
     <Compile Include="Services\ServiceValueList.cs" />
     <Compile Include="Services\ServiceValue.cs" />
+    <Compile Include="Staff\Decorators\DecoratableMaster.cs" />
     <Compile Include="Staff\Decorators\EmployeesDecorator.cs" />
     <Compile Include="Staff\Employees.cs" />
     <Compile Include="Staff\Master.cs" />
+    <Compile Include="Staff\ValueClasses\Address.cs" />
+    <Compile Include="Staff\ValueClasses\Decorators\DecoratableAddress.cs" />
+    <Compile Include="Staff\ValueClasses\Decorators\DecoratableEmployeeDetail.cs" />
+    <Compile Include="Staff\ValueClasses\Decorators\DecoratablePassport.cs" />
+    <Compile Include="Staff\ValueClasses\EmployeeDetail.cs" />
+    <Compile Include="Staff\ValueClasses\Passport.cs" />
     <Compile Include="Staff\ValueClasses\Position.cs" />
     <Compile Include="Orders\Decorators\DateCheckableOrder.cs" />
     <Compile Include="Orders\Decorators\OrderDecorator.cs" />

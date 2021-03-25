@@ -6,32 +6,39 @@ using System.Threading.Tasks;
 using VIIS.App.Staff.ViewModels.EmployeesViewModels;
 using VIIS.App.GlobalViewModel;
 using VIMVVM;
+using VIIS.Domain.Staff.Decorators;
+using VIIS.Domain.Staff;
+using VIIS.Domain.Staff.ValueClasses;
 
 namespace VIIS.App.Staff.ViewModels
 {
-    public class ViewEmployee: Notifier
+    public class ViewEmployee : DecoratableMaster
     {
-        private readonly ViewEmployeeDetail detail;
+        private readonly ViewEmployeeDetail viewDetail;
+        private readonly ViewAddress viewAddress;
+        private readonly ViewPassport viewPassport;
 
-        public ViewEmployee(ViewEmployeeDetail detail, string position, ViewName name, DateTime birthDay, string phone, string email)
-        {
-            this.detail = detail;
-            Position = position;
-            Name = name;
-            BirthDay = birthDay;
-            Phone = phone;
-            Email = email;
-        }
-        public ViewEmployee(): this(new ViewEmployeeDetail(), "", new ViewName(), DateTime.Now, "", "@mail")
+        public ViewEmployee(): this(new Master())
         {
         }
 
-        public string Position { get; set; }
+        public ViewEmployee(Master other) : base(other)
+        {
+            viewDetail = new ViewEmployeeDetail(detail);
+            viewAddress = new ViewAddress(address);
+            viewPassport = new ViewPassport(passport);
+            Name = new ViewName(firstName, middleName, lastName);
+        }
+
+        public Position Position { get => position; set => position = value; }
         public ViewName Name { get; set; }
-        public DateTime BirthDay { get; set; }
-        public string Phone { get; set; }
-        public string Email { get; set; }
+        public DateTime BirthDay { get => birthday; set => birthday = value; }
+        public string Phone { get => phone; set => phone = value; }
+        public string Email { get => email; set => email = value; }
 
-        public ViewEmployeeDetail Detail => detail;
+        public ViewEmployeeDetail Detail => viewDetail;
+
+        public ViewAddress Address => viewAddress;
+        public ViewPassport Passport => viewPassport;
     }
 }

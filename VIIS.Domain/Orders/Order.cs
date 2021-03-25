@@ -18,7 +18,7 @@ namespace VIIS.Domain.Orders
         protected readonly Master master;
         protected string comment;
         protected readonly DateTime ordersDate;
-        protected readonly decimal sale;
+        protected decimal sale;
 
         public Order(Client client, List<Service> services, Master master, string comment, DateTime ordersDate, decimal sale)
         {
@@ -34,19 +34,15 @@ namespace VIIS.Domain.Orders
         {
         }
 
+        public Order(Order other) : this(other.client, other.services, other.master, other.comment, other.ordersDate, other.sale)
+        {
+        }
+
+
         public Order(Master master, DateTime orderDate): this(new Client(), new List<Service>(), master, "", orderDate.Date, 0)
         {
         }
 
-        public Order(Order other)
-        {
-            client = other.client;
-            services = other.services;
-            comment = other.comment;
-            master = other.master;
-            ordersDate = other.ordersDate;
-            sale = other.sale;
-        }
 
         public bool CheckYourSelf(Order other)
         {
@@ -82,6 +78,13 @@ namespace VIIS.Domain.Orders
             return client == other.client && master == other.master && client == other.client;
         }
 
-        public bool IsEmpty => client.Equals(new AnyClient()) && services.Count == 0 && string.IsNullOrEmpty(comment) && sale == 0; 
+        public bool IsEmpty => client.Equals(new AnyClient()) && services.Count == 0 && string.IsNullOrEmpty(comment) && sale == 0;
+
+        public bool IsIncomplete => client.IsIncomplete || services.Count == 0 || comment == null || ordersDate == new DateTime() || sale == 0 || master.IsIncomplete || !master.IsWork(ordersDate);
+
+        public override string ToString()
+        {
+            return String.Format("Заказ от {0}; Клиент - {1}; Мастер - {2}, Сервисы - {3}", ordersDate, client.ToString(), master.ToString(), services.Count);
+        }
     }
 }

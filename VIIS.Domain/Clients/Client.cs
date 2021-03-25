@@ -34,6 +34,8 @@ namespace VIIS.Domain.Clients
             phone = other.phone;
         }
 
+        public virtual bool IsIncomplete => firstName == "" || lastName == "" || phone == "";
+
         public virtual string FullName => String.Format("{0} {1} {2}", lastName, firstName, middleName);
 
         public override string ToString()

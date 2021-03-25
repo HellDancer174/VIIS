@@ -3,28 +3,28 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VIIS.Domain.Staff.ValueClasses;
+using VIIS.Domain.Staff.ValueClasses.Decorators;
 using VIMVVM;
 
 namespace VIIS.App.Staff.ViewModels.EmployeesViewModels
 {
-    public class ViewAddress: Notifier
+    public class ViewAddress : DecoratableAddress
     {
-        public ViewAddress(int index, string city, string street, string house, string flat)
-        {
-            Index = index;
-            City = city;
-            Street = street;
-            House = house;
-            Flat = flat;
-        }
-        public ViewAddress():this(0, nameof(City), nameof(Street), "0", "0")
+
+        public ViewAddress() : this(new Address())
         {
         }
-        public int Index { get; set; }
-        public string City { get; set; }
-        public string Street { get; set; }
-        public string House { get; set; }
-        public string Flat { get; set; }
+
+        public ViewAddress(Address other) : base(other)
+        {
+        }
+
+        public int Index { get => index; set => index = value; }
+        public string City { get => city; set => city = value; }
+        public string Street { get => street; set => street = value; }
+        public string House { get => house; set => house = value; }
+        public string Flat { get => flat; set => flat = value; }
 
     }
 }

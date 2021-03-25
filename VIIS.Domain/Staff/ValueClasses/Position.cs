@@ -18,6 +18,8 @@ namespace VIIS.Domain.Staff.ValueClasses
         {
         }
 
+        public bool IsEmpty => string.IsNullOrEmpty(position) || string.IsNullOrWhiteSpace(position);
+
         public override string ToString()
         {
             return position;

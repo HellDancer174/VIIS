@@ -57,12 +57,14 @@ namespace VIIS.App.OrdersJournal.OrderDetail.ViewModels
 
         public virtual RelayCommand Save => new RelayCommand(async(obl) =>
         {
-            //window.Close();
+            if (Convert.ToDecimal(Sale) == 0) Sale = ServicesSale;
+            sale = Convert.ToDecimal(Sale);
+            var newOrder = new Order(this);
+            if (newOrder.IsIncomplete) throw new InvalidOperationException(newOrder.ToString());
             await journal.Update(other, this);
         });
         public virtual RelayCommand End => new RelayCommand(async(obl) =>
         {
-            //window.Close();
             await journal.Remove(other);
         });
 
