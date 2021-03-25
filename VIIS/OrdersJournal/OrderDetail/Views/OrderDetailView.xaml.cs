@@ -31,5 +31,15 @@ namespace VIIS.App.OrdersJournal.OrderDetail.Views
             InitializeComponent();
             DataContext = this.viewModel = viewModel;
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void TabControl_Unselected(object sender, RoutedEventArgs e)
+        {
+            viewModel.ClientNames.Clear();
+        }
     }
 }

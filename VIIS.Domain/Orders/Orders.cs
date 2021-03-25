@@ -36,6 +36,30 @@ namespace VIIS.Domain.Orders
 
             });
         }
+
+        public virtual async Task Add(Order order)
+        {
+            ordersList.Add(order);
+            //Отправить на сервер
+            await Task.CompletedTask;
+        }
+
+        public virtual async Task Update(Order oldOrder, Order newOrder)
+        {
+            var index = ordersList.IndexOf(oldOrder);
+            ordersList[index] = newOrder;
+            //Отправить на сервер
+            await Task.CompletedTask;
+        }
+
+        public virtual async Task Remove(Order order)
+        {
+            ordersList.Remove(order);
+            //Отправить на сервер
+            await Task.CompletedTask;
+        }
+
+
         public virtual Task Transfer()
         {
             return Task.CompletedTask;

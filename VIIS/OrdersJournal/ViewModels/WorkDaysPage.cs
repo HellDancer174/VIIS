@@ -23,26 +23,31 @@ namespace VIIS.App.OrdersJournal.ViewModels
         public VirtualObservableCollection<PageTime> CurrentTimes { get; set; }
 
         protected Dictionary<Master, PageTimes> journalPages;
+        private readonly Journal journal;
 
-        public WorkDaysPage(Dictionary<Master, PageTimes> journalPages)
+        public WorkDaysPage(Dictionary<Master, PageTimes> journalPages, Journal journal)
         {
             this.journalPages = journalPages;
-            if(journalPages.Count != 0) ChangeMaster(journalPages.Keys.First());
+            this.journal = journal;
+            if (journalPages.Count != 0) ChangeMaster(journalPages.Keys.First());
         }
-        public WorkDaysPage(List<Master> masters) :
-            this(masters.ToDictionary(master => master, master => new PageTimes(new TimeSpan(8, 0, 0), new TimeSpan(19, 0, 0))))
+        public WorkDaysPage(List<Master> masters, Journal journal) :
+            this(masters.ToDictionary(master => master, master => new PageTimes(new TimeSpan(8, 0, 0), new TimeSpan(19, 0, 0), journal)), journal)
         {
         }
-        public WorkDaysPage(WorkDaysPage other) : this(other.journalPages)
+        public WorkDaysPage(WorkDaysPage other) : this(other.journalPages, other.journal)
         {
         }
-        public virtual void AddOrder(Order order, ServiceValueList serviceValueList, Clients clients)
+        public void AddOrder(Order order, ServiceValueList serviceValueList, Clients clients)
         {
-            var masterPageOrders = new JournalOrder(order, serviceValueList, clients).PageOrders;
-            var pageOrders = masterPageOrders.Value;
-            foreach (var pageOrder in pageOrders)
-                journalPages[masterPageOrders.Key].AddContent(pageOrder);
+            journalPages[order.KeyValue().Key].AddContent(order, serviceValueList, clients);
         }
+
+        public void RemoveOrder(Order order)
+        {
+            journalPages[order.KeyValue().Key].RemoveContent(order);
+        }
+
         public void ChangeMaster(Master master)
         {
             CurrentTimes = journalPages[master].Content;
@@ -56,9 +61,10 @@ namespace VIIS.App.OrdersJournal.ViewModels
             foreach (var pagetimes in pageTimesCollection)
                 pagetimes.Clear();
         }
-        public void CreateOrder()
-        {
-            var orderDetail = new OrderDetailView();//Передать во ViewModel this(WorkDaysPage).
-        }
+        //public void CreateOrder(DateTime date, ServiceValueList serviceValueList, Clients clients)
+        //{
+        //    var orderDetail = new OrderDetailView(new OrderDetailVM(new Order(CurrentMaster, date), journal, serviceValueList, clients));
+        //    orderDetail.Show();
+        //}
     }
 }

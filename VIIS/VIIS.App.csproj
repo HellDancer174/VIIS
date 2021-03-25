@@ -72,7 +72,9 @@
     <Compile Include="OrdersJournal\OrderDetail\Models\NamingClient.cs" />
     <Compile Include="OrdersJournal\OrderDetail\Models\DetailTransferableOrder.cs" />
     <Compile Include="OrdersJournal\OrderDetail\Models\ViewServiceValueList.cs" />
+    <Compile Include="OrdersJournal\OrderDetail\ViewModels\ViewNewOrderDetail.cs" />
     <Compile Include="OrdersJournal\OrderDetail\ViewModels\ViewServiceValue.cs" />
+    <Compile Include="OrdersJournal\ViewModels\AnyPageOrder.cs" />
     <Compile Include="Services\ViewModel\BaseViewService.cs" />
     <Compile Include="Staff\ViewModels\EmployeesViewModels\ViewAddress.cs" />
     <Compile Include="Staff\ViewModels\EmployeesViewModels\ViewEmployeeDetail.cs" />

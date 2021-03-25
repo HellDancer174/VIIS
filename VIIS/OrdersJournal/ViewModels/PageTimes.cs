@@ -2,7 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using VIIS.App.OrdersJournal.Models.OrdersDecorators;
 using VIIS.App.OrdersJournal.OrderDetail.Models;
+using VIIS.Domain.Clients;
 using VIIS.Domain.Orders;
 using VIIS.Domain.Services;
 
@@ -28,14 +30,14 @@ namespace VIIS.App.OrdersJournal.ViewModels
                     throw new ArgumentOutOfRangeException(String.Format("index должен быть >= {0} и {1} <=", startIndex, finishIndex));
             };
         }
-        public PageTimes(int startIndex, int finishIndex) : this(startIndex, finishIndex, new VirtualObservableCollection<PageTime>(new PageTime[12]))
+        public PageTimes(int startIndex, int finishIndex, Journal journal) : this(startIndex, finishIndex, new VirtualObservableCollection<PageTime>(new PageTime[12]))
         {
             for(int i = 0; i < 12; i++)
             {
-                Content[i] = new PageTime(i + startIndex, this);
+                Content[i] = new PageTime(i + startIndex, journal);
             }
         }
-        public PageTimes(TimeSpan start, TimeSpan finish): this(start.Hours, finish.Hours)
+        public PageTimes(TimeSpan start, TimeSpan finish, Journal journal): this(start.Hours, finish.Hours, journal)
         {
         }
 
@@ -61,6 +63,16 @@ namespace VIIS.App.OrdersJournal.ViewModels
         {
             validIndex(order.ContentIndex());
             Content[order.ContentIndex() - startIndex].Add(order);
+            Content[order.ContentIndex() - startIndex].Sort();
+        }
+
+        public void AddContent(Order order, ServiceValueList serviceValueList, Clients clients)
+        {
+            var masterPageOrders = new JournalOrder(order, serviceValueList, clients).PageOrders;
+            var pageOrders = masterPageOrders.Value;
+            foreach (var pageOrder in pageOrders)
+                        AddContent(pageOrder);
+
         }
 
         public virtual void RemoveContent(PageOrder order)
@@ -73,13 +85,14 @@ namespace VIIS.App.OrdersJournal.ViewModels
             var list = new List<PageOrder>();
             foreach(var time in Content)
             {
-                foreach(var pageOrder in time)
+                foreach(var pageOrder in time.Content)
                 {
                     if (pageOrder.Equals(order)) list.Add(pageOrder);
                 }
             }
             foreach (var pageOrder in list)
                 RemoveContent(pageOrder);
+
         }
         public virtual void RemoveContent(Service service)
         {

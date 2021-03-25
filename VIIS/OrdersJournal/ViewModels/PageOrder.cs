@@ -14,7 +14,7 @@ using VIIS.Domain.Services;
 
 namespace VIIS.App.OrdersJournal.ViewModels
 {
-    public class PageOrder: OrderDecorator
+    public class PageOrder: OrderDecorator, IComparable<PageOrder>
     {
         private readonly BaseViewService service;
         private readonly ViewClient viewClient;
@@ -49,9 +49,9 @@ namespace VIIS.App.OrdersJournal.ViewModels
            return service.CheckYourSelf(other.service);
         }
 
-        public void ShowDetail(PageTimes pageTimes)
+        public virtual void ShowDetail(Journal journal)
         {
-            new OrderDetailView(new OrderDetailVM(this, pageTimes, serviceValueList, clients)).Show();
+            new OrderDetailView(new OrderDetailVM(this, journal, serviceValueList, clients)).Show();
         }
         public override string ToString()
         {
@@ -61,6 +61,11 @@ namespace VIIS.App.OrdersJournal.ViewModels
         public bool Equals(Service other)
         {
             return service.Equals(other);
+        }
+
+        public int CompareTo(PageOrder other)
+        {
+            return service.CompareTo(other.service);
         }
     }
 }

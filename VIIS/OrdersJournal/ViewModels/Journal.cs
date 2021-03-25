@@ -33,6 +33,7 @@ namespace VIIS.App.OrdersJournal.ViewModels
         public Journal():this(new Orders(), new Employees(), new ServiceValueList(), new Clients())
         {
         }
+
         public ViewJournalEmployees Staff => staff;
 
         public DateTime CurrentDate
@@ -42,8 +43,7 @@ namespace VIIS.App.OrdersJournal.ViewModels
             {
                 if (value == currentDate) return;
                 currentDate = value;
-                var staff = new ViewJournalEmployees(employees, currentDate);
-                staff.AddOrdersList(ordersList.Where(order => order.CheckDate(currentDate)).ToList(), serviceValueList, clients);
+                var staff = new ViewJournalEmployees(employees, currentDate, serviceValueList, clients, this, ordersList.Where(order => order.CheckDate(currentDate)).ToList());
                 ChangeStaff(staff);
             }
         }
@@ -54,7 +54,23 @@ namespace VIIS.App.OrdersJournal.ViewModels
             ChangeProperty(nameof(Staff));
         }
 
-        public RelayCommand Add => new RelayCommand((obj) => staff.CreateOrder());
+        public override async Task Add(Order order)
+        {
+            staff.DaysPage.AddOrder(order, serviceValueList, clients);
+            await base.Add(order);
+        }
 
+        public override async Task Update(Order oldOrder, Order newOrder)
+        {
+            staff.DaysPage.RemoveOrder(oldOrder);
+            staff.DaysPage.AddOrder(newOrder, serviceValueList, clients);
+            await base.Update(oldOrder, newOrder);
+        }
+
+        public override async Task Remove(Order order)
+        {
+            staff.DaysPage.RemoveOrder(order);
+            await base.Remove(order);
+        }
     }
 }

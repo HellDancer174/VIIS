@@ -18,17 +18,23 @@ namespace VIIS.Domain.Orders
         protected readonly Master master;
         protected string comment;
         protected readonly DateTime ordersDate;
+        protected readonly decimal sale;
 
-        public Order(Client client, List<Service> services, Master master, string comment, DateTime ordersDate)
+        public Order(Client client, List<Service> services, Master master, string comment, DateTime ordersDate, decimal sale)
         {
             this.client = client;
             this.services = services;
             this.master = master;
             this.comment = comment;
             this.ordersDate = ordersDate;
+            this.sale = sale;
+        }
+        public Order(Client client, List<Service> services, Master master, string comment, DateTime ordersDate):
+            this(client, services, master, comment, ordersDate, services.Select(service => service.Sale).Sum())
+        {
         }
 
-        public Order(Master master, DateTime orderDate): this(new Client(), new List<Service>(), master, "", orderDate.Date)
+        public Order(Master master, DateTime orderDate): this(new Client(), new List<Service>(), master, "", orderDate.Date, 0)
         {
         }
 
@@ -39,6 +45,7 @@ namespace VIIS.Domain.Orders
             comment = other.comment;
             master = other.master;
             ordersDate = other.ordersDate;
+            sale = other.sale;
         }
 
         public bool CheckYourSelf(Order other)
@@ -59,9 +66,9 @@ namespace VIIS.Domain.Orders
             return master.FullName;
         }
 
-        public virtual KeyValuePair<string, Order> KeyValue()
+        public virtual KeyValuePair<Master, Order> KeyValue()
         {
-            return new KeyValuePair<string, Order>(master.ToString(), this);
+            return new KeyValuePair<Master, Order>(master, this);
         }
 
         public virtual void Transfer()
@@ -74,5 +81,7 @@ namespace VIIS.Domain.Orders
             //Проверить сервисы
             return client == other.client && master == other.master && client == other.client;
         }
+
+        public bool IsEmpty => client.Equals(new AnyClient()) && services.Count == 0 && string.IsNullOrEmpty(comment) && sale == 0; 
     }
 }

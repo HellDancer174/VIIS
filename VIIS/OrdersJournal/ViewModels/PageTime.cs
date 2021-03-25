@@ -15,7 +15,7 @@ namespace VIIS.App.OrdersJournal.ViewModels
     public class PageTime: VirtualObservableCollection<PageOrder>
     {
         private readonly int timeIndex;
-        private readonly PageTimes pageTimes;
+        private readonly Journal journal;
 
         public string TimeIndex => string.Format("{0}:00",timeIndex);
 
@@ -26,20 +26,20 @@ namespace VIIS.App.OrdersJournal.ViewModels
             set
             {
                 selected = value;
-                selected.ShowDetail(pageTimes);
+                if(selected != null) selected.ShowDetail(journal);
             }
         }
 
-        public ObservableCollection<PageOrder> Content { get; }
+        public ObservableCollection<PageOrder> Content { get; private set; }
 
-        public PageTime(List<PageOrder> content, int timeIndex, PageTimes pageTimes): base(content)
+        public PageTime(List<PageOrder> content, int timeIndex, Journal journal): base(content)
         {
             this.Content = new ObservableCollection<PageOrder>(content);
             this.timeIndex = timeIndex;
-            this.pageTimes = pageTimes;
+            this.journal = journal;
             ChangeProperty(nameof(TimeIndex));
         }
-        public PageTime(int timeIndex, PageTimes pageTimes):this(new List<PageOrder>(), timeIndex, pageTimes)
+        public PageTime(int timeIndex, Journal journal):this(new List<PageOrder>(), timeIndex, journal)
         {
         }
 
@@ -53,5 +53,19 @@ namespace VIIS.App.OrdersJournal.ViewModels
             Content.Add(item);
         }
 
+        public override bool Remove(PageOrder item)
+        {
+
+            return Content.Remove(item);
+        }
+
+        public override void Sort()
+        {
+            var sorted = Content.ToList();
+            sorted.Sort();
+            Content = new ObservableCollection<PageOrder>(sorted);
+            ChangeProperty(nameof(Content));
+            
+        }
     }
 }

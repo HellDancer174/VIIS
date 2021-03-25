@@ -112,7 +112,7 @@
                         <TextBlock Text="Педикюр" Style="{StaticResource Header}"/>
                         <ListBox ItemsSource="{Binding Pedicure}" SelectedItem="{Binding SelectedMaster}"/>
                     </StackPanel>
-                    <Button VerticalAlignment="Center" Style="{StaticResource Material}" Command="{Binding Add}" Grid.Row="1" Margin="10,0">
+                    <Button VerticalAlignment="Center" Style="{StaticResource Material}" Command="{Binding CreateOrder}" Grid.Row="1" Margin="10,0">
                         <TextBlock Text="Добавить" FontSize="18" Style="{StaticResource Default}"/>
                     </Button>
                 </Grid>

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace VIIS.Domain.Services
 {
-    public class Service: ServiceValue, IDocument, IEquatable<Service>
+    public class Service: ServiceValue, IDocument, IEquatable<Service>, IComparable<Service>
     {
         protected TimeSpan start;
         protected TimeSpan timeSpan;
@@ -52,6 +52,11 @@ namespace VIIS.Domain.Services
         public bool Equals(Service other)
         {
             return other.start == start && other.timeSpan == timeSpan && other.name == name;
+        }
+
+        public int CompareTo(Service other)
+        {
+            return start.CompareTo(other.start);
         }
     }
 }

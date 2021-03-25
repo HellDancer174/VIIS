@@ -44,7 +44,14 @@ namespace VIIS.App.OrdersJournal.OrderDetail.ViewModels
 
         public Client Model()
         {
-            return SelectedClient.Model();
+            if (selectedClient != null) return SelectedClient.Model();
+            else return new AnyClient();
+        }
+
+        public override string ToString()
+        {
+            if (selectedClient == null) return new AnyClient().ToString();
+            else return selectedClient.ToString();
         }
     }
 }
