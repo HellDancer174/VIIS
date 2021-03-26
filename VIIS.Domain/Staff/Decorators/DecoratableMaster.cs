@@ -8,7 +8,7 @@ namespace VIIS.Domain.Staff.Decorators
 {
     public class DecoratableMaster : Master
     {
-        private readonly Master other;
+        protected readonly Master other;
 
         public DecoratableMaster(Master other) : base(other)
         {

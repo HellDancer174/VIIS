@@ -5,35 +5,31 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using VIIS.App.Staff.Views;
+using VIIS.Domain.Staff;
+using VIIS.Domain.Staff.Decorators;
 
 namespace VIIS.App.Staff.ViewModels.WorkGraphViewModels
 {
-    public class ViewMastersList
+    public class ViewMastersList: EmployeesDecorator
     {
-        private readonly List<int> columnNames;
-        private readonly List<ViewWorkDaysList> mastersWorkDays;
-        private readonly WorkGraph page;
+        private List<int> columnNames;
+        private List<ViewMasterOfWorkDays> mastersWorkDays;
 
-        public ViewMastersList(List<int> columnNames, List<ViewWorkDaysList> mastersWorkDays, WorkGraph page)
+
+        public ViewMastersList(Employees other, DateTime month) : base(other)
         {
-            this.columnNames = columnNames;
-            this.mastersWorkDays = mastersWorkDays;
-            this.page = page;
+            ChangeMonth(month);
         }
-        public ViewMastersList(WorkGraph page) : this(new Month(3, 2021).Days(), new List<ViewWorkDaysList>() { new ViewWorkDaysList("Full"), new ViewWorkDaysList(), new ViewWorkDaysList() }, page)
+
+        public void ChangeMonth(DateTime date)
         {
+            mastersWorkDays = this.Select(master => new ViewMasterOfWorkDays(master, date)).ToList();
+            columnNames = new Month(date).Days();
+            ChangeProperty(nameof(MastersWorkDays));
+            ChangeProperty(nameof(ColumnNames));
         }
-        public ViewMastersList(string month, int year, List<ViewWorkDaysList> mastersWorkDays, WorkGraph page)
-        {
-            var mymonth = new Month(month, year);
-            columnNames = mymonth.Days();
-            this.mastersWorkDays = mastersWorkDays;
-            this.page = page;
-        }
-        public ViewMastersList(string month, List<ViewWorkDaysList> mastersWorkDays, WorkGraph page) : this(month, DateTime.Now.Year, mastersWorkDays, page)
-        {
-        }
-        public List<ViewWorkDaysList> MastersWorkDays => mastersWorkDays;
+
+        public List<ViewMasterOfWorkDays> MastersWorkDays => mastersWorkDays;
 
         public List<int> ColumnNames => columnNames;
     }

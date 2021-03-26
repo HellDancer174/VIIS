@@ -34,7 +34,7 @@
                     <ColumnDefinition Width="80*"/>
                 </Grid.ColumnDefinitions>-->
                 <!--<TextBlock Grid.Column="0" Text="Выберите месяц" Style="{StaticResource Default}" HorizontalAlignment="Center" VerticalAlignment="Center"/>-->
-                <Calendar x:Name="Calendar" DisplayMode="Year" DisplayDateChanged="Calendar_DisplayDateChanged" DisplayModeChanged="Calendar_DisplayModeChanged" SelectionMode="None" Margin="0,0,0,159"/>
+                <Calendar x:Name="Calendar" DisplayDate="{Binding Current}" DisplayMode="Year" DisplayModeChanged="Calendar_DisplayModeChanged" Margin="0,0,0,159"/>
                 <!--<ComboBox Grid.Column="1" ItemsSource="{Binding Months}" Style="{StaticResource DefaultDefaultComboBox}" SelectedItem="{Binding Mouth}" VerticalAlignment="Center"/>-->
             </Grid>
             <Grid Grid.Column="0" DataContext="{Binding MastersList, Mode=OneWay}" Width="800" HorizontalAlignment="Left">
@@ -76,7 +76,7 @@
                                     <ColumnDefinition Width="25*"/>
                                     <ColumnDefinition Width="75*"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" Text="{Binding Master}" MinWidth="61" Style="{StaticResource Default}" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                                <TextBlock Grid.Column="0" Text="{Binding FullName}" MinWidth="61" Style="{StaticResource Default}" VerticalAlignment="Center" Margin="0,0,5,0"/>
                                 <ItemsControl ItemsSource="{Binding WorkDays}" Grid.Column="1">
                                     <ItemsControl.ItemTemplate>
                                         <DataTemplate>

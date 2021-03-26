@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using VIIS.App.Staff.ViewModels;
+using VIIS.Domain.Staff;
 
 namespace VIIS.App.Staff.Views
 {
@@ -26,7 +27,7 @@ namespace VIIS.App.Staff.Views
         public WorkGraph()
         {
             InitializeComponent();
-            DataContext = viewModels = new ViewWorkGraph(new ViewModels.WorkGraphViewModels.ViewMastersList(this), this);
+            DataContext = viewModels = new ViewWorkGraph(new Employees(), DateTime.Now);
         }
 
         private void Calendar_DisplayModeChanged(object sender, CalendarModeChangedEventArgs e)
@@ -34,9 +35,5 @@ namespace VIIS.App.Staff.Views
             Calendar.DisplayMode = CalendarMode.Year;
         }
 
-        private void Calendar_DisplayDateChanged(object sender, CalendarDateChangedEventArgs e)
-        {
-
-        }
     }
 }

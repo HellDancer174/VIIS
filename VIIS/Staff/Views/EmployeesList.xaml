@@ -26,11 +26,11 @@
                 <Border BorderThickness="2" BorderBrush="Black">
                     <DataGrid ItemsSource="{Binding Employees}" AutoGenerateColumns="False" SelectedItem="{Binding Selected}" MouseDoubleClick="DataGrid_MouseDoubleClick" FontFamily="/VIIS.App;component/Resources/#Champagne &amp; Limousines">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Должность" Binding="{Binding Position}"/>
-                            <DataGridTextColumn Header="ФИО" Binding="{Binding FullName}"/>
-                            <DataGridTextColumn Header="Дата рождения" Binding="{Binding BirthDay, Converter={StaticResource DateConverter}}"/>
-                            <DataGridTextColumn Header="Телефон" Binding="{Binding Phone}"/>
-                            <DataGridTextColumn Header="Email" Binding="{Binding Email}"/>
+                            <DataGridTextColumn Header="Должность" Binding="{Binding Position}" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="ФИО" Binding="{Binding FullName}" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Дата рождения" Binding="{Binding BirthDay, Converter={StaticResource DateConverter}}" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Телефон" Binding="{Binding Phone}" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Email" Binding="{Binding Email}" IsReadOnly="True"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </Border>
@@ -41,8 +41,8 @@
                     <ColumnDefinition Width="80*"/>
                     <ColumnDefinition Width="20*"/>
                 </Grid.ColumnDefinitions>
-                <StackPanel Grid.Column="0" DataContext="{Binding Selected.Detail, Mode=OneWay}">
-                    <Grid Margin="5">
+                <StackPanel Grid.Column="0" DataContext="{Binding Selected, Mode=OneWay}">
+                    <Grid Margin="5" DataContext="{Binding Detail}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="10*"/>
                             <ColumnDefinition Width="20*"/>
@@ -80,20 +80,20 @@
                             <ColumnDefinition Width="20*"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Grid.Column="0" Text="Паспорт" Style="{StaticResource Default}" HorizontalAlignment="Center"/>
-                        <TextBlock Grid.Column="1" Text="{Binding Seria}" Style="{StaticResource Default}"/>
+                        <TextBlock Grid.Column="1" Text="{Binding Series}" Style="{StaticResource Default}"/>
                         <TextBlock Grid.Column="2" Text="{Binding PassportID}" Style="{StaticResource Default}"/>
-                        <TextBlock Grid.Column="3" Text="{Binding Date.Date, Converter={StaticResource DateConverter}, Mode=OneWay}" Style="{StaticResource Default}"/>
+                        <TextBlock Grid.Column="3" Text="{Binding IssusiesDate, Converter={StaticResource DateConverter}, Mode=OneWay}" Style="{StaticResource Default}"/>
                         <TextBlock Grid.Column="4" Text="{Binding Organization}" Style="{StaticResource Default}"/>
                     </Grid>
                 </StackPanel>
                 <StackPanel Grid.Column="1" Margin="10">
-                    <Button Style="{StaticResource Material}" Command="{Binding Add}" Margin="0,0,0,5">
+                    <Button Style="{StaticResource Material}" Command="{Binding AddCommand}" Margin="0,0,0,5">
                         <TextBlock Text="Добавить" Style="{StaticResource Default}"/>
                     </Button>
-                    <Button Style="{StaticResource Material}" Command="{Binding Change}" Margin="0,0,0,5">
+                    <Button Style="{StaticResource Material}" Command="{Binding ChangeCommand}" Margin="0,0,0,5">
                         <TextBlock Text="Редактировать" Style="{StaticResource Default}"/>
                     </Button>
-                    <Button Style="{StaticResource Material}" Command="{Binding Remove}" Margin="0,0,0,5">
+                    <Button Style="{StaticResource Material}" Command="{Binding RemoveCommand}" Margin="0,0,0,5">
                         <TextBlock Text="Удалить" Style="{StaticResource Default}"/>
                     </Button>
                 </StackPanel>

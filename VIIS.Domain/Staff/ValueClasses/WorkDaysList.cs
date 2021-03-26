@@ -6,13 +6,11 @@ using System.Threading.Tasks;
 
 namespace VIIS.Domain.Staff.ValueClasses
 {
-    public class WorkDaysList
+    public class WorkDaysList: List<DateTime>
     {
-        private readonly List<DateTime> dates;
 
-        public WorkDaysList(List<DateTime> dates)
+        public WorkDaysList(List<DateTime> dates): base(dates)
         {
-            this.dates = dates;
         }
         public WorkDaysList(): this(new List<DateTime> { DateTime.Now.Date })
         {
@@ -20,7 +18,7 @@ namespace VIIS.Domain.Staff.ValueClasses
 
         public bool IsWorkDay(DateTime date)
         {
-            return dates.Contains(date.Date);
+            return this.Contains(date.Date);
         }
     }
 }

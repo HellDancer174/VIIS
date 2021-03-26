@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:VIIS.App.Staff.Views"
-        xmlns:ViewModels="clr-namespace:VIIS.App.Staff.ViewModels" x:Class="VIIS.App.Staff.Views.EmployeeDetail"
+        xmlns:ViewModels="clr-namespace:VIIS.App.Staff.ViewModels" x:Class="VIIS.App.Staff.Views.EmployeeDetailView"
         mc:Ignorable="d"
         Title="" Height="450" Width="800">
     <Window.Resources>
@@ -34,9 +34,6 @@
             <Setter Property="Background" Value="#FF007ACC"/>
         </Style>
     </Window.Resources>
-    <!--<Window.DataContext>
-        <ViewModels:ViewEmployee/>
-    </Window.DataContext>-->
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="90*"/>
@@ -59,8 +56,8 @@
                     <TextBlock Grid.Column="0" Text="Фамилия" HorizontalAlignment="Center"/>
                     <TextBlock Grid.Column="2" Text="Имя" HorizontalAlignment="Center"/>
                     <TextBlock Grid.Column="4" Text="Отчество" HorizontalAlignment="Center"/>
-                    <TextBox Grid.Column="1" Text="{Binding FirstName}"/>
-                    <TextBox Grid.Column="3" Text="{Binding LastName}"/>
+                    <TextBox Grid.Column="1" Text="{Binding LastName}"/>
+                    <TextBox Grid.Column="3" Text="{Binding FirstName}"/>
                     <TextBox Grid.Column="5" Text="{Binding MiddleName}"/>
                 </Grid>
                 <Grid Margin="5">
@@ -127,7 +124,7 @@
                 <Grid>
                     <TextBlock Text="Реквизиты" HorizontalAlignment="Center" TextDecorations="Underline"/>
                 </Grid>
-                <Grid Margin="5" DataContext="{Binding Detail.Address, Mode=OneWay}">
+                <Grid Margin="5" DataContext="{Binding Address, Mode=OneWay}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="10*"/>
                         <ColumnDefinition Width="10*"/>
@@ -143,7 +140,7 @@
                     <TextBox Grid.Column="4" Text="{Binding House}" />
                     <TextBox Grid.Column="5" Text="{Binding Flat}"/>
                 </Grid>
-                <Grid Margin="5" DataContext="{Binding Detail.Passport, Mode=OneWay}">
+                <Grid Margin="5" DataContext="{Binding Passport, Mode=OneWay}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="10*"/>
                         <ColumnDefinition Width="10*"/>
@@ -152,9 +149,9 @@
                         <ColumnDefinition Width="20*"/>
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0" Text="Паспорт" HorizontalAlignment="Center"/>
-                    <TextBox Grid.Column="1" Text="{Binding Seria}"/>
-                    <TextBox Grid.Column="2" Text="{Binding Id}" />
-                    <DatePicker Grid.Column="3" SelectedDate="{Binding Date}" HorizontalContentAlignment="Center" FontFamily="/VIIS.App;component/Resources/#Champagne &amp; Limousines"/>
+                    <TextBox Grid.Column="1" Text="{Binding Series}"/>
+                    <TextBox Grid.Column="2" Text="{Binding PassportID}" />
+                    <DatePicker Grid.Column="3" SelectedDate="{Binding IssusiesDate}" HorizontalContentAlignment="Center" FontFamily="/VIIS.App;component/Resources/#Champagne &amp; Limousines"/>
                     <TextBox Grid.Column="4" Text="{Binding Organization}" />
                 </Grid>
             </StackPanel>
@@ -164,11 +161,11 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Style="{StaticResource Material}" Margin="10, 0, 10, 0">
-                <TextBlock Text="Сохранить"/>
+            <Button Grid.Column="0" Command="{Binding Save}" Style="{StaticResource Material}" Margin="10, 0, 10, 0">
+                <TextBlock Text="{Binding SaveName}"/>
             </Button>
-            <Button Grid.Column="1" Style="{StaticResource Material}" Margin="10, 0, 10, 0">
-                <TextBlock Text="Удалить" />
+            <Button Grid.Column="1" Command="{Binding End}" Style="{StaticResource Material}" Margin="10, 0, 10, 0">
+                <TextBlock Text="{Binding EndName}" />
             </Button>
         </Grid>
     </Grid>

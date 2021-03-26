@@ -18,10 +18,9 @@ namespace VIIS.Domain.Staff
         protected DateTime birthday;
         protected string email;
 
-        public Master(Master other) : base(other)
+        public Master(Master other) : 
+            this(other.firstName, other.lastName, other.middleName, other.phone, other.position, other.workDaysList, other.address, other.passport, other.detail, other.birthday, other.email)
         {
-            position = other.position;
-            workDaysList = other.workDaysList;
         }
 
         public Master(string firstName, string lastName, string middleName, string phone, Position position, WorkDaysList workDaysList, Address address, Passport passport, EmployeeDetail detail, DateTime birthday, string email):

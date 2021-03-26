@@ -12,22 +12,23 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using VIIS.App.Staff.ViewModels;
+using VIIS.Domain.Staff;
 
 namespace VIIS.App.Staff.Views
 {
     /// <summary>
     /// Логика взаимодействия для EmployeeDetail.xaml
     /// </summary>
-    public partial class EmployeeDetail : Window
+    public partial class EmployeeDetailView : Window
     {
         private readonly ViewEmployee employee;
 
-        public EmployeeDetail()
+        public EmployeeDetailView()
         {
             InitializeComponent();
-            DataContext = employee = new ViewEmployee();
+            DataContext = employee = new ViewEmployee(new Employees());
         }
-        public EmployeeDetail(ViewEmployee employee)
+        public EmployeeDetailView(ViewEmployee employee)
         {
             InitializeComponent();
             DataContext = this.employee = employee;

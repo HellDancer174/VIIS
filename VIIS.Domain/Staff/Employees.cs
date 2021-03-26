@@ -9,7 +9,7 @@ using VIMVVM;
 
 namespace VIIS.Domain.Staff
 {
-    public class Employees: VirtualCollection<Master>
+    public class Employees: VirtualObservableCollection<Master>
     {
 
         public Employees(List<Master> masters): base(masters)
@@ -22,7 +22,7 @@ namespace VIIS.Domain.Staff
         {
         }
 
-        public override async void Add(Master item)
+        public virtual async Task AddAsync(Master item)
         {
             base.Add(item);
             await Task.CompletedTask;

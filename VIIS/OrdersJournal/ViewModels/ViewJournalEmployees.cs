@@ -29,16 +29,16 @@ namespace VIIS.App.OrdersJournal.ViewModels
             var mastersPosition = new Position("Мастер - парикмахер");
             var manicurePosition = new Position("Мастер маникюра");
             var pedicurePosition = new Position("Мастер педикюра");
-            Masters = masters.Where(master => master.Equals(mastersPosition) && master.IsWork(workDay)).ToList();
-            Manicure = masters.Where(master => master.Equals(manicurePosition) && master.IsWork(workDay)).ToList();
-            Pedicure = masters.Where(master => master.Equals(pedicurePosition) && master.IsWork(workDay)).ToList();
-            daysPage = new WorkDaysPage(masters, journal);
+            Masters = this.Where(master => master.Equals(mastersPosition) && master.IsWork(workDay)).ToList();
+            Manicure = this.Where(master => master.Equals(manicurePosition) && master.IsWork(workDay)).ToList();
+            Pedicure = this.Where(master => master.Equals(pedicurePosition) && master.IsWork(workDay)).ToList();
+            daysPage = new WorkDaysPage(this.ToList(), journal);
             this.workDay = workDay;
             this.serviceValueList = serviceValueList;
             this.clients = clients;
             this.journal = journal;
             AddOrdersList(orders, serviceValueList, clients);
-            SelectedMaster = masters.First();
+            SelectedMaster = this.First();
         }
 
         public List<Master> Manicure { get; }
