@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using VIIS.App.OrdersJournal.OrderDetail.ViewModels;
 using VIIS.App.OrdersJournal.OrderDetail.Views.ClientNamePages;
-using VIIS.Domain.Clients;
+using VIIS.Domain.Customers;
 using VIIS.Domain.Orders;
 using VIIS.Domain.Orders.Decorators;
 using VIIS.Domain.Services;

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using VIIS.App.OrdersJournal.OrderDetail.Views.ClientNamePages;
-using VIIS.Domain.Clients;
+using VIIS.Domain.Customers;
 using VIMVVM;
 
 namespace VIIS.App.OrdersJournal.OrderDetail.ViewModels

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using VIIS.Domain.Clients;
+using VIIS.Domain.Customers;
 using VIIS.Domain.Staff.ValueClasses;
 
 namespace VIIS.Domain.Staff
@@ -12,11 +12,9 @@ namespace VIIS.Domain.Staff
     {
         protected Position position;
         protected WorkDaysList workDaysList;
-        protected Address address;
         protected Passport passport;
         protected EmployeeDetail detail;
         protected DateTime birthday;
-        protected string email;
 
         public Master(Master other) : 
             this(other.firstName, other.lastName, other.middleName, other.phone, other.position, other.workDaysList, other.address, other.passport, other.detail, other.birthday, other.email)
@@ -24,15 +22,13 @@ namespace VIIS.Domain.Staff
         }
 
         public Master(string firstName, string lastName, string middleName, string phone, Position position, WorkDaysList workDaysList, Address address, Passport passport, EmployeeDetail detail, DateTime birthday, string email):
-            base(firstName, lastName, middleName, phone)
+            base(firstName, lastName, middleName, phone, email, address, "")
         {
             this.position = position;
             this.workDaysList = workDaysList;
-            this.address = address;
             this.passport = passport;
             this.detail = detail;
             this.birthday = birthday;
-            this.email = email;
         }
         public Master(): this("Валентина", "Игнатьева", "Иониктовна", "", new Position(), new WorkDaysList(), new Address(), new Passport(), new EmployeeDetail(), DateTime.Now.Date, "@mail")
         {
@@ -42,6 +38,7 @@ namespace VIIS.Domain.Staff
         {
             return workDaysList.IsWorkDay(date.Date);
         }
+
 
         public override bool IsIncomplete => base.IsIncomplete || position.IsEmpty;
         

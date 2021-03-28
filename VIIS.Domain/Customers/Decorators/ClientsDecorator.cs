@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace VIIS.Domain.Clients.Decorators
+namespace VIIS.Domain.Customers.Decorators
 {
     public class ClientsDecorator : Clients
     {

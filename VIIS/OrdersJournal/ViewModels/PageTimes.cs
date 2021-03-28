@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using VIIS.App.OrdersJournal.Models.OrdersDecorators;
 using VIIS.App.OrdersJournal.OrderDetail.Models;
-using VIIS.Domain.Clients;
+using VIIS.Domain.Customers;
 using VIIS.Domain.Orders;
 using VIIS.Domain.Services;
 

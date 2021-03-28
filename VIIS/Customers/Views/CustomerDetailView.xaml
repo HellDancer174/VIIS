@@ -1,0 +1,90 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VIIS.App.Customers.Views"
+        xmlns:ViewModels="clr-namespace:VIIS.App.Customers.ViewModels" x:Class="VIIS.App.Customers.Views.CustomerDetailView"
+        mc:Ignorable="d"
+        Title="" Height="350" Width="800" ResizeMode="NoResize">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="90*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <ScrollViewer Grid.Row="0">
+            <StackPanel Margin="0,15,0,0">
+                <Grid DataContext="{Binding Name}" Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="10*"/>
+                        <ColumnDefinition Width="20*"/>
+                        <ColumnDefinition Width="10*"/>
+                        <ColumnDefinition Width="20*"/>
+                        <ColumnDefinition Width="10*"/>
+                        <ColumnDefinition Width="20*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="Фамилия" HorizontalAlignment="Center" Style="{StaticResource Default}"/>
+                    <TextBlock Grid.Column="2" Text="Имя" HorizontalAlignment="Center" Style="{StaticResource Default}"/>
+                    <TextBlock Grid.Column="4" Text="Отчество" HorizontalAlignment="Center" Style="{StaticResource Default}"/>
+                    <TextBox Grid.Column="1" Text="{Binding LastName}" Style="{StaticResource DefaultTextBox}"/>
+                    <TextBox Grid.Column="3" Text="{Binding FirstName}" Style="{StaticResource DefaultTextBox}"/>
+                    <TextBox Grid.Column="5" Text="{Binding MiddleName}" Style="{StaticResource DefaultTextBox}"/>
+                </Grid>
+
+                <Grid Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="10*"/>
+                        <ColumnDefinition Width="20*"/>
+                        <ColumnDefinition Width="10*"/>
+                        <ColumnDefinition Width="20*"/>
+                        <ColumnDefinition Width="10*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="Телефон" HorizontalAlignment="Center" VerticalAlignment="Bottom" Style="{StaticResource Default}"/>
+                    <TextBox Grid.Column="1" Text="{Binding Phone}" Style="{StaticResource DefaultTextBox}"/>
+                </Grid>
+                <Grid Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="10*"/>
+                        <ColumnDefinition Width="20*"/>
+                        <ColumnDefinition Width="10*"/>
+                        <ColumnDefinition Width="20*"/>
+                        <ColumnDefinition Width="10*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="Email" HorizontalAlignment="Center" VerticalAlignment="Bottom" Style="{StaticResource Default}"/>
+                    <TextBox Grid.Column="1" Text="{Binding Email}" Style="{StaticResource DefaultTextBox}"/>
+                </Grid>
+
+                <Grid Margin="5" DataContext="{Binding Address, Mode=OneWay}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="10*"/>
+                        <ColumnDefinition Width="10*"/>
+                        <ColumnDefinition Width="20*"/>
+                        <ColumnDefinition Width="20*"/>
+                        <ColumnDefinition Width="10*"/>
+                        <ColumnDefinition Width="10*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="Адрес" HorizontalAlignment="Center" Style="{StaticResource Default}"/>
+                    <TextBox Grid.Column="1" Text="{Binding Index}" Style="{StaticResource DefaultTextBox}"/>
+                    <TextBox Grid.Column="2" Text="{Binding City}" Style="{StaticResource DefaultTextBox}"/>
+                    <TextBox Grid.Column="3" Text="{Binding Street}" Style="{StaticResource DefaultTextBox}"/>
+                    <TextBox Grid.Column="4" Text="{Binding House}" Style="{StaticResource DefaultTextBox}"/>
+                    <TextBox Grid.Column="5" Text="{Binding Flat}" Style="{StaticResource DefaultTextBox}"/>
+                </Grid>
+                <TextBlock Text="Коментарий" Margin="5" Style="{StaticResource Default}"/>
+                <TextBox Text="{Binding Comment}" Height="60" Margin="5" Style="{StaticResource DefaultTextBox}"/>
+            </StackPanel>
+        </ScrollViewer>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Command="{Binding Save}" Style="{StaticResource Material}" Margin="10, 0, 10, 0">
+                <TextBlock Text="{Binding SaveName}" Style="{StaticResource Default}"/>
+            </Button>
+            <Button Grid.Column="1" Command="{Binding End}" Style="{StaticResource Material}" Margin="10, 0, 10, 0">
+                <TextBlock Text="{Binding EndName}" Style="{StaticResource Default}"/>
+            </Button>
+        </Grid>
+    </Grid>
+</Window>

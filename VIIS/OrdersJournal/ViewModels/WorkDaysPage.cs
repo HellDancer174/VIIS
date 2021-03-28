@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using VIIS.App.OrdersJournal.Models.OrdersDecorators;
 using VIIS.App.OrdersJournal.OrderDetail.ViewModels;
 using VIIS.App.OrdersJournal.OrderDetail.Views;
-using VIIS.Domain.Clients;
+using VIIS.Domain.Customers;
 using VIIS.Domain.Orders;
 using VIIS.Domain.Services;
 using VIIS.Domain.Staff;

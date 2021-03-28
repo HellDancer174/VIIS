@@ -7,7 +7,7 @@ using VIIS.App.OrdersJournal.Models.OrdersDecorators;
 using VIIS.App.OrdersJournal.OrderDetail.ViewModels;
 using VIIS.App.OrdersJournal.OrderDetail.Views;
 using VIIS.App.Services.ViewModel;
-using VIIS.Domain.Clients;
+using VIIS.Domain.Customers;
 using VIIS.Domain.Orders;
 using VIIS.Domain.Orders.Decorators;
 using VIIS.Domain.Services;

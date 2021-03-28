@@ -1,0 +1,36 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
+using VIIS.App.Customers.ViewModels;
+
+namespace VIIS.App.Customers.Views
+{
+    /// <summary>
+    /// Логика взаимодействия для CustomersDetailView.xaml
+    /// </summary>
+    public partial class CustomerDetailView : Window
+    {
+        private readonly ViewClient viewModel;
+
+        public CustomerDetailView(): this(new ViewClient(new ViewClients(new Domain.Customers.Clients())))
+        {
+            InitializeComponent();
+        }
+        public CustomerDetailView(ViewClient viewModel)
+        {
+            InitializeComponent();
+            DataContext = this.viewModel = viewModel;
+        }
+
+    }
+}

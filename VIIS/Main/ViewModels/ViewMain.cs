@@ -9,6 +9,9 @@ using VIIS.App.Account.Views;
 using VIMVVM;
 using VIIS.App.Staff.Views;
 using VIIS.App.Main.Views;
+using VIIS.App.Customers.Views;
+using VIIS.App.Customers.ViewModels;
+using VIIS.Domain.Customers;
 
 namespace VIIS.App.Main.ViewModels
 {
@@ -31,7 +34,7 @@ namespace VIIS.App.Main.ViewModels
             this.view = view;
             Current = journal;
         }
-        public ViewMain(MainView view): this(new OrdersJournalView(), new Page(), new EmployeesTabs(), new Page(), new UsersWindow(), view)
+        public ViewMain(MainView view): this(new OrdersJournalView(), new ClientsView(new ViewClients(new Clients())), new EmployeesTabs(), new Page(), new UsersWindow(), view)
         {
 
         }

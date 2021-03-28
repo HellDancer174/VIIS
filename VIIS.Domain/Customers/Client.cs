@@ -5,9 +5,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VIIS.Domain.Staff.ValueClasses;
 using VIMVVM;
 
-namespace VIIS.Domain.Clients
+namespace VIIS.Domain.Customers
 {
     public class Client: Notifier, IDocument, IEquatable<Client>
     {
@@ -15,23 +16,29 @@ namespace VIIS.Domain.Clients
         protected string lastName;
         protected string middleName;
         protected string phone;
+        protected string email;
+        protected Address address;
+        protected string comment;
 
-        public Client(string firstName, string lastName, string middleName, string phone)
+        public Client(string firstName, string lastName, string middleName, string phone): this(firstName, lastName, middleName, phone, "", new Address(), "")
+        {
+        }
+        public Client(): this("", "", "", "")
+        {
+        }
+        public Client(Client other): this(other.firstName, other.lastName, other.middleName, other.phone, other.email, other.address, other.comment)
+        {
+        }
+
+        public Client(string firstName, string lastName, string middleName, string phone, string email, Address address, string comment)
         {
             this.firstName = firstName;
             this.lastName = lastName;
             this.middleName = middleName;
             this.phone = phone;
-        }
-        public Client(): this("", "", "", "")
-        {
-        }
-        public Client(Client other)
-        {
-            firstName = other.firstName;
-            middleName = other.middleName;
-            lastName = other.lastName;
-            phone = other.phone;
+            this.email = email;
+            this.address = address;
+            this.comment = comment;
         }
 
         public virtual bool IsIncomplete => firstName == "" || lastName == "" || phone == "";

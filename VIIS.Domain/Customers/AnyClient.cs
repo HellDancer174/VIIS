@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace VIIS.Domain.Clients
+namespace VIIS.Domain.Customers
 {
     public class AnyClient: Client
     {

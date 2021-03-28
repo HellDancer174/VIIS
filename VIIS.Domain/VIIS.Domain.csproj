@@ -41,11 +41,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Clients\AnyClient.cs" />
-    <Compile Include="Clients\Client.cs" />
-    <Compile Include="Clients\Clients.cs" />
-    <Compile Include="Clients\Decorators\ClientDecorator.cs" />
-    <Compile Include="Clients\Decorators\ClientsDecorator.cs" />
+    <Compile Include="Customers\AnyClient.cs" />
+    <Compile Include="Customers\Client.cs" />
+    <Compile Include="Customers\Clients.cs" />
+    <Compile Include="Customers\Decorators\ClientDecorator.cs" />
+    <Compile Include="Customers\Decorators\ClientsDecorator.cs" />
     <Compile Include="Global\Person.cs" />
     <Compile Include="Global\ValidPropetry.cs" />
     <Compile Include="Orders\AnyOrder.cs" />

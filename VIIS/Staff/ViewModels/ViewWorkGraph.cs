@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using VIIS.App.Staff.ViewModels.WorkGraphViewModels;
 using VIIS.App.Staff.Views;
 using VIIS.Domain.Staff;
@@ -16,13 +17,13 @@ namespace VIIS.App.Staff.ViewModels
 
         public ViewWorkGraph(ViewMastersList mastersList, DateTime current)
         {
-            //this.months = new List<string>() { "январь", "февраль", "март", "апрель", "май", "июнь", "июль", "август", "сентябрь", "октябрь", "ноябрь", "декабрь" };
             this.MastersList = mastersList;
             this.current = current;
         }
         public ViewWorkGraph(Employees masters, DateTime current): this(new ViewMastersList(masters, current), current)
         {
         }
+
 
         public ViewMastersList MastersList { get; private set; }
 
@@ -35,5 +36,11 @@ namespace VIIS.App.Staff.ViewModels
                 MastersList.ChangeMonth(current);
             }
         }
+
+        public RelayCommand Save => new RelayCommand(async(obj) => 
+        {
+            await MastersList.SaveMonth();
+            MessageBox.Show(String.Format("Обновлен график работы на {0}", MastersList.CurrentMonth));
+        });
     }
 }

@@ -24,6 +24,7 @@ namespace VIIS.App.Staff.ViewModels.WorkGraphViewModels
 
         public ViewMasterOfWorkDays(Master other, DateTime month) : this(new List<ViewBooleanWorkDay>(), other, month)
         {
+            this.month = month;
             var days = DateTime.DaysInMonth(month.Year, month.Month);
             for (int i = 1; i < days + 1; i++)
             {
@@ -33,7 +34,6 @@ namespace VIIS.App.Staff.ViewModels.WorkGraphViewModels
         }
 
         public List<ViewBooleanWorkDay> WorkDays => workDays;
-
 
     }
 }

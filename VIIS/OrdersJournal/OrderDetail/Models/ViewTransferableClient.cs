@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using VIIS.App.OrdersJournal.OrderDetail.ViewModels;
-using VIIS.Domain.Clients;
+using VIIS.Domain.Customers;
 
 namespace VIIS.App.OrdersJournal.OrderDetail.Models
 {

@@ -12,24 +12,26 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using VIIS.App.OrdersJournal.OrderDetail.ViewModels;
-using VIIS.Domain.Customers;
+using VIIS.App.Customers.ViewModels;
 
-namespace VIIS.App.OrdersJournal.OrderDetail.Views.ClientNamePages
+namespace VIIS.App.Customers.Views
 {
     /// <summary>
-    /// Логика взаимодействия для NewClient.xaml
+    /// Логика взаимодействия для ClientsView.xaml
     /// </summary>
-    public partial class NewClient : Page
+    public partial class ClientsView : Page
     {
-        private ViewClient clientName;
-        public NewClient():this(new ViewClient(new Client()))
-        {
-        }
-        public NewClient(ViewClient clientName)
+        private readonly ViewClients viewModel;
+
+        public ClientsView(): this(new ViewClients(new Domain.Customers.Clients()))
         {
             InitializeComponent();
-            DataContext = this.clientName = clientName;
+        }
+
+        public ClientsView(ViewClients viewModel)
+        {
+            InitializeComponent();
+            DataContext = this.viewModel = viewModel;
         }
     }
 }

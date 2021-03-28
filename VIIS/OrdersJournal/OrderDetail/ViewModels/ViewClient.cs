@@ -5,8 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using VIIS.App.GlobalViewModel;
 using VIIS.App.OrdersJournal.OrderDetail.Models;
-using VIIS.Domain.Clients;
-using VIIS.Domain.Clients.Decorators;
+using VIIS.Domain.Customers;
+using VIIS.Domain.Customers.Decorators;
 using VIMVVM;
 
 namespace VIIS.App.OrdersJournal.OrderDetail.ViewModels

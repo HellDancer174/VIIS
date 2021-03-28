@@ -9,7 +9,7 @@ using System.Windows;
 using VIIS.App.OrdersJournal.OrderDetail.Models;
 using VIIS.App.OrdersJournal.OrderDetail.Views.ClientNamePages;
 using VIIS.App.OrdersJournal.ViewModels;
-using VIIS.Domain.Clients;
+using VIIS.Domain.Customers;
 using VIIS.Domain.Orders;
 using VIIS.Domain.Orders.Decorators;
 using VIIS.Domain.Services;

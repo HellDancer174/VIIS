@@ -4,8 +4,8 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using VIIS.Domain.Clients;
-using VIIS.Domain.Clients.Decorators;
+using VIIS.Domain.Customers;
+using VIIS.Domain.Customers.Decorators;
 using VIMVVM;
 
 namespace VIIS.App.OrdersJournal.OrderDetail.ViewModels
@@ -18,7 +18,7 @@ namespace VIIS.App.OrdersJournal.OrderDetail.ViewModels
 
         public ExistingViewClient(Clients other) : base(other)
         {
-            Clients = new ObservableCollection<ViewClient>(clients.Select(client => new ViewClient(client)).ToList());
+            Clients = new ObservableCollection<ViewClient>(this.Select(client => new ViewClient(client)).ToList());
         }
         public ExistingViewClient(Clients other, Client current): this(other)
         {
@@ -37,8 +37,9 @@ namespace VIIS.App.OrdersJournal.OrderDetail.ViewModels
             }
         }
 
-        public void Clear()
+        public override void Clear()
         {
+            base.Clear();
             SelectedClient = new ViewClient(new AnyClient());
         }
 
