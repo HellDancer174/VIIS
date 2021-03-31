@@ -92,6 +92,11 @@
     <Compile Include="Customers\Views\CustomerDetailView.xaml.cs">
       <DependentUpon>CustomerDetailView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GlobalViewModel\ViewDetail.cs" />
+    <Compile Include="GlobalViewModel\RepositoryCommand.cs" />
+    <Compile Include="GlobalViewModel\ViewNewDetail.cs" />
+    <Compile Include="GlobalViewModel\ViewRepository.cs" />
+    <Compile Include="GlobalViewModel\ViewWindowDetail.cs" />
     <Compile Include="OrdersJournal\Models\OrdersDecorators\JournalOrder.cs" />
     <Compile Include="OrdersJournal\OrderDetail\Models\IndexedService.cs" />
     <Compile Include="OrdersJournal\OrderDetail\Models\NamingClient.cs" />
@@ -100,7 +105,17 @@
     <Compile Include="OrdersJournal\OrderDetail\ViewModels\ViewNewOrderDetail.cs" />
     <Compile Include="OrdersJournal\OrderDetail\ViewModels\ViewServiceValue.cs" />
     <Compile Include="OrdersJournal\ViewModels\AnyPageOrder.cs" />
-    <Compile Include="Services\ViewModel\BaseViewService.cs" />
+    <Compile Include="Services\ViewModels\BaseViewService.cs" />
+    <Compile Include="Services\ViewModels\ViewNewServiceDetail.cs" />
+    <Compile Include="Services\ViewModels\ViewServiceDetail.cs" />
+    <Compile Include="Services\ViewModels\ViewServices.cs" />
+    <Compile Include="Services\ViewModels\ViewServiceValue.cs" />
+    <Compile Include="Services\Views\ServiceDetail.xaml.cs">
+      <DependentUpon>ServiceDetail.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Services\Views\ServicesView.xaml.cs">
+      <DependentUpon>ServicesView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Staff\Models\AddressOfView.cs" />
     <Compile Include="Staff\Models\MasterOfView.cs" />
     <Compile Include="Staff\Models\PassportOfView.cs" />
@@ -150,6 +165,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Customers\Views\CustomerDetailView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Services\Views\ServiceDetail.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Services\Views\ServicesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

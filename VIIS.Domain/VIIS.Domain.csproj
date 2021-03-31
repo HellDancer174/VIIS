@@ -47,6 +47,7 @@
     <Compile Include="Customers\Decorators\ClientDecorator.cs" />
     <Compile Include="Customers\Decorators\ClientsDecorator.cs" />
     <Compile Include="Global\Person.cs" />
+    <Compile Include="Global\Repository.cs" />
     <Compile Include="Global\ValidPropetry.cs" />
     <Compile Include="Orders\AnyOrder.cs" />
     <Compile Include="Orders\Decorators\OrdersDecorator.cs" />

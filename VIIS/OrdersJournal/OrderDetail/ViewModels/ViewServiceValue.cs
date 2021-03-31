@@ -19,6 +19,8 @@ namespace VIIS.App.OrdersJournal.OrderDetail.ViewModels
 
         public string Name { get => name; set => name = value; }
 
+        public decimal Price { get => Sale; set => sale = value; }
+
         public override bool Equals(object obj)
         {
             var value = obj as ViewServiceValue;

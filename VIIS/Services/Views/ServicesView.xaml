@@ -1,0 +1,43 @@
+﻿<Page x:Class="VIIS.App.Services.Views.ServicesView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:VIIS.App.Services.Views"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="" Background="White">
+
+    <Grid>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="80*"/>
+                <ColumnDefinition Width="20*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <Border BorderThickness="2" BorderBrush="Black">
+                    <DataGrid ItemsSource="{Binding Collection}" AutoGenerateColumns="False" SelectedItem="{Binding Selected}" FontFamily="/VIIS.App;component/Resources/#Champagne &amp; Limousines">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Название" Binding="{Binding Name}" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Стоимость" Binding="{Binding Price}" IsReadOnly="True"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Border>
+
+            </Grid>
+            <Grid Grid.Column="1">
+                <StackPanel VerticalAlignment="Center">
+                    <Button Style="{StaticResource Material}" Command="{Binding AddCommand}" Margin="10">
+                        <TextBlock Text="Добавить" Style="{StaticResource Default}"/>
+                    </Button>
+                    <Button Style="{StaticResource Material}" Command="{Binding ChangeCommand}" Margin="10">
+                        <TextBlock Text="Редактировать" Style="{StaticResource Default}"/>
+                    </Button>
+                    <Button Style="{StaticResource Material}" Command="{Binding RemoveCommand}" Margin="10">
+                        <TextBlock Text="Удалить" Style="{StaticResource Default}"/>
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>

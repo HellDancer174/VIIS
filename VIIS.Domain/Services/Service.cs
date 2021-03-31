@@ -44,11 +44,6 @@ namespace VIIS.Domain.Services
         }
 
 
-        public virtual void Transfer()
-        {
-            return;
-        }
-
         public bool Equals(Service other)
         {
             return other.start == start && other.timeSpan == timeSpan && other.name == name;
@@ -57,6 +52,11 @@ namespace VIIS.Domain.Services
         public int CompareTo(Service other)
         {
             return start.CompareTo(other.start);
+        }
+
+        public virtual void Transfer()
+        {
+            return;
         }
     }
 }

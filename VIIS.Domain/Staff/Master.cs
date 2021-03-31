@@ -40,7 +40,7 @@ namespace VIIS.Domain.Staff
         }
 
 
-        public override bool IsIncomplete => base.IsIncomplete || position.IsEmpty;
+        public override bool IsIncomplete => (base.IsIncomplete && !String.IsNullOrEmpty(phone)) || position.IsEmpty;
         
 
         public bool Equals(Master other)

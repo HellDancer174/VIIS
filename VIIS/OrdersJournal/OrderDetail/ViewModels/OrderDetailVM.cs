@@ -59,9 +59,9 @@ namespace VIIS.App.OrdersJournal.OrderDetail.ViewModels
         {
             if (Convert.ToDecimal(Sale) == 0) Sale = ServicesSale;
             sale = Convert.ToDecimal(Sale);
-            var newOrder = new Order(this);
+            var newOrder = new Order(ClientNames.Model(), ViewServices.Select(viewService => new Service(viewService)).ToList(), master, Comment, ordersDate);
             if (newOrder.IsIncomplete) throw new InvalidOperationException(newOrder.ToString());
-            await journal.Update(other, this);
+            await journal.Update(other, newOrder);
         });
         public virtual RelayCommand End => new RelayCommand(async(obl) =>
         {

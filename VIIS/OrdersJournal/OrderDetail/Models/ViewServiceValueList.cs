@@ -19,6 +19,6 @@ namespace VIIS.App.OrdersJournal.OrderDetail.Models
         }
 
         public List<ViewServiceValue> ViewServices => 
-            new List<ViewServiceValue>(services.Select(service => new ViewServiceValue(service)).ToList());
+            new List<ViewServiceValue>(this.Select(service => new ViewServiceValue(service)).ToList());
     }
 }

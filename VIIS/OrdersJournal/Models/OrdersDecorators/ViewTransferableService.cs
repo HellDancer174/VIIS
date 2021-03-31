@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using VIIS.App.OrdersJournal.ViewModels;
-using VIIS.App.Services.ViewModel;
+using VIIS.App.Services.ViewModels;
 using VIIS.Domain.Services;
 
 namespace VIIS.App.OrdersJournal.Models.OrdersDecorators

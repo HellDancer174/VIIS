@@ -9,7 +9,7 @@ using VIIS.Domain.Services;
 using VIIS.Domain.Services.Decorators;
 using VIMVVM;
 
-namespace VIIS.App.Services.ViewModel
+namespace VIIS.App.Services.ViewModels
 {
     public class BaseViewService : ServiceDecorator, INotifyPropertyChanged
     {
