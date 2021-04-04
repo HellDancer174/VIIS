@@ -1,0 +1,90 @@
+﻿<Page
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:VIIS.App.Finance.Views"
+      xmlns:ViewModels="clr-namespace:VIIS.App.Finance.ViewModels" x:Class="VIIS.App.Finance.Views.FinanceView"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="SettingsView" Background="White">
+
+    <Page.DataContext>
+        <ViewModels:ViewTransactions/>
+    </Page.DataContext>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="70*"/>
+            <ColumnDefinition Width="240"/>
+        </Grid.ColumnDefinitions>
+        <Calendar Grid.Column="1" DisplayMode="Year"/>
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20*"/>
+                <RowDefinition Height="65*"/>
+                <RowDefinition Height="15*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Border BorderThickness="1" BorderBrush="AliceBlue" Grid.Column="0">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="Выручка" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Style="{StaticResource Default}"/>
+                        <TextBlock Text="1561684р" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource Default}"/>
+                    </Grid>
+                </Border>
+                <Border BorderThickness="1" BorderBrush="AliceBlue" Grid.Column="1">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="Средний чек" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Style="{StaticResource Default}"/>
+                        <TextBlock Text="1584р" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource Default}"/>
+                    </Grid>
+                </Border>
+                <Border BorderThickness="1" BorderBrush="AliceBlue" Grid.Column="2">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="Расходы" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Style="{StaticResource Default}"/>
+                        <TextBlock Text="56184р" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource Default}"/>
+                    </Grid>
+                </Border>
+            </Grid>
+            <DataGrid Grid.Row="1" ItemsSource="{Binding Collection}" AutoGenerateColumns="False" SelectedItem="{Binding Selected}" FontFamily="/VIIS.App;component/Resources/#Champagne &amp; Limousines">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Название" Binding="{Binding Name}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Цена" Binding="{Binding Sale}" IsReadOnly="True"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Button Style="{StaticResource Material}" Command="{Binding AddCommand}" Grid.Column="0" Margin="10">
+                    <TextBlock Text="Добавить" Style="{StaticResource Default}"/>
+                </Button>
+                <Button Style="{StaticResource Material}" Command="{Binding ChangeCommand}" Grid.Column="1" Margin="10">
+                    <TextBlock Text="Редактировать" Style="{StaticResource Default}"/>
+                </Button>
+                <Button Style="{StaticResource Material}" Command="{Binding RemoveCommand}" Grid.Column="2" Margin="10">
+                    <TextBlock Text="Удалить" Style="{StaticResource Default}"/>
+                </Button>
+            </Grid>
+
+        </Grid>
+    </Grid>
+</Page>
