@@ -16,7 +16,7 @@
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
                 <Border BorderThickness="2" BorderBrush="Black">
-                    <DataGrid ItemsSource="{Binding ClientCollection}" AutoGenerateColumns="False" SelectedItem="{Binding Selected}" FontFamily="/VIIS.App;component/Resources/#Champagne &amp; Limousines">
+                    <DataGrid ItemsSource="{Binding Collection}" AutoGenerateColumns="False" SelectedItem="{Binding Selected}" FontFamily="/VIIS.App;component/Resources/#Champagne &amp; Limousines">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="ФИО" Binding="{Binding FullName}" IsReadOnly="True"/>
                             <DataGridTextColumn Header="Телефон" Binding="{Binding Phone}" IsReadOnly="True"/>

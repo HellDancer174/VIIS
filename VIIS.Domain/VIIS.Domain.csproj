@@ -46,6 +46,7 @@
     <Compile Include="Customers\Clients.cs" />
     <Compile Include="Customers\Decorators\ClientDecorator.cs" />
     <Compile Include="Customers\Decorators\ClientsDecorator.cs" />
+    <Compile Include="Finance\DecoratableTransaction.cs" />
     <Compile Include="Finance\Transaction.cs" />
     <Compile Include="Global\Person.cs" />
     <Compile Include="Global\Repository.cs" />
@@ -64,9 +65,10 @@
     <Compile Include="Staff\ValueClasses\Decorators\DecoratableEmployeeDetail.cs" />
     <Compile Include="Staff\ValueClasses\Decorators\DecoratablePassport.cs" />
     <Compile Include="Staff\ValueClasses\EmployeeDetail.cs" />
+    <Compile Include="Staff\ValueClasses\MastersPercent.cs" />
     <Compile Include="Staff\ValueClasses\Passport.cs" />
     <Compile Include="Staff\ValueClasses\Position.cs" />
-    <Compile Include="Orders\Decorators\DateCheckableOrder.cs" />
+    <Compile Include="Orders\Decorators\CheckableOrder.cs" />
     <Compile Include="Orders\Decorators\OrderDecorator.cs" />
     <Compile Include="Orders\Order.cs" />
     <Compile Include="Orders\Orders.cs" />

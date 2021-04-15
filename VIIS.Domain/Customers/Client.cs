@@ -10,7 +10,7 @@ using VIMVVM;
 
 namespace VIIS.Domain.Customers
 {
-    public class Client: Notifier, IDocument, IEquatable<Client>
+    public class Client: Notifier, IDocument, IEquatable<Client>, IDocumentAsync
     {
         protected string firstName;
         protected string lastName;
@@ -50,10 +50,10 @@ namespace VIIS.Domain.Customers
             return String.Format("{0} {1} {2}; {3}", lastName, firstName, middleName, phone);
         }
 
-        public virtual void Transfer()
-        {
-            new AnyDocument().Transfer();
-        }
+        //public virtual void Transfer()
+        //{
+        //    new AnyDocument().Transfer();
+        //}
 
         public override bool Equals(object obj)
         {
@@ -74,6 +74,16 @@ namespace VIIS.Domain.Customers
             hashCode = hashCode * -1521134295 + middleName.GetHashCode();
             hashCode = hashCode * -1521134295 + phone.GetHashCode();
             return hashCode;
+        }
+
+        public Task Transfer()
+        {
+            return Task.CompletedTask;
+        }
+
+        void IDocument.Transfer()
+        {
+            throw new NotImplementedException();
         }
     }
 }

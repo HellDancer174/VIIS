@@ -4,11 +4,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VIIS.Domain.Global;
 using VIMVVM;
 
 namespace VIIS.Domain.Customers
 {
-    public class Clients: VirtualObservableCollection<Client>
+    public class Clients: Repository<Client>
     {
 
         public Clients(List<Client> clients):base(clients)
@@ -22,23 +23,23 @@ namespace VIIS.Domain.Customers
         {
         }
 
-        public virtual async Task AddAsync(Client item)
-        {
-            Add(item);
-            await Task.CompletedTask;
-        }
+        //public virtual async Task AddAsync(Client item)
+        //{
+        //    Add(item);
+        //    await Task.CompletedTask;
+        //}
 
-        public virtual async Task Update(Client oldItem, Client item)
-        {
-            this[IndexOf(oldItem)] = item;
-            await Task.CompletedTask;
-        }
+        //public virtual async Task Update(Client oldItem, Client item)
+        //{
+        //    this[IndexOf(oldItem)] = item;
+        //    await Task.CompletedTask;
+        //}
 
-        public virtual async Task RemoveAsync(Client item)
-        {
-            Remove(item);
-            await Task.CompletedTask;
-        }
+        //public virtual async Task RemoveAsync(Client item)
+        //{
+        //    Remove(item);
+        //    await Task.CompletedTask;
+        //}
 
         public Client Find(Client item)
         {

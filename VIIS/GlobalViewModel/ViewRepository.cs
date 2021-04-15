@@ -46,11 +46,11 @@ namespace VIIS.App.GlobalViewModel
             await base.RemoveAsync(item);
         }
 
-        public async Task UpdateViewAsync(V oldItem, V item)
+        public virtual async Task UpdateViewAsync(V oldItem, V item)
         {
             //var index = Collection.IndexOf(oldItem);
             //Collection[index] = item;
-            await base.Update(oldItem, item);
+            await Update(oldItem, item);
             ChangeProperty(nameof(Selected));
             ChangeProperty(nameof(Collection));
         }

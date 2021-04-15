@@ -14,7 +14,7 @@ namespace VIIS.App.GlobalViewModel
         protected string saveName;
         protected string endName;
         protected readonly Repo repository;
-        private readonly V oldViewModel;
+        protected readonly V oldViewModel;
 
         public ViewDetail(Repo repository, V viewModel, V oldViewModel, string saveName, string endName)
         {
@@ -35,7 +35,7 @@ namespace VIIS.App.GlobalViewModel
         public virtual string EndName => endName;
 
         public virtual RelayCommand Save => new RelayCommand(async (obj) => await repository.UpdateViewAsync(oldViewModel, ViewModel));
-        public virtual RelayCommand End => new RelayCommand(async (obj) => await repository.RemoveAsync(ViewModel));
+        public virtual RelayCommand End => new RelayCommand(async (obj) => await repository.RemoveAsync(oldViewModel));
 
         public V ViewModel { get; }
     }

@@ -84,7 +84,7 @@
     </ApplicationDefinition>
     <Compile Include="Customers\ViewModels\ViewClient.cs" />
     <Compile Include="Customers\ViewModels\ViewClients.cs" />
-    <Compile Include="Customers\ViewModels\ViewNewClient.cs" />
+    <Compile Include="Customers\ViewModels\ViewWindowClientDetail.cs" />
     <Compile Include="Customers\ViewModels\ViewWindowClient.cs" />
     <Compile Include="Customers\Views\ClientsView.xaml.cs">
       <DependentUpon>ClientsView.xaml</DependentUpon>
@@ -92,14 +92,21 @@
     <Compile Include="Customers\Views\CustomerDetailView.xaml.cs">
       <DependentUpon>CustomerDetailView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Finance\Models\SumTransaction.cs" />
     <Compile Include="Finance\ViewModels\ViewTransaction.cs" />
+    <Compile Include="Finance\ViewModels\ViewTransactionDetail.cs" />
     <Compile Include="Finance\ViewModels\ViewTransactions.cs" />
+    <Compile Include="Finance\Views\TransactionDetailView.xaml.cs">
+      <DependentUpon>TransactionDetailView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GlobalViewModel\ViewDetail.cs" />
     <Compile Include="GlobalViewModel\RepositoryCommand.cs" />
     <Compile Include="GlobalViewModel\ViewNewDetail.cs" />
     <Compile Include="GlobalViewModel\ViewRepository.cs" />
     <Compile Include="GlobalViewModel\ViewWindowDetail.cs" />
+    <Compile Include="OrdersJournal\Models\OrdersDecorators\MonthCheckableOrder.cs" />
     <Compile Include="OrdersJournal\Models\OrdersDecorators\JournalOrder.cs" />
+    <Compile Include="OrdersJournal\Models\OrdersDecorators\OrdersPerMonth.cs" />
     <Compile Include="OrdersJournal\OrderDetail\Models\IndexedService.cs" />
     <Compile Include="OrdersJournal\OrderDetail\Models\NamingClient.cs" />
     <Compile Include="OrdersJournal\OrderDetail\Models\DetailTransferableOrder.cs" />
@@ -123,6 +130,7 @@
     </Compile>
     <Compile Include="Staff\Models\AddressOfView.cs" />
     <Compile Include="Staff\Models\MasterOfView.cs" />
+    <Compile Include="Staff\Models\MastersOrderPerMonth.cs" />
     <Compile Include="Staff\Models\PassportOfView.cs" />
     <Compile Include="Staff\ViewModels\EmployeesViewModels\ViewAddress.cs" />
     <Compile Include="Staff\ViewModels\EmployeesViewModels\ViewEmployeeDetail.cs" />
@@ -170,6 +178,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Customers\Views\CustomerDetailView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Finance\Views\TransactionDetailView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

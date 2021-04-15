@@ -35,7 +35,7 @@ namespace VIIS.App.Main.ViewModels
             this.view = view;
             Current = journal;
         }
-        public ViewMain(MainView view): this(new OrdersJournalView(), new ClientsView(new ViewClients(new Clients())), new EmployeesTabs(), new ServicesView(), new UsersWindow(), view)
+        public ViewMain(MainView view): this(new OrdersJournalView(), new ClientsView(new ViewClients(new Clients())), new EmployeesTabs(), new Finance.Views.FinanceView(), new UsersWindow(), view)
         {
 
         }

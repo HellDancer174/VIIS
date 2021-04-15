@@ -8,6 +8,7 @@ using VIIS.Domain.Customers;
 using VIIS.Domain.Staff;
 using VIIS.Domain.Services;
 using VIMVVM;
+using VIIS.Domain.Staff.ValueClasses;
 
 namespace VIIS.Domain.Orders
 {
@@ -81,6 +82,18 @@ namespace VIIS.Domain.Orders
         public bool IsEmpty => client.Equals(new AnyClient()) && services.Count == 0 && string.IsNullOrEmpty(comment) && sale == 0;
 
         public bool IsIncomplete => client.IsIncomplete ||services.Count == 0 || ordersDate == new DateTime() || sale == 0 || master.IsIncomplete || !master.IsWork(ordersDate);
+
+        public bool IsOwner(Master master)
+        {
+            return this.master.Equals(master);
+        }
+
+        public decimal CashOfMaster(MastersPercent percent)
+        {
+            return percent.CashOfMaster(sale);
+        }
+
+        public decimal CashOfMaster() => CashOfMaster(new MastersPercent());
 
         public override string ToString()
         {

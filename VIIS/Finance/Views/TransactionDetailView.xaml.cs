@@ -11,16 +11,15 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using VIIS.App.Customers.ViewModels;
 
-namespace VIIS.App.Customers.Views
+namespace VIIS.App.Finance.Views
 {
     /// <summary>
-    /// Логика взаимодействия для CustomersDetailView.xaml
+    /// Логика взаимодействия для TransactionDetailView.xaml
     /// </summary>
-    public partial class CustomerDetailView : Window
+    public partial class TransactionDetailView : Window
     {
-        public CustomerDetailView()
+        public TransactionDetailView()
         {
             InitializeComponent();
         }

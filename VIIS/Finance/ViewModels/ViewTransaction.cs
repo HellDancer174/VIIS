@@ -17,7 +17,27 @@ namespace VIIS.App.Finance.ViewModels
         {
         }
 
-        public string Name { get => name; set => name = value; }
-        public decimal Sale { get => sale; set => sale = value; }
+
+
+        public string Name
+        {
+            get => name;
+            set
+            {
+                if (value == name) return;
+                name = value;
+                ChangeProperty();
+            }
+        }
+        public new decimal Sale
+        {
+            get => sale;
+            set
+            {
+                if (value == sale) return;
+                sale = value;
+                ChangeProperty();
+            }
+        }
     }
 }

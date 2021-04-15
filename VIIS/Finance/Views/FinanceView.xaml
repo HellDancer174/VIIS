@@ -7,7 +7,7 @@
       xmlns:ViewModels="clr-namespace:VIIS.App.Finance.ViewModels" x:Class="VIIS.App.Finance.Views.FinanceView"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="SettingsView" Background="White">
+      Title="" Background="White">
 
     <Page.DataContext>
         <ViewModels:ViewTransactions/>
@@ -38,7 +38,7 @@
                             <RowDefinition/>
                         </Grid.RowDefinitions>
                         <TextBlock Text="Выручка" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Style="{StaticResource Default}"/>
-                        <TextBlock Text="1561684р" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource Default}"/>
+                        <TextBlock Text="{Binding Proseeds}" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource Default}"/>
                     </Grid>
                 </Border>
                 <Border BorderThickness="1" BorderBrush="AliceBlue" Grid.Column="1">
@@ -48,7 +48,7 @@
                             <RowDefinition/>
                         </Grid.RowDefinitions>
                         <TextBlock Text="Средний чек" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Style="{StaticResource Default}"/>
-                        <TextBlock Text="1584р" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource Default}"/>
+                        <TextBlock Text="{Binding MiddleSale}" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource Default}"/>
                     </Grid>
                 </Border>
                 <Border BorderThickness="1" BorderBrush="AliceBlue" Grid.Column="2">
@@ -58,7 +58,7 @@
                             <RowDefinition/>
                         </Grid.RowDefinitions>
                         <TextBlock Text="Расходы" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Style="{StaticResource Default}"/>
-                        <TextBlock Text="56184р" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource Default}"/>
+                        <TextBlock Text="{Binding Cost}" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource Default}"/>
                     </Grid>
                 </Border>
             </Grid>

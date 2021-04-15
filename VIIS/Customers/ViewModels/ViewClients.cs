@@ -4,54 +4,63 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using VIIS.App.GlobalViewModel;
 using VIIS.Domain.Customers;
 using VIIS.Domain.Customers.Decorators;
 using VIMVVM;
 
 namespace VIIS.App.Customers.ViewModels
 {
-    public class ViewClients : ClientsDecorator
+    public class ViewClients : ViewRepository<ViewClient, Client>
     {
-        private readonly ObservableCollection<ViewClient> clientCollection;
+        //private readonly ObservableCollection<ViewClient> clientCollection;
 
-        public ViewClients(Clients other) : base(other)
+        public ViewClients(Clients other) : base(other, new ObservableCollection<ViewClient>(other.Select(client => new ViewClient(client)).ToList()))
         {
-            clientCollection = new ObservableCollection<ViewClient>(this.Select(client => new ViewClient(client, this)).ToList());
+            //clientCollection = new ObservableCollection<ViewClient>(this.Select(client => new ViewClient(client, this)).ToList());
         }
 
-        public ObservableCollection<ViewClient> ClientCollection => clientCollection;
+        //public ObservableCollection<ViewClient> ClientCollection => clientCollection;
 
-        public ViewClient Selected { get; set; }
 
-        public RelayCommand AddCommand => new RelayCommand((obj) => new ViewWindowClient(new ViewNewClient(new ViewClient(new Client(), this, "Добавить", "Отмена"))));
-        public RelayCommand ChangeCommand => new RelayCommand((obj) => new ViewWindowClient(Selected, this));
-        public RelayCommand RemoveCommand => new RelayCommand(async (obj) =>
+        public override ICommand AddCommand => new RelayCommand((obj) => new ViewWindowClientDetail(this));
+        public override ICommand ChangeCommand => new RelayCommand((obj) => new ViewWindowClientDetail(Selected, this));
+        public override ICommand RemoveCommand => new RelayCommand(async (obj) =>
         {
             await RemoveAsync(Selected);
         });
 
-        public override Task AddAsync(Client item)
+        public override Task UpdateViewAsync(ViewClient oldItem, ViewClient item)
         {
-            ClientCollection.Add(new ViewClient(item, this));
-            ChangeProperty(nameof(ClientCollection));
-            return base.AddAsync(item);
+            return base.UpdateViewAsync(oldItem, new ViewClient(item));
         }
 
-        public override Task RemoveAsync(Client item)
-        {
-            ClientCollection.Remove(new ViewClient(item, this));
-            ChangeProperty(nameof(Selected));
-            ChangeProperty(nameof(ClientCollection));
-            return base.RemoveAsync(item);
-        }
+        //public override Task AddAsync(Client item)
+        //{
+        //    ClientCollection.Add(new ViewClient(item, this));
+        //    ChangeProperty(nameof(ClientCollection));
+        //    return base.AddAsync(item);
+        //}
 
-        public override Task Update(Client oldItem, Client item)
-        {
-            ClientCollection[ClientCollection.IndexOf(new ViewClient(oldItem, this))] = new ViewClient(item, this);
-            ChangeProperty(nameof(Selected));
-            ChangeProperty(nameof(ClientCollection));
-            return base.Update(oldItem, item);
-        }
+        //public override Task RemoveAsync(Client item)
+        //{
+        //    ClientCollection.Remove(new ViewClient(item, this));
+        //    ChangeProperty(nameof(Selected));
+        //    ChangeProperty(nameof(ClientCollection));
+        //    return base.RemoveAsync(item);
+        //}
+
+        //public Task UpdateView(ViewClient oldItem, ViewClient item)
+        //{
+        //    //var newClient = new ViewClient(item, this);
+        //    //var index = ClientCollection.IndexOf(new ViewClient(oldItem, this));
+        //    //ClientCollection[index] = newClient;
+        //    ChangeProperty(nameof(ClientCollection));
+        //    ChangeProperty(nameof(Selected));
+        //    //ClientCollection[index].ChangeProperties();
+        //    return Update(oldItem, item);
+        //}
 
     }
 }

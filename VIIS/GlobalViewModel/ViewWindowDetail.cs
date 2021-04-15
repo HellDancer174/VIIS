@@ -23,8 +23,8 @@ namespace VIIS.App.GlobalViewModel
             view.Show();
         }
 
-        public override RelayCommand Save => new RelayCommand((obj) => { base.Save.Execute(obj); view.Close(); });
+        public override RelayCommand Save => new RelayCommand((obj) => { other.Save.Execute(obj); view.Close(); });
 
-        public override RelayCommand End => new RelayCommand((obj) => { base.End.Execute(obj); view.Close(); });
+        public override RelayCommand End => new RelayCommand((obj) => { other.End.Execute(obj); view.Close(); });
     }
 }

@@ -19,9 +19,5 @@ namespace VIIS.App.OrdersJournal.OrderDetail.Models
             this.media = media;
         }
 
-        public override void Transfer()
-        {
-            return;
-        }
     }
 }

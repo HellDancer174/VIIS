@@ -59,6 +59,7 @@ namespace VIIS.Domain.Orders
             await Task.CompletedTask;
         }
 
+        public Orders OrdersOfMaster(Master master) => new Orders(ordersList.Where(order => order.IsOwner(master)).ToList());
 
         public virtual Task Transfer()
         {

@@ -14,42 +14,57 @@ namespace VIIS.App.Customers.ViewModels
     public class ViewClient : ClientDecorator
     {
         private readonly ViewAddress viewAddress;
-        protected readonly ViewClients clients;
-        protected string saveName;
-        protected string endName;
 
-        public ViewClient(Client other, ViewClients clients, string saveName, string endName) : base(other)
+        public ViewClient(Client other) : base(other)
         {
             Name = new ViewName(firstName, middleName, lastName);
             viewAddress = new ViewAddress(address);
-            this.clients = clients;
-            this.saveName = saveName;
-            this.endName = endName;
         }
-        public ViewClient(Client other, ViewClients clients): this(other, clients, "Сохранить", "Удалить")
+        public ViewClient(): this(new Client())
         {
+        }
 
-        }
-        public ViewClient(ViewClient viewClient):this(viewClient.other, viewClient.clients, viewClient.saveName, viewClient.endName)
+        public ViewClient(ViewClient viewClient): base(viewClient)
         {
-        }
-        public ViewClient(ViewClients clients):this(new Client(), clients)
-        {
+            Name = new ViewName(firstName, middleName, lastName);
+            viewAddress = new ViewAddress(address);
         }
 
         public ViewName Name { get; set; }
-        public string Phone { get => phone; set => phone = value; }
-        public string Email { get => email; set => email = value; }
+        public string Phone
+        {
+            get => phone;
+            set
+            {
+                phone = value;
+                ChangeProperty();
+            }
+        }
+        public string Email
+        {
+            get => email;
+            set
+            {
+                if (value == email) return;
+                email = value;
+                ChangeProperty();
+                
+            }
+        }
 
 
         public ViewAddress Address => viewAddress;
         public string FullAddress => address.ToString();
         public string Comment { get => comment; set => comment = value; }
 
-        public virtual string SaveName => saveName;
-        public virtual string EndName => endName;
+        public void ChangeProperties()
+        {
+            ChangeProperty(nameof(Name));
+            ChangeProperty(nameof(Phone));
+            ChangeProperty(nameof(Email));
+            ChangeProperty(nameof(FullAddress));
+            ChangeProperty(nameof(Comment));
 
-        public virtual RelayCommand Save => new RelayCommand(async(obj) => await clients.Update(other, new Client(this)));
-        public virtual RelayCommand End => new RelayCommand(async (obj) => await clients.RemoveAsync(other));
+        }
     }
 }

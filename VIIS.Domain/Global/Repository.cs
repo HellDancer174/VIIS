@@ -26,7 +26,9 @@ namespace VIIS.Domain.Global
 
         public virtual async Task Update(T oldItem, T item)
         {
-            this[IndexOf(oldItem)] = item;
+            var index = IndexOf(oldItem);
+            if (index == -1) index = IndexOf(item);
+            this[index] = item;
             await item.Transfer();
         }
 
