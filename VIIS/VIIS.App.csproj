@@ -104,7 +104,6 @@
     <Compile Include="GlobalViewModel\ViewNewDetail.cs" />
     <Compile Include="GlobalViewModel\ViewRepository.cs" />
     <Compile Include="GlobalViewModel\ViewWindowDetail.cs" />
-    <Compile Include="OrdersJournal\Models\OrdersDecorators\MonthCheckableOrder.cs" />
     <Compile Include="OrdersJournal\Models\OrdersDecorators\JournalOrder.cs" />
     <Compile Include="OrdersJournal\Models\OrdersDecorators\OrdersPerMonth.cs" />
     <Compile Include="OrdersJournal\OrderDetail\Models\IndexedService.cs" />
@@ -135,10 +134,12 @@
     <Compile Include="Staff\ViewModels\EmployeesViewModels\ViewAddress.cs" />
     <Compile Include="Staff\ViewModels\EmployeesViewModels\ViewEmployeeDetail.cs" />
     <Compile Include="Staff\ViewModels\EmployeesViewModels\ViewPassport.cs" />
+    <Compile Include="Staff\ViewModels\PayViewModels\ViewMastersCashList.cs" />
     <Compile Include="Staff\ViewModels\ViewEmployee.cs" />
     <Compile Include="Staff\ViewModels\ViewEmployeeOfWindow.cs" />
     <Compile Include="Staff\ViewModels\ViewEmployees.cs" />
     <Compile Include="Staff\ViewModels\ViewEmployeesTabs.cs" />
+    <Compile Include="Staff\ViewModels\PayViewModels\ViewMastersCash.cs" />
     <Compile Include="Staff\ViewModels\ViewNewEmployee.cs" />
     <Compile Include="Staff\ViewModels\ViewWorkGraph.cs" />
     <Compile Include="Staff\ViewModels\WorkGraphViewModels\ViewBooleanWorkDay.cs" />
@@ -205,6 +206,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Staff\Views\PayView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Staff\Views\WorkGraph.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -244,6 +249,9 @@
     </Compile>
     <Compile Include="Staff\Views\EmployeesTabs.xaml.cs">
       <DependentUpon>EmployeesTabs.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Staff\Views\PayView.xaml.cs">
+      <DependentUpon>PayView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Staff\Views\WorkGraph.xaml.cs">
       <DependentUpon>WorkGraph.xaml</DependentUpon>

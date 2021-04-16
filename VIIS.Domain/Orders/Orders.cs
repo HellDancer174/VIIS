@@ -11,55 +11,62 @@ using VIIS.Domain.Staff;
 using VIIS.Domain.Services;
 using VIIS.Domain.Staff.ValueClasses;
 using VIMVVM;
+using VIIS.Domain.Orders.Decorators;
 
 namespace VIIS.Domain.Orders
 {
-    public class Orders : Notifier, IDocumentAsync
+    public class Orders : VirtualObservableCollection<Order>, IDocumentAsync
     {
-        protected readonly VirtualCollection<Order> ordersList;
+        //protected readonly VirtualCollection<Order> ordersList;
 
-        public Orders(List<Order> orders)
+        public Orders(List<Order> orders): base(orders)
         {
-            this.ordersList = new VirtualCollection<Order>(orders);
         }
-        public Orders(Orders other)
+        public Orders(Orders other): base(other)
         {
-            ordersList = other.ordersList;
         }
-        public Orders()
-        {
-            ordersList = new VirtualCollection<Order>(new List<Order>()
+        public Orders(): 
+            base(new VirtualCollection<Order>(new List<Order>()
             {
                 new Order(new Client("Виктор", "Игнатьев", "", "265664699589"), new List<Service>() { new Service("Стрижка", 500, new TimeSpan(9,10,0), new TimeSpan(0,30,0)) }, new Master(), "", DateTime.Now.Date),
                 new Order(new Client("Виктор", "Кот", "", "16542389"), new List<Service>() { new Service("Стрижка", 500, new TimeSpan(9,40,0), new TimeSpan(0,30,0)) }, new Master(),"", DateTime.Now.Date),
                 new Order(new Client("Виктор", "Игнатов", "", "268596564"), new List<Service>() { new Service("Стрижка", 500, new TimeSpan(10,10,0), new TimeSpan(0,30,0)) }, new Master(),"", DateTime.Now.Date)
 
-            });
+            }))
+        {
         }
 
-        public virtual async Task Add(Order order)
+        public Orders(IList<Order> orders, DateTime monthOfYear, Master master):
+            this(orders.Select(order => new MasterCheckableOrder(new MonthCheckableOrder(order, monthOfYear), master)).Where(checkableOrder => checkableOrder.Check()).Select(checkableOrder => (Order)checkableOrder).ToList())
         {
-            ordersList.Add(order);
+
+        }
+
+        public virtual async Task AddAsync(Order order)
+        {
+            Add(order);
             //Отправить на сервер
             await Task.CompletedTask;
         }
 
         public virtual async Task Update(Order oldOrder, Order newOrder)
         {
-            var index = ordersList.IndexOf(oldOrder);
-            ordersList[index] = newOrder;
+            var index = IndexOf(oldOrder);
+            this[index] = newOrder;
             //Отправить на сервер
             await Task.CompletedTask;
         }
 
-        public virtual async Task Remove(Order order)
+        public virtual async Task RemoveAsync(Order order)
         {
-            ordersList.Remove(order);
+            Remove(order);
             //Отправить на сервер
             await Task.CompletedTask;
         }
 
-        public Orders OrdersOfMaster(Master master) => new Orders(ordersList.Where(order => order.IsOwner(master)).ToList());
+        public Orders OrdersOfMaster(Master master) => new Orders(this.Where(order => order.IsOwner(master)).ToList());
+
+        public decimal TotalSale => this.Sum(order => order.Sale);
 
         public virtual Task Transfer()
         {

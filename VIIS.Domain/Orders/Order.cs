@@ -95,6 +95,8 @@ namespace VIIS.Domain.Orders
 
         public decimal CashOfMaster() => CashOfMaster(new MastersPercent());
 
+        public decimal Sale => sale;
+
         public override string ToString()
         {
             return String.Format("Заказ от {0}; Клиент - {1}; Мастер - {2}, Сервисы - {3}", ordersDate, client.ToString(), master.ToString(), services.Count);

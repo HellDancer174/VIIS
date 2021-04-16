@@ -10,8 +10,8 @@ namespace VIIS.App.OrdersJournal.Models.OrdersDecorators
 {
     public class OrdersPerMonth : OrdersDecorator
     {
-        public OrdersPerMonth(List<Order> orders, DateTime monthOfYear) : 
-            base(new Orders(orders.Select(order => new MonthCheckableOrder(order)).Where(checkableOrder => checkableOrder.Check(monthOfYear)).Select(checkableOrder => (Order)checkableOrder).ToList()))
+        public OrdersPerMonth(IList<Order> orders, DateTime monthOfYear): 
+            base(new Orders(orders.Select(order => new MonthCheckableOrder(order, monthOfYear)).Where(checkableOrder => checkableOrder.Check()).Select(checkableOrder => (Order)checkableOrder).ToList()))
         {
         }
     }

@@ -6,13 +6,21 @@ using System.Threading.Tasks;
 
 namespace VIIS.Domain.Orders.Decorators
 {
-    public abstract class CheckableOrder<T> : OrderDecorator
+    public class CheckableOrder<T> : OrderDecorator
     {
-        public CheckableOrder(Order other) : base(other)
+        protected readonly CheckableOrder<T> checkableOther;
+        protected readonly T checker;
+
+        public CheckableOrder(Order other, T checker) : base(other)
         {
+            this.checker = checker;
+        }
+        public CheckableOrder(CheckableOrder<T> checkableOther): this((Order)checkableOther, checkableOther.checker)
+        {
+            this.checkableOther = checkableOther;
         }
 
-        public abstract bool Check(T value);
+        public virtual bool Check() => true;
 
     }
 }

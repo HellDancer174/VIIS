@@ -25,11 +25,11 @@ namespace VIIS.App.OrdersJournal.OrderDetail.ViewModels
 
         public override RelayCommand Save => new RelayCommand(async(obj) =>
         {
-            if (Convert.ToDecimal(Sale) == 0) Sale = ServicesSale;
-            sale = Convert.ToDecimal(Sale);
+            if (Price == 0) Price = ServicesPrice;
+            sale = Price;
             var order = new Order(ClientNames.Model(), ViewServices.Select(viewService => new Service(viewService)).ToList(), master, comment, OrdersDate, sale);
             if (order.IsIncomplete) throw new InvalidOperationException(order.ToString());
-            await journal.Add(order);
+            await journal.AddAsync(order);
         });
 
         public override RelayCommand End => new RelayCommand((obj) => { });

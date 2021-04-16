@@ -32,7 +32,7 @@ namespace VIIS.App.OrdersJournal.OrderDetail.ViewModels
             this.serviceValueList = new ViewServiceValueList(serviceValueList);
             ClientNames = new ViewClients(new ViewClient(client), new ExistingViewClient(clients));
             ViewServices = new ObservableCollection<ViewService>(services.Select(service => new ViewService(this.serviceValueList.ViewServices, service, this)));
-            Sale = sale.ToString();
+            Price = sale;
         }
 
         public ViewClients ClientNames { get; private set; }
@@ -41,8 +41,8 @@ namespace VIIS.App.OrdersJournal.OrderDetail.ViewModels
 
         public string Comment { get => comment; set => comment = value; }
 
-        public string ServicesSale => ViewServices.Select(viewServices => viewServices.Sale).Sum().ToString();
-        public string Sale { get; set; }
+        public decimal ServicesPrice => ViewServices.Select(viewServices => viewServices.Sale).Sum();
+        public decimal Price { get; set; }
 
         public virtual string SaveButtonName => "Сохранить";
         public virtual string EndButtonName => "Удалить";
@@ -52,25 +52,25 @@ namespace VIIS.App.OrdersJournal.OrderDetail.ViewModels
         {
             if (ViewServices.Count == 0) return;
             else ViewServices.RemoveAt(ViewServices.Count - 1);
-            ChangeProperty(nameof(ServicesSale));
+            ChangeProperty(nameof(ServicesPrice));
         });
 
         public virtual RelayCommand Save => new RelayCommand(async(obl) =>
         {
-            if (Convert.ToDecimal(Sale) == 0) Sale = ServicesSale;
-            sale = Convert.ToDecimal(Sale);
+            if (Price == 0) Price = ServicesPrice;
+            sale = Price;
             var newOrder = new Order(ClientNames.Model(), ViewServices.Select(viewService => new Service(viewService)).ToList(), master, Comment, ordersDate);
             if (newOrder.IsIncomplete) throw new InvalidOperationException(newOrder.ToString());
             await journal.Update(other, newOrder);
         });
         public virtual RelayCommand End => new RelayCommand(async(obl) =>
         {
-            await journal.Remove(other);
+            await journal.RemoveAsync(other);
         });
 
         public void ChangeServiceSale()
         {
-            ChangeProperty(nameof(ServicesSale));
+            ChangeProperty(nameof(ServicesPrice));
         }
 
     }
