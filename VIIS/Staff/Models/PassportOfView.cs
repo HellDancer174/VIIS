@@ -34,11 +34,11 @@ namespace VIIS.App.Staff.Models
 
         private Passport Passport()
         {
-            var corrected = new List<ValidPropetry>();
-            corrected.Add(new ValidPropetry("Серия", series, !string.IsNullOrEmpty(series)));
-            corrected.Add(new ValidPropetry("Номер", passportID, !string.IsNullOrEmpty(passportID)));
-            corrected.Add(new ValidPropetry("Дата выпуска", issusiesDate.ToShortDateString(), issusiesDate != new DateTime()));
-            corrected.Add(new ValidPropetry("Организация, выдавшая паспорт", organization, !string.IsNullOrEmpty(organization)));
+            var corrected = new List<ValidTextBlock>();
+            corrected.Add(new ValidTextBlock("Серия", series, !string.IsNullOrEmpty(series)));
+            corrected.Add(new ValidTextBlock("Номер", passportID, !string.IsNullOrEmpty(passportID)));
+            corrected.Add(new ValidTextBlock("Дата выпуска", issusiesDate.ToShortDateString(), issusiesDate != new DateTime()));
+            corrected.Add(new ValidTextBlock("Организация, выдавшая паспорт", organization, !string.IsNullOrEmpty(organization)));
             corrected.ForEach(prop => prop.Validate());
             return new Passport(this);
         }

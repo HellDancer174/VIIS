@@ -53,16 +53,19 @@ namespace VIIS.App.Staff.ViewModels
         public virtual string SaveName => "Сохранить";
         public virtual string EndName => "Удалить";
 
-        public virtual RelayCommand Save => new RelayCommand( async(obj) => 
+        public virtual RelayCommand Save => new RelayCommand( async(obj) => await SaveMethod());
+
+        protected virtual async Task<bool> SaveMethod()
         {
             var masters = new MasterOfView(this).Safe();
-            if (masters.Count() == 0) return;
+            if (masters.Count() == 0) return false;
             else
             {
                 await this.masters.Update(other, masters.First());
-            } 
-           
-        });
+                return true;
+            }
+        }
+
         public virtual RelayCommand End => new RelayCommand(async(obj) => 
         {
             await masters.RemoveAsync(other);

@@ -50,7 +50,8 @@
     <Compile Include="Finance\Transaction.cs" />
     <Compile Include="Global\Person.cs" />
     <Compile Include="Global\Repository.cs" />
-    <Compile Include="Global\ValidPropetry.cs" />
+    <Compile Include="Global\ValidProperty.cs" />
+    <Compile Include="Global\ValidTextBlock.cs" />
     <Compile Include="Orders\AnyOrder.cs" />
     <Compile Include="Orders\Decorators\MasterCheckableOrder.cs" />
     <Compile Include="Orders\Decorators\MonthCheckableOrder.cs" />

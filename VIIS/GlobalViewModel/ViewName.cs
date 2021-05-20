@@ -18,7 +18,11 @@ namespace VIIS.App.GlobalViewModel
         public ViewName(): this(string.Empty, string.Empty, string.Empty)
         {
         }
-        public string FirstName { get; set; }
+        public string FirstName
+        {
+            get;
+            set;
+        }
         public string MiddleName { get; set; }
         public string LastName { get; set; }
 

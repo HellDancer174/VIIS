@@ -14,7 +14,7 @@
         </Grid.RowDefinitions>
         <ScrollViewer Grid.Row="0">
             <StackPanel Margin="0,15,0,0" DataContext="{Binding ViewModel}">
-                <Grid DataContext="{Binding Name}" Margin="5">
+                <Grid Margin="5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="10*"/>
                         <ColumnDefinition Width="20*"/>

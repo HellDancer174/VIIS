@@ -27,8 +27,8 @@ namespace VIIS.App.Staff.Models
         {
             try
             {
-                new ValidPropetry("Адрес", addressOfView.ToString(), addressOfView.Safe().Count() == 0).Validate();
-                new ValidPropetry("Паспорт", passportOfView.ToString(), passportOfView.Safe().Count() == 0).Validate();
+                new ValidTextBlock("Адрес", addressOfView.ToString(), addressOfView.Safe().Count() != 0).Validate();
+                new ValidTextBlock("Паспорт", passportOfView.ToString(), passportOfView.Safe().Count() != 0).Validate();
                 return new List<Master>() { Master() };
             }
             catch (ArgumentException ex)
@@ -40,10 +40,10 @@ namespace VIIS.App.Staff.Models
 
         private Master Master()
         {
-            var corrected = new List<ValidPropetry>();
-            corrected.Add(new ValidPropetry("Имя мастера", FullName, !(String.IsNullOrEmpty(firstName) || String.IsNullOrEmpty(lastName) || String.IsNullOrEmpty(middleName))));
-            corrected.Add(new ValidPropetry("Телефон", phone, !string.IsNullOrEmpty(phone)));
-            corrected.Add(new ValidPropetry("Дата рождения", birthday.ToShortDateString(), birthday != new DateTime()));
+            var corrected = new List<ValidTextBlock>();
+            corrected.Add(new ValidTextBlock("Имя мастера", FullName, !(String.IsNullOrEmpty(firstName) || String.IsNullOrEmpty(lastName) || String.IsNullOrEmpty(middleName))));
+            corrected.Add(new ValidTextBlock("Телефон", phone, !string.IsNullOrEmpty(phone)));
+            corrected.Add(new ValidTextBlock("Дата рождения", birthday.ToShortDateString(), birthday != new DateTime()));
             corrected.ForEach(prop => prop.Validate());
             return new Master(this);
         }

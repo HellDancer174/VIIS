@@ -34,12 +34,12 @@ namespace VIIS.App.Staff.Models
 
         private Address Address()
         {
-            var corrected = new List<ValidPropetry>();
-            corrected.Add(new ValidPropetry("Почтовый индекс", index.ToString(), index > 0));
-            corrected.Add(new ValidPropetry("Город", city, !string.IsNullOrEmpty(city)));
-            corrected.Add(new ValidPropetry("Улица", street, !string.IsNullOrEmpty(street)));
-            corrected.Add(new ValidPropetry("Дом", house, string.IsNullOrEmpty(house)));
-            corrected.Add(new ValidPropetry("Квартира", flat, string.IsNullOrEmpty(flat)));
+            var corrected = new List<ValidTextBlock>();
+            corrected.Add(new ValidTextBlock("Почтовый индекс", index.ToString(), index > 0));
+            corrected.Add(new ValidTextBlock("Город", city, !string.IsNullOrEmpty(city)));
+            corrected.Add(new ValidTextBlock("Улица", street, !string.IsNullOrEmpty(street)));
+            corrected.Add(new ValidTextBlock("Дом", house, string.IsNullOrEmpty(house)));
+            corrected.Add(new ValidTextBlock("Квартира", flat, string.IsNullOrEmpty(flat)));
             corrected.ForEach(property => property.Validate());
             return new Address(this);
         }

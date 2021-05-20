@@ -48,5 +48,13 @@ namespace VIIS.App.Services.ViewModels
             return other != null &&
                    base.Equals(other);
         }
+
+        public override int GetHashCode()
+        {
+            var hashCode = -44027456;
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Name);
+            hashCode = hashCode * -1521134295 + Price.GetHashCode();
+            return hashCode;
+        }
     }
 }

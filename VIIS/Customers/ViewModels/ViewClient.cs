@@ -17,7 +17,6 @@ namespace VIIS.App.Customers.ViewModels
 
         public ViewClient(Client other) : base(other)
         {
-            Name = new ViewName(firstName, middleName, lastName);
             viewAddress = new ViewAddress(address);
         }
         public ViewClient(): this(new Client())
@@ -26,11 +25,37 @@ namespace VIIS.App.Customers.ViewModels
 
         public ViewClient(ViewClient viewClient): base(viewClient)
         {
-            Name = new ViewName(firstName, middleName, lastName);
             viewAddress = new ViewAddress(address);
         }
 
-        public ViewName Name { get; set; }
+        public string FirstName
+        {
+            get { return firstName; }
+            set
+            {
+                firstName = value;
+                ChangeProperty(nameof(FullName));
+            }
+        }
+        public string MiddleName
+        {
+            get { return middleName; }
+            set
+            {
+                middleName = value;
+                ChangeProperty(nameof(FullName));
+            }
+        }
+        public string LastName
+        {
+            get { return lastName; }
+            set
+            {
+                lastName = value;
+                ChangeProperty(nameof(FullName));
+            }
+        }
+
         public string Phone
         {
             get => phone;
@@ -54,17 +79,32 @@ namespace VIIS.App.Customers.ViewModels
 
 
         public ViewAddress Address => viewAddress;
-        public string FullAddress => address.ToString();
-        public string Comment { get => comment; set => comment = value; }
+        public string FullAddress => Address.ToString();
+        public string Comment
+        {
+            get => comment;
+            set
+            {
+                comment = value;
+                ChangeProperty();
+            }
+        }
+
+
+
+        public override bool Equals(object obj)
+        {
+            var client = obj as ViewClient;
+            return client != null && Equals(client);
+        }
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
 
         public void ChangeProperties()
         {
-            ChangeProperty(nameof(Name));
-            ChangeProperty(nameof(Phone));
-            ChangeProperty(nameof(Email));
             ChangeProperty(nameof(FullAddress));
-            ChangeProperty(nameof(Comment));
-
         }
     }
 }

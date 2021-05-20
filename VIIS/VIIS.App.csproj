@@ -101,6 +101,7 @@
     </Compile>
     <Compile Include="GlobalViewModel\ViewDetail.cs" />
     <Compile Include="GlobalViewModel\RepositoryCommand.cs" />
+    <Compile Include="GlobalViewModel\ViewFilterableModel.cs" />
     <Compile Include="GlobalViewModel\ViewNewDetail.cs" />
     <Compile Include="GlobalViewModel\ViewRepository.cs" />
     <Compile Include="GlobalViewModel\ViewWindowDetail.cs" />

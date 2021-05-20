@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace VIIS.Domain.Global
 {
-    public class ValidPropetry
+    public class ValidProperty<T>
     {
-        private readonly string name;
-        private readonly string value;
-        private readonly bool condition;
+        protected readonly string name;
+        protected readonly T value;
+        protected readonly bool condition;
 
-        public ValidPropetry(string name, string value, bool condition)
+        public ValidProperty(string name, T value, bool condition)
         {
             this.name = name;
             this.value = value;
@@ -28,7 +28,8 @@ namespace VIIS.Domain.Global
 
         public override string ToString()
         {
-            return string.Format("\nНекорректное поле {0}: {1}\n", name, String.IsNullOrEmpty(value) ? "Нет данных":value);
+            return string.Format("\nНекорректное поле {0}: {1}\n", name, value == null ? "Нет данных" : value.ToString());
         }
+
     }
 }

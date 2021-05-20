@@ -5,13 +5,14 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VIIS.App.GlobalViewModel;
 using VIIS.Domain.Orders;
 using VIIS.Domain.Staff;
 using VIMVVM;
 
 namespace VIIS.App.Staff.ViewModels.PayViewModels
 {
-    public class ViewMastersCashList : Notifier
+    public class ViewMastersCashList : ViewFilterableModel<DateTime>
     {
         private ObservableCollection<ViewMastersCash> collection;
         private readonly Employees masters;
@@ -27,14 +28,19 @@ namespace VIIS.App.Staff.ViewModels.PayViewModels
 
         public ObservableCollection<ViewMastersCash> Collection => collection;
 
-        public DateTime Selected
+        //public DateTime Selected
+        //{
+        //    get => selected;
+        //    set
+        //    {
+        //        if (value == selected) return;
+        //        collection = new ObservableCollection<ViewMastersCash>(masters.Select(master => new ViewMastersCash(master, orders, selected)));
+        //    }
+        //}
+
+        protected override void Refresh()
         {
-            get => selected;
-            set
-            {
-                if (value == selected) return;
-                collection = new ObservableCollection<ViewMastersCash>(masters.Select(master => new ViewMastersCash(master, orders, selected)));
-            }
+            collection = new ObservableCollection<ViewMastersCash>(masters.Select(master => new ViewMastersCash(master, orders, selected)));
         }
     }
 }

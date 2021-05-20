@@ -9,9 +9,9 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="" Background="White">
 
-    <Page.DataContext>
+    <!--<Page.DataContext>
         <ViewModels:ViewTransactions/>
-    </Page.DataContext>
+    </Page.DataContext>-->
 
     <Grid>
         <Grid.ColumnDefinitions>
