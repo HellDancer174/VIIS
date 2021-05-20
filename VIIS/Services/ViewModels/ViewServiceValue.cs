@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using VIIS.Domain.Services;
+using VIMVVM.Detail;
 
 namespace VIIS.App.Services.ViewModels
 {
-    public class ViewServiceValue : ServiceValue, IEquatable<ViewServiceValue>
+    public class ViewServiceValue : ServiceValue, IEquatable<ViewServiceValue>, IDetailedViewModel
     {
 
         public ViewServiceValue(ServiceValue other) : base(other)
@@ -55,6 +56,11 @@ namespace VIIS.App.Services.ViewModels
             hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Name);
             hashCode = hashCode * -1521134295 + Price.GetHashCode();
             return hashCode;
+        }
+
+        public void NotifySelector()
+        {
+            throw new NotImplementedException();
         }
     }
 }

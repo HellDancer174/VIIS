@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using VIIS.Domain.Finance;
+using VIMVVM.Detail;
 
 namespace VIIS.App.Finance.ViewModels
 {
-    public class ViewTransaction: Transaction
+    public class ViewTransaction: Transaction, IDetailedViewModel
     {
         public ViewTransaction(): this(new Transaction(nameof(Name), 0))
         {
@@ -38,6 +39,11 @@ namespace VIIS.App.Finance.ViewModels
                 sale = value;
                 ChangeProperty();
             }
+        }
+
+        public void NotifySelector()
+        {
+            throw new NotImplementedException();
         }
     }
 }

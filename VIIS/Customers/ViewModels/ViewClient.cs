@@ -8,10 +8,11 @@ using VIIS.App.Staff.ViewModels.EmployeesViewModels;
 using VIIS.Domain.Customers;
 using VIIS.Domain.Customers.Decorators;
 using VIMVVM;
+using VIMVVM.Detail;
 
 namespace VIIS.App.Customers.ViewModels
 {
-    public class ViewClient : ClientDecorator
+    public class ViewClient : ClientDecorator, IDetailedViewModel
     {
         private readonly ViewAddress viewAddress;
 
@@ -102,9 +103,15 @@ namespace VIIS.App.Customers.ViewModels
             return base.GetHashCode();
         }
 
-        public void ChangeProperties()
+        //public void ChangeProperties()
+        //{
+        //    ChangeProperty(nameof(FullAddress));
+        //}
+
+        public void NotifySelector()
         {
             ChangeProperty(nameof(FullAddress));
+            ChangeProperty(nameof(FullName));
         }
     }
 }

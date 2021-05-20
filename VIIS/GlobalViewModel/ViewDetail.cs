@@ -5,11 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using VIMVVM;
+using VIMVVM.Detail;
 
 namespace VIIS.App.GlobalViewModel
 {
     public class ViewDetail<Repo,V,T>: Notifier
-        where Repo: ViewRepository<V,T> where V:T where T:IDocumentAsync
+        where Repo: ViewRepository<V,T> where V:T, IDetailedViewModel where T:IDocumentAsync
     {
         protected string saveName;
         protected string endName;
