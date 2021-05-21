@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using VIIS.App.Staff.ViewModels;
+using VIIS.Domain.Staff;
 
 namespace VIIS.App.Staff.Views
 {
@@ -20,9 +22,13 @@ namespace VIIS.App.Staff.Views
     /// </summary>
     public partial class EmployeesList : Page
     {
-        public EmployeesList()
+        public EmployeesList(ViewEmployees masters)
         {
             InitializeComponent();
+            DataContext = masters;
+        }
+        public EmployeesList() : this(new ViewEmployees(new Employees()))
+        {
         }
 
         private void DataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)

@@ -10,9 +10,6 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="" Background="White">
 
-    <Page.DataContext>
-        <ViewModels:ViewEmployees/>
-    </Page.DataContext>
     <Page.Resources>
         <converters:DateConverter x:Key="DateConverter"/>
     </Page.Resources>
@@ -24,7 +21,7 @@
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
                 <Border BorderThickness="2" BorderBrush="Black">
-                    <DataGrid ItemsSource="{Binding Employees}" AutoGenerateColumns="False" SelectedItem="{Binding Selected}" MouseDoubleClick="DataGrid_MouseDoubleClick" FontFamily="/VIIS.App;component/Resources/#Champagne &amp; Limousines">
+                    <DataGrid ItemsSource="{Binding Collection}" AutoGenerateColumns="False" SelectedItem="{Binding Selected}" MouseDoubleClick="DataGrid_MouseDoubleClick" FontFamily="/VIIS.App;component/Resources/#Champagne &amp; Limousines">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Должность" Binding="{Binding Position}" IsReadOnly="True"/>
                             <DataGridTextColumn Header="ФИО" Binding="{Binding FullName}" IsReadOnly="True"/>

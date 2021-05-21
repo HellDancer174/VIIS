@@ -40,7 +40,7 @@
             <RowDefinition Height="10*"/>
         </Grid.RowDefinitions>
         <ScrollViewer Grid.Row="0">
-            <StackPanel>
+            <StackPanel DataContext="{Binding ViewModel}">
                 <Grid>
                     <TextBlock Text="Общее" HorizontalAlignment="Center" TextDecorations="Underline"/>
                 </Grid>

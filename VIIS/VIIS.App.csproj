@@ -85,7 +85,7 @@
     <Compile Include="Customers\ViewModels\ViewClient.cs" />
     <Compile Include="Customers\ViewModels\ViewClients.cs" />
     <Compile Include="Customers\ViewModels\ViewWindowClientDetail.cs" />
-    <Compile Include="Customers\ViewModels\ViewWindowClient.cs" />
+    <Compile Include="Customers\ViewModels\ViewClientDetail.cs" />
     <Compile Include="Customers\Views\ClientsView.xaml.cs">
       <DependentUpon>ClientsView.xaml</DependentUpon>
     </Compile>
@@ -137,11 +137,11 @@
     <Compile Include="Staff\ViewModels\EmployeesViewModels\ViewPassport.cs" />
     <Compile Include="Staff\ViewModels\PayViewModels\ViewMastersCashList.cs" />
     <Compile Include="Staff\ViewModels\ViewEmployee.cs" />
-    <Compile Include="Staff\ViewModels\ViewEmployeeOfWindow.cs" />
+    <Compile Include="Staff\ViewModels\ViewStaffDetail.cs" />
     <Compile Include="Staff\ViewModels\ViewEmployees.cs" />
     <Compile Include="Staff\ViewModels\ViewEmployeesTabs.cs" />
     <Compile Include="Staff\ViewModels\PayViewModels\ViewMastersCash.cs" />
-    <Compile Include="Staff\ViewModels\ViewNewEmployee.cs" />
+    <Compile Include="Staff\ViewModels\ViewWindowStaffDetail.cs" />
     <Compile Include="Staff\ViewModels\ViewWorkGraph.cs" />
     <Compile Include="Staff\ViewModels\WorkGraphViewModels\ViewBooleanWorkDay.cs" />
     <Compile Include="Staff\ViewModels\WorkGraphViewModels\ViewMastersList.cs" />

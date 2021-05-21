@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,9 +13,10 @@ using VIMVVM;
 namespace VIIS.App.GlobalViewModel
 {
     public abstract class ViewRepository<V, T> : Repository<T>
-        where V:T where T: IDocumentAsync
+        where V : T where T : IDocumentAsync
     {
         private ObservableCollection<V> collection;
+        private V selected;
 
         public ViewRepository(Repository<T> other, ObservableCollection<V> collection) : base(other)
         {
@@ -23,7 +25,7 @@ namespace VIIS.App.GlobalViewModel
 
         public ObservableCollection<V> Collection => collection;
 
-        public V Selected { get; set; }
+        public V Selected { get => selected; set { selected = value; ChangeProperty(); } }
 
         public abstract ICommand AddCommand { get; }
         public abstract ICommand ChangeCommand { get; }

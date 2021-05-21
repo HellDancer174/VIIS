@@ -21,17 +21,16 @@ namespace VIIS.App.Staff.Views
     /// </summary>
     public partial class EmployeeDetailView : Window
     {
-        private readonly ViewEmployee employee;
+        //private readonly ViewEmployee employee;
 
         public EmployeeDetailView()
         {
             InitializeComponent();
-            DataContext = employee = new ViewEmployee(new Employees());
         }
-        public EmployeeDetailView(ViewEmployee employee)
-        {
-            InitializeComponent();
-            DataContext = this.employee = employee;
-        }
+        //public EmployeeDetailView(ViewEmployee employee)
+        //{
+        //    InitializeComponent();
+        //    DataContext = this.employee = employee;
+        //}
     }
 }

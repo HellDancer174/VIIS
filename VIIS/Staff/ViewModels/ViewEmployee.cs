@@ -18,13 +18,13 @@ namespace VIIS.App.Staff.ViewModels
 {
     public class ViewEmployee : DecoratableMaster, IDetailedViewModel
     {
-        private readonly ViewEmployeeDetail viewDetail;
+        private readonly EmployeesViewModels.ViewEmployeeDetail viewDetail;
         private readonly ViewAddress viewAddress;
         private readonly ViewPassport viewPassport;
-        protected readonly Employees masters;
+        //protected readonly Employees masters;
         private string viewPosition;
 
-        public ViewEmployee(Employees masters): this(new Master(), masters)
+        public ViewEmployee(/*Employees masters*/) : this(new Master()/*, masters*/)
         {
         }
         public ViewEmployee(ViewEmployee other): base(other)
@@ -34,17 +34,17 @@ namespace VIIS.App.Staff.ViewModels
             viewPassport = other.viewPassport;
             Name = other.Name;
             viewPosition = other.viewPosition;
-            masters = other.masters;
+            //masters = other.masters;
 
         }
-        public ViewEmployee(Master other, Employees masters) : base(other)
+        public ViewEmployee(Master other/*, Employees masters*/) : base(other)
         {
-            viewDetail = new ViewEmployeeDetail(detail);
+            viewDetail = new EmployeesViewModels.ViewEmployeeDetail(detail);
             viewAddress = new ViewAddress(address);
             viewPassport = new ViewPassport(passport);
             Name = new ViewName(firstName, middleName, lastName);
             viewPosition = position.ToString();
-            this.masters = masters;
+            //this.masters = masters;
         }
 
         public string Position { get => viewPosition; set => viewPosition = value; }
@@ -58,25 +58,23 @@ namespace VIIS.App.Staff.ViewModels
         public ViewAddress Address => viewAddress;
         public ViewPassport Passport => viewPassport;
 
-        public virtual string SaveName => "Сохранить";
-        public virtual string EndName => "Удалить";
 
-        public virtual RelayCommand Save => new RelayCommand(async(obj) => await SaveMethod());
+        //public virtual RelayCommand Save => new RelayCommand(async(obj) => await SaveMethod());
 
-        protected virtual async Task<bool> SaveMethod()
-        {
-            address = viewAddress;
-            passport = viewPassport;
-            detail = viewDetail;
-            var masters = new MasterOfView(this).Safe();
-            if (masters.Count() == 0) return false;
-            else
-            {
-                await this.masters.Update(other, masters.First());
-                NotifySelector();
-                return true;
-            }
-        }
+        //protected virtual async Task<bool> SaveMethod()
+        //{
+        //    address = viewAddress;
+        //    passport = viewPassport;
+        //    detail = viewDetail;
+        //    var masters = new MasterOfView(this).Safe();
+        //    if (masters.Count() == 0) return false;
+        //    else
+        //    {
+        //        await this.masters.Update(other, masters.First());
+        //        NotifySelector();
+        //        return true;
+        //    }
+        //}
 
         public void NotifySelector()
         {
@@ -88,9 +86,9 @@ namespace VIIS.App.Staff.ViewModels
 
         }
 
-        public virtual RelayCommand End => new RelayCommand(async(obj) => 
-        {
-            await masters.RemoveAsync(other);
-        });
+        //public virtual RelayCommand End => new RelayCommand(async(obj) => 
+        //{
+        //    await masters.RemoveAsync(other);
+        //});
     }
 }
