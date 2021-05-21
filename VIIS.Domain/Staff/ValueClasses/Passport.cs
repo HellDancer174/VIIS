@@ -7,7 +7,7 @@ using VIMVVM;
 
 namespace VIIS.Domain.Staff.ValueClasses
 {
-    public class Passport
+    public class Passport: Notifier
     {
         protected string series;
         protected string passportID;

@@ -17,7 +17,7 @@ namespace VIIS.App.Staff.ViewModels.PayViewModels
         private ObservableCollection<ViewMastersCash> collection;
         private readonly Employees masters;
         private readonly Orders orders;
-        private DateTime selected;
+        //private DateTime selected;
 
         public ViewMastersCashList(Employees masters, Orders orders)
         {
@@ -40,7 +40,7 @@ namespace VIIS.App.Staff.ViewModels.PayViewModels
 
         protected override void Refresh()
         {
-            collection = new ObservableCollection<ViewMastersCash>(masters.Select(master => new ViewMastersCash(master, orders, selected)));
+            collection = new ObservableCollection<ViewMastersCash>(masters.Select(master => new ViewMastersCash(master, orders, Selected)));
         }
     }
 }

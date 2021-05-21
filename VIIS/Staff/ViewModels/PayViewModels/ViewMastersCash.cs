@@ -25,7 +25,6 @@ namespace VIIS.App.Staff.ViewModels.PayViewModels
         {
         }
 
-
         public string MasterName { get; set; }
 
         public decimal Cash { get; set; }

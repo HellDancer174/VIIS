@@ -18,7 +18,7 @@ namespace VIIS.App.Customers.ViewModels
         {
             this.other = other;
         }
-        public ViewWindowClientDetail(ViewClient client, ViewClients clients): this(new ViewDetail<ViewClients, ViewClient, Client>(clients, client, new ViewClient(client), () => client.NotifySelector()))
+        public ViewWindowClientDetail(ViewClient client, ViewClients clients): this(new ViewDetail<ViewClients, ViewClient, Client>(clients, client, new ViewClient(client)))
         {
         }
         public ViewWindowClientDetail(ViewClients clients) : this(new ViewNewDetail<ViewClients, ViewClient, Client>(clients, new ViewClient(), new ViewClient()))

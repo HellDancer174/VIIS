@@ -38,8 +38,8 @@ namespace VIIS.App.Staff.Models
             corrected.Add(new ValidTextBlock("Почтовый индекс", index.ToString(), index > 0));
             corrected.Add(new ValidTextBlock("Город", city, !string.IsNullOrEmpty(city)));
             corrected.Add(new ValidTextBlock("Улица", street, !string.IsNullOrEmpty(street)));
-            corrected.Add(new ValidTextBlock("Дом", house, string.IsNullOrEmpty(house)));
-            corrected.Add(new ValidTextBlock("Квартира", flat, string.IsNullOrEmpty(flat)));
+            corrected.Add(new ValidTextBlock("Дом", house, !string.IsNullOrEmpty(house)));
+            corrected.Add(new ValidTextBlock("Квартира", flat, !string.IsNullOrEmpty(flat)));
             corrected.ForEach(property => property.Validate());
             return new Address(this);
         }

@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VIMVVM;
 
 namespace VIIS.Domain.Staff.ValueClasses
 {
-    public class EmployeeDetail
+    public class EmployeeDetail: Notifier
     {
         protected DateTime start;
         protected int contractID;

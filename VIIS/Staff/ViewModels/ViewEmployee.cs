@@ -12,10 +12,11 @@ using VIIS.Domain.Staff.ValueClasses;
 using VIIS.App.Staff.Models;
 using System.Windows;
 using VIIS.App.Staff.Views;
+using VIMVVM.Detail;
 
 namespace VIIS.App.Staff.ViewModels
 {
-    public class ViewEmployee : DecoratableMaster
+    public class ViewEmployee : DecoratableMaster, IDetailedViewModel
     {
         private readonly ViewEmployeeDetail viewDetail;
         private readonly ViewAddress viewAddress;
@@ -26,8 +27,15 @@ namespace VIIS.App.Staff.ViewModels
         public ViewEmployee(Employees masters): this(new Master(), masters)
         {
         }
-        public ViewEmployee(ViewEmployee viewEmployee): this(viewEmployee, viewEmployee.masters)
+        public ViewEmployee(ViewEmployee other): base(other)
         {
+            viewDetail = other.viewDetail;
+            viewAddress = other.viewAddress;
+            viewPassport = other.viewPassport;
+            Name = other.Name;
+            viewPosition = other.viewPosition;
+            masters = other.masters;
+
         }
         public ViewEmployee(Master other, Employees masters) : base(other)
         {
@@ -53,17 +61,31 @@ namespace VIIS.App.Staff.ViewModels
         public virtual string SaveName => "Сохранить";
         public virtual string EndName => "Удалить";
 
-        public virtual RelayCommand Save => new RelayCommand( async(obj) => await SaveMethod());
+        public virtual RelayCommand Save => new RelayCommand(async(obj) => await SaveMethod());
 
         protected virtual async Task<bool> SaveMethod()
         {
+            address = viewAddress;
+            passport = viewPassport;
+            detail = viewDetail;
             var masters = new MasterOfView(this).Safe();
             if (masters.Count() == 0) return false;
             else
             {
                 await this.masters.Update(other, masters.First());
+                NotifySelector();
                 return true;
             }
+        }
+
+        public void NotifySelector()
+        {
+            Name.NotifySelector();
+            ChangeProperties(nameof(Position), nameof(BirthDay), nameof(Phone), nameof(Email));
+            Detail.NotifySelector();
+            Address.NotifySelector();
+            Passport.NotifySelector();
+
         }
 
         public virtual RelayCommand End => new RelayCommand(async(obj) => 

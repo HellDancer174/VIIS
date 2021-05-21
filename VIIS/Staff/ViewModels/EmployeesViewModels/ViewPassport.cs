@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 using VIIS.Domain.Staff.ValueClasses;
 using VIIS.Domain.Staff.ValueClasses.Decorators;
 using VIMVVM;
+using VIMVVM.Detail;
 
 namespace VIIS.App.Staff.ViewModels.EmployeesViewModels
 {
-    public class ViewPassport: DecoratablePassport
+    public class ViewPassport: DecoratablePassport, IDetailedViewModel
     {
         public ViewPassport(): this(new Passport())
         {
@@ -24,5 +25,13 @@ namespace VIIS.App.Staff.ViewModels.EmployeesViewModels
         public DateTime IssusiesDate { get => issusiesDate; set => issusiesDate = value; }
         public string Organization { get => organization; set => organization = value; }
 
+        public void NotifySelector()
+        {
+            ChangeProperty(nameof(Series));
+            ChangeProperty(nameof(PassportID));
+            ChangeProperty(nameof(IssusiesDate));
+            ChangeProperty(nameof(Organization));
+
+        }
     }
 }

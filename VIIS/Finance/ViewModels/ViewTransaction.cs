@@ -43,7 +43,8 @@ namespace VIIS.App.Finance.ViewModels
 
         public void NotifySelector()
         {
-            throw new NotImplementedException();
+            ChangeProperty(nameof(Name));
+            ChangeProperty(nameof(Sale));
         }
     }
 }

@@ -13,10 +13,10 @@ namespace VIIS.App.Customers.ViewModels
 {
     public class ViewClientDetail : ViewDetail<ViewClients, ViewClient, Client>
     {
-        public ViewClientDetail(ViewClients repository, ViewClient viewModel, ViewClient oldViewModel) : base(repository, viewModel, oldViewModel, () => viewModel.ChangeProperties())
+        public ViewClientDetail(ViewClients repository, ViewClient viewModel, ViewClient oldViewModel) : base(repository, viewModel, oldViewModel)
         {
         }
 
-        public override RelayCommand Save => new RelayCommand(async (obj) => { await repository.UpdateViewAsync(oldViewModel, new ViewClient(ViewModel)); changeProperties.Invoke(); });
+        public override RelayCommand Save => new RelayCommand(async (obj) => { await repository.UpdateViewAsync(oldViewModel, new ViewClient(ViewModel)); ViewModel.NotifySelector(); });
     }
 }

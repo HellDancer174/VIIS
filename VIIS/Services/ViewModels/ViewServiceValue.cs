@@ -60,7 +60,8 @@ namespace VIIS.App.Services.ViewModels
 
         public void NotifySelector()
         {
-            throw new NotImplementedException();
+            ChangeProperty(nameof(Price));
+            ChangeProperty(nameof(Name));
         }
     }
 }

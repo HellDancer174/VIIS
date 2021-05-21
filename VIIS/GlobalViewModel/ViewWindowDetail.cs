@@ -6,11 +6,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using VIMVVM;
+using VIMVVM.Detail;
 
 namespace VIIS.App.GlobalViewModel
 {
     public class ViewWindowDetail<Repo, V, T> : ViewDetail<Repo, V, T>
-     where Repo : ViewRepository<V, T> where V : T where T : IDocumentAsync
+     where Repo : ViewRepository<V, T> where V : T, IDetailedViewModel where T : IDocumentAsync
     {
         private readonly ViewDetail<Repo, V, T> other;
         protected readonly Window view;

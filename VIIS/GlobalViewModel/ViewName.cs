@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using VIMVVM;
+using VIMVVM.Detail;
 
 namespace VIIS.App.GlobalViewModel
 {
-    public class ViewName: Notifier
+    public class ViewName: Notifier, IDetailedViewModel
     {
         public ViewName(string firstName, string middleName, string lastName)
         {
@@ -28,5 +29,9 @@ namespace VIIS.App.GlobalViewModel
 
         public virtual string FullName => String.Format("{0} {1} {2}", LastName, FirstName, MiddleName);
 
+        public void NotifySelector()
+        {
+            ChangeProperty(nameof(FullName));
+        }
     }
 }

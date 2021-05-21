@@ -14,36 +14,34 @@ namespace VIIS.App.GlobalViewModel
     {
         protected string saveName;
         protected string endName;
-        protected readonly Action changeProperties;
         protected readonly Repo repository;
         protected readonly V oldViewModel;
 
-        public ViewDetail(Repo repository, V viewModel, V oldViewModel, string saveName, string endName, Action changeProperties)
+        public ViewDetail(Repo repository, V viewModel, V oldViewModel, string saveName, string endName)
         {
             this.saveName = saveName;
             this.endName = endName;
-            this.changeProperties = changeProperties;
             this.repository = repository;
             ViewModel = viewModel;
             this.oldViewModel = oldViewModel;
         }
-        public ViewDetail(Repo repository, V viewModel, V oldViewModel, string saveName, string endName): this(repository, viewModel, oldViewModel, saveName, endName, () => { })
-        {
-        }
-        public ViewDetail(Repo repository, V viewModel, V oldViewModel, Action changeProperties) : this(repository, viewModel, oldViewModel, "Сохранить", "Удалить", changeProperties)
-        {
-        }
+        //public ViewDetail(Repo repository, V viewModel, V oldViewModel, string saveName, string endName): this(repository, viewModel, oldViewModel, saveName, endName)
+        //{
+        //}
+        //public ViewDetail(Repo repository, V viewModel, V oldViewModel) : this(repository, viewModel, oldViewModel, "Сохранить", "Удалить")
+        //{
+        //}
         public ViewDetail(Repo repository, V viewModel, V oldViewModel) : this(repository, viewModel, oldViewModel, "Сохранить", "Удалить")
         {
         }
-        public ViewDetail(ViewDetail<Repo, V, T> other): this(other.repository, other.ViewModel, other.oldViewModel, other.saveName, other.endName, other.changeProperties)
+        public ViewDetail(ViewDetail<Repo, V, T> other): this(other.repository, other.ViewModel, other.oldViewModel, other.saveName, other.endName)
         {
         }
 
         public virtual string SaveName => saveName;
         public virtual string EndName => endName;
 
-        public virtual RelayCommand Save => new RelayCommand(async (obj) => { await repository.UpdateViewAsync(oldViewModel, ViewModel); changeProperties.Invoke(); });
+        public virtual RelayCommand Save => new RelayCommand(async (obj) => { await repository.UpdateViewAsync(oldViewModel, ViewModel); ViewModel.NotifySelector(); });
         public virtual RelayCommand End => new RelayCommand(async (obj) => await repository.RemoveAsync(oldViewModel));
 
         public V ViewModel { get; }

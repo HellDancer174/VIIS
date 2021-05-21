@@ -55,9 +55,10 @@ namespace VIIS.App.Staff.ViewModels
 
         public override Task Update(Master oldItem, Master item)
         {
-            employees[employees.IndexOf(new ViewEmployee(oldItem, this))] = new ViewEmployee(item, this);
-            ChangeProperty(nameof(Selected));
+            //var newItem = new ViewEmployee(item, this);
+            //employees[employees.IndexOf(new ViewEmployee(oldItem, this))] = newItem;
             ChangeProperty(nameof(Employees));
+            //newItem.NotifySelector();
             return base.Update(oldItem, item);
         }
     }

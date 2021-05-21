@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 using VIIS.Domain.Staff.ValueClasses;
 using VIIS.Domain.Staff.ValueClasses.Decorators;
 using VIMVVM;
+using VIMVVM.Detail;
 
 namespace VIIS.App.Staff.ViewModels.EmployeesViewModels
 {
-    public class ViewAddress : DecoratableAddress
+    public class ViewAddress : DecoratableAddress, IDetailedViewModel
     {
         //private readonly Action changeProperties;
 
@@ -31,5 +32,13 @@ namespace VIIS.App.Staff.ViewModels.EmployeesViewModels
         public string House { get => house; set { house = value; } }
         public string Flat { get => flat; set { flat = value; /*changeProperties.Invoke();*/ } }
 
+        public void NotifySelector()
+        {
+            ChangeProperty(nameof(Index));
+            ChangeProperty(nameof(City));
+            ChangeProperty(nameof(Street));
+            ChangeProperty(nameof(House));
+            ChangeProperty(nameof(Flat));
+        }
     }
 }
