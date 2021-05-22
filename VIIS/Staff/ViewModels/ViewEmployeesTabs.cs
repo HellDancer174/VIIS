@@ -13,18 +13,21 @@ namespace VIIS.App.Staff.ViewModels
     {
         private readonly EmployeesList employees;
         private readonly WorkGraph graph;
+        private readonly PayView pay;
 
-        public ViewEmployeesTabs(EmployeesList employees, WorkGraph graph)
+        public ViewEmployeesTabs(EmployeesList employees, WorkGraph graph, PayView pay)
         {
             this.employees = employees;
             this.graph = graph;
+            this.pay = pay;
         }
-        public ViewEmployeesTabs(): this(new EmployeesList(), new WorkGraph())
+        public ViewEmployeesTabs(): this(new EmployeesList(), new WorkGraph(), new PayView())
         {
         }
 
         public Page Employees => employees;
 
         public Page Graph => graph;
+        public Page Pay => pay;
     }
 }

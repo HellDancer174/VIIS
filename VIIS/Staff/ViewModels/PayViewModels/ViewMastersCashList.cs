@@ -41,6 +41,7 @@ namespace VIIS.App.Staff.ViewModels.PayViewModels
         protected override void Refresh()
         {
             collection = new ObservableCollection<ViewMastersCash>(masters.Select(master => new ViewMastersCash(master, orders, Selected)));
+            ChangeProperty(nameof(Collection));
         }
     }
 }

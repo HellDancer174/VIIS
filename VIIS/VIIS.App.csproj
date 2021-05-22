@@ -129,6 +129,7 @@
       <DependentUpon>FinanceView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Staff\Models\AddressOfView.cs" />
+    <Compile Include="Staff\Models\DetailOfView.cs" />
     <Compile Include="Staff\Models\MasterOfView.cs" />
     <Compile Include="Staff\Models\MastersOrderPerMonth.cs" />
     <Compile Include="Staff\Models\PassportOfView.cs" />

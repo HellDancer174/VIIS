@@ -24,7 +24,7 @@
             <Grid Grid.Column="0" Width="800" HorizontalAlignment="Left">
                 <DataGrid ItemsSource="{Binding Collection}" AutoGenerateColumns="False" FontFamily="{StaticResource Champagne}">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Мастер" Binding="{Binding Name}" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Мастер" Binding="{Binding MasterName}" IsReadOnly="True"/>
                         <DataGridTextColumn Header="Заработная плата" Binding="{Binding Cash}" IsReadOnly="True"/>
                     </DataGrid.Columns>
 

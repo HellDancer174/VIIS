@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using VIIS.App.Staff.ViewModels.PayViewModels;
 
 namespace VIIS.App.Staff.Views
 {
@@ -20,9 +21,15 @@ namespace VIIS.App.Staff.Views
     /// </summary>
     public partial class PayView : Page
     {
-        public PayView()
+        private readonly ViewMastersCashList viewModel;
+
+        public PayView(ViewMastersCashList viewModel)
         {
             InitializeComponent();
+            DataContext = this.viewModel = viewModel;
+        }
+        public PayView(): this(new ViewMastersCashList(new Domain.Staff.Employees(), new Domain.Orders.Orders()))
+        {
         }
 
         private void Calendar_DisplayModeChanged(object sender, CalendarModeChangedEventArgs e)

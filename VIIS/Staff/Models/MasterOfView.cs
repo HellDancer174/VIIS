@@ -15,12 +15,14 @@ namespace VIIS.App.Staff.Models
         private readonly ViewEmployee other;
         private readonly AddressOfView addressOfView;
         private readonly PassportOfView passportOfView;
+        private readonly DetailOfView detailOfView;
 
         public MasterOfView(ViewEmployee other) : base(other)
         {
             this.other = other;
             addressOfView = new AddressOfView(other.Address);
             passportOfView = new PassportOfView(other.Passport);
+            detailOfView = new DetailOfView(other.Detail);
         }
 
         public IEnumerable<Master> Safe()
@@ -29,6 +31,7 @@ namespace VIIS.App.Staff.Models
             {
                 new ValidTextBlock("Адрес", addressOfView.ToString(), addressOfView.Safe().Count() != 0).Validate();
                 new ValidTextBlock("Паспорт", passportOfView.ToString(), passportOfView.Safe().Count() != 0).Validate();
+                if(!detailOfView.Safe()) return new List<Master>();
                 return new List<Master>() { Master() };
             }
             catch (ArgumentException ex)

@@ -12,6 +12,7 @@ using VIIS.Domain.Services;
 using VIIS.Domain.Staff.ValueClasses;
 using VIMVVM;
 using VIIS.Domain.Orders.Decorators;
+using VIIS.Domain.Orders.Decorators.Checkable;
 
 namespace VIIS.Domain.Orders
 {
@@ -37,7 +38,7 @@ namespace VIIS.Domain.Orders
         }
 
         public Orders(IList<Order> orders, DateTime monthOfYear, Master master):
-            this(orders.Select(order => new MasterCheckableOrder(new MonthCheckableOrder(order, monthOfYear), master)).Where(checkableOrder => checkableOrder.Check()).Select(checkableOrder => (Order)checkableOrder).ToList())
+            this(orders.Select(order => new MasterCheckableOrder(new MonthCheckableOrder(new CheckableOrder(order), monthOfYear), master)).Where(checkableOrder => checkableOrder.Check()).Select(checkableOrder => (Order)checkableOrder).ToList())
         {
 
         }

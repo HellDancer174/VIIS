@@ -21,6 +21,9 @@
             <TabItem Header="График работы">
                 <Frame Content="{Binding Graph}"/>
             </TabItem>
+            <TabItem Header="Заработная плата">
+                <Frame Content="{Binding Pay}"/>
+            </TabItem>
         </TabControl>
     </Grid>
 </Page>
