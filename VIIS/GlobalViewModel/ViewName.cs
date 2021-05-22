@@ -8,7 +8,7 @@ using VIMVVM.Detail;
 
 namespace VIIS.App.GlobalViewModel
 {
-    public class ViewName: Notifier, IDetailedViewModel
+    public class ViewName: Notifier, IDetailedViewModel<string[]>
     {
         public ViewName(string firstName, string middleName, string lastName)
         {
@@ -32,6 +32,11 @@ namespace VIIS.App.GlobalViewModel
         public void NotifySelector()
         {
             ChangeProperty(nameof(FullName));
+        }
+
+        public string[] Model()
+        {
+            return new[] { FirstName, MiddleName, LastName };
         }
     }
 }

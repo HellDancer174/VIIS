@@ -14,6 +14,8 @@ namespace VIIS.App.Customers.ViewModels
 {
     public class ViewClients : ViewRepository<ViewClient, Client>
     {
+        //private int _selectedIndex;
+
         //private readonly ObservableCollection<ViewClient> clientCollection;
 
         public ViewClients(Clients other) : base(other, new ObservableCollection<ViewClient>(other.Select(client => new ViewClient(client)).ToList()))
@@ -25,16 +27,22 @@ namespace VIIS.App.Customers.ViewModels
 
 
         public override ICommand AddCommand => new RelayCommand((obj) => new ViewWindowClientDetail(this));
-        public override ICommand ChangeCommand => new RelayCommand((obj) => new ViewWindowClientDetail(Selected, this));
+        public override ICommand ChangeCommand => new RelayCommand((obj) => new ViewWindowClientDetail(new ViewClient(Selected), this));
         public override ICommand RemoveCommand => new RelayCommand(async (obj) =>
         {
-            await RemoveAsync(Selected);
+            await RemoveViewAsync(Selected);
         });
 
-        public override Task UpdateViewAsync(ViewClient oldItem, ViewClient item)
-        {
-            return base.UpdateViewAsync(oldItem, new ViewClient(item));
-        }
+        //public override Task UpdateViewAsync(ViewClient oldItem, ViewClient item)
+        //{
+        //    return base.UpdateViewAsync(oldItem, new ViewClient(item));
+        //}
+
+        //public int SelectedIndex
+        //{ get => _selectedIndex;
+        //    set => _selectedIndex = value;
+        //}
+
 
         //public override Task AddAsync(Client item)
         //{

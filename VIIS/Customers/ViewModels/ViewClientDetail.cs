@@ -17,6 +17,6 @@ namespace VIIS.App.Customers.ViewModels
         {
         }
 
-        public override RelayCommand Save => new RelayCommand(async (obj) => { await repository.UpdateViewAsync(oldViewModel, new ViewClient(ViewModel)); ViewModel.NotifySelector(); });
+        //public override RelayCommand Save => new RelayCommand(async (obj) => { await repository.UpdateViewAsync(oldViewModel, new ViewClient(ViewModel.Model())); ViewModel.NotifySelector(); });
     }
 }

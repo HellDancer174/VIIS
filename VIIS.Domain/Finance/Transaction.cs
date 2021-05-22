@@ -58,7 +58,7 @@ namespace VIIS.Domain.Finance
         public override int GetHashCode()
         {
             var hashCode = -960945004;
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(name);
+            hashCode = hashCode * -1521134295 + name.GetHashCode();
             hashCode = hashCode * -1521134295 + sale.GetHashCode();
             return hashCode;
         }

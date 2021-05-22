@@ -28,10 +28,10 @@ namespace VIIS.App.Finance.ViewModels
             cost = sum.Cost();
             middleSale = 0;
         }
-        public ViewTransactions(Repository<Transaction> other) : this(other, new ObservableCollection<ViewTransaction>(other.Select(transact => new ViewTransaction(transact)).ToArray()))
+        public ViewTransactions(Repository<Transaction> other) : this(other, new ObservableCollection<ViewTransaction>(other.Select(transact => new ViewTransaction(transact)).ToList()))
         {
         }
-        public ViewTransactions():this(new Repository<Transaction>(new Transaction[] { new Transaction(), new Transaction(), new Transaction() }))
+        public ViewTransactions():this(new Repository<Transaction>(new Transaction[] { new Transaction(), new Transaction("pro", 5), new Transaction("dsp", 9) }))
         {
         }
 

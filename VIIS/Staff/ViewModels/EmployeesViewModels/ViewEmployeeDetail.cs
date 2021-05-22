@@ -10,7 +10,7 @@ using VIMVVM.Detail;
 
 namespace VIIS.App.Staff.ViewModels.EmployeesViewModels
 {
-    public class ViewEmployeeDetail : DecoratableEmployeeDetail, IDetailedViewModel
+    public class ViewEmployeeDetail : DecoratableEmployeeDetail, IDetailedViewModel<EmployeeDetail>
     {
 
         public ViewEmployeeDetail() : this(new EmployeeDetail())
@@ -23,6 +23,11 @@ namespace VIIS.App.Staff.ViewModels.EmployeesViewModels
 
         public DateTime Start { get => start; set => start = value; }
         public int ContractID { get => contractID; set => contractID = value; }
+
+        public EmployeeDetail Model()
+        {
+            return new EmployeeDetail(Start, ContractID);
+        }
 
         public void NotifySelector()
         {

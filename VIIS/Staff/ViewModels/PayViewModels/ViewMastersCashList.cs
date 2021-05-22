@@ -28,16 +28,6 @@ namespace VIIS.App.Staff.ViewModels.PayViewModels
 
         public ObservableCollection<ViewMastersCash> Collection => collection;
 
-        //public DateTime Selected
-        //{
-        //    get => selected;
-        //    set
-        //    {
-        //        if (value == selected) return;
-        //        collection = new ObservableCollection<ViewMastersCash>(masters.Select(master => new ViewMastersCash(master, orders, selected)));
-        //    }
-        //}
-
         protected override void Refresh()
         {
             collection = new ObservableCollection<ViewMastersCash>(masters.Select(master => new ViewMastersCash(master, orders, Selected)));

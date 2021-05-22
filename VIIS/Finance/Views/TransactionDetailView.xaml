@@ -26,7 +26,7 @@
                     <ColumnDefinition Width="20*"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0" Text="Стоимость" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Bottom" Style="{StaticResource Default}"/>
-                <TextBox Grid.Column="1" Text="{Binding Sale}" FontSize="20" Style="{StaticResource DefaultTextBox}"/>
+                <TextBox Grid.Column="1" Text="{Binding Price}" FontSize="20" Style="{StaticResource DefaultTextBox}"/>
             </Grid>
         </StackPanel>
         <Grid Grid.Row="1">

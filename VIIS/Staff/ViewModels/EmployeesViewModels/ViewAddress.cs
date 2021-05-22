@@ -10,7 +10,7 @@ using VIMVVM.Detail;
 
 namespace VIIS.App.Staff.ViewModels.EmployeesViewModels
 {
-    public class ViewAddress : DecoratableAddress, IDetailedViewModel
+    public class ViewAddress : DecoratableAddress, IDetailedViewModel<Address>
     {
         //private readonly Action changeProperties;
 
@@ -31,6 +31,11 @@ namespace VIIS.App.Staff.ViewModels.EmployeesViewModels
         public string Street { get => street; set { street = value; } }
         public string House { get => house; set { house = value; } }
         public string Flat { get => flat; set { flat = value; /*changeProperties.Invoke();*/ } }
+
+        public Address Model()
+        {
+            return new Address(this);
+        }
 
         public void NotifySelector()
         {

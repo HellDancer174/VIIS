@@ -10,7 +10,7 @@ using VIMVVM.Detail;
 namespace VIIS.App.GlobalViewModel
 {
     public class ViewNewDetail<Repo, V, T> : ViewDetail<Repo, V, T>
-             where Repo : ViewRepository<V, T> where V : T, IDetailedViewModel where T : IDocumentAsync
+             where Repo : ViewRepository<V, T> where V : T, IDetailedViewModel<T> where T : IDocumentAsync
     {
         public ViewNewDetail(Repo repository, V viewModel, V oldViewModel) : base(repository, viewModel, oldViewModel, "Добавить", "Отмена")
         {

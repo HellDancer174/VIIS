@@ -12,7 +12,7 @@ using VIMVVM.Detail;
 
 namespace VIIS.App.Customers.ViewModels
 {
-    public class ViewClient : ClientDecorator, IDetailedViewModel
+    public class ViewClient : ClientDecorator, IDetailedViewModel<Client>
     {
         private readonly ViewAddress viewAddress;
 
@@ -112,6 +112,17 @@ namespace VIIS.App.Customers.ViewModels
         {
             ChangeProperty(nameof(FullAddress));
             ChangeProperty(nameof(FullName));
+        }
+
+        public void Rebuild()
+        {
+            address = viewAddress;
+        }
+
+        public Client Model()
+        {
+            address = viewAddress;
+            return new Client(this);
         }
     }
 }

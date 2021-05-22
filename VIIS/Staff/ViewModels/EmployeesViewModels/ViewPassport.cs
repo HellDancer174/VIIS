@@ -10,7 +10,7 @@ using VIMVVM.Detail;
 
 namespace VIIS.App.Staff.ViewModels.EmployeesViewModels
 {
-    public class ViewPassport: DecoratablePassport, IDetailedViewModel
+    public class ViewPassport: DecoratablePassport, IDetailedViewModel<Passport>
     {
         public ViewPassport(): this(new Passport())
         {
@@ -24,6 +24,11 @@ namespace VIIS.App.Staff.ViewModels.EmployeesViewModels
         public string PassportID { get => passportID; set => passportID = value; }
         public DateTime IssusiesDate { get => issusiesDate; set => issusiesDate = value; }
         public string Organization { get => organization; set => organization = value; }
+
+        public Passport Model()
+        {
+            return new Passport(Series, PassportID, IssusiesDate, Organization);
+        }
 
         public void NotifySelector()
         {

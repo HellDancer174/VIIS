@@ -8,7 +8,7 @@ using VIMVVM.Detail;
 
 namespace VIIS.App.Services.ViewModels
 {
-    public class ViewServiceValue : ServiceValue, IEquatable<ViewServiceValue>, IDetailedViewModel
+    public class ViewServiceValue : ServiceValue, IEquatable<ViewServiceValue>, IDetailedViewModel<ServiceValue>
     {
 
         public ViewServiceValue(ServiceValue other) : base(other)
@@ -62,6 +62,11 @@ namespace VIIS.App.Services.ViewModels
         {
             ChangeProperty(nameof(Price));
             ChangeProperty(nameof(Name));
+        }
+
+        public ServiceValue Model()
+        {
+            return new ServiceValue(this);
         }
     }
 }

@@ -9,23 +9,24 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using VIIS.Domain.Global;
 using VIMVVM;
+using VIMVVM.Detail;
 
 namespace VIIS.App.GlobalViewModel
 {
     public abstract class ViewRepository<V, T> : Repository<T>
-        where V : T where T : IDocumentAsync
+        where V : T, IDetailedViewModel<T> where T : IDocumentAsync
     {
-        private ObservableCollection<V> collection;
         private V selected;
 
         public ViewRepository(Repository<T> other, ObservableCollection<V> collection) : base(other)
         {
-            this.collection = collection;
+            this.Collection = collection;
         }
 
-        public ObservableCollection<V> Collection => collection;
+        public ObservableCollection<V> Collection { get; set; }
 
-        public V Selected { get => selected; set { selected = value; ChangeProperty(); } }
+        public V Selected { get => selected;
+            set { selected = value; } }
 
         public abstract ICommand AddCommand { get; }
         public abstract ICommand ChangeCommand { get; }
@@ -50,11 +51,12 @@ namespace VIIS.App.GlobalViewModel
 
         public virtual async Task UpdateViewAsync(V oldItem, V item)
         {
-            //var index = Collection.IndexOf(oldItem);
-            //Collection[index] = item;
-            await Update(oldItem, item);
-            ChangeProperty(nameof(Selected));
+            var index = Collection.IndexOf(oldItem);
+            if (index == -1) index = Collection.IndexOf(item);
+            Collection[index] = item;
+            await Update(oldItem, item.Model());
             ChangeProperty(nameof(Collection));
+            //ChangeProperty(nameof(Selected));
         }
 
     }

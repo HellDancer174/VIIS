@@ -38,7 +38,7 @@
                             <RowDefinition/>
                         </Grid.RowDefinitions>
                         <TextBlock Text="Выручка" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Style="{StaticResource Default}"/>
-                        <TextBlock Text="{Binding Proseeds}" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource Default}"/>
+                        <TextBlock Text="{Binding Proceeds}" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource Default}"/>
                     </Grid>
                 </Border>
                 <Border BorderThickness="1" BorderBrush="AliceBlue" Grid.Column="1">
@@ -62,10 +62,10 @@
                     </Grid>
                 </Border>
             </Grid>
-            <DataGrid Grid.Row="1" ItemsSource="{Binding Collection}" AutoGenerateColumns="False" SelectedItem="{Binding Selected}" FontFamily="/VIIS.App;component/Resources/#Champagne &amp; Limousines">
+            <DataGrid Grid.Row="1" ItemsSource="{Binding Collection}" AutoGenerateColumns="False" SelectedItem="{Binding Selected, UpdateSourceTrigger=PropertyChanged}" FontFamily="/VIIS.App;component/Resources/#Champagne &amp; Limousines">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Название" Binding="{Binding Name}" IsReadOnly="True"/>
-                    <DataGridTextColumn Header="Цена" Binding="{Binding Sale}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Цена" Binding="{Binding Price}" IsReadOnly="True"/>
                 </DataGrid.Columns>
             </DataGrid>
             <Grid Grid.Row="2">

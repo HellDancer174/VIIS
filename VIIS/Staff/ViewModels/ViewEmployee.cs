@@ -16,7 +16,7 @@ using VIMVVM.Detail;
 
 namespace VIIS.App.Staff.ViewModels
 {
-    public class ViewEmployee : DecoratableMaster, IDetailedViewModel
+    public class ViewEmployee : DecoratableMaster, IDetailedViewModel<Master>
     {
         private readonly EmployeesViewModels.ViewEmployeeDetail viewDetail;
         private readonly ViewAddress viewAddress;
@@ -58,6 +58,11 @@ namespace VIIS.App.Staff.ViewModels
         public ViewAddress Address => viewAddress;
         public ViewPassport Passport => viewPassport;
 
+        public Master Model()
+        {
+            return new Master(firstName, lastName, middleName, Phone, new Position(Position), workDaysList, Address, Passport, Detail, BirthDay, Email);
+        }
+
 
         //public virtual RelayCommand Save => new RelayCommand(async(obj) => await SaveMethod());
 
@@ -78,7 +83,7 @@ namespace VIIS.App.Staff.ViewModels
 
         public void NotifySelector()
         {
-            Name.NotifySelector();
+            ChangeProperty(nameof(FullName));
             ChangeProperties(nameof(Position), nameof(BirthDay), nameof(Phone), nameof(Email));
             Detail.NotifySelector();
             Address.NotifySelector();

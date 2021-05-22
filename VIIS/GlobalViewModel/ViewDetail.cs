@@ -10,7 +10,7 @@ using VIMVVM.Detail;
 namespace VIIS.App.GlobalViewModel
 {
     public class ViewDetail<Repo,V,T>: Notifier
-        where Repo: ViewRepository<V,T> where V:T, IDetailedViewModel where T:IDocumentAsync
+        where Repo: ViewRepository<V,T> where V:T, IDetailedViewModel<T> where T:IDocumentAsync
     {
         protected string saveName;
         protected string endName;

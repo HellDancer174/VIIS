@@ -18,12 +18,11 @@ namespace VIIS.App.Staff.ViewModels
     {
         public ViewEmployees(Employees masters) : base(masters, new ObservableCollection<ViewEmployee>(masters.Select(master => new ViewEmployee(master)).ToList()))
         {
-
             if (Collection.Count != 0) Selected = Collection.First();
         }
 
         public override ICommand AddCommand => new RelayCommand((obj) => new ViewWindowStaffDetail(this));
-        public override ICommand ChangeCommand => new RelayCommand((obj) => new ViewWindowStaffDetail(Selected, this));
+        public override ICommand ChangeCommand => new RelayCommand((obj) => new ViewWindowStaffDetail(new ViewEmployee(Selected), this));
         public override ICommand RemoveCommand => new RelayCommand(async(obj) => 
         {
             await RemoveViewAsync(Selected);

@@ -8,7 +8,7 @@ using VIMVVM.Detail;
 
 namespace VIIS.App.Finance.ViewModels
 {
-    public class ViewTransaction: Transaction, IDetailedViewModel
+    public class ViewTransaction: Transaction, IDetailedViewModel<Transaction>
     {
         public ViewTransaction(): this(new Transaction(nameof(Name), 0))
         {
@@ -27,24 +27,39 @@ namespace VIIS.App.Finance.ViewModels
             {
                 if (value == name) return;
                 name = value;
-                ChangeProperty();
             }
         }
-        public new decimal Sale
+        public decimal Price
         {
             get => sale;
             set
             {
                 if (value == sale) return;
                 sale = value;
-                ChangeProperty();
             }
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj is ViewTransaction) return base.Equals(obj);
+            else return false;
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+
+        public Transaction Model()
+        {
+            return new Transaction(this);
         }
 
         public void NotifySelector()
         {
             ChangeProperty(nameof(Name));
-            ChangeProperty(nameof(Sale));
+            ChangeProperty(nameof(Price));
         }
+
     }
 }

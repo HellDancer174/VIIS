@@ -16,12 +16,12 @@
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
                 <Border BorderThickness="2" BorderBrush="Black">
-                    <DataGrid ItemsSource="{Binding Collection}" AutoGenerateColumns="False" SelectedItem="{Binding Selected}" FontFamily="/VIIS.App;component/Resources/#Champagne &amp; Limousines">
+                    <DataGrid ItemsSource="{Binding Collection}" AutoGenerateColumns="False" SelectedItem="{Binding Selected}" SelectedIndex="{Binding SelectedIndex}" FontFamily="/VIIS.App;component/Resources/#Champagne &amp; Limousines">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="ФИО" Binding="{Binding FullName}" IsReadOnly="True"/>
-                            <DataGridTextColumn Header="Телефон" Binding="{Binding Phone}" IsReadOnly="True"/>
-                            <DataGridTextColumn Header="Email" Binding="{Binding Email}" IsReadOnly="True"/>
-                            <DataGridTextColumn Header="Адрес" Binding="{Binding FullAddress}" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="ФИО" Binding="{Binding FullName, Mode=OneWay}" IsReadOnly="False"/>
+                            <DataGridTextColumn Header="Телефон" Binding="{Binding Phone, Mode=OneWay}" IsReadOnly="False"/>
+                            <DataGridTextColumn Header="Email" Binding="{Binding Email, Mode=OneWay}" IsReadOnly="False"/>
+                            <DataGridTextColumn Header="Адрес" Binding="{Binding FullAddress, Mode=OneWay}" IsReadOnly="False"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </Border>
