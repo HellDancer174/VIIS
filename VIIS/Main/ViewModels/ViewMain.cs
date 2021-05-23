@@ -13,6 +13,14 @@ using VIIS.App.Customers.Views;
 using VIIS.App.Customers.ViewModels;
 using VIIS.Domain.Customers;
 using VIIS.App.Services.Views;
+using VIIS.App.Finance.Views;
+using VIIS.App.Finance.ViewModels;
+using VIIS.Domain.Orders;
+using VIIS.Domain.Staff;
+using VIIS.Domain.Services;
+using VIIS.App.OrdersJournal.ViewModels;
+using VIIS.Domain.Global;
+using VIIS.Domain.Finance;
 
 namespace VIIS.App.Main.ViewModels
 {
@@ -35,10 +43,19 @@ namespace VIIS.App.Main.ViewModels
             this.view = view;
             Current = journal;
         }
-        public ViewMain(MainView view): this(new OrdersJournalView(), new ClientsView(new ViewClients(new Clients())), new EmployeesTabs(), new Finance.Views.FinanceView(), new UsersWindow(), view)
+        public ViewMain(MainView view): this(new OrdersJournalView(), new ClientsView(new ViewClients(new Clients())), new EmployeesTabs(), new FinanceView(new ViewTransactions()), new UsersWindow(), view)
         {
 
         }
+
+        public ViewMain(Orders orders, Employees masters, Clients clients, ServiceValueList serviceValues, Repository<Transaction> transactions,  MainView view):
+            this(new OrdersJournalView(new Journal(orders, masters, serviceValues, clients)), new ClientsView(new ViewClients(clients)), 
+                new EmployeesTabs(), 
+                new FinanceView(new ViewTransactions(transactions)), new UsersWindow(), view)
+        {
+
+        }
+
         public ViewMain(): this(new MainView())
         {
 

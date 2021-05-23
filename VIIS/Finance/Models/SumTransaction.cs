@@ -20,8 +20,9 @@ namespace VIIS.App.Finance.Models
             costTransact = new Transaction();
             foreach (var transact in transactionList)
             {
-                proceedsTransact = proceedsTransact.Sum(transact);
-                if (transact.IsCost()) costTransact.Sum(transact);
+                if (transact.IsCost()) costTransact = costTransact.Sum(transact);
+                else proceedsTransact = proceedsTransact.Sum(transact);
+
             }
 
         }
@@ -33,7 +34,7 @@ namespace VIIS.App.Finance.Models
 
         public decimal Cost()
         {
-            return costTransact.Sale;
+            return Math.Abs(costTransact.Sale);
         }
 
     }

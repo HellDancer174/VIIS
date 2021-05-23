@@ -19,7 +19,7 @@
                     <DataGrid ItemsSource="{Binding Collection}" AutoGenerateColumns="False" SelectedItem="{Binding Selected}" FontFamily="/VIIS.App;component/Resources/#Champagne &amp; Limousines">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Название" Binding="{Binding Name}" IsReadOnly="True"/>
-                            <DataGridTextColumn Header="Стоимость" Binding="{Binding Price}" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Цена" Binding="{Binding Price}" IsReadOnly="True"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </Border>

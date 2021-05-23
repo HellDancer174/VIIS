@@ -92,6 +92,7 @@
     <Compile Include="Customers\Views\CustomerDetailView.xaml.cs">
       <DependentUpon>CustomerDetailView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Finance\Models\TransactableOrders.cs" />
     <Compile Include="Finance\Models\SumTransaction.cs" />
     <Compile Include="Finance\ViewModels\ViewTransaction.cs" />
     <Compile Include="Finance\ViewModels\ViewTransactionDetail.cs" />

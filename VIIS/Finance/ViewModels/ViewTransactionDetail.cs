@@ -7,11 +7,13 @@ using System.Windows;
 using VIIS.App.Finance.Views;
 using VIIS.App.GlobalViewModel;
 using VIIS.Domain.Finance;
+using VIMVVM;
 
 namespace VIIS.App.Finance.ViewModels
 {
     public class ViewTransactionDetail : ViewWindowDetail<ViewTransactions, ViewTransaction, Transaction>
     {
+
         public ViewTransactionDetail(ViewDetail<ViewTransactions, ViewTransaction, Transaction> other, Window view) : base(other, view)
         {
         }
@@ -23,6 +25,7 @@ namespace VIIS.App.Finance.ViewModels
         {
         }
 
+        public override RelayCommand Save => new RelayCommand((obj) => { base.Save.Execute(obj); repository.CalcTotal(); });
 
     }
 }

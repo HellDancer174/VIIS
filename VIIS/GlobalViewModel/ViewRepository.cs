@@ -26,7 +26,7 @@ namespace VIIS.App.GlobalViewModel
         public ObservableCollection<V> Collection { get; set; }
 
         public V Selected { get => selected;
-            set { selected = value; } }
+            set { selected = value; ChangeProperty(); } }
 
         public abstract ICommand AddCommand { get; }
         public abstract ICommand ChangeCommand { get; }
@@ -53,8 +53,11 @@ namespace VIIS.App.GlobalViewModel
         {
             var index = Collection.IndexOf(oldItem);
             if (index == -1) index = Collection.IndexOf(item);
-            Collection[index] = item;
+            Collection.RemoveAt(index);
+            Collection.Insert(index, item);
             await Update(oldItem, item.Model());
+            //Collection = new ObservableCollection<V>(Collection.ToList());
+            
             ChangeProperty(nameof(Collection));
             //ChangeProperty(nameof(Selected));
         }

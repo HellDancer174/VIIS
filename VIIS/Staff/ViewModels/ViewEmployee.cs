@@ -32,7 +32,6 @@ namespace VIIS.App.Staff.ViewModels
             viewDetail = other.viewDetail;
             viewAddress = other.viewAddress;
             viewPassport = other.viewPassport;
-            Name = other.Name;
             viewPosition = other.viewPosition;
             //masters = other.masters;
 
@@ -42,13 +41,35 @@ namespace VIIS.App.Staff.ViewModels
             viewDetail = new EmployeesViewModels.ViewEmployeeDetail(detail);
             viewAddress = new ViewAddress(address);
             viewPassport = new ViewPassport(passport);
-            Name = new ViewName(firstName, middleName, lastName);
             viewPosition = position.ToString();
             //this.masters = masters;
         }
 
         public string Position { get => viewPosition; set => viewPosition = value; }
-        public ViewName Name { get; set; }
+        public string FirstName
+        {
+            get { return firstName; }
+            set
+            {
+                firstName = value;
+            }
+        }
+        public string MiddleName
+        {
+            get { return middleName; }
+            set
+            {
+                middleName = value;
+            }
+        }
+        public string LastName
+        {
+            get { return lastName; }
+            set
+            {
+                lastName = value;
+            }
+        }
         public DateTime BirthDay { get => birthday; set => birthday = value; }
         public string Phone { get => phone; set => phone = value; }
         public string Email { get => email; set => email = value; }
@@ -83,8 +104,12 @@ namespace VIIS.App.Staff.ViewModels
 
         public void NotifySelector()
         {
+            //ChangeProperties(nameof(Position), nameof(BirthDay), nameof(Phone), nameof(Email));
+            ChangeProperty(nameof(BirthDay));
+            ChangeProperty(nameof(Position));
+            ChangeProperty(nameof(Phone));
+            ChangeProperty(nameof(Email));
             ChangeProperty(nameof(FullName));
-            ChangeProperties(nameof(Position), nameof(BirthDay), nameof(Phone), nameof(Email));
             Detail.NotifySelector();
             Address.NotifySelector();
             Passport.NotifySelector();

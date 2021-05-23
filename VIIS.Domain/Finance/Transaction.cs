@@ -27,9 +27,13 @@ namespace VIIS.Domain.Finance
 
         public Transaction Sum(Transaction other)
         {
-            return new Transaction("Сумма", sale + other.sale);
+            return Sum(other, "Сумма");
         }
         
+        public Transaction Sum(Transaction other, string name)
+        {
+            return new Transaction(name, sale + other.sale);
+        }
 
         public bool IsCost()
         {
@@ -52,7 +56,7 @@ namespace VIIS.Domain.Finance
 
         public override bool Equals(object obj)
         {
-            return obj as Transaction != null || Equals(obj as Transaction);
+            return obj as Transaction != null && Equals(obj as Transaction);
         }
 
         public override int GetHashCode()

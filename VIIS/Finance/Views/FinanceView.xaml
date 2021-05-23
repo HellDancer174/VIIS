@@ -47,8 +47,8 @@
                             <RowDefinition/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
-                        <TextBlock Text="Средний чек" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Style="{StaticResource Default}"/>
-                        <TextBlock Text="{Binding MiddleSale}" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource Default}"/>
+                        <TextBlock Text="Баланс" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Style="{StaticResource Default}"/>
+                        <TextBlock Text="{Binding Balance}" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource Default}"/>
                     </Grid>
                 </Border>
                 <Border BorderThickness="1" BorderBrush="AliceBlue" Grid.Column="2">

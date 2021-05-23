@@ -21,13 +21,13 @@
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
                 <Border BorderThickness="2" BorderBrush="Black">
-                    <DataGrid ItemsSource="{Binding Collection}" AutoGenerateColumns="False" SelectedItem="{Binding Selected}" MouseDoubleClick="DataGrid_MouseDoubleClick" FontFamily="/VIIS.App;component/Resources/#Champagne &amp; Limousines">
+                    <DataGrid ItemsSource="{Binding Collection}" AutoGenerateColumns="False" SelectedItem="{Binding Selected}" FontFamily="/VIIS.App;component/Resources/#Champagne &amp; Limousines">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Должность" Binding="{Binding Position}" IsReadOnly="True"/>
-                            <DataGridTextColumn Header="ФИО" Binding="{Binding FullName}" IsReadOnly="True"/>
-                            <DataGridTextColumn Header="Дата рождения" Binding="{Binding BirthDay, Converter={StaticResource DateConverter}}" IsReadOnly="True"/>
-                            <DataGridTextColumn Header="Телефон" Binding="{Binding Phone}" IsReadOnly="True"/>
-                            <DataGridTextColumn Header="Email" Binding="{Binding Email}" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Должность" Binding="{Binding Position, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" CanUserReorder="False"/>
+                            <DataGridTextColumn Header="ФИО" Binding="{Binding FullName, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Дата рождения" Binding="{Binding BirthDay, Converter={StaticResource DateConverter}, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Телефон" Binding="{Binding Phone, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Email" Binding="{Binding Email, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </Border>

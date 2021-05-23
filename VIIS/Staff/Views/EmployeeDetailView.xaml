@@ -44,7 +44,7 @@
                 <Grid>
                     <TextBlock Text="Общее" HorizontalAlignment="Center" TextDecorations="Underline"/>
                 </Grid>
-                <Grid DataContext="{Binding Name}" Margin="5">
+                <Grid Margin="5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="10*"/>
                         <ColumnDefinition Width="20*"/>

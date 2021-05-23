@@ -8,7 +8,7 @@ namespace VIIS.Domain.Orders.Decorators
 {
     public class OrdersDecorator : Orders
     {
-        private readonly Orders other;
+        protected readonly Orders other;
 
         public OrdersDecorator(Orders other) : base(other)
         {
