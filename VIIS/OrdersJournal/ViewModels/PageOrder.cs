@@ -14,16 +14,15 @@ using VIIS.Domain.Services;
 
 namespace VIIS.App.OrdersJournal.ViewModels
 {
-    public class PageOrder: OrderDecorator, IComparable<PageOrder>
+    public class PageOrder : OrderDecorator, IComparable<PageOrder>
     {
-        private readonly BaseViewService service;
+        //private readonly BaseViewService service;
         private readonly ViewClient viewClient;
         private readonly ServiceValueList serviceValueList;
         private readonly Clients clients;
 
-        public PageOrder(Order other, Service service, ServiceValueList serviceValueList, Clients clients) : base(other)
+        public PageOrder(Order other, ServiceValueList serviceValueList, Clients clients) : base(other)
         {
-            this.service = new BaseViewService(service);
             viewClient = new ViewClient(client);
             this.serviceValueList = serviceValueList;
             this.clients = clients;
@@ -31,22 +30,33 @@ namespace VIIS.App.OrdersJournal.ViewModels
 
         public string Customer => viewClient.FullName;
         public string Phone => viewClient.Phone;
-        public string OrderInfo => service.ToString();
-        
+        public string OrderInfo => string.Join(", ", services.Select(service => service.ToString()));
+
 
         public int ContentIndex()
         {
-            return service.Start.TimeOfDay.Hours;
+            return ordersStart.TimeOfDay.Hours;
         }
 
         public bool IsOwnerIndex(int index)
         {
-            return index == service.Start.TimeOfDay.Hours;
+            return index == ordersStart.TimeOfDay.Hours;
         }
 
         public bool CheckOrders(PageOrder other)
         {
-           return service.CheckYourSelf(other.service);
+            var finish = OrdersFinish();
+            var otherFinish = other.OrdersFinish();
+            return !(ordersStart >= other.ordersStart && ordersStart < otherFinish) && !(finish > other.ordersStart && finish <= otherFinish);
+
+        }
+
+        protected DateTime OrdersFinish()
+        {
+            var ordersFinish = ordersStart;
+            foreach (var service in services)
+                ordersFinish = ordersFinish.Date + service.TimesSummary(ordersFinish.TimeOfDay);
+            return ordersFinish;
         }
 
         public virtual void ShowDetail(Journal journal)
@@ -55,17 +65,17 @@ namespace VIIS.App.OrdersJournal.ViewModels
         }
         public override string ToString()
         {
-            return String.Format("Заказ: {0}, {1}, {2}, {3}", service.Start, Customer, Phone, service.ToString());
+            return String.Format("Заказ: {0}, {1}, {2}, {3}", ordersStart, Customer, Phone, string.Join(", " ,services.Select(service => service.ToString())));
         }
 
-        public bool Equals(Service other)
-        {
-            return service.Equals(other);
-        }
+        //public bool Equals(Service other)
+        //{
+        //    return service.Equals(other);
+        //}
 
         public int CompareTo(PageOrder other)
         {
-            return service.CompareTo(other.service);
+            return ordersStart.CompareTo(other.ordersStart);
         }
     }
 }

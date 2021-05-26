@@ -18,7 +18,7 @@ namespace VIIS.Domain.Orders
         protected readonly List<Service> services;
         protected readonly Master master;
         protected string comment;
-        protected readonly DateTime ordersDate;
+        protected DateTime ordersStart;
         protected decimal sale;
 
         public Order(Client client, List<Service> services, Master master, string comment, DateTime ordersDate, decimal sale)
@@ -27,7 +27,7 @@ namespace VIIS.Domain.Orders
             this.services = services;
             this.master = master;
             this.comment = comment;
-            this.ordersDate = ordersDate;
+            this.ordersStart = ordersDate;
             this.sale = sale;
         }
         public Order(Client client, List<Service> services, Master master, string comment, DateTime ordersDate):
@@ -35,7 +35,7 @@ namespace VIIS.Domain.Orders
         {
         }
 
-        public Order(Order other) : this(other.client, other.services, other.master, other.comment, other.ordersDate, other.sale)
+        public Order(Order other) : this(other.client, other.services, other.master, other.comment, other.ordersStart, other.sale)
         {
         }
 
@@ -45,18 +45,15 @@ namespace VIIS.Domain.Orders
         }
 
 
-        public bool CheckYourSelf(Order other)
-        {
-            foreach(var service in services)
-            {
-                foreach(var otherServices in other.services)
-                {
-                    if(service.CheckYourSelf(otherServices) == false) return false;
-                }
-            }
-            return !client.Equals(other.client) && !master.Equals(other.master);
-        }
-        public bool CheckDate(DateTime date) => ordersDate.Date == date.Date;
+        //public bool CheckYourSelf(Order other)
+        //{
+        //    var finish = OrdersFinish();
+        //    var otherFinish = other.OrdersFinish();
+        //    return !(ordersStart >= other.ordersStart && ordersStart < otherFinish) && !(finish > other.ordersStart && finish <= otherFinish);
+
+        //    return !client.Equals(other.client) && !master.Equals(other.master);
+        //}
+        public bool CheckDate(DateTime date) => ordersStart.Date == date.Date;
 
         public string MasterName()
         {
@@ -81,7 +78,7 @@ namespace VIIS.Domain.Orders
 
         public bool IsEmpty => client.Equals(new AnyClient()) && services.Count == 0 && string.IsNullOrEmpty(comment) && sale == 0;
 
-        public bool IsIncomplete => client.IsIncomplete ||services.Count == 0 || ordersDate == new DateTime() || sale == 0 || master.IsIncomplete || !master.IsWork(ordersDate);
+        public bool IsIncomplete => client.IsIncomplete ||services.Count == 0 || ordersStart == new DateTime() || sale == 0 || master.IsIncomplete || !master.IsWork(ordersStart);
 
         public bool IsOwner(Master master)
         {
@@ -99,7 +96,7 @@ namespace VIIS.Domain.Orders
 
         public override string ToString()
         {
-            return String.Format("Заказ от {0}; Клиент - {1}; Мастер - {2}, Сервисы - {3}", ordersDate, client.ToString(), master.ToString(), services.Count);
+            return String.Format("Заказ от {0}; Клиент - {1}; Мастер - {2}, Сервисы - {3}", ordersStart, client.ToString(), master.ToString(), services.Count);
         }
     }
 }

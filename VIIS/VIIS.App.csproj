@@ -114,7 +114,6 @@
     <Compile Include="OrdersJournal\OrderDetail\Models\ViewServiceValueList.cs" />
     <Compile Include="OrdersJournal\OrderDetail\ViewModels\ViewNewOrderDetail.cs" />
     <Compile Include="OrdersJournal\OrderDetail\ViewModels\ViewServiceValue.cs" />
-    <Compile Include="OrdersJournal\ViewModels\AnyPageOrder.cs" />
     <Compile Include="Services\ViewModels\BaseViewService.cs" />
     <Compile Include="Services\ViewModels\ViewNewServiceDetail.cs" />
     <Compile Include="Services\ViewModels\ViewServiceDetail.cs" />

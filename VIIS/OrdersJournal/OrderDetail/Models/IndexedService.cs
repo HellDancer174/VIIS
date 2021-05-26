@@ -18,7 +18,7 @@ namespace VIIS.App.OrdersJournal.OrderDetail.Models
 
         public int TimeIndex()
         {
-            return start.Hours;
+            return ordersStart.TimeOfDay.Hours;
         }
     }
 }

@@ -21,6 +21,6 @@ namespace VIIS.App.OrdersJournal.Models.OrdersDecorators
         }
 
         public KeyValuePair<Master, List<PageOrder>> PageOrders => 
-            new KeyValuePair<Master, List<PageOrder>>(master, services.Select(service => new PageOrder(this, service, serviceValueList, clients)).ToList());
+            new KeyValuePair<Master, List<PageOrder>>(master, services.Select(service => new PageOrder(this, serviceValueList, clients)).ToList());
     }
 }

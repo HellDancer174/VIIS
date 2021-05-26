@@ -49,11 +49,13 @@
                     </Grid.RowDefinitions>
                     <Grid Grid.Row="0">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="55*"/>
-                            <ColumnDefinition Width="45*"/>
+                            <ColumnDefinition Width="150"/>
+                            <ColumnDefinition Width="50*"/>
+                            <ColumnDefinition Width="50*"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Text="Клиент" Grid.Column="0" HorizontalAlignment="Right"/>
-                        <TextBlock Text="{Binding OrdersDate, StringFormat=\{0:D\}}" Grid.Column="1" HorizontalAlignment="Center" Style="{StaticResource Default}"/>
+                        <TextBlock Text="Клиент" Grid.Column="0" HorizontalAlignment="Center"/>
+                        <TextBlock Text="{Binding OrdersStart, StringFormat=\{0:D\}}" Grid.Column="1" HorizontalAlignment="Center" Style="{StaticResource Default}"/>
+                        <materialDesign:TimePicker Grid.Column="2" SelectedTime="{Binding OrdersStart}" Is24Hours="True" FontFamily="/VIIS.App;component/Resources/#Champagne &amp; Limousines"/>
                     </Grid>
                     <TabControl Grid.Row="1" DataContext="{Binding ClientNames}">
                         <TabItem Header="Новый">
@@ -97,17 +99,18 @@
                                         <Grid.ColumnDefinitions>
                                             <!--<ColumnDefinition Width="5*"/>
                                             <ColumnDefinition Width="10*"/>-->
+                                            <ColumnDefinition Width="10*"/>
+                                            <ColumnDefinition Width="10*"/>
                                             <ColumnDefinition Width="5*"/>
-                                            <ColumnDefinition Width="10*"/>
-                                            <ColumnDefinition Width="10*"/>
                                             <ColumnDefinition Width="10*"/>
                                         </Grid.ColumnDefinitions>
                                         <!--<TextBlock Grid.Column="0" Text="Дата" Style="{StaticResource Default}" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
                                         <DatePicker Grid.Column="1" SelectedDate="{Binding Date}" FontFamily="/VIIS.App;component/Resources/#Champagne &amp; Limousines"/>-->
-                                        <TextBlock Grid.Column="0" Text="Время" Style="{StaticResource Default}" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
-                                        <materialDesign:TimePicker Grid.Column="1" SelectedTime="{Binding Start}" FontFamily="/VIIS.App;component/Resources/#Champagne &amp; Limousines"/>
-                                        <TextBlock Grid.Column="2" Text="Продолжительность" Style="{StaticResource Default}" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
-                                        <materialDesign:TimePicker Grid.Column="3" SelectedTime="{Binding TimeSpan}" FontFamily="/VIIS.App;component/Resources/#Champagne &amp; Limousines"/>
+                                        <!--<TextBlock Grid.Column="0" Text="Время" Style="{StaticResource Default}" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
+                                        <materialDesign:TimePicker Grid.Column="1" SelectedTime="{Binding Start}" FontFamily="/VIIS.App;component/Resources/#Champagne &amp; Limousines"/>-->
+                                        <TextBlock Grid.Column="1" Text="Продолжительность" Style="{StaticResource Default}" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
+                                        <TextBox Grid.Column="2" Text="{Binding TimeSpan}" Style="{StaticResource DefaultTextBox}" VerticalAlignment="Bottom"/>
+                                        <TextBlock Grid.Column="3" Text="мин." Style="{StaticResource Default}" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
                                     </Grid>
                                 </Grid>
                             </DataTemplate>

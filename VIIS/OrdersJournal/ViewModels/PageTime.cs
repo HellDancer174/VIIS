@@ -55,7 +55,6 @@ namespace VIIS.App.OrdersJournal.ViewModels
 
         public override bool Remove(PageOrder item)
         {
-
             return Content.Remove(item);
         }
 

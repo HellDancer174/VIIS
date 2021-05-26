@@ -18,8 +18,8 @@ namespace VIIS.App.Services.ViewModels
         }
 
         public string Name { get => name; set => name = value; }
-        public DateTime Start { get => new DateTime()+start; set => start = value.TimeOfDay; }
-        public DateTime TimeSpan { get => new DateTime() + timeSpan; set => timeSpan = value.TimeOfDay; }
+        //public DateTime Start { get => new DateTime()+ordersStart; set => ordersStart = value.TimeOfDay; }
+        public int TimeSpan { get => (int)timeSpan.TotalMinutes; set => timeSpan = new TimeSpan(0, value, 0); }
 
     }
 }

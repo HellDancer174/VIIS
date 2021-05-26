@@ -17,7 +17,7 @@ namespace VIIS.Domain.Orders.Decorators.Checkable
 
         public override bool Check()
         {
-            return ordersDate.Month == monthOfYear.Month && ordersDate.Year == monthOfYear.Year && checkableOther.Check();
+            return ordersStart.Month == monthOfYear.Month && ordersStart.Year == monthOfYear.Year && checkableOther.Check();
         }
     }
 }

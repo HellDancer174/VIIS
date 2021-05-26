@@ -36,7 +36,7 @@ namespace VIIS.App.OrdersJournal.OrderDetail.ViewModels
         }
 
         public ViewClients ClientNames { get; private set; }
-        public DateTime OrdersDate => ordersDate;
+        public DateTime OrdersStart { get => ordersStart; set => ordersStart = value; }
         public ObservableCollection<ViewService> ViewServices { get; set; }
 
         public string Comment { get => comment; set => comment = value; }
@@ -59,7 +59,7 @@ namespace VIIS.App.OrdersJournal.OrderDetail.ViewModels
         {
             if (Price == 0) Price = ServicesPrice;
             sale = Price;
-            var newOrder = new Order(ClientNames.Model(), ViewServices.Select(viewService => new Service(viewService)).ToList(), master, Comment, ordersDate);
+            var newOrder = new Order(ClientNames.Model(), ViewServices.Select(viewService => new Service(viewService, OrdersStart, new TimeSpan(0,viewService.TimeSpan, 0))).ToList(), master, Comment, ordersStart);
             if (newOrder.IsIncomplete) throw new InvalidOperationException(newOrder.ToString());
             await journal.Update(other, newOrder);
         });

@@ -27,7 +27,7 @@ namespace VIIS.App.OrdersJournal.OrderDetail.ViewModels
         {
             if (Price == 0) Price = ServicesPrice;
             sale = Price;
-            var order = new Order(ClientNames.Model(), ViewServices.Select(viewService => new Service(viewService)).ToList(), master, comment, OrdersDate, sale);
+            var order = new Order(ClientNames.Model(), ViewServices.Select(viewService => new Service(viewService)).ToList(), master, comment, OrdersStart, sale);
             if (order.IsIncomplete) throw new InvalidOperationException(order.ToString());
             await journal.AddAsync(order);
         });
