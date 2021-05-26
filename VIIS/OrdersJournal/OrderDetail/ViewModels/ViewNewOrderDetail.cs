@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VIIS.App.Finance.ViewModels;
+using VIIS.App.GlobalViewModel;
 using VIIS.App.OrdersJournal.ViewModels;
 using VIIS.Domain.Customers;
+using VIIS.Domain.Finance;
 using VIIS.Domain.Orders;
 using VIIS.Domain.Services;
 using VIIS.Domain.Staff;
@@ -14,8 +17,8 @@ namespace VIIS.App.OrdersJournal.OrderDetail.ViewModels
 {
     public class ViewNewOrderDetail : OrderDetailVM
     {
-        public ViewNewOrderDetail(Master master, DateTime orderDate, Journal journal, ServiceValueList serviceValueList, Clients clients) : 
-            base(new Order(master, orderDate), journal, serviceValueList, clients)
+        public ViewNewOrderDetail(Master master, DateTime orderDate, Journal journal, ServiceValueList serviceValueList, Clients clients, ViewRepository<ViewTransaction, Transaction> transactions): 
+            base(new Order(master, orderDate), journal, serviceValueList, clients, transactions)
         {
 
         }

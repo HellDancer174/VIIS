@@ -2,9 +2,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using VIIS.App.Finance.ViewModels;
+using VIIS.App.GlobalViewModel;
 using VIIS.App.OrdersJournal.Models.OrdersDecorators;
 using VIIS.App.OrdersJournal.OrderDetail.Models;
 using VIIS.Domain.Customers;
+using VIIS.Domain.Finance;
 using VIIS.Domain.Orders;
 using VIIS.Domain.Services;
 
@@ -30,14 +33,14 @@ namespace VIIS.App.OrdersJournal.ViewModels
                     throw new ArgumentOutOfRangeException(String.Format("index должен быть >= {0} и {1} <=", startIndex, finishIndex));
             };
         }
-        public PageTimes(int startIndex, int finishIndex, Journal journal) : this(startIndex, finishIndex, new VirtualObservableCollection<PageTime>(new PageTime[12]))
+        public PageTimes(int startIndex, int finishIndex, Journal journal, ViewRepository<ViewTransaction, Transaction> transactions) : this(startIndex, finishIndex, new VirtualObservableCollection<PageTime>(new PageTime[12]))
         {
             for(int i = 0; i < 12; i++)
             {
-                Content[i] = new PageTime(i + startIndex, journal);
+                Content[i] = new PageTime(i + startIndex, journal, transactions);
             }
         }
-        public PageTimes(TimeSpan start, TimeSpan finish, Journal journal): this(start.Hours, finish.Hours, journal)
+        public PageTimes(TimeSpan start, TimeSpan finish, Journal journal, ViewRepository<ViewTransaction, Transaction> transactions) : this(start.Hours, finish.Hours, journal, transactions)
         {
         }
 

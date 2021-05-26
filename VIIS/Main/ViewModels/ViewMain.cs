@@ -21,6 +21,7 @@ using VIIS.Domain.Services;
 using VIIS.App.OrdersJournal.ViewModels;
 using VIIS.Domain.Global;
 using VIIS.Domain.Finance;
+using VIIS.App.GlobalViewModel;
 
 namespace VIIS.App.Main.ViewModels
 {
@@ -48,15 +49,15 @@ namespace VIIS.App.Main.ViewModels
 
         }
 
-        public ViewMain(Orders orders, Employees masters, Clients clients, ServiceValueList serviceValues, Repository<Transaction> transactions,  MainView view):
-            this(new OrdersJournalView(new Journal(orders, masters, serviceValues, clients)), new ClientsView(new ViewClients(clients)), 
+        public ViewMain(Orders orders, Employees masters, Clients clients, ServiceValueList serviceValues, ViewTransactions transactions,  MainView view):
+            this(new OrdersJournalView(new Journal(orders, masters, serviceValues, clients, transactions)), new ClientsView(new ViewClients(clients)), 
                 new EmployeesTabs(), 
-                new FinanceView(new ViewTransactions(transactions)), new UsersWindow(), view)
+                new FinanceView(transactions), new UsersWindow(), view)
         {
 
         }
 
-        public ViewMain(): this(new MainView())
+        public ViewMain(): this(new Orders(), new Employees(), new Clients(), new ServiceValueList(), new ViewTransactions(), new MainView())
         {
 
         }

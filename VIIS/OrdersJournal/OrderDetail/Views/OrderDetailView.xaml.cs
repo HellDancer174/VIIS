@@ -41,5 +41,6 @@ namespace VIIS.App.OrdersJournal.OrderDetail.Views
         {
             viewModel.ClientNames.Clear();
         }
+
     }
 }

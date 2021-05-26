@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VIIS.App.Finance.ViewModels;
+using VIIS.App.GlobalViewModel;
 using VIIS.App.OrdersJournal.Models.OrdersDecorators;
 using VIIS.App.OrdersJournal.OrderDetail.ViewModels;
 using VIIS.App.OrdersJournal.OrderDetail.Views;
 using VIIS.App.Services.ViewModels;
 using VIIS.Domain.Customers;
+using VIIS.Domain.Finance;
 using VIIS.Domain.Orders;
 using VIIS.Domain.Orders.Decorators;
 using VIIS.Domain.Services;
@@ -59,9 +62,9 @@ namespace VIIS.App.OrdersJournal.ViewModels
             return ordersFinish;
         }
 
-        public virtual void ShowDetail(Journal journal)
+        public virtual void ShowDetail(Journal journal, ViewRepository<ViewTransaction, Transaction> transactions)
         {
-            new OrderDetailView(new OrderDetailVM(this, journal, serviceValueList, clients)).Show();
+            new OrderDetailView(new OrderDetailVM(this, journal, serviceValueList, clients, transactions)).Show();
         }
         public override string ToString()
         {

@@ -5,8 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using VIIS.App.Finance.ViewModels;
+using VIIS.App.GlobalViewModel;
 using VIIS.App.OrdersJournal.Models.OrdersDecorators;
 using VIIS.Domain.Customers;
+using VIIS.Domain.Finance;
 using VIIS.Domain.Orders;
 using VIIS.Domain.Orders.Decorators;
 using VIIS.Domain.Services;
@@ -22,15 +25,17 @@ namespace VIIS.App.OrdersJournal.ViewModels
         private readonly Employees employees;
         private readonly ServiceValueList serviceValueList;
         private readonly Clients clients;
+        private readonly ViewRepository<ViewTransaction, Transaction> transactions;
 
-        public Journal(Orders orders, Employees employees, ServiceValueList serviceValueList, Clients clients): base(orders)
+        public Journal(Orders orders, Employees employees, ServiceValueList serviceValueList, Clients clients, ViewRepository<ViewTransaction, Transaction> transactions) : base(orders)
         {
             this.employees = employees;
             this.serviceValueList = serviceValueList;
             this.clients = clients;
+            this.transactions = transactions;
             CurrentDate = DateTime.Now.Date;
         }
-        public Journal():this(new Orders(), new Employees(), new ServiceValueList(), new Clients())
+        public Journal():this(new Orders(), new Employees(), new ServiceValueList(), new Clients(), new ViewTransactions())
         {
         }
 
@@ -56,7 +61,7 @@ namespace VIIS.App.OrdersJournal.ViewModels
         }
         public void ChangeStaff(Employees masters)
         {
-            ChangeStaff(new ViewJournalEmployees(masters, currentDate, serviceValueList, clients, this, this.Where(order => order.CheckDate(currentDate)).ToList()));
+            ChangeStaff(new ViewJournalEmployees(masters, currentDate, serviceValueList, clients, this, this.Where(order => order.CheckDate(currentDate)).ToList(), transactions));
         }
         public void ChangeStaff() => ChangeStaff(employees);
 

@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VIIS.App.Finance.ViewModels;
+using VIIS.App.GlobalViewModel;
 using VIIS.App.OrdersJournal.Models.OrdersDecorators;
 using VIIS.App.OrdersJournal.OrderDetail.ViewModels;
 using VIIS.App.OrdersJournal.OrderDetail.Views;
 using VIIS.Domain.Customers;
+using VIIS.Domain.Finance;
 using VIIS.Domain.Orders;
 using VIIS.Domain.Services;
 using VIIS.Domain.Staff;
@@ -23,8 +26,9 @@ namespace VIIS.App.OrdersJournal.ViewModels
         private readonly ServiceValueList serviceValueList;
         private readonly Clients clients;
         private readonly Journal journal;
+        private readonly ViewRepository<ViewTransaction, Transaction> transactions;
 
-        public ViewJournalEmployees(Employees other, DateTime workDay, ServiceValueList serviceValueList, Clients clients, Journal journal, List<Order> orders) : base(other)
+        public ViewJournalEmployees(Employees other, DateTime workDay, ServiceValueList serviceValueList, Clients clients, Journal journal, List<Order> orders, ViewRepository<ViewTransaction, Transaction> transactions) : base(other)
         {
             var mastersPosition = new Position("Мастер - парикмахер");
             var manicurePosition = new Position("Мастер маникюра");
@@ -32,11 +36,12 @@ namespace VIIS.App.OrdersJournal.ViewModels
             Masters = this.Where(master => master.Equals(mastersPosition) && master.IsWork(workDay)).ToList();
             Manicure = this.Where(master => master.Equals(manicurePosition) && master.IsWork(workDay)).ToList();
             Pedicure = this.Where(master => master.Equals(pedicurePosition) && master.IsWork(workDay)).ToList();
-            daysPage = new WorkDaysPage(this.ToList(), journal);
+            daysPage = new WorkDaysPage(this.ToList(), journal, transactions);
             this.workDay = workDay;
             this.serviceValueList = serviceValueList;
             this.clients = clients;
             this.journal = journal;
+            this.transactions = transactions;
             AddOrdersList(orders, serviceValueList, clients);
             SelectedMaster = this.First();
         }
@@ -64,7 +69,7 @@ namespace VIIS.App.OrdersJournal.ViewModels
 
         public WorkDaysPage DaysPage => daysPage;
 
-        public RelayCommand CreateOrder => new RelayCommand((obj) => new OrderDetailView(new ViewNewOrderDetail(selectedMaster, workDay, journal, serviceValueList, clients)).Show());
+        public RelayCommand CreateOrder => new RelayCommand((obj) => new OrderDetailView(new ViewNewOrderDetail(selectedMaster, workDay, journal, serviceValueList, clients, transactions)).Show());
 
     }
 }

@@ -6,10 +6,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using VIIS.App.Finance.ViewModels;
+using VIIS.App.GlobalViewModel;
 using VIIS.App.OrdersJournal.OrderDetail.Models;
 using VIIS.App.OrdersJournal.OrderDetail.Views.ClientNamePages;
 using VIIS.App.OrdersJournal.ViewModels;
 using VIIS.Domain.Customers;
+using VIIS.Domain.Finance;
 using VIIS.Domain.Orders;
 using VIIS.Domain.Orders.Decorators;
 using VIIS.Domain.Services;
@@ -21,14 +24,14 @@ namespace VIIS.App.OrdersJournal.OrderDetail.ViewModels
     {
         protected readonly Journal journal;
         protected readonly Clients clients;
-        //private readonly Window window;
+        private readonly ViewRepository<ViewTransaction, Transaction> transactions;
         protected readonly ViewServiceValueList serviceValueList;
 
-        public OrderDetailVM(Order order, Journal journal, ServiceValueList serviceValueList, Clients clients): base(order)
+        public OrderDetailVM(Order order, Journal journal, ServiceValueList serviceValueList, Clients clients, ViewRepository<ViewTransaction, Transaction> transactions) : base(order)
         {
             this.journal = journal;
             this.clients = clients;
-            //this.window = window;
+            this.transactions = transactions;
             this.serviceValueList = new ViewServiceValueList(serviceValueList);
             ClientNames = new ViewClients(new ViewClient(client), new ExistingViewClient(clients));
             ViewServices = new ObservableCollection<ViewService>(services.Select(service => new ViewService(this.serviceValueList.ViewServices, service, this)));
@@ -67,6 +70,12 @@ namespace VIIS.App.OrdersJournal.OrderDetail.ViewModels
         {
             await journal.RemoveAsync(other);
         });
+
+        public RelayCommand ExecuteOrderCommand => new RelayCommand(async(obj) => 
+        {
+            await transactions.AddAsync(new ViewTransaction(new Transaction(String.Format("Оплата заказа ({0})", ToString()), Price)));
+            isFinished = true;
+        }, (obj) => !isFinished );
 
         public void ChangeServiceSale()
         {

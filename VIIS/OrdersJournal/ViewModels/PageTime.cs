@@ -7,7 +7,10 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VIIS.App.Finance.ViewModels;
+using VIIS.App.GlobalViewModel;
 using VIIS.App.OrdersJournal.OrderDetail.Views;
+using VIIS.Domain.Finance;
 using VIIS.Domain.Orders;
 
 namespace VIIS.App.OrdersJournal.ViewModels
@@ -16,6 +19,7 @@ namespace VIIS.App.OrdersJournal.ViewModels
     {
         private readonly int timeIndex;
         private readonly Journal journal;
+        private readonly ViewRepository<ViewTransaction, Transaction> transactions;
 
         public string TimeIndex => string.Format("{0}:00",timeIndex);
 
@@ -26,20 +30,21 @@ namespace VIIS.App.OrdersJournal.ViewModels
             set
             {
                 selected = value;
-                if(selected != null) selected.ShowDetail(journal);
+                if(selected != null) selected.ShowDetail(journal, transactions);
             }
         }
 
         public ObservableCollection<PageOrder> Content { get; private set; }
 
-        public PageTime(List<PageOrder> content, int timeIndex, Journal journal): base(content)
+        public PageTime(List<PageOrder> content, int timeIndex, Journal journal, ViewRepository<ViewTransaction, Transaction> transactions) : base(content)
         {
             this.Content = new ObservableCollection<PageOrder>(content);
             this.timeIndex = timeIndex;
             this.journal = journal;
+            this.transactions = transactions;
             ChangeProperty(nameof(TimeIndex));
         }
-        public PageTime(int timeIndex, Journal journal):this(new List<PageOrder>(), timeIndex, journal)
+        public PageTime(int timeIndex, Journal journal, ViewRepository<ViewTransaction, Transaction> transactions) :this(new List<PageOrder>(), timeIndex, journal, transactions)
         {
         }
 

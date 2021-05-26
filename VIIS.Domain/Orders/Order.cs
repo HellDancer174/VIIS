@@ -20,8 +20,13 @@ namespace VIIS.Domain.Orders
         protected string comment;
         protected DateTime ordersStart;
         protected decimal sale;
+        protected bool isFinished;
 
-        public Order(Client client, List<Service> services, Master master, string comment, DateTime ordersDate, decimal sale)
+        public Order(Client client, List<Service> services, Master master, string comment, DateTime ordersDate, decimal sale):
+            this(client, services, master, comment, ordersDate, sale, false)
+        {
+        }
+        public Order(Client client, List<Service> services, Master master, string comment, DateTime ordersDate, decimal sale, bool isFinished)
         {
             this.client = client;
             this.services = services;
@@ -29,6 +34,7 @@ namespace VIIS.Domain.Orders
             this.comment = comment;
             this.ordersStart = ordersDate;
             this.sale = sale;
+            this.isFinished = isFinished;
         }
         public Order(Client client, List<Service> services, Master master, string comment, DateTime ordersDate):
             this(client, services, master, comment, ordersDate, services.Select(service => service.Sale).Sum())
