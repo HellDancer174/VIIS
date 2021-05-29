@@ -44,10 +44,10 @@ namespace VIIS.App.Main.ViewModels
             this.view = view;
             Current = journal;
         }
-        public ViewMain(MainView view): this(new OrdersJournalView(), new ClientsView(new ViewClients(new Clients())), new EmployeesTabs(), new FinanceView(new ViewTransactions()), new UsersWindow(), view)
-        {
+        //public ViewMain(MainView view): this(new OrdersJournalView(), new ClientsView(new ViewClients(new Clients())), new EmployeesTabs(), new FinanceView(new ViewTransactions()), new UsersWindow(), view)
+        //{
 
-        }
+        //}
 
         public ViewMain(Orders orders, Employees masters, Clients clients, ServiceValueList serviceValues, ViewTransactions transactions,  MainView view):
             this(new OrdersJournalView(new Journal(orders, masters, serviceValues, clients, transactions)), new ClientsView(new ViewClients(clients)), 
@@ -57,7 +57,7 @@ namespace VIIS.App.Main.ViewModels
 
         }
 
-        public ViewMain(): this(new Orders(), new Employees(), new Clients(), new ServiceValueList(), new ViewTransactions(), new MainView())
+        public ViewMain(MainView view) : this(new Orders(), new Employees(), new Clients(), new ServiceValueList(), new ViewTransactions(), view)
         {
 
         }

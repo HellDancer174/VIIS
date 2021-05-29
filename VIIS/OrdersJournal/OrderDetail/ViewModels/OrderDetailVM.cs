@@ -69,9 +69,7 @@ namespace VIIS.App.OrdersJournal.OrderDetail.ViewModels
             Order newOrder;
             try
             {
-                newOrder = new Order(ClientNames.Model(), ViewServices.Select(viewService => new Service(viewService, OrdersStart, new TimeSpan(0, viewService.TimeSpan, 0))).ToList(), master, Comment, ordersStart);
-                var validatableOrder = new OrderOfJournal(newOrder);
-                validatableOrder.Safe();
+                newOrder = ValidOrder();
             }
             catch (ArgumentException)
             {
@@ -85,6 +83,14 @@ namespace VIIS.App.OrdersJournal.OrderDetail.ViewModels
             await SaveMethod(newOrder);
         });
 
+        private Order ValidOrder()
+        {
+            Order newOrder = new Order(ClientNames.Model(), ViewServices.Select(viewService => new Service(viewService, OrdersStart, new TimeSpan(0, viewService.TimeSpan, 0))).ToList(), master, Comment, ordersStart, sale, isFinished);
+            var validatableOrder = new OrderOfJournal(newOrder);
+            validatableOrder.Safe();
+            return newOrder;
+        }
+
         public virtual async Task SaveMethod(Order newOrder)
         {
             await journal.Update(other, newOrder);
@@ -95,11 +101,16 @@ namespace VIIS.App.OrdersJournal.OrderDetail.ViewModels
             await journal.RemoveAsync(other);
         });
 
-        public RelayCommand ExecuteOrderCommand => new RelayCommand(async(obj) => 
+        public virtual RelayCommand ExecuteOrderCommand => new RelayCommand(async(obj) =>
         {
-            await transactions.AddAsync(new ViewTransaction(new Transaction(String.Format("Оплата заказа ({0})", ToString()), Price)));
+            await PostTransaction();
+        }, (obj) => !isFinished);
+
+        public virtual async Task PostTransaction()
+        {
+            await transactions.AddViewAsync(new ViewTransaction(new Transaction(String.Format("Оплата заказа ({0})", ToString()), Price)));
             isFinished = true;
-        }, (obj) => !isFinished );
+        }
 
         public void ChangeServiceSale()
         {

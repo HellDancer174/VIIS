@@ -45,7 +45,7 @@ namespace VIIS.App.OrdersJournal.ViewModels
         }
         public void AddOrder(Order order, ServiceValueList serviceValueList, Clients clients)
         {
-            journalPages[order.KeyValue().Key].AddContent(order, serviceValueList, clients);
+            journalPages[order.KeyValue().Key].AddContent(new PageOrder(order, serviceValueList, clients));
         }
 
         public void RemoveOrder(Order order)

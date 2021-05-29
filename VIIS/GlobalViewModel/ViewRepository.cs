@@ -33,7 +33,7 @@ namespace VIIS.App.GlobalViewModel
         public abstract ICommand RemoveCommand { get; }
 
 
-        public async Task AddViewAsync(V item)
+        public virtual async Task AddViewAsync(V item)
         {
             Collection.Add(item);
             ChangeProperty(nameof(Collection));
@@ -41,7 +41,7 @@ namespace VIIS.App.GlobalViewModel
         }
 
 
-        public async Task RemoveViewAsync(V item)
+        public virtual async Task RemoveViewAsync(V item)
         {
             Collection.Remove(item);
             ChangeProperty(nameof(Selected));

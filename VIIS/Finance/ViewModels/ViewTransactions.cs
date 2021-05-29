@@ -79,5 +79,16 @@ namespace VIIS.App.Finance.ViewModels
             Balance = Proceeds - Cost;
         }
 
+        public override async Task AddViewAsync(ViewTransaction item)
+        {
+            await base.AddViewAsync(item);
+            CalcTotal();
+        }
+
+        public override async Task RemoveViewAsync(ViewTransaction item)
+        {
+            await base.RemoveViewAsync(item);
+            CalcTotal();
+        }
     }
 }

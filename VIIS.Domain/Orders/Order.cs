@@ -41,7 +41,7 @@ namespace VIIS.Domain.Orders
         {
         }
 
-        public Order(Order other) : this(other.client, other.services, other.master, other.comment, other.ordersStart, other.sale)
+        public Order(Order other) : this(other.client, other.services, other.master, other.comment, other.ordersStart, other.sale, other.isFinished)
         {
         }
 

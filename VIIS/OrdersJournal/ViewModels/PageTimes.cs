@@ -69,14 +69,14 @@ namespace VIIS.App.OrdersJournal.ViewModels
             Content[order.ContentIndex() - startIndex].Sort();
         }
 
-        public void AddContent(Order order, ServiceValueList serviceValueList, Clients clients)
-        {
-            var masterPageOrders = new JournalOrder(order, serviceValueList, clients).PageOrders;
-            var pageOrders = masterPageOrders.Value;
-            foreach (var pageOrder in pageOrders)
-                        AddContent(pageOrder);
+        //public void AddContent(Order order, ServiceValueList serviceValueList, Clients clients)
+        //{
+        //    var masterPageOrders = new JournalOrder(order, serviceValueList, clients).PageOrders;
+        //    var pageOrders = masterPageOrders.Value;
+        //    foreach (var pageOrder in pageOrders)
+        //                AddContent(pageOrder);
 
-        }
+        //}
 
         public virtual void RemoveContent(PageOrder order)
         {
