@@ -69,7 +69,7 @@ namespace VIIS.App.OrdersJournal.ViewModels
 
         public WorkDaysPage DaysPage => daysPage;
 
-        public RelayCommand CreateOrder => new RelayCommand((obj) => new OrderDetailView(new ViewNewOrderDetail(selectedMaster, workDay, journal, serviceValueList, clients, transactions)).Show());
+        public RelayCommand CreateOrder => new RelayCommand((obj) => new WindowOrderDetail(new ViewNewOrderDetail(selectedMaster, workDay, journal, serviceValueList, clients, transactions), new OrderDetailView()));
 
     }
 }

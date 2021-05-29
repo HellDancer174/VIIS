@@ -30,7 +30,11 @@ namespace VIIS.App.OrdersJournal.ViewModels
             set
             {
                 selected = value;
-                if(selected != null) selected.ShowDetail(journal, transactions);
+                if (selected != null)
+                {
+                    selected.ShowDetail(journal, transactions);
+                    selected = null;
+                } 
             }
         }
 

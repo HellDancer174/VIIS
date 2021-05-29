@@ -26,14 +26,18 @@ namespace VIIS.App.OrdersJournal.OrderDetail.ViewModels
         public override string SaveButtonName => "Добавить";
         public override string EndButtonName => "Отмена";
 
-        public override RelayCommand Save => new RelayCommand(async(obj) =>
+        //public override RelayCommand Save => new RelayCommand(async(obj) =>
+        //{
+        //    if (Price == 0) Price = ServicesPrice;
+        //    sale = Price;
+        //    var order = new Order(ClientNames.Model(), ViewServices.Select(viewService => new Service(viewService)).ToList(), master, comment, OrdersStart, sale);
+        //    if (order.IsIncomplete) throw new InvalidOperationException(order.ToString());
+        //    await journal.AddAsync(order);
+        //});
+        public override async Task SaveMethod(Order newOrder)
         {
-            if (Price == 0) Price = ServicesPrice;
-            sale = Price;
-            var order = new Order(ClientNames.Model(), ViewServices.Select(viewService => new Service(viewService)).ToList(), master, comment, OrdersStart, sale);
-            if (order.IsIncomplete) throw new InvalidOperationException(order.ToString());
-            await journal.AddAsync(order);
-        });
+            await journal.AddAsync(newOrder);
+        }
 
         public override RelayCommand End => new RelayCommand((obj) => { });
     }

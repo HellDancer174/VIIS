@@ -9,6 +9,7 @@ using System.Windows;
 using VIIS.App.Finance.ViewModels;
 using VIIS.App.GlobalViewModel;
 using VIIS.App.OrdersJournal.OrderDetail.Models;
+using VIIS.App.OrdersJournal.OrderDetail.Models.Validatable;
 using VIIS.App.OrdersJournal.OrderDetail.Views.ClientNamePages;
 using VIIS.App.OrdersJournal.ViewModels;
 using VIIS.Domain.Customers;
@@ -37,6 +38,9 @@ namespace VIIS.App.OrdersJournal.OrderDetail.ViewModels
             ViewServices = new ObservableCollection<ViewService>(services.Select(service => new ViewService(this.serviceValueList.ViewServices, service, this)));
             Price = sale;
         }
+        public OrderDetailVM(OrderDetailVM other): this(other, other.journal, other.serviceValueList, other. clients, other.transactions)
+        {
+        }
 
         public ViewClients ClientNames { get; private set; }
         public DateTime OrdersStart { get => ordersStart; set => ordersStart = value; }
@@ -62,10 +66,30 @@ namespace VIIS.App.OrdersJournal.OrderDetail.ViewModels
         {
             if (Price == 0) Price = ServicesPrice;
             sale = Price;
-            var newOrder = new Order(ClientNames.Model(), ViewServices.Select(viewService => new Service(viewService, OrdersStart, new TimeSpan(0,viewService.TimeSpan, 0))).ToList(), master, Comment, ordersStart);
-            if (newOrder.IsIncomplete) throw new InvalidOperationException(newOrder.ToString());
-            await journal.Update(other, newOrder);
+            Order newOrder;
+            try
+            {
+                newOrder = new Order(ClientNames.Model(), ViewServices.Select(viewService => new Service(viewService, OrdersStart, new TimeSpan(0, viewService.TimeSpan, 0))).ToList(), master, Comment, ordersStart);
+                var validatableOrder = new OrderOfJournal(newOrder);
+                validatableOrder.Safe();
+            }
+            catch (ArgumentException)
+            {
+                return;
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return;
+            }
+            await SaveMethod(newOrder);
         });
+
+        public virtual async Task SaveMethod(Order newOrder)
+        {
+            await journal.Update(other, newOrder);
+        }
+
         public virtual RelayCommand End => new RelayCommand(async(obl) =>
         {
             await journal.RemoveAsync(other);

@@ -162,10 +162,10 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Style="{StaticResource Material}" Margin="20" Command="{Binding Save}" Click="Button_Click">
+            <Button Grid.Column="0" Style="{StaticResource Material}" Margin="20" Command="{Binding Save}">
                 <TextBlock Text="{Binding SaveButtonName}"/>
             </Button>
-            <Button Grid.Column="1" Style="{StaticResource Material}" Margin="20" Command="{Binding End}" Click="Button_Click">
+            <Button Grid.Column="1" Style="{StaticResource Material}" Margin="20" Command="{Binding End}">
                 <TextBlock Text="{Binding EndButtonName}"/>
             </Button>
         </Grid>

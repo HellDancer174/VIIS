@@ -35,7 +35,7 @@ namespace VIIS.App.OrdersJournal.OrderDetail.ViewModels
             var existingModel = existingClient.Model();
             if (newModel.Equals(anyClient) && !existingModel.Equals(anyClient)) return existingModel;
             else if (!newModel.Equals(anyClient) && existingModel.Equals(anyClient)) return newModel;
-            else throw new InvalidOperationException(String.Format("Выберите кого-то одного: Новый - {0}, Существующий - {1}", newClient.ToString(), existingClient.ToString()));
+            else throw new InvalidOperationException(String.Format("Выберите одного клиента: Новый - {0}, Существующий - {1}", newClient.ToString(), existingClient.ToString()));
         }
 
         public void Clear()

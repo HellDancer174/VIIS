@@ -111,9 +111,13 @@
     <Compile Include="OrdersJournal\OrderDetail\Models\IndexedService.cs" />
     <Compile Include="OrdersJournal\OrderDetail\Models\NamingClient.cs" />
     <Compile Include="OrdersJournal\OrderDetail\Models\DetailTransferableOrder.cs" />
+    <Compile Include="OrdersJournal\OrderDetail\Models\Validatable\ClientOfJournal.cs" />
+    <Compile Include="OrdersJournal\OrderDetail\Models\Validatable\OrderOfJournal.cs" />
+    <Compile Include="OrdersJournal\OrderDetail\Models\Validatable\ServiceOfJournal.cs" />
     <Compile Include="OrdersJournal\OrderDetail\Models\ViewServiceValueList.cs" />
     <Compile Include="OrdersJournal\OrderDetail\ViewModels\ViewNewOrderDetail.cs" />
     <Compile Include="OrdersJournal\OrderDetail\ViewModels\ViewServiceValue.cs" />
+    <Compile Include="OrdersJournal\OrderDetail\ViewModels\WindowOrderDetail.cs" />
     <Compile Include="Services\ViewModels\BaseViewService.cs" />
     <Compile Include="Services\ViewModels\ViewNewServiceDetail.cs" />
     <Compile Include="Services\ViewModels\ViewServiceDetail.cs" />

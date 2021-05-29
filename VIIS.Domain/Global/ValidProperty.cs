@@ -19,11 +19,13 @@ namespace VIIS.Domain.Global
             this.condition = condition;
         }
 
-        public virtual void Validate()
+        public virtual void Validate(string messageOfFail)
         {
             if (condition) return;
-            else throw new ArgumentException(ToString());
+            else throw new ArgumentException(messageOfFail);
         }
+
+        public virtual void Validate() => Validate(ToString());
 
 
         public override string ToString()
