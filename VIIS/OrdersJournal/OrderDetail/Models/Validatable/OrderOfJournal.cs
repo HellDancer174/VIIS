@@ -16,16 +16,18 @@ namespace VIIS.App.OrdersJournal.OrderDetail.Models.Validatable
     {
         private ValidProperty<DateTime> validStart;
         private ValidProperty<decimal> validSale;
-        private ValidProperty<List<Service>> validServices;
+        private ValidProperty<List<ServiceOfJournal>> validServices;
         private ValidProperty<Master> validMaster;
         private ClientOfJournal validClient;
+        private List<ServiceOfJournal> servicesOfJournal;
         
 
         public OrderOfJournal(Order other) : base(other)
         {
+            servicesOfJournal = services.Select(service => new ServiceOfJournal(service)).ToList();
             validSale = new ValidProperty<decimal>("Цена", sale, sale > 0);
             validStart = new ValidProperty<DateTime>("Дата и время заказа", ordersStart, ordersStart != new DateTime());
-            validServices = new ValidProperty<List<Service>>("Услуги", services, services.Count != 0);
+            validServices = new ValidProperty<List<ServiceOfJournal>>("Услуги", servicesOfJournal, servicesOfJournal.Count != 0);
             validMaster = new ValidProperty<Master>("Мастер", master, master.IsWork(ordersStart.Date));
             validClient = new ClientOfJournal(client);
         }
@@ -38,6 +40,7 @@ namespace VIIS.App.OrdersJournal.OrderDetail.Models.Validatable
                 validMaster.Validate();
                 validStart.Validate();
                 validServices.Validate();
+                servicesOfJournal.ForEach(service => service.UnSafe());
                 validSale.Validate();
             }
             catch (ArgumentException ex)
