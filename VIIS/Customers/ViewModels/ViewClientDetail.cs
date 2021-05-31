@@ -4,8 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using VIIS.App.Customers.Models;
 using VIIS.App.Customers.Views;
 using VIIS.App.GlobalViewModel;
+using VIIS.App.OrdersJournal.OrderDetail.Models.Validatable;
 using VIIS.Domain.Customers;
 using VIMVVM;
 
@@ -17,6 +19,19 @@ namespace VIIS.App.Customers.ViewModels
         {
         }
 
-        //public override RelayCommand Save => new RelayCommand(async (obj) => { await repository.UpdateViewAsync(oldViewModel, new ViewClient(ViewModel.Model())); ViewModel.NotifySelector(); });
+        //public override RelayCommand Save => new RelayCommand(async (obj) => 
+        //{
+        //    try
+        //    {
+        //        new ClientOfCustomers(new ClientOfJournal(ViewModel.Model())).Safe();
+        //    }
+        //    catch (ArgumentException)
+        //    {
+        //        return;
+        //    }
+        //    base.Save.Execute(obj);
+        //    //await repository.UpdateViewAsync(oldViewModel, new ViewClient(ViewModel.Model()));
+        //    //ViewModel.NotifySelector();
+        //});
     }
 }

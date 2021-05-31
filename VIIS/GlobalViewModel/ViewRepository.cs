@@ -13,6 +13,7 @@ using VIMVVM.Detail;
 
 namespace VIIS.App.GlobalViewModel
 {
+
     public abstract class ViewRepository<V, T> : Repository<T>
         where V : T, IDetailedViewModel<T> where T : IDocumentAsync
     {

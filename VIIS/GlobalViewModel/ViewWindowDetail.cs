@@ -22,6 +22,7 @@ namespace VIIS.App.GlobalViewModel
             this.view = view;
             view.DataContext = this;
             view.Show();
+            repository.Selected = default(V);
         }
 
         public override RelayCommand Save => new RelayCommand((obj) => { other.Save.Execute(obj); view.Close(); });

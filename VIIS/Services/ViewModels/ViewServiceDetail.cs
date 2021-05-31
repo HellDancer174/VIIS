@@ -5,8 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using VIIS.App.GlobalViewModel;
+using VIIS.App.Services.Model;
 using VIIS.App.Services.Views;
 using VIIS.Domain.Services;
+using VIMVVM;
 
 namespace VIIS.App.Services.ViewModels
 {
@@ -18,5 +20,19 @@ namespace VIIS.App.Services.ViewModels
         public ViewServiceDetail(ViewServices repo, ViewServiceValue selected): this(new ViewDetail<ViewServices, ViewServiceValue, ServiceValue>(repo, selected, new ViewServiceValue(selected)))
         {
         }
+
+        public override RelayCommand Save => new RelayCommand((obj) =>
+        {
+            try
+            {
+                new ServiceValueOfViewService(ViewModel.Model()).Safe();
+            }
+            catch (ArgumentException)
+            {
+                return;
+            }
+            base.Save.Execute(obj);
+        });
+
     }
 }

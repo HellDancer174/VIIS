@@ -64,7 +64,6 @@ namespace VIIS.App.OrdersJournal.ViewModels
 
         public virtual void ShowDetail(Journal journal, ViewRepository<ViewTransaction, Transaction> transactions)
         {
-            //new OrderDetailView(new OrderDetailVM(this, journal, serviceValueList, clients, transactions)).Show();
             new WindowOrderDetail(new OrderDetailVM(this, journal, serviceValueList, clients, transactions), new OrderDetailView());
         }
         public override string ToString()

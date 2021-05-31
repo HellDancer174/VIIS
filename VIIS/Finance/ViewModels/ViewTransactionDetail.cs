@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using VIIS.App.Finance.Models;
 using VIIS.App.Finance.Views;
 using VIIS.App.GlobalViewModel;
 using VIIS.Domain.Finance;
@@ -25,7 +26,19 @@ namespace VIIS.App.Finance.ViewModels
         {
         }
 
-        public override RelayCommand Save => new RelayCommand((obj) => { base.Save.Execute(obj); repository.CalcTotal(); });
+        public override RelayCommand Save => new RelayCommand((obj) => 
+        {
+            try
+            {
+                new TransactionOfFinance(ViewModel.Model()).Safe();
+            }
+            catch (ArgumentException)
+            {
+                return;
+            }
+            base.Save.Execute(obj);
+            repository.CalcTotal();
+        });
 
     }
 }
