@@ -98,6 +98,12 @@
     <Compile Include="Finance\MasterPay\ViewModels\ViewMasterCashDetail.cs" />
     <Compile Include="Finance\MasterPay\ViewModels\ViewMasterCashList.cs" />
     <Compile Include="Finance\MasterPay\ViewModels\WindowMasterCashDetail.cs" />
+    <Compile Include="Finance\MasterPay\Views\MasterCashCommonView.xaml.cs">
+      <DependentUpon>MasterCashCommonView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Finance\MasterPay\Views\MasterCashView.xaml.cs">
+      <DependentUpon>MasterCashView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Finance\Models\TransactableOrders.cs" />
     <Compile Include="Finance\Models\SumTransaction.cs" />
     <Compile Include="Finance\Models\TransactionOfFinance.cs" />
@@ -191,6 +197,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Customers\Views\CustomerDetailView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Finance\MasterPay\Views\MasterCashCommonView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Finance\MasterPay\Views\MasterCashView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -353,7 +367,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Finance\MasterPay\Views\" />
     <Folder Include="Settings\Views\" />
   </ItemGroup>
   <ItemGroup>

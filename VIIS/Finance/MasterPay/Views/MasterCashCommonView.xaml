@@ -1,0 +1,41 @@
+﻿<Page x:Class="VIIS.App.Finance.MasterPay.Views.MasterCashCommonView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:VIIS.App.Finance.MasterPay.Views"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="MasterCashCommonView" Background="White">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80*"/>
+            <RowDefinition Height="20*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Width="800" HorizontalAlignment="Left">
+            <DataGrid ItemsSource="{Binding Collection}" SelectedItem="{Binding Selected}" AutoGenerateColumns="False" FontFamily="{StaticResource Champagne}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Мастер" Binding="{Binding MasterName}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Заработная плата" Binding="{Binding Cash}" IsReadOnly="True"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="5*"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="5*"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Button Style="{StaticResource Material}" Grid.Column="1" Command="{Binding UpdateCommand}">
+                <TextBlock Text="Изменить" Style="{StaticResource Default}"/>
+            </Button>
+            <Button Style="{StaticResource Material}" Grid.Column="3" Command="{Binding RemoveCommand}">
+                <TextBlock Text="Удалить" Style="{StaticResource Default}"/>
+            </Button>
+        </Grid>
+    </Grid>
+</Page>

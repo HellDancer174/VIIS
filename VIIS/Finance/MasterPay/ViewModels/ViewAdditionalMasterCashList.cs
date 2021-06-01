@@ -34,6 +34,7 @@ namespace VIIS.App.Finance.MasterPay.ViewModels
 
         public ICommand Сalculation => new RelayCommand((obj) =>
         {
+            Collection.Clear();
             foreach (var master in masters)
             {
                 Collection.Add(new ViewMasterCash(master, orders, StartDate, FinishDate, new MastersPercent(Percent)));
