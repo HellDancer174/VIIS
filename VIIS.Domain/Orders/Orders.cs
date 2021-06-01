@@ -37,11 +37,16 @@ namespace VIIS.Domain.Orders
         {
         }
 
-        public Orders(IList<Order> orders, DateTime monthOfYear, Master master):
-            this(orders.Select(order => new MasterCheckableOrder(new MonthCheckableOrder(new CheckableOrder(order), monthOfYear), master)).Where(checkableOrder => checkableOrder.Check()).Select(checkableOrder => (Order)checkableOrder).ToList())
+        public Orders(IList<Order> orders, DateTime startDate, DateTime finishDate, Master master):
+            this(orders.Select(order => new MasterCheckableOrder(new DateSpanCheckableOrder(new CheckableOrder(order), startDate, finishDate), master)).Where(checkableOrder => checkableOrder.Check()).Select(checkableOrder => (Order)checkableOrder).ToList())
         {
 
         }
+        public Orders(IList<Order> orders, DateTime monthOfYear, Master master): 
+            this(orders, new DateTime(monthOfYear.Year, monthOfYear.Month, 1), new DateTime(monthOfYear.Year, monthOfYear.Month, DateTime.DaysInMonth(monthOfYear.Year, monthOfYear.Month)), master)
+        {
+        }
+
 
         public virtual async Task AddAsync(Order order)
         {

@@ -11,8 +11,8 @@ namespace VIIS.App.OrdersJournal.Models.OrdersDecorators
 {
     public class OrdersPerMonth : OrdersDecorator
     {
-        public OrdersPerMonth(IList<Order> orders, DateTime monthOfYear): 
-            base(new Orders(orders.Select(order => new MonthCheckableOrder(new CheckableOrder(order), monthOfYear)).Where(checkableOrder => checkableOrder.Check()).Select(checkableOrder => (Order)checkableOrder).ToList()))
+        public OrdersPerMonth(IList<Order> orders, DateTime monthOfYear): base(new Orders(orders.ToList()))
+            //base(new Orders(orders.Select(order => new DateSpanCheckableOrder(new CheckableOrder(order), monthOfYear)).Where(checkableOrder => checkableOrder.Check()).Select(checkableOrder => (Order)checkableOrder).ToList()))
         {
         }
     }

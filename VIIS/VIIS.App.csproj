@@ -93,6 +93,11 @@
     <Compile Include="Customers\Views\CustomerDetailView.xaml.cs">
       <DependentUpon>CustomerDetailView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Finance\MasterPay\ViewModels\ViewAdditionalMasterCashList.cs" />
+    <Compile Include="Finance\MasterPay\ViewModels\ViewMasterCash.cs" />
+    <Compile Include="Finance\MasterPay\ViewModels\ViewMasterCashDetail.cs" />
+    <Compile Include="Finance\MasterPay\ViewModels\ViewMasterCashList.cs" />
+    <Compile Include="Finance\MasterPay\ViewModels\WindowMasterCashDetail.cs" />
     <Compile Include="Finance\Models\TransactableOrders.cs" />
     <Compile Include="Finance\Models\SumTransaction.cs" />
     <Compile Include="Finance\Models\TransactionOfFinance.cs" />
@@ -109,7 +114,6 @@
     <Compile Include="GlobalViewModel\ViewRepository.cs" />
     <Compile Include="GlobalViewModel\ViewWindowDetail.cs" />
     <Compile Include="OrdersJournal\Models\OrdersDecorators\JournalOrder.cs" />
-    <Compile Include="OrdersJournal\Models\OrdersDecorators\OrdersPerMonth.cs" />
     <Compile Include="OrdersJournal\OrderDetail\Models\IndexedService.cs" />
     <Compile Include="OrdersJournal\OrderDetail\Models\NamingClient.cs" />
     <Compile Include="OrdersJournal\OrderDetail\Models\DetailTransferableOrder.cs" />
@@ -138,7 +142,6 @@
     <Compile Include="Staff\Models\AddressOfView.cs" />
     <Compile Include="Staff\Models\DetailOfView.cs" />
     <Compile Include="Staff\Models\MasterOfView.cs" />
-    <Compile Include="Staff\Models\MastersOrderPerMonth.cs" />
     <Compile Include="Staff\Models\PassportOfView.cs" />
     <Compile Include="Staff\ViewModels\EmployeesViewModels\ViewAddress.cs" />
     <Compile Include="Staff\ViewModels\EmployeesViewModels\ViewEmployeeDetail.cs" />
@@ -350,6 +353,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Finance\MasterPay\Views\" />
     <Folder Include="Settings\Views\" />
   </ItemGroup>
   <ItemGroup>
