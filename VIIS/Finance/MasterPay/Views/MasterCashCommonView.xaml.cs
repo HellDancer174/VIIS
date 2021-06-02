@@ -12,6 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using VIIS.App.Finance.MasterPay.ViewModels;
+using VIIS.Domain.Finance;
+using VIIS.Domain.Global;
 
 namespace VIIS.App.Finance.MasterPay.Views
 {
@@ -20,9 +23,17 @@ namespace VIIS.App.Finance.MasterPay.Views
     /// </summary>
     public partial class MasterCashCommonView : Page
     {
-        public MasterCashCommonView()
+        private readonly ViewMasterCashList viewModel;
+
+        public MasterCashCommonView(ViewMasterCashList viewModel)
         {
             InitializeComponent();
+            DataContext = this.viewModel = viewModel;
         }
+        //public MasterCashCommonView(): this(new ViewMasterCashList(new Repository<MasterCash>(new List<MasterCash>())))
+        //{
+        //}
+
+        
     }
 }

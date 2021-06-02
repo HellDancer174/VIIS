@@ -43,9 +43,9 @@ namespace VIIS.Domain.Finance
         public decimal Sale => sale;
 
 
-        public Task Transfer()
+        public virtual async Task Transfer()
         {
-            return Task.CompletedTask;
+            await Task.CompletedTask;
         }
 
         public bool Equals(Transaction other)

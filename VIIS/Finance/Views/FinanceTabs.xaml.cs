@@ -12,18 +12,18 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using VIIS.App.Finance.MasterPay.ViewModels;
+using VIIS.App.Finance.ViewModels;
 
-namespace VIIS.App.Finance.MasterPay.Views
+namespace VIIS.App.Finance.Views
 {
     /// <summary>
-    /// Логика взаимодействия для MasterCashView.xaml
+    /// Логика взаимодействия для FinanceTabs.xaml
     /// </summary>
-    public partial class MasterCashView : Page
+    public partial class FinanceTabs : Page
     {
-        private readonly ViewAdditionalMasterCashList viewModel;
+        private readonly ViewFinance viewModel;
 
-        public MasterCashView(ViewAdditionalMasterCashList viewModel)
+        public FinanceTabs(ViewFinance viewModel)
         {
             InitializeComponent();
             DataContext = this.viewModel = viewModel;

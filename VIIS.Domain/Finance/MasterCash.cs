@@ -58,12 +58,17 @@ namespace VIIS.Domain.Finance
 
         public override string ToString()
         {
-            return String.Format("Заработная плата: Мастер - {0}, период - c {1} по {2}, сумма - {2}", master.ToString(), startDate.ToShortDateString(), finishDate.ToShortDateString(), transaction.Sale);
+            return String.Format("Заработная плата: Мастер - {0}, период - c {1} по {2}, сумма - {3}", master.ToString(), startDate.ToShortDateString(), finishDate.ToShortDateString(), transaction.Sale);
         }
 
         public async Task Transfer()
         {
             await Task.CompletedTask;
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj is MasterCash && Equals((MasterCash)obj);
         }
     }
 }

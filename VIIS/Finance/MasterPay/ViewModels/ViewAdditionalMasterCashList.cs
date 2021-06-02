@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using VIIS.App.Finance.ViewModels;
 using VIIS.Domain.Finance;
 using VIIS.Domain.Global;
 using VIIS.Domain.Orders;
@@ -20,11 +21,14 @@ namespace VIIS.App.Finance.MasterPay.ViewModels
         private readonly Employees masters;
         private readonly Orders orders;
 
-        public ViewAdditionalMasterCashList(ViewMasterCashList other, Employees masters, Orders orders) : base(new Repository<MasterCash>(new List<MasterCash>()))
+        public ViewAdditionalMasterCashList(ViewMasterCashList other, Employees masters, Orders orders, ViewTransactions transactions) : base(new Repository<MasterCash>(new List<MasterCash>()), transactions)
         {
             this.other = other;
             this.masters = masters;
             this.orders = orders;
+            StartDate = DateTime.Now.Date;
+            FinishDate = DateTime.Now.Date;
+            Percent = 40;
         }
 
         public DateTime StartDate { get; set; }
@@ -32,21 +36,21 @@ namespace VIIS.App.Finance.MasterPay.ViewModels
 
         public int Percent { get; set; }
 
-        public ICommand Сalculation => new RelayCommand((obj) =>
+        public ICommand СalcCommand => new RelayCommand((obj) =>
         {
             Collection.Clear();
             foreach (var master in masters)
             {
                 Collection.Add(new ViewMasterCash(master, orders, StartDate, FinishDate, new MastersPercent(Percent)));
             }
-        }, (obj) => CanExecute);
+        }, (obj) => CanExecute());
 
-        private bool CanExecute => FinishDate > StartDate && FinishDate > new DefaultDateTime().Value && StartDate > new DefaultDateTime().Value;
+        private bool CanExecute() => FinishDate.Date > StartDate.Date && FinishDate > new DefaultDateTime().Value && StartDate > new DefaultDateTime().Value;
 
         public ICommand AdditionalSum => new RelayCommand(async (obj) =>
         {
-            await other.AddRange(Collection.Where(cash => cash.IsSelected).ToArray(), StartDate, FinishDate);
-        }, (obj) => CanExecute && Collection.Where(cash => cash.IsSelected).Count() != 0);
+            await other.AddRange(Collection.Where(cash => cash.IsSelected).Select(cash => new ViewMasterCash(cash.Model())).ToArray(), StartDate, FinishDate);
+        }, (obj) => CanExecute() && Collection.Where(cash => cash.IsSelected).ToList().Count != 0);
 
 
 

@@ -31,12 +31,16 @@ namespace VIIS.App.Finance.MasterPay.ViewModels
 
         public decimal Cash { get; set; }
 
+        public string DateSpan => String.Format("{0} - {1}", startDate.ToShortDateString(), finishDate.ToShortDateString());
+
         public bool IsSelected { get; set; }
 
         public MasterCash Model()
         {
-            return new MasterCash(master, startDate, finishDate, new Transaction(String.Format("Заработная плата: Maстер - {0}", MasterName), 0 - Cash));
+            return new MasterCash(master, startDate, finishDate, Transaction);
         }
+
+        public Transaction Transaction => new Transaction(String.Format("Заработная плата: Maстер - {0}", MasterName), 0 - Cash);
 
         public void NotifySelector()
         {

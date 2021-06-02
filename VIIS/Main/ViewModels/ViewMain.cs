@@ -22,6 +22,7 @@ using VIIS.App.OrdersJournal.ViewModels;
 using VIIS.Domain.Global;
 using VIIS.Domain.Finance;
 using VIIS.App.GlobalViewModel;
+using VIIS.App.Finance.MasterPay.ViewModels;
 
 namespace VIIS.App.Main.ViewModels
 {
@@ -49,15 +50,15 @@ namespace VIIS.App.Main.ViewModels
 
         //}
 
-        public ViewMain(Orders orders, Employees masters, Clients clients, ServiceValueList serviceValues, ViewTransactions transactions,  MainView view):
+        public ViewMain(Orders orders, Employees masters, Clients clients, ServiceValueList serviceValues, ViewTransactions transactions, Repository<MasterCash> cashes, MainView view):
             this(new OrdersJournalView(new Journal(orders, masters, serviceValues, clients, transactions)), new ClientsView(new ViewClients(clients)), 
                 new EmployeesTabs(), 
-                new FinanceView(transactions), new UsersWindow(), view)
+                new FinanceTabs(new ViewFinance(transactions, new ViewMasterCashList(cashes, transactions), orders, masters)), new UsersWindow(), view)
         {
 
         }
 
-        public ViewMain(MainView view) : this(new Orders(), new Employees(), new Clients(), new ServiceValueList(), new ViewTransactions(), view)
+        public ViewMain(MainView view) : this(new Orders(), new Employees(), new Clients(), new ServiceValueList(), new ViewTransactions(), new Repository<MasterCash>(new List<MasterCash>()), view)
         {
 
         }

@@ -101,15 +101,22 @@
     <Compile Include="Finance\MasterPay\Views\MasterCashCommonView.xaml.cs">
       <DependentUpon>MasterCashCommonView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Finance\MasterPay\Views\MasterCashDetailView.xaml.cs">
+      <DependentUpon>MasterCashDetailView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Finance\MasterPay\Views\MasterCashView.xaml.cs">
       <DependentUpon>MasterCashView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Finance\Models\TransactableOrders.cs" />
     <Compile Include="Finance\Models\SumTransaction.cs" />
     <Compile Include="Finance\Models\TransactionOfFinance.cs" />
+    <Compile Include="Finance\ViewModels\ViewFinance.cs" />
     <Compile Include="Finance\ViewModels\ViewTransaction.cs" />
     <Compile Include="Finance\ViewModels\ViewTransactionDetail.cs" />
     <Compile Include="Finance\ViewModels\ViewTransactions.cs" />
+    <Compile Include="Finance\Views\FinanceTabs.xaml.cs">
+      <DependentUpon>FinanceTabs.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Finance\Views\TransactionDetailView.xaml.cs">
       <DependentUpon>TransactionDetailView.xaml</DependentUpon>
     </Compile>
@@ -204,7 +211,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Finance\MasterPay\Views\MasterCashDetailView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Finance\MasterPay\Views\MasterCashView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Finance\Views\FinanceTabs.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

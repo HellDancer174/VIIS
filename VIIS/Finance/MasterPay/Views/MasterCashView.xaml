@@ -13,12 +13,13 @@
             <ColumnDefinition Width="80*"/>
             <ColumnDefinition Width="20*"/>
         </Grid.ColumnDefinitions>
-        <Grid Grid.Column="0" Width="800" HorizontalAlignment="Left">
+        <Grid Grid.Column="0">
             <DataGrid ItemsSource="{Binding Collection}" AutoGenerateColumns="False" FontFamily="{StaticResource Champagne}">
                 <DataGrid.Columns>
                     <DataGridCheckBoxColumn Header="Отменить" Binding="{Binding IsSelected}"/>
                     <DataGridTextColumn Header="Мастер" Binding="{Binding MasterName}" IsReadOnly="True"/>
                     <DataGridTextColumn Header="Заработная плата" Binding="{Binding Cash}" IsReadOnly="False"/>
+                    <DataGridTextColumn Header="Расчетный период" Binding="{Binding DateSpan}" IsReadOnly="True"/>
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
@@ -33,13 +34,13 @@
             </Grid.RowDefinitions>
             <StackPanel Grid.Row="1">
                 <TextBlock Text="Начало периода" Style="{StaticResource Default}" HorizontalAlignment="Center"/>
-                <DatePicker DisplayDate="{Binding StartDate}"/>
+                <DatePicker SelectedDate="{Binding StartDate}"/>
             </StackPanel>
             <StackPanel Grid.Row="2">
                 <TextBlock Text="Окончание периода" Style="{StaticResource Default}" HorizontalAlignment="Center"/>
-                <DatePicker DisplayDate="{Binding StartDate}"/>
+                <DatePicker SelectedDate="{Binding FinishDate}"/>
             </StackPanel>
-            <Button Style="{StaticResource Material}" Grid.Row="3" Command="{Binding Calculation}">
+            <Button Style="{StaticResource Material}" Grid.Row="3" Command="{Binding СalcCommand}">
                 <TextBlock Text="Расчитать" Style="{StaticResource Default}"/>
             </Button>
             <Button Style="{StaticResource Material}" Grid.Row="4" Command="{Binding AdditionalSum}">
