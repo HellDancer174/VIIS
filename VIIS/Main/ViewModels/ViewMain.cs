@@ -23,6 +23,7 @@ using VIIS.Domain.Global;
 using VIIS.Domain.Finance;
 using VIIS.App.GlobalViewModel;
 using VIIS.App.Finance.MasterPay.ViewModels;
+using VIIS.App.Staff.ViewModels;
 
 namespace VIIS.App.Main.ViewModels
 {
@@ -53,7 +54,7 @@ namespace VIIS.App.Main.ViewModels
         public ViewMain(Orders orders, Employees masters, Clients clients, ServiceValueList serviceValues, ViewTransactions transactions, Repository<MasterCash> cashes, MainView view):
             this(new OrdersJournalView(new Journal(orders, masters, serviceValues, clients, transactions)), new ClientsView(new ViewClients(clients)), 
                 new EmployeesTabs(), 
-                new FinanceTabs(new ViewFinance(transactions, new ViewMasterCashList(cashes, transactions), orders, masters)), new UsersWindow(), view)
+                new FinanceTabs(new ViewFinance(transactions, new ViewMasterCashList(cashes, transactions, masters.Select(master => new ViewEmployee(master)).ToList()), orders, masters)), new UsersWindow(), view)
         {
 
         }

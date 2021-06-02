@@ -11,19 +11,19 @@ namespace VIIS.Domain.Finance
 {
     public class MasterCash: Notifier, IEquatable<Master>, IEquatable<MasterCash>, IDocumentAsync
     {
-        protected readonly Master master;
-        protected readonly DateTime startDate;
-        protected readonly DateTime finishDate;
-        protected readonly Transaction transaction;
+        protected Master master;
+        protected DateTime startDate;
+        protected DateTime finishDate;
+        protected decimal value;
 
-        public MasterCash(Master master, DateTime startDate, DateTime finishDate, Transaction transaction)
+        public MasterCash(Master master, DateTime startDate, DateTime finishDate, decimal value)
         {
             this.master = master;
             this.startDate = startDate;
             this.finishDate = finishDate;
-            this.transaction = transaction;
+            this.value = value;
         }
-        public MasterCash(MasterCash other): this(other.master, other.startDate, other.finishDate, other.transaction)
+        public MasterCash(MasterCash other): this(other.master, other.startDate, other.finishDate, other.value)
         {
         }
 
@@ -43,7 +43,7 @@ namespace VIIS.Domain.Finance
 
         public bool Equals(MasterCash other)
         {
-            return other != null && Equals(other.master) && transaction.Equals(other.transaction) && startDate == other.startDate && finishDate == other.finishDate;
+            return other != null && Equals(other.master) && value == other.value && startDate == other.startDate && finishDate == other.finishDate;
         }
 
         public override int GetHashCode()
@@ -52,13 +52,13 @@ namespace VIIS.Domain.Finance
             hashCode = hashCode * -1521134295 + master.GetHashCode();
             hashCode = hashCode * -1521134295 + startDate.GetHashCode();
             hashCode = hashCode * -1521134295 + finishDate.GetHashCode();
-            hashCode = hashCode * -1521134295 + transaction.GetHashCode();
+            hashCode = hashCode * -1521134295 + value.GetHashCode();
             return hashCode;
         }
 
         public override string ToString()
         {
-            return String.Format("Заработная плата: Мастер - {0}, период - c {1} по {2}, сумма - {3}", master.ToString(), startDate.ToShortDateString(), finishDate.ToShortDateString(), transaction.Sale);
+            return String.Format("Заработная плата: Мастер - {0}, период - c {1} по {2}, сумма - {3}", master.ToString(), startDate.ToShortDateString(), finishDate.ToShortDateString(), value);
         }
 
         public async Task Transfer()

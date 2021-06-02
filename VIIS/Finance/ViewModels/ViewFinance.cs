@@ -26,7 +26,7 @@ namespace VIIS.App.Finance.ViewModels
         {
         }
         public ViewFinance(ViewTransactions transactions, ViewMasterCashList cashes, Orders orders, Employees masters):
-            this(transactions, cashes, new ViewAdditionalMasterCashList(cashes, masters, orders, transactions))
+            this(transactions, cashes, new ViewAdditionalMasterCashList(cashes, masters, orders))
         {
         }
 

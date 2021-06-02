@@ -93,6 +93,7 @@
     <Compile Include="Customers\Views\CustomerDetailView.xaml.cs">
       <DependentUpon>CustomerDetailView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Finance\MasterPay\ViewModels\ViewAdditionalMasterCash.cs" />
     <Compile Include="Finance\MasterPay\ViewModels\ViewAdditionalMasterCashList.cs" />
     <Compile Include="Finance\MasterPay\ViewModels\ViewMasterCash.cs" />
     <Compile Include="Finance\MasterPay\ViewModels\ViewMasterCashDetail.cs" />
@@ -120,6 +121,7 @@
     <Compile Include="Finance\Views\TransactionDetailView.xaml.cs">
       <DependentUpon>TransactionDetailView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GlobalViewModel\ExtentedViewRepository.cs" />
     <Compile Include="GlobalViewModel\ViewDetail.cs" />
     <Compile Include="GlobalViewModel\RepositoryCommand.cs" />
     <Compile Include="GlobalViewModel\ViewFilterableModel.cs" />

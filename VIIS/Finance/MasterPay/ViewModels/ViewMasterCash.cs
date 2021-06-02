@@ -17,32 +17,30 @@ namespace VIIS.App.Finance.MasterPay.ViewModels
     {
         public ViewMasterCash(MasterCash other) : base(other)
         {
-            Cash = Math.Abs(transaction.Sale);
         }
 
         public ViewMasterCash(Master master, Orders orders, DateTime startDate, DateTime finishDate, MastersPercent percent):
-            this(new MasterCash(master, startDate, finishDate, 
-                new Transaction(String.Format("Заработная плата: Maстер - {0}", master.FullName), percent.CashOfMaster(new Orders(orders, startDate, finishDate, master).TotalSale))))
+            this(new MasterCash(master, startDate, finishDate, percent.CashOfMaster(new Orders(orders, startDate, finishDate, master).TotalSale)))
         {
 
         }
 
         public string MasterName => master.FullName;
 
-        public decimal Cash { get; set; }
+        public decimal Cash { get => value; set => this.value = value; }
 
         public string DateSpan => String.Format("{0} - {1}", startDate.ToShortDateString(), finishDate.ToShortDateString());
 
         public bool IsSelected { get; set; }
 
-        public MasterCash Model()
+        public virtual MasterCash Model()
         {
-            return new MasterCash(master, startDate, finishDate, Transaction);
+            return new MasterCash(master, startDate, finishDate, value);
         }
 
         public Transaction Transaction => new Transaction(String.Format("Заработная плата: Maстер - {0}", MasterName), 0 - Cash);
 
-        public void NotifySelector()
+        public virtual void NotifySelector()
         {
             ChangeProperties(nameof(MasterName), nameof(Cash));
         }

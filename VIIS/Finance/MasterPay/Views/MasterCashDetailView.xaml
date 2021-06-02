@@ -18,16 +18,31 @@
                     <ColumnDefinition Width="20*"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0" Text="Мастер" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Bottom" Style="{StaticResource Default}"/>
-                <TextBlock Grid.Column="1" Text="{Binding MasterName}" FontSize="20" Style="{StaticResource Default}"/>
+                <ComboBox Grid.Column="1" ItemsSource="{Binding Masters}" FontSize="20" Style="{StaticResource DefaultDefaultComboBox}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding FullName}" Style="{StaticResource Default}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
             </Grid>
             <Grid Margin="5,15,5,15">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="10*"/>
                     <ColumnDefinition Width="20*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0" Text="Расчетный период" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Bottom" Style="{StaticResource Default}"/>
-                <TextBlock Grid.Column="1" Text="{Binding DateSpan}" FontSize="20" Style="{StaticResource Default}"/>
+                <TextBlock Grid.Column="0" Text="Начало периода" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Bottom" Style="{StaticResource Default}"/>
+                <DatePicker Grid.Column="1" SelectedDate="{Binding StartDate}" FontSize="20" FontFamily="{StaticResource Champagne}"/>
             </Grid>
+            <Grid Margin="5,15,5,15">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="10*"/>
+                    <ColumnDefinition Width="20*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Text="Окончание периода" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Bottom" Style="{StaticResource Default}"/>
+                <DatePicker Grid.Column="1" SelectedDate="{Binding FinishDate}" FontSize="20" FontFamily="{StaticResource Champagne}"/>
+            </Grid>
+
             <Grid Margin="5,15,5,15">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="10*"/>

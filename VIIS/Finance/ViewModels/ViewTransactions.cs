@@ -90,5 +90,16 @@ namespace VIIS.App.Finance.ViewModels
             await base.RemoveViewAsync(item);
             CalcTotal();
         }
+
+        public async Task AddRange(IEnumerable<ViewTransaction> viewTransactions)
+        {
+            foreach(var transact in viewTransactions)
+            {
+                Collection.Add(transact);
+                this.Add(transact);
+            }
+
+            await Task.CompletedTask; // отправить на сервер
+        }
     }
 }

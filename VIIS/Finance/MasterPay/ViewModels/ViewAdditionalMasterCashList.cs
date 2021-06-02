@@ -21,7 +21,7 @@ namespace VIIS.App.Finance.MasterPay.ViewModels
         private readonly Employees masters;
         private readonly Orders orders;
 
-        public ViewAdditionalMasterCashList(ViewMasterCashList other, Employees masters, Orders orders, ViewTransactions transactions) : base(new Repository<MasterCash>(new List<MasterCash>()), transactions)
+        public ViewAdditionalMasterCashList(ViewMasterCashList other, Employees masters, Orders orders) : base(new Repository<MasterCash>(new List<MasterCash>()), other)
         {
             this.other = other;
             this.masters = masters;
