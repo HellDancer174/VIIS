@@ -61,6 +61,7 @@
     <Compile Include="Orders\Decorators\Checkable\MasterCheckableOrder.cs" />
     <Compile Include="Orders\Decorators\Checkable\MonthCheckableOrder.cs" />
     <Compile Include="Orders\Decorators\OrdersDecorator.cs" />
+    <Compile Include="Orders\Decorators\UpdatableOrders.cs" />
     <Compile Include="Services\Decorators\DecoratableServiceValue.cs" />
     <Compile Include="Services\Decorators\ServiceDecorator.cs" />
     <Compile Include="Services\ServiceValueList.cs" />

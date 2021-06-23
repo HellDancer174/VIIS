@@ -18,7 +18,7 @@ using VIMVVM;
 
 namespace VIIS.App.OrdersJournal.ViewModels
 {
-    public class Journal: OrdersDecorator, INotifyPropertyChanged
+    public class Journal: UpdatableOrders, INotifyPropertyChanged
     {
         private ViewJournalEmployees staff;
         private DateTime currentDate;
@@ -67,21 +67,30 @@ namespace VIIS.App.OrdersJournal.ViewModels
 
         public override async Task AddAsync(Order order)
         {
-            staff.DaysPage.AddOrder(order, serviceValueList, clients);
+            //staff.DaysPage.AddOrder(order, serviceValueList, clients);
             await base.AddAsync(order);
+            await UpdateAsync();
         }
 
         public override async Task Update(Order oldOrder, Order newOrder)
         {
-            staff.DaysPage.RemoveOrder(oldOrder);
-            staff.DaysPage.AddOrder(newOrder, serviceValueList, clients);
+            //staff.DaysPage.RemoveOrder(oldOrder);
+            //staff.DaysPage.AddOrder(newOrder, serviceValueList, clients);
             await base.Update(oldOrder, newOrder);
+            await UpdateAsync();
         }
 
         public override async Task RemoveAsync(Order order)
         {
-            staff.DaysPage.RemoveOrder(order);
+            //staff.DaysPage.RemoveOrder(order);
             await base.RemoveAsync(order);
+            await UpdateAsync();
+        }
+
+        protected override async Task UpdateAsync()
+        {
+            await base.UpdateAsync();
+            ChangeStaff();
         }
     }
 }

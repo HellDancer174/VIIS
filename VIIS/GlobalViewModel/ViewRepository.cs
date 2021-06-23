@@ -63,5 +63,6 @@ namespace VIIS.App.GlobalViewModel
             //ChangeProperty(nameof(Selected));
         }
 
+
     }
 }
