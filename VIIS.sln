@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VIMVVM", "..\VIMVVM\VIMVVM\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElegantLib", "..\ElegantLib\ElegantLib\ElegantLib.csproj", "{4AEFDB59-CAD9-4FD0-954E-F2C686200A55}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VIIS.API", "VIIS.API\VIIS.API.csproj", "{B4A6068D-019F-437C-9A3E-FE1E55E1D661}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{4AEFDB59-CAD9-4FD0-954E-F2C686200A55}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4AEFDB59-CAD9-4FD0-954E-F2C686200A55}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4AEFDB59-CAD9-4FD0-954E-F2C686200A55}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B4A6068D-019F-437C-9A3E-FE1E55E1D661}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4A6068D-019F-437C-9A3E-FE1E55E1D661}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4A6068D-019F-437C-9A3E-FE1E55E1D661}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4A6068D-019F-437C-9A3E-FE1E55E1D661}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
