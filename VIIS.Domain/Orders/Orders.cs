@@ -74,7 +74,7 @@ namespace VIIS.Domain.Orders
 
         public decimal TotalSale => this.Sum(order => order.Sale);
 
-        public virtual Task Transfer()
+        public virtual Task TransferAsync()
         {
             return Task.CompletedTask;
         }

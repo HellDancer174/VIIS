@@ -4,11 +4,15 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using VIIS.API.Data.DBObjects;
 
 namespace VIIS.API.Data
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+        //public DbSet<AddressOfDB> Addresses { get; set; }
+
+
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {

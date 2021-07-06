@@ -59,7 +59,7 @@ namespace VIIS.Domain.Finance.Decorators
             return obj is MasterCash && Equals((MasterCashTransaction)obj);
         }
 
-        public override async Task Transfer()
+        public override async Task TransferAsync()
         {
             await Task.CompletedTask;
         }

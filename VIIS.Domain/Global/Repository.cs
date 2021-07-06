@@ -21,7 +21,7 @@ namespace VIIS.Domain.Global
         public virtual async Task AddAsync(T item)
         {
             Add(item);
-            await item.Transfer();
+            await item.TransferAsync();
         }
 
         public virtual async Task Update(T oldItem, T item)
@@ -29,13 +29,13 @@ namespace VIIS.Domain.Global
             var index = IndexOf(oldItem);
             if (index == -1) index = IndexOf(item);
             this[index] = item;
-            await item.Transfer();
+            await item.TransferAsync();
         }
 
         public virtual async Task RemoveAsync(T item)
         {
             Remove(item);
-            await item.Transfer();
+            await item.TransferAsync();
         }
 
     }

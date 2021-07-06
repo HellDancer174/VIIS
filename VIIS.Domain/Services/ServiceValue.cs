@@ -33,7 +33,7 @@ namespace VIIS.Domain.Services
             return name;
         }
 
-        public Task Transfer()
+        public Task TransferAsync()
         {
             return Task.CompletedTask;
         }

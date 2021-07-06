@@ -61,7 +61,7 @@ namespace VIIS.Domain.Finance
             return String.Format("Заработная плата: Мастер - {0}, период - c {1} по {2}, сумма - {3}", master.ToString(), startDate.ToShortDateString(), finishDate.ToShortDateString(), value);
         }
 
-        public async Task Transfer()
+        public async Task TransferAsync()
         {
             await Task.CompletedTask;
         }

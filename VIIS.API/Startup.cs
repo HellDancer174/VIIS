@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using VIIS.API.Data;
 using VIIS.API.Services;
+using VIIS.API.JwtBearer.Models;
 
 namespace VIIS.API
 {
@@ -40,6 +41,11 @@ namespace VIIS.API
                     options.Conventions.AuthorizePage("/Account/Logout");
                 });
 
+            services.AddTransient<IEmailSender, EmailSender>();
+            services.AddAuthentication().AddCookie(config => config.SlidingExpiration = true).AddJwtBearer(config =>
+            {
+                config.TokenValidationParameters = new VITokenValidParameters(new Issuer(), new Audience(), new Key());
+            });
             // Register no-op EmailSender used by account confirmation and password reset during development
             // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=532713
             services.AddSingleton<IEmailSender, EmailSender>();

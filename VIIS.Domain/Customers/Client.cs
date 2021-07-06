@@ -1,5 +1,6 @@
 ﻿using ElegantLib;
 using ElegantLib.Documents;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,28 +11,36 @@ using VIMVVM;
 
 namespace VIIS.Domain.Customers
 {
+    [JsonObject(MemberSerialization.OptIn)]
     public class Client: Notifier, IDocument, IEquatable<Client>, IDocumentAsync
     {
-        protected string firstName;
-        protected string lastName;
-        protected string middleName;
-        protected string phone;
-        protected string email;
-        protected Address address;
-        protected string comment;
 
-        public Client(string firstName, string lastName, string middleName, string phone): this(firstName, lastName, middleName, phone, "", new Address(), "")
+        [JsonProperty] protected string firstName;
+        [JsonProperty] protected string lastName;
+        [JsonProperty] protected string middleName;
+        [JsonProperty] protected string phone;
+        [JsonProperty] protected string email;
+        [JsonProperty] protected Address address;
+        [JsonProperty] protected string comment;
+        [JsonProperty] protected readonly int id;
+
+        public Client(int id, string firstName, string lastName, string middleName, string phone) : this(id, firstName, lastName, middleName, phone, "", new Address(), "")
+        {
+            this.id = id;
+        }
+        public Client(string firstName, string lastName, string middleName, string phone): this(0, firstName, lastName, middleName, phone)
         {
         }
         public Client(): this("", "", "", "")
         {
         }
-        public Client(Client other): this(other.firstName, other.lastName, other.middleName, other.phone, other.email, other.address, other.comment)
+        public Client(Client other): this(other.id, other.firstName, other.lastName, other.middleName, other.phone, other.email, other.address, other.comment)
         {
         }
 
-        public Client(string firstName, string lastName, string middleName, string phone, string email, Address address, string comment)
+        public Client(int id, string firstName, string lastName, string middleName, string phone, string email, Address address, string comment)
         {
+            this.id = id;
             this.firstName = firstName;
             this.lastName = lastName;
             this.middleName = middleName;
@@ -39,6 +48,10 @@ namespace VIIS.Domain.Customers
             this.email = email;
             this.address = address;
             this.comment = comment;
+        }
+        public Client(string firstName, string lastName, string middleName, string phone, string email, Address address, string comment):
+            this(0, firstName, lastName, middleName, phone, email, address, comment)
+        {
         }
 
         public virtual bool IsIncomplete => firstName == "" || lastName == "" || phone == "";
@@ -76,14 +89,14 @@ namespace VIIS.Domain.Customers
             return hashCode;
         }
 
-        public Task Transfer()
+        public virtual Task TransferAsync()
         {
             return Task.CompletedTask;
         }
 
-        void IDocument.Transfer()
+        public virtual void Transfer()
         {
-            throw new NotImplementedException();
+            return;
         }
     }
 }

@@ -22,7 +22,7 @@ namespace VIIS.Domain.Staff
         }
 
         public Master(string firstName, string lastName, string middleName, string phone, Position position, WorkDaysList workDaysList, Address address, Passport passport, EmployeeDetail detail, DateTime birthday, string email):
-            base(firstName, lastName, middleName, phone, email, address, "")
+            base(new Client(firstName, lastName, middleName, phone, email, address, ""))
         {
             this.position = position;
             this.workDaysList = workDaysList;

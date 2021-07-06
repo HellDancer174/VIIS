@@ -73,7 +73,7 @@ namespace VIIS.Domain.Orders
 
         public virtual void Transfer()
         {
-            client.Transfer();
+            client.TransferAsync();
         }
 
         public bool Equals(Order other)
