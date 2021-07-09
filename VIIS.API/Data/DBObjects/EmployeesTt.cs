@@ -11,6 +11,17 @@ namespace VIIS.API.Data.DBObjects
             WorkDaysTt = new HashSet<WorkDaysTt>();
         }
 
+        public EmployeesTt(int id, int personId, string position, DateTime birthday, int contractId, DateTime startDate, int passportId)
+        {
+            Id = id;
+            PersonId = personId;
+            Position = position;
+            Birthday = birthday;
+            ContractId = contractId;
+            StartDate = startDate;
+            PassportId = passportId;
+        }
+
         public int Id { get; set; }
         public int PersonId { get; set; }
         public string Position { get; set; }

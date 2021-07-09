@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using VIIS.API.Customers.Models;
+using VIIS.API.Data.DBObjects;
+using VIIS.API.GlobalModel;
 using VIIS.API.JwtBearer.Models;
 using VIIS.Domain.Customers;
 
@@ -38,38 +40,35 @@ namespace VIIS.API.Controllers
         [HttpPost]
         public ActionResult Post([FromBody]Client value)
         {
-            using (var context = new Data.DBObjects.VIISDBContext())
+            using (var context = new VIISDBContext())
             {
-                var client = new InsertableDBClient(new DBClient(value));
-                client.Transfer();
+                return Execute(new TDBClient(value, new DBQuery<PersonsTt>(context.PersonsTt, context), new DBQuery<AddressesTt>(context.AddressesTt, context)));
             }
-            return Ok();
         }
 
         // PUT: api/Clients/5
         [HttpPut("{id}")]
         public ActionResult Put([FromBody]Client value)
         {
-            try
+            using (var context = new VIISDBContext())
             {
-                var client = new ValidDBClient(new UpdatableDBClient(new DBClient(value)));
-                client.Transfer();
+                return Execute(new ValidDBClient(new TDBClient(value, new UpdatableDBQuery<PersonsTt>(context.PersonsTt, context), new UpdatableDBQuery<AddressesTt>(context.AddressesTt, context))));
             }
-            catch (Exception ex)
-            {
-                ModelState.AddModelError(string.Empty, ex.Message);
-                return BadRequest(ModelState);
-            }
-            return Ok();
+            //return Execute(new ValidDBClient(new UpdatableDBClient(new DBClient(value))));
         }
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
         public ActionResult Delete([FromBody]Client value)
         {
+            throw new NotImplementedException("Переделать");
+            //return Execute(new ValidDBClient(new RemovableDBClient(new DBClient(value))));
+        }
+
+        private ActionResult Execute(Client client)
+        {
             try
             {
-                var client = new ValidDBClient(new RemovableDBClient(new DBClient(value)));
                 client.Transfer();
             }
             catch (Exception ex)
@@ -78,6 +77,7 @@ namespace VIIS.API.Controllers
                 return BadRequest(ModelState);
             }
             return Ok();
+
         }
     }
 }

@@ -10,6 +10,7 @@ namespace VIIS.Domain.Staff
 {
     public class Master : Client, IEquatable<Master>, IEquatable<Position>
     {
+        protected int masterID;
         protected Position position;
         protected WorkDaysList workDaysList;
         protected Passport passport;
@@ -17,8 +18,23 @@ namespace VIIS.Domain.Staff
         protected DateTime birthday;
 
         public Master(Master other) : 
-            this(other.firstName, other.lastName, other.middleName, other.phone, other.position, other.workDaysList, other.address, other.passport, other.detail, other.birthday, other.email)
+            this(other.masterID, other.id, other.firstName, other.lastName, other.middleName, other.phone, other.position, other.workDaysList, other.address, other.passport, other.detail, other.birthday, other.email)
         {
+        }
+
+        public Master(int id, int clientID, string firstName, string lastName, string middleName, string phone, Position position, WorkDaysList workDaysList, Address address, Passport passport, EmployeeDetail detail, DateTime birthday, string email) :
+            this(id, position, workDaysList, address, passport, detail, birthday, new Client(clientID, firstName, lastName, middleName, phone, email, address, ""))
+        {
+        }
+        public Master(int id, Position position, WorkDaysList workDaysList, Address address, Passport passport, EmployeeDetail detail, DateTime birthday, Client client):
+            base(client)
+        {
+            masterID = id;
+            this.position = position;
+            this.workDaysList = workDaysList;
+            this.passport = passport;
+            this.detail = detail;
+            this.birthday = birthday;
         }
 
         public Master(string firstName, string lastName, string middleName, string phone, Position position, WorkDaysList workDaysList, Address address, Passport passport, EmployeeDetail detail, DateTime birthday, string email):

@@ -11,7 +11,7 @@ namespace VIIS.API.Customers.Models
 {
     public class DBClients : ClientsDecorator
     {
-        public DBClients(VIISDBContext context) : base(new Clients(context.PersonsTt.Include(person => person.Address).ToList().Select(person => new DBClient(person) as Client).ToList()))
+        public DBClients(VIISDBContext context) : base(new Clients(context.PersonsTt.Include(person => person.Address).ToList().Select(person => new TDBClient(person) as Client).ToList()))
         {
         }
     }

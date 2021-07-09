@@ -14,6 +14,6 @@ namespace VIIS.API.Customers.Models
             dbAddress = new UpdatableDBAddress(dbAddress);
         }
 
-        protected override void ExecuteTransfer(VIISDBContext context, PersonsTt dataClient) => context.Update(dataClient);
+        protected override void PersonTransfer(VIISDBContext context, PersonsTt dataClient) => context.Update(dataClient);
     }
 }

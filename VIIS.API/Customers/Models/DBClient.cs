@@ -39,15 +39,15 @@ namespace VIIS.API.Customers.Models
             {
                 dbAddress.Transfer();
                 var dataClient = new PersonsTt(id, firstName, middleName, lastName, phone, email, dbAddress.Key, comment);
-                ExecuteTransfer(context, dataClient);
+                PersonTransfer(context, dataClient);
                 context.SaveChanges();
                 Key = dataClient.Id;
             }
         }
 
-        protected virtual void ExecuteTransfer(VIISDBContext context, PersonsTt dataClient) => context.Add(dataClient);
+        protected virtual void PersonTransfer(VIISDBContext context, PersonsTt dataClient) => context.Add(dataClient);
 
-        public int Key { get; private set; }
+        public int Key { get; protected set; }
 
     
     }

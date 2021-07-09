@@ -12,7 +12,7 @@ namespace VIIS.Domain.Customers.Decorators
 
         public ClientDecorator(Client other) : base(other)
         {
-            this.other = new Client(other);
+            this.other = other; //Убрал new;
         }
     }
 }

@@ -14,6 +14,20 @@ namespace VIIS.API.Customers.Models
             dbAddress = new RemovableDBAddress(dbAddress);
         }
 
-        protected override void ExecuteTransfer(VIISDBContext context, PersonsTt dataClient) => context.Remove(dataClient);
+        protected override void PersonTransfer(VIISDBContext context, PersonsTt dataClient) => context.Remove(dataClient);
+
+        public override void Transfer()
+        {
+            using (var context = new VIISDBContext())
+            {
+                var dataClient = new PersonsTt(id, firstName, middleName, lastName, phone, email, dbAddress.Key, comment);
+                PersonTransfer(context, dataClient);
+                context.SaveChanges();
+                dbAddress.Transfer();
+                context.SaveChanges();
+                Key = 0;
+            }
+        }
+
     }
 }

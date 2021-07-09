@@ -15,6 +15,7 @@ namespace VIIS.API.Customers.Addresses
         }
         public DBAddress(Address other) : base(other)
         {
+            Key = id;
         }
 
         protected virtual void ExecuteTransfer(VIISDBContext context, AddressesTt dataAddress) => context.AddressesTt.Add(dataAddress);

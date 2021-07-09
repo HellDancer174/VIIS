@@ -10,6 +10,15 @@ namespace VIIS.API.Data.DBObjects
             EmployeesTt = new HashSet<EmployeesTt>();
         }
 
+        public PassportsTt(int id, string series, string passportNumber, DateTime issusiesDate, string organization)
+        {
+            Id = id;
+            Series = series;
+            PassportNumber = passportNumber;
+            IssusiesDate = issusiesDate;
+            Organization = organization;
+        }
+
         public int Id { get; set; }
         public string Series { get; set; }
         public string PassportNumber { get; set; }
