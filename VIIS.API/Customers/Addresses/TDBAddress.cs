@@ -5,10 +5,11 @@ using System.Threading.Tasks;
 using VIIS.API.Data.DBObjects;
 using VIIS.API.GlobalModel;
 using VIIS.Domain.Staff.ValueClasses;
+using VIIS.Domain.Staff.ValueClasses.Decorators;
 
 namespace VIIS.API.Customers.Addresses
 {
-    public class TDBAddress : DBAddress
+    public class TDBAddress : DecoratableAddress
     {
         private readonly DBQuery<AddressesTt> query;
         private readonly AddressesTt entity;
@@ -29,6 +30,6 @@ namespace VIIS.API.Customers.Addresses
             query.Transfer(entity);
         }
 
-        public new int Key => entity.Id;
+        public int Key => entity.Id;
     }
 }

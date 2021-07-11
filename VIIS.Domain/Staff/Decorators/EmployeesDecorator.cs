@@ -12,7 +12,7 @@ namespace VIIS.Domain.Staff.Decorators
 
         public EmployeesDecorator(Employees other) : base(other)
         {
-            this.other = new Employees(other);
+            this.other = other;
         }
     }
 }

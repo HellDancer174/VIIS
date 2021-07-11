@@ -12,9 +12,9 @@ namespace VIIS.API.Customers.Models
 {
     public class TDBClient: ClientDecorator
     {
-        private readonly DBQuery<PersonsTt> personQuery;
-        private readonly DBQuery<AddressesTt> addressQuery;
-        private readonly PersonsTt entity;
+        protected readonly DBQuery<PersonsTt> personQuery;
+        protected readonly DBQuery<AddressesTt> addressQuery;
+        protected readonly PersonsTt entity;
 
         public TDBClient(PersonsTt row, AddressesTt addressRow) : 
             this(new Client(row.Id, row.FirstName, row.LastName, row.MiddleName, row.Phone, row.Email, new TDBAddress(addressRow), row.Comment), new AnyDBQuery<PersonsTt>(), new AnyDBQuery<AddressesTt>())
@@ -38,6 +38,6 @@ namespace VIIS.API.Customers.Models
             personQuery.Transfer(entity);
         }
 
-        public int Key => entity.Id;
+        public virtual int Key => entity.Id;
     }
 }

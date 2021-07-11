@@ -12,7 +12,7 @@ namespace VIIS.Domain.Staff.Decorators
 
         public DecoratableMaster(Master other) : base(other)
         {
-            this.other = new Master(other);
+            this.other = other;
         }
     }
 }

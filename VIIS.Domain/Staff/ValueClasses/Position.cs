@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,9 +7,10 @@ using System.Threading.Tasks;
 
 namespace VIIS.Domain.Staff.ValueClasses
 {
+    [JsonObject(MemberSerialization.OptIn)]
     public class Position: IEquatable<Position>
     {
-        private readonly string position;
+        [JsonProperty] private readonly string position;
 
         public Position(string position)
         {

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,14 +9,15 @@ using VIIS.Domain.Staff.ValueClasses;
 
 namespace VIIS.Domain.Staff
 {
+    [JsonObject(MemberSerialization.OptIn)]
     public class Master : Client, IEquatable<Master>, IEquatable<Position>
     {
-        protected int masterID;
-        protected Position position;
-        protected WorkDaysList workDaysList;
-        protected Passport passport;
-        protected EmployeeDetail detail;
-        protected DateTime birthday;
+        [JsonProperty] protected int masterID;
+        [JsonProperty] protected Position position;
+        [JsonProperty] protected WorkDaysList workDaysList;
+        [JsonProperty] protected Passport passport;
+        [JsonProperty] protected EmployeeDetail detail;
+        [JsonProperty] protected DateTime birthday;
 
         public Master(Master other) : 
             this(other.masterID, other.id, other.firstName, other.lastName, other.middleName, other.phone, other.position, other.workDaysList, other.address, other.passport, other.detail, other.birthday, other.email)
@@ -23,10 +25,10 @@ namespace VIIS.Domain.Staff
         }
 
         public Master(int id, int clientID, string firstName, string lastName, string middleName, string phone, Position position, WorkDaysList workDaysList, Address address, Passport passport, EmployeeDetail detail, DateTime birthday, string email) :
-            this(id, position, workDaysList, address, passport, detail, birthday, new Client(clientID, firstName, lastName, middleName, phone, email, address, ""))
+            this(id, position, workDaysList, passport, detail, birthday, new Client(clientID, firstName, lastName, middleName, phone, email, address, ""))
         {
         }
-        public Master(int id, Position position, WorkDaysList workDaysList, Address address, Passport passport, EmployeeDetail detail, DateTime birthday, Client client):
+        public Master(int id, Position position, WorkDaysList workDaysList, Passport passport, EmployeeDetail detail, DateTime birthday, Client client):
             base(client)
         {
             masterID = id;

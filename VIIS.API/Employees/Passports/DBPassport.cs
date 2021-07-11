@@ -21,6 +21,12 @@ namespace VIIS.API.Employees.Passports
             entity = new PassportsTt(id, series, passportID, issusiesDate, organization);
             
         }
+        public DBPassport(PassportsTt row, DBQuery<PassportsTt> query) : this(new Passport(row.Id, row.Series, row.PassportNumber, row.IssusiesDate, row.Organization), query)
+        {
+        }
+        public DBPassport(PassportsTt row): this(row, new AnyDBQuery<PassportsTt>())
+        {
+        }
 
         public void Transfer()
         {

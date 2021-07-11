@@ -13,7 +13,6 @@ namespace VIIS.API.Employees.Models
         public DBDetail(EmployeeDetail other) : base(other)
         {
         }
-
         public EmployeesTt EmployeeEntity(EmployeesTt entity)
         {
             return new EmployeesTt(entity.Id, entity.PersonId, entity.Position, entity.Birthday, contractID, start, entity.PassportId);

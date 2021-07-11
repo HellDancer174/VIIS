@@ -19,6 +19,9 @@ namespace VIIS.API.GlobalModel
             this.collection = collection;
             this.context = context;
         }
+        public DBQuery(DBQuery<TEntity> other): this(other.collection, other.context)
+        {
+        }
 
         protected virtual void ExecuteCommand(TEntity entity) => collection.Add(entity);
 

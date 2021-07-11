@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,13 +8,14 @@ using VIMVVM;
 
 namespace VIIS.Domain.Staff.ValueClasses
 {
+    [JsonObject(MemberSerialization.OptIn)]
     public class Passport: Notifier
     {
-        protected int id;
-        protected string series;
-        protected string passportID;
-        protected DateTime issusiesDate;
-        protected string organization;
+        [JsonProperty] protected int id;
+        [JsonProperty] protected string series;
+        [JsonProperty] protected string passportID;
+        [JsonProperty] protected DateTime issusiesDate;
+        [JsonProperty] protected string organization;
 
         public Passport(int id, string seria, string passportID, DateTime date, string organization)
         {

@@ -61,8 +61,10 @@ namespace VIIS.API.Controllers
         [HttpDelete("{id}")]
         public ActionResult Delete([FromBody]Client value)
         {
-            throw new NotImplementedException("Переделать");
-            //return Execute(new ValidDBClient(new RemovableDBClient(new DBClient(value))));
+            using (var context = new VIISDBContext())
+            {
+                return Execute(new ValidDBClient(new RemovableTDBClient(value, new RemovableDBQuery<PersonsTt>(context.PersonsTt, context), new RemovableDBQuery<AddressesTt>(context.AddressesTt, context))));
+            }
         }
 
         private ActionResult Execute(Client client)

@@ -8,16 +8,17 @@ using VIIS.API.Employees.Passports;
 using VIIS.API.GlobalModel;
 using VIIS.Domain.Staff;
 using VIIS.Domain.Staff.Decorators;
+using VIIS.Domain.Staff.ValueClasses;
 
 namespace VIIS.API.Employees.Models
 {
     public class DBMaster : DecoratableMaster
     {
-        private readonly EmployeesTt entity;
-        private readonly DBQuery<EmployeesTt> query;
-        private readonly DBQuery<PassportsTt> passportQuery;
-        private readonly DBQuery<PersonsTt> personQuery;
-        private readonly DBQuery<AddressesTt> addressQuery;
+        protected readonly EmployeesTt entity;
+        protected readonly DBQuery<EmployeesTt> query;
+        protected readonly DBQuery<PassportsTt> passportQuery;
+        protected readonly DBQuery<PersonsTt> personQuery;
+        protected readonly DBQuery<AddressesTt> addressQuery;
 
         public DBMaster(Master other, DBQuery<EmployeesTt> query, DBQuery<PassportsTt> passportQuery, DBQuery<PersonsTt> personQuery, DBQuery<AddressesTt> addressQuery) : base(other)
         {
@@ -26,6 +27,16 @@ namespace VIIS.API.Employees.Models
             this.passportQuery = passportQuery;
             this.personQuery = personQuery;
             this.addressQuery = addressQuery;
+        }
+        public DBMaster(EmployeesTt row): 
+            base(new Master(row.Id, new Position(row.Position), new WorkDaysList(row.WorkDaysTt.Where(day => day.MasterId == row.Id).Select(day => day.WorkDate).ToList()), 
+                new DBPassport(row.Passport), new EmployeeDetail(row.StartDate, row.ContractId), row.Birthday, new TDBClient(row.Person)))
+        {
+            entity = row;
+            this.query = new AnyDBQuery<EmployeesTt>();
+            this.passportQuery = new AnyDBQuery<PassportsTt>();
+            this.personQuery = new AnyDBQuery<PersonsTt>();
+            this.addressQuery = new AnyDBQuery<AddressesTt>();
         }
 
         public override void Transfer()

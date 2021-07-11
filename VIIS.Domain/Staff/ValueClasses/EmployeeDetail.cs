@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,10 +8,11 @@ using VIMVVM;
 
 namespace VIIS.Domain.Staff.ValueClasses
 {
+    [JsonObject(MemberSerialization.OptIn)]
     public class EmployeeDetail: Notifier
     {
-        protected DateTime start;
-        protected int contractID;
+        [JsonProperty] protected DateTime start;
+        [JsonProperty] protected int contractID;
 
         public EmployeeDetail(DateTime start, int contractID)
         {
