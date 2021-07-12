@@ -11,9 +11,11 @@ namespace VIIS.API.Employees.Models
 {
     public class DBEmployees : EmployeesDecorator
     {
-        public DBEmployees(VIISDBContext context) : base(new Domain.Staff.Employees(context.EmployeesTt.Include(master => master.Person).ThenInclude(person => person.Address).Include(master => master.Passport)
+        public DBEmployees(VIISDBContext context) : base(new Domain.Staff.Employees(context.EmployeesTt.Include(master => master.Person).ThenInclude(person => person.Address)
+            .Include(master => master.Passport).Include(master => master.WorkDaysTt)
             .Select(master => new DBMaster(master) as Master).ToList()))
         {
         }
+
     }
 }

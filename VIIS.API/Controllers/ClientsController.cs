@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using VIIS.API.Controllers.Base;
 using VIIS.API.Customers.Models;
 using VIIS.API.Data.DBObjects;
 using VIIS.API.GlobalModel;
@@ -17,7 +18,7 @@ namespace VIIS.API.Controllers
     [Produces("application/json")]
     [Route("api/Clients")]
     //[Authorize(AuthenticationSchemes = JwtAuthScheme.scheme)]
-    public class ClientsController : Controller
+    public class ClientsController : DBController
     {
         // GET: api/Clients
         [HttpGet]
@@ -67,19 +68,5 @@ namespace VIIS.API.Controllers
             }
         }
 
-        private ActionResult Execute(Client client)
-        {
-            try
-            {
-                client.Transfer();
-            }
-            catch (Exception ex)
-            {
-                ModelState.AddModelError(string.Empty, ex.Message);
-                return BadRequest(ModelState);
-            }
-            return Ok();
-
-        }
     }
 }

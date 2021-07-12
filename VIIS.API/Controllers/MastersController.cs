@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ElegantLib;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -68,7 +69,7 @@ namespace VIIS.API.Controllers
             }
         }
 
-        private ActionResult Execute(Master model)
+        private ActionResult Execute(IDocument model)
         {
             try
             {
