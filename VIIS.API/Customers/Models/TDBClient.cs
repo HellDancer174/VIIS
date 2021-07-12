@@ -29,6 +29,9 @@ namespace VIIS.API.Customers.Models
             this.addressQuery = addressQuery;
             entity = new PersonsTt(id, firstName, middleName, lastName, phone, email, 0, comment);
         }
+        public TDBClient(Client other): this(other, new AnyDBQuery<PersonsTt>(), new AnyDBQuery<AddressesTt>())
+        {
+        }
 
         public override void Transfer()
         {

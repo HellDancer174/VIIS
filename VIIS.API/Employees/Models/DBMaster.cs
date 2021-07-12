@@ -28,6 +28,9 @@ namespace VIIS.API.Employees.Models
             this.personQuery = personQuery;
             this.addressQuery = addressQuery;
         }
+        public DBMaster(Master other):this(other, new AnyDBQuery<EmployeesTt>(), new AnyDBQuery<PassportsTt>(), new AnyDBQuery<PersonsTt>(), new AnyDBQuery<AddressesTt>())
+        {
+        }
         public DBMaster(EmployeesTt row): 
             base(new Master(row.Id, new Position(row.Position), new WorkDaysList(row.WorkDaysTt.Where(day => day.MasterId == row.Id).Select(day => day.WorkDate).ToList()), 
                 new DBPassport(row.Passport), new EmployeeDetail(row.StartDate, row.ContractId), row.Birthday, new TDBClient(row.Person)))
@@ -49,5 +52,7 @@ namespace VIIS.API.Employees.Models
             entity.PersonId = dbClient.Key;
             query.Transfer(entity);
         }
+
+        public int Key => entity.Id;
     }
 }

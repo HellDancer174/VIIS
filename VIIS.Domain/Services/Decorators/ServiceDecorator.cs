@@ -12,7 +12,7 @@ namespace VIIS.Domain.Services.Decorators
 
         public ServiceDecorator(Service other) : base(other)
         {
-            this.other = new Service(other);
+            this.other = other;
         }
     }
 }

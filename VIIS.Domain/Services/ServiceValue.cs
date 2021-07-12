@@ -10,18 +10,21 @@ namespace VIIS.Domain.Services
 {
     public class ServiceValue: Notifier, IDocumentAsync, IEquatable<ServiceValue>
     {
+        protected int id;
         protected string name;
         protected decimal sale;
 
-        public ServiceValue(string name, decimal sale)
+        public ServiceValue(int id, string name, decimal sale)
         {
+            this.id = id;
             this.name = name;
             this.sale = sale;
         }
-        public ServiceValue(ServiceValue other)
+        public ServiceValue(string name, decimal sale): this(0, name, sale)
         {
-            name = other.name;
-            sale = other.sale;
+        }
+        public ServiceValue(ServiceValue other): this(other.id, other.name, other.sale)
+        {
         }
         public ServiceValue(): this("", 0)
         {

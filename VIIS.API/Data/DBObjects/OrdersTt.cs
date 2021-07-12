@@ -10,6 +10,17 @@ namespace VIIS.API.Data.DBObjects
             ServicesTt = new HashSet<ServicesTt>();
         }
 
+        public OrdersTt(int id, int clientId, int masterId, DateTime start, decimal sale, int isFinished, string comment):this()
+        {
+            Id = id;
+            ClientId = clientId;
+            MasterId = masterId;
+            Start = start;
+            Sale = sale;
+            IsFinished = isFinished;
+            Comment = comment;
+        }
+
         public int Id { get; set; }
         public int ClientId { get; set; }
         public int MasterId { get; set; }
