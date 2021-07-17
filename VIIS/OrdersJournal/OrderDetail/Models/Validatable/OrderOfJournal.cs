@@ -29,7 +29,7 @@ namespace VIIS.App.OrdersJournal.OrderDetail.Models.Validatable
             validStart = new ValidProperty<DateTime>("Дата и время заказа", ordersStart, ordersStart != new DateTime());
             validServices = new ValidProperty<List<ServiceOfJournal>>("Услуги", servicesOfJournal, servicesOfJournal.Count != 0);
             validMaster = new ValidProperty<Master>("Мастер", master, master.IsWork(ordersStart.Date));
-            validClient = new ClientOfJournal(client);
+            validClient = new ClientOfJournal(person);
         }
 
         public Order Safe()

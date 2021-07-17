@@ -24,7 +24,7 @@ namespace VIIS.API.Controllers
         }
 
         // GET: api/WorkDays/5
-        [HttpGet("{id}", Name = "Get")]
+        [HttpGet("api/WorkDays/{id}"/*, Name = "Get"*/)]
         public string Get(int id)
         {
             return "value";

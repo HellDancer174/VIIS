@@ -34,7 +34,7 @@ namespace VIIS.App.OrdersJournal.OrderDetail.ViewModels
             this.clients = clients;
             this.transactions = transactions;
             this.serviceValueList = new ViewServiceValueList(serviceValueList);
-            ClientNames = new ViewClients(new ViewClient(client), new ExistingViewClient(clients));
+            ClientNames = new ViewClients(new ViewClient(person), new ExistingViewClient(clients));
             ViewServices = new ObservableCollection<ViewService>(services.Select(service => new ViewService(this.serviceValueList.ViewServices, service, this)));
             Price = sale;
         }

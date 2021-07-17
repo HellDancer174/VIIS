@@ -23,6 +23,9 @@ namespace VIIS.API.ServicesDir
         public DBServiceValue(DBServiceValue other): this(other, other.query)
         {
         }
+        public DBServiceValue(ServiceValuesTs entity): this(new ServiceValue(entity.Id, entity.Name, entity.Sale), new AnyDBQuery<ServiceValuesTs>())
+        {
+        }
 
         public int Key => entity.Id;
 

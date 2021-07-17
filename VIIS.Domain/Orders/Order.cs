@@ -9,32 +9,34 @@ using VIIS.Domain.Staff;
 using VIIS.Domain.Services;
 using VIMVVM;
 using VIIS.Domain.Staff.ValueClasses;
+using Newtonsoft.Json;
 
 namespace VIIS.Domain.Orders
 {
+    [JsonObject(MemberSerialization.OptIn)]
     public class Order: Notifier, IDocument, IEquatable<Order>
     {
-        protected readonly int id;
-        protected readonly Client client;
-        protected readonly List<Service> services;
-        protected readonly Master master;
-        protected string comment;
-        protected DateTime ordersStart;
-        protected decimal sale;
-        protected bool isFinished;
+        [JsonProperty("order_id")] protected readonly int id;
+        [JsonProperty] protected readonly Client person;
+        [JsonProperty] protected readonly List<Service> services;
+        [JsonProperty] protected readonly Master master;
+        [JsonProperty("order_comment")] protected string comment;
+        [JsonProperty] protected DateTime ordersStart;
+        [JsonProperty("order_sale")] protected decimal sale;
+        [JsonProperty] protected bool isFinished;
 
         public Order(Client client, List<Service> services, Master master, string comment, DateTime ordersDate, decimal sale):
             this(client, services, master, comment, ordersDate, sale, false)
         {
         }
-        public Order(int id, Client client, List<Service> services, Master master, string comment, DateTime ordersDate, decimal sale, bool isFinished)
+        public Order(int id, Client person, List<Service> services, Master master, string comment, DateTime ordersStart, decimal sale, bool isFinished)
         {
             this.id = id;
-            this.client = client;
+            this.person = person;
             this.services = services;
             this.master = master;
             this.comment = comment;
-            this.ordersStart = ordersDate;
+            this.ordersStart = ordersStart;
             this.sale = sale;
             this.isFinished = isFinished;
         }
@@ -48,13 +50,17 @@ namespace VIIS.Domain.Orders
         {
         }
 
-        public Order(Order other) : this(other.client, other.services, other.master, other.comment, other.ordersStart, other.sale, other.isFinished)
+        public Order(Order other) : this(other.id, other.person, other.services, other.master, other.comment, other.ordersStart, other.sale, other.isFinished)
         {
         }
 
 
         public Order(Master master, DateTime orderDate): this(new Client(), new List<Service>(), master, "", orderDate.Date, 0)
         {
+        }
+        public Order()
+        {
+
         }
 
 
@@ -80,18 +86,18 @@ namespace VIIS.Domain.Orders
 
         public virtual void Transfer()
         {
-            client.TransferAsync();
+            person.TransferAsync();
         }
 
         public bool Equals(Order other)
         {
             //Проверить сервисы
-            return client == other.client && master == other.master && client == other.client;
+            return person == other.person && master == other.master && person == other.person;
         }
 
-        public bool IsEmpty => client.Equals(new AnyClient()) && services.Count == 0 && string.IsNullOrEmpty(comment) && sale == 0;
+        public bool IsEmpty => person.Equals(new AnyClient()) && services.Count == 0 && string.IsNullOrEmpty(comment) && sale == 0;
 
-        public bool IsIncomplete => client.IsIncomplete ||services.Count == 0 || ordersStart == new DateTime() || sale == 0 || master.IsIncomplete || !master.IsWork(ordersStart);
+        public bool IsIncomplete => person.IsIncomplete ||services.Count == 0 || ordersStart == new DateTime() || sale == 0 || master.IsIncomplete || !master.IsWork(ordersStart);
 
         public bool IsOwner(Master master)
         {
@@ -109,7 +115,7 @@ namespace VIIS.Domain.Orders
 
         public override string ToString()
         {
-            return String.Format("Заказ от {0}; Клиент - {1}; Мастер - {2}, Сервисы - {3}", ordersStart, client.ToString(), master.ToString(), services.Count);
+            return String.Format("Заказ от {0}; Клиент - {1}; Мастер - {2}, Сервисы - {3}", ordersStart, person.ToString(), master.ToString(), services.Count);
         }
     }
 }

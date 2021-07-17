@@ -67,6 +67,7 @@
     <Compile Include="Orders\Decorators\UpdatableOrders.cs" />
     <Compile Include="Services\Decorators\DecoratableServiceValue.cs" />
     <Compile Include="Services\Decorators\ServiceDecorator.cs" />
+    <Compile Include="Services\ServiceList.cs" />
     <Compile Include="Services\ServiceValueList.cs" />
     <Compile Include="Services\ServiceValue.cs" />
     <Compile Include="Staff\Decorators\DecoratableMaster.cs" />

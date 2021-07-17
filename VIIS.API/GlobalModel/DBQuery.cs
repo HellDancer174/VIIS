@@ -12,7 +12,7 @@ namespace VIIS.API.GlobalModel
         where TEntity: class
     {
         protected readonly DbSet<TEntity> collection;
-        private readonly VIISDBContext context;
+        protected readonly VIISDBContext context;
 
         public DBQuery(DbSet<TEntity> collection, VIISDBContext context)
         {
@@ -24,11 +24,18 @@ namespace VIIS.API.GlobalModel
         }
 
         protected virtual void ExecuteCommand(TEntity entity) => collection.Add(entity);
+        protected virtual void ExecuteCommand(IEnumerable<TEntity> entities) => collection.AddRange(entities);
 
         public virtual void Transfer(TEntity entity)
         {
             ExecuteCommand(entity);
             context.SaveChanges();
         }
+        public virtual void Transfer(IEnumerable<TEntity> entities)
+        {
+            ExecuteCommand(entities);
+            context.SaveChanges();
+        }
+
     }
 }

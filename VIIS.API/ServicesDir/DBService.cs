@@ -10,7 +10,7 @@ using VIIS.Domain.Services.Decorators;
 
 namespace VIIS.API.ServicesDir
 {
-    public class DBService : ServiceDecorator
+    public class DBService : ServiceDecorator, IEquatable<ServicesTt>
     {
         private readonly DBQuery<ServicesTt> query;
         private readonly DBServiceValue serviceValue;
@@ -25,10 +25,17 @@ namespace VIIS.API.ServicesDir
             entity = new ServicesTt(serviceValue.Key, dBOrder.Key, timeSpan);
         }
 
+        public bool Equals(ServicesTt other)
+        {
+            return entity.OrderId == other.OrderId && entity.ServiceValueId == other.ServiceValueId;
+        }
+
         public override void Transfer()
         {
             if (entity.OrderId == 0 || entity.ServiceValueId == 0) throw new ArgumentException("ID == 0");
             query.Transfer(entity);
         }
+
+        public ServicesTt Entity => entity;
     }
 }

@@ -27,7 +27,7 @@ namespace VIIS.API.Controllers
         }
 
         // GET: api/ServiceValue/5
-        [HttpGet("{id}", Name = "Get")]
+        [HttpGet("api/ServiceValue/{id}"/*, Name = "Get"*/)]
         public string Get(int id)
         {
             return "value";

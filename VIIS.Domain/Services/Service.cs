@@ -1,4 +1,5 @@
 ﻿using ElegantLib;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,12 +8,16 @@ using System.Threading.Tasks;
 
 namespace VIIS.Domain.Services
 {
+    [JsonObject(MemberSerialization.OptIn)]
     public class Service: ServiceValue, IDocument, IEquatable<Service>, IComparable<Service>
     {
-        protected DateTime ordersStart;
-        protected TimeSpan timeSpan;
+        [JsonProperty("service_orderStart")] protected DateTime ordersStart;
+        [JsonProperty] protected TimeSpan timeSpan;
 
-        public Service(string name, decimal sale, DateTime ordersStart, TimeSpan timeSpan): base(name, sale)
+        public Service(string name, decimal sale, DateTime ordersStart, TimeSpan timeSpan): this(0, name, sale, ordersStart, timeSpan)
+        {
+        }
+        public Service(int id, string name, decimal sale, DateTime ordersStart, TimeSpan timeSpan): base(id, name, sale)
         {
             this.ordersStart = ordersStart;
             this.timeSpan = timeSpan;
@@ -25,10 +30,13 @@ namespace VIIS.Domain.Services
         public Service(ServiceValue serviceValue): this(serviceValue, new DateTime(1900, 1, 1), new TimeSpan())
         {
         }
-        public Service(Service other) : base(other.name, other.sale)
+        public Service(Service other) : base(other.id, other.name, other.sale)
         {
             ordersStart = other.ordersStart;
             timeSpan = other.timeSpan;
+        }
+        public Service(): base()
+        {
         }
 
         //public bool CheckTime(int timeIndex)

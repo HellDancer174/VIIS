@@ -9,14 +9,15 @@ using VIIS.API.GlobalModel;
 using VIIS.API.ServicesDir;
 using VIIS.Domain.Orders;
 using VIIS.Domain.Orders.Decorators;
+using VIIS.Domain.Services;
 
 namespace VIIS.API.Orders
 {
     public class DBOrder : OrderDecorator
     {
-        private readonly DBQuery<OrdersTt> query;
-        private readonly DBQuery<ServicesTt> serviceQuery;
-        private readonly OrdersTt entity;
+        protected readonly DBQuery<OrdersTt> query;
+        protected readonly DBQuery<ServicesTt> serviceQuery;
+        protected readonly OrdersTt entity;
         private TDBClient dBClient;
         private DBMaster dBMaster;
 
@@ -24,9 +25,27 @@ namespace VIIS.API.Orders
         {
             this.query = query;
             this.serviceQuery = serviceQuery;
-            dBClient = new TDBClient(client, personquery, addressquery);
+            dBClient = new TDBClient(person, personquery, addressquery);
             dBMaster = new DBMaster(master);
             entity = new OrdersTt(id, dBClient.Key, dBMaster.Key, ordersStart, sale, Convert.ToInt32(isFinished), comment);
+        }
+        public DBOrder(Order other, DBQuery<OrdersTt> query, VIISDBContext context, DBQuery<PersonsTt> personquery, DBQuery<AddressesTt> addressquery):
+            base(other)
+        {
+            this.query = query;
+            dBClient = new TDBClient(person, personquery, addressquery);
+            dBMaster = new DBMaster(master);
+            entity = new OrdersTt(id, dBClient.Key, dBMaster.Key, ordersStart, sale, Convert.ToInt32(isFinished), comment);
+            this.serviceQuery = new UpdateServicesDBQuery(context, this);
+
+        }
+        public DBOrder(OrdersTt entity): 
+            this(new Order(entity.Id, new TDBClient(entity.Client),
+                entity.ServicesTt.Select(service => new Service(new DBServiceValue(service.ServiceValue), entity.Start, service.TimeSpan)).ToList(), 
+                new DBMaster(entity.Master), entity.Comment, entity.Start, entity.Sale, Convert.ToBoolean(entity.IsFinished)), 
+                new AnyDBQuery<OrdersTt>(), new AnyDBQuery<ServicesTt>(), new AnyDBQuery<PersonsTt>(), new AnyDBQuery<AddressesTt>())
+        {
+
         }
 
         public override void Transfer()
@@ -43,10 +62,11 @@ namespace VIIS.API.Orders
                 entity.ClientId = dBClient.Key;
             }
             query.Transfer(entity);
-            var dbServices = services.Select(service => new DBService(service, serviceQuery, this)).ToArray();
-            foreach (var service in dbServices)
-                service.Transfer();
-
+            //var dbServices = services.Select(service => new DBService(service, serviceQuery, this)).ToArray();
+            //foreach (var service in dbServices)
+            //    service.Transfer();
+            var dbServices = new DBServiceList(services.Select(service => new DBService(service, serviceQuery, this)).ToList(), this, serviceQuery);
+            dbServices.Transfer();
         }
 
         public int Key => entity.Id;

@@ -1,4 +1,5 @@
 ﻿using ElegantLib;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,11 +9,12 @@ using VIMVVM;
 
 namespace VIIS.Domain.Services
 {
+    [JsonObject(MemberSerialization.OptIn)]
     public class ServiceValue: Notifier, IDocumentAsync, IEquatable<ServiceValue>
     {
-        protected int id;
-        protected string name;
-        protected decimal sale;
+        [JsonProperty("serviceValueID")] protected int id;
+        [JsonProperty] protected string name;
+        [JsonProperty("service_sale")] protected decimal sale;
 
         public ServiceValue(int id, string name, decimal sale)
         {

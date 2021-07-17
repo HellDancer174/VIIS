@@ -15,5 +15,9 @@ namespace VIIS.API.GlobalModel
         }
 
         protected override void ExecuteCommand(TEntity entity) => collection.Remove(entity);
+        protected override void ExecuteCommand(IEnumerable<TEntity> entities)
+        {
+            collection.RemoveRange(entities);
+        }
     }
 }

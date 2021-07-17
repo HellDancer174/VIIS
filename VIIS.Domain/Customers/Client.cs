@@ -21,8 +21,8 @@ namespace VIIS.Domain.Customers
         [JsonProperty] protected string phone;
         [JsonProperty] protected string email;
         [JsonProperty] protected Address address;
-        [JsonProperty] protected string comment;
-        [JsonProperty] protected readonly int id;
+        [JsonProperty("person_comment")] protected string comment;
+        [JsonProperty("personID")] protected readonly int id;
 
         public Client(int id, string firstName, string lastName, string middleName, string phone) : this(id, firstName, lastName, middleName, phone, "", new Address(), "")
         {

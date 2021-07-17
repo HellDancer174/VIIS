@@ -26,7 +26,7 @@ namespace VIIS.App.OrdersJournal.ViewModels
 
         public PageOrder(Order other, ServiceValueList serviceValueList, Clients clients) : base(other)
         {
-            viewClient = new ViewClient(client);
+            viewClient = new ViewClient(person);
             this.serviceValueList = serviceValueList;
             this.clients = clients;
         }

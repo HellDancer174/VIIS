@@ -15,5 +15,14 @@ namespace VIIS.API.GlobalModel
         }
 
         protected override void ExecuteCommand(TEntity entity) => collection.Update(entity);
+        protected override void ExecuteCommand(IEnumerable<TEntity> entities)
+        {
+            foreach(var entity in entities)
+            {
+                if (collection.Contains(entity)) ExecuteCommand(entity);
+                else collection.Add(entity);
+            }
+        }
+
     }
 }
