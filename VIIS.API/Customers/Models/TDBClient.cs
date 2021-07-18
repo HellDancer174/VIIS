@@ -14,6 +14,7 @@ namespace VIIS.API.Customers.Models
     {
         protected readonly DBQuery<PersonsTt> personQuery;
         protected readonly DBQuery<AddressesTt> addressQuery;
+        protected readonly TDBAddress dBAddress;
         protected readonly PersonsTt entity;
 
         public TDBClient(PersonsTt row, AddressesTt addressRow) : 
@@ -27,7 +28,8 @@ namespace VIIS.API.Customers.Models
         {
             this.personQuery = personQuery;
             this.addressQuery = addressQuery;
-            entity = new PersonsTt(id, firstName, middleName, lastName, phone, email, 0, comment);
+            dBAddress = new TDBAddress(address, addressQuery);
+            entity = new PersonsTt(id, firstName, middleName, lastName, phone, email, dBAddress.Key, comment);
         }
         public TDBClient(Client other): this(other, new AnyDBQuery<PersonsTt>(), new AnyDBQuery<AddressesTt>())
         {
@@ -42,5 +44,11 @@ namespace VIIS.API.Customers.Models
         }
 
         public virtual int Key => entity.Id;
+
+        public PersonsTt Entity()
+        {
+            entity.Address = new TDBAddress(address, addressQuery).Entity;
+            return entity;
+        }
     }
 }

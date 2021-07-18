@@ -18,7 +18,7 @@ namespace VIIS.API.Orders
             .Include(order => order.Master).ThenInclude(master => master.Passport)
             .Include(order => order.Master).ThenInclude(master => master.WorkDaysTt)
             .Include(order => order.ServicesTt)
-            .Select(order => new DBOrder(ServiceLoad(order)) as Order).ToList()))
+            .Select(order => new TDBOrder(ServiceLoad(order)) as Order).ToList()))
         {
         }
 

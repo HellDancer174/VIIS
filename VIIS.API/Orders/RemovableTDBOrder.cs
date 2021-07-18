@@ -9,9 +9,9 @@ using VIIS.Domain.Orders;
 
 namespace VIIS.API.Orders
 {
-    public class RemovableDBOrder : DBOrder
+    public class RemovableTDBOrder : TDBOrder
     {
-        public RemovableDBOrder(Order other, DBQuery<OrdersTt> query, DBQuery<ServicesTt> serviceQuery) : base(other, query, serviceQuery, new AnyDBQuery<PersonsTt>(), new AnyDBQuery<AddressesTt>())
+        public RemovableTDBOrder(Order other, DBQuery<OrdersTt> query, DBQuery<ServicesTt> serviceQuery) : base(other, query, serviceQuery)
         {
         }
 
@@ -20,9 +20,8 @@ namespace VIIS.API.Orders
             //var dbServices = services.Select(service => new DBService(service, serviceQuery, this)).ToArray();
             //foreach (var service in dbServices)
             //    service.Transfer();
-            var dbServices = new DBServiceList(services.Select(service => new DBService(service, serviceQuery, this)).ToList(), this, serviceQuery);
             dbServices.Transfer();
-            query.Transfer(entity);
+            base.Transfer();
         }
     }
 }

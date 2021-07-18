@@ -46,11 +46,8 @@ namespace VIIS.API.Controllers
             //var obj = JsonConvert.DeserializeObject<Order>(value);
             using (var context = new VIISDBContext())
             {
-                return Execute(new DBOrder(value, 
-                    new DBQuery<OrdersTt>(context.OrdersTt, context), 
-                    new DBQuery<ServicesTt>(context.ServicesTt, context), 
-                    new DBQuery<PersonsTt>(context.PersonsTt, context), 
-                    new DBQuery<AddressesTt>(context.AddressesTt, context)));
+                return Execute(new AddOrUpdatableTDBOrder(value, 
+                    new DBQuery<OrdersTt>(context.OrdersTt, context), new DBQuery<ServicesTt>(context.ServicesTt, context)));
             }
         }
 
@@ -60,11 +57,8 @@ namespace VIIS.API.Controllers
         {
             using (var context = new VIISDBContext())
             {
-                return Execute(new DBOrder(value,
-                    new UpdatableDBQuery<OrdersTt>(context.OrdersTt, context),
-                    context,
-                    new UpdatableDBQuery<PersonsTt>(context.PersonsTt, context),
-                    new UpdatableDBQuery<AddressesTt>(context.AddressesTt, context)));
+                return Execute(new AddOrUpdatableTDBOrder(value,
+                    new UpdatableDBQuery<OrdersTt>(context.OrdersTt, context), new UpdateServicesDBQuery(context)));
             }
         }
         
@@ -74,9 +68,9 @@ namespace VIIS.API.Controllers
         {
             using (var context = new VIISDBContext())
             {
-                return Execute(new RemovableDBOrder(value,
+                return Execute(new RemovableTDBOrder(value,
                     new RemovableDBQuery<OrdersTt>(context.OrdersTt, context),
-                    new RemovableDBQuery<ServicesTt>(context.ServicesTt, context));
+                    new RemovableDBQuery<ServicesTt>(context.ServicesTt, context)));
             }
 
         }
@@ -90,6 +84,7 @@ namespace VIIS.API.Controllers
             catch (Exception ex)
             {
                 ModelState.AddModelError(string.Empty, ex.Message);
+                if(ex.InnerException != null) ModelState.AddModelError(string.Empty, ex.InnerException.Message);
                 return BadRequest(ModelState);
             }
             return Ok();

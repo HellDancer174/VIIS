@@ -11,22 +11,21 @@ namespace VIIS.API.ServicesDir
 {
     public class UpdateServicesDBQuery : UpdatableDBQuery<ServicesTt>
     {
-        private readonly DBOrder dBOrder;
 
-        public UpdateServicesDBQuery(DbSet<ServicesTt> collection, VIISDBContext context, DBOrder dBOrder) : base(collection, context)
+        public UpdateServicesDBQuery(DbSet<ServicesTt> collection, VIISDBContext context) : base(collection, context)
         {
-            this.dBOrder = dBOrder;
         }
-        public UpdateServicesDBQuery(VIISDBContext context, DBOrder dBOrder): this(context.ServicesTt, context, dBOrder)
+        public UpdateServicesDBQuery(VIISDBContext context): this(context.ServicesTt, context)
         {
 
         }
 
         protected override void ExecuteCommand(IEnumerable<ServicesTt> entities)
         {
-            collection.RemoveRange(collection.Where(service => service.OrderId == dBOrder.Key).ToArray());
+            var orderID = entities.First().OrderId;
+            collection.RemoveRange(collection.Where(service => service.OrderId == orderID).ToArray());
             context.SaveChanges();
-            collection.AddRange(entities);
+            context.ServicesTt.AddRange(entities);
         }
     }
 }

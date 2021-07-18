@@ -31,5 +31,7 @@ namespace VIIS.API.Customers.Addresses
         }
 
         public int Key => entity.Id;
+
+        public AddressesTt Entity => entity;
     }
 }

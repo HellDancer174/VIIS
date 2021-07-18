@@ -13,46 +13,35 @@ using VIIS.Domain.Services;
 
 namespace VIIS.API.Orders
 {
-    public class DBOrder : OrderDecorator
+    public class TDBOrder: OrderDecorator
     {
         protected readonly DBQuery<OrdersTt> query;
         protected readonly DBQuery<ServicesTt> serviceQuery;
         protected readonly OrdersTt entity;
+        protected readonly DBServiceList dbServices;
         protected TDBClient dBClient;
         protected DBMaster dBMaster;
 
-        public DBOrder(Order other, DBQuery<OrdersTt> query, DBQuery<ServicesTt> serviceQuery, DBQuery<PersonsTt> personquery, DBQuery<AddressesTt> addressquery) : base(other)
+        public TDBOrder(Order other, DBQuery<OrdersTt> query, DBQuery<ServicesTt> serviceQuery/*, DBQuery<PersonsTt> personquery, DBQuery<AddressesTt> addressquery*/) : base(other)
         {
-            throw new NotImplementedException("Legasy Code!");
             this.query = query;
             this.serviceQuery = serviceQuery;
-            dBClient = new TDBClient(person, personquery, addressquery);
+            dBClient = new TDBClient(person, new AnyDBQuery<PersonsTt>(), new AnyDBQuery<AddressesTt>());
             dBMaster = new DBMaster(master);
             entity = new OrdersTt(id, dBClient.Key, dBMaster.Key, ordersStart, sale, Convert.ToInt32(isFinished), comment);
+            dbServices = new DBServiceList(services.Select(service => new DBService(service, entity)).ToList(), entity, serviceQuery);
         }
-        public DBOrder(Order other, DBQuery<OrdersTt> query, VIISDBContext context, DBQuery<PersonsTt> personquery, DBQuery<AddressesTt> addressquery):
-            base(other)
+        public TDBOrder(OrdersTt entity) :
+        this(new Order(entity.Id, new TDBClient(entity.Client),
+        entity.ServicesTt.Select(service => new Service(new DBServiceValue(service.ServiceValue), entity.Start, service.TimeSpan)).ToList(),
+        new DBMaster(entity.Master), entity.Comment, entity.Start, entity.Sale, Convert.ToBoolean(entity.IsFinished)),
+        new AnyDBQuery<OrdersTt>(), new AnyDBQuery<ServicesTt>())
         {
-            throw new NotImplementedException("Legasy Code!");
-            this.query = query;
-            dBClient = new TDBClient(person, personquery, addressquery);
-            dBMaster = new DBMaster(master);
-            entity = new OrdersTt(id, dBClient.Key, dBMaster.Key, ordersStart, sale, Convert.ToInt32(isFinished), comment);
-            this.serviceQuery = new UpdateServicesDBQuery(context);
 
-        }
-        public DBOrder(OrdersTt entity): 
-            this(new Order(entity.Id, new TDBClient(entity.Client),
-                entity.ServicesTt.Select(service => new Service(new DBServiceValue(service.ServiceValue), entity.Start, service.TimeSpan)).ToList(), 
-                new DBMaster(entity.Master), entity.Comment, entity.Start, entity.Sale, Convert.ToBoolean(entity.IsFinished)), 
-                new AnyDBQuery<OrdersTt>(), new AnyDBQuery<ServicesTt>(), new AnyDBQuery<PersonsTt>(), new AnyDBQuery<AddressesTt>())
-        {
-            throw new NotImplementedException("Legasy Code!");
         }
 
         public override void Transfer()
         {
-            throw new NotImplementedException("Legasy Code!");
             var dbServiceValues = services.Select(service => new DBServiceValue(service, new AnyDBQuery<ServiceValuesTs>())).ToList();
             var filtered = dbServiceValues.Where(serviceValue => serviceValue.Key > 0).ToList();
             if (filtered.Count != dbServiceValues.Count)
@@ -61,17 +50,13 @@ namespace VIIS.API.Orders
             if (entity.MasterId < 1) throw new ArgumentException("Такого мастера не существует");
             if (entity.ClientId < 1)
             {
-                dBClient.Transfer();
-                entity.ClientId = dBClient.Key;
+                entity.Client = dBClient.Entity();
             }
+            //entity.ServicesTt = dbServices.Entities();
             query.Transfer(entity);
             //var dbServices = services.Select(service => new DBService(service, serviceQuery, this)).ToArray();
             //foreach (var service in dbServices)
             //    service.Transfer();
-            var dbServices = new DBServiceList(services.Select(service => new DBService(service, serviceQuery, this)).ToList(), entity, serviceQuery);
-            dbServices.Transfer();
         }
-
-        public int Key => entity.Id;
     }
 }
