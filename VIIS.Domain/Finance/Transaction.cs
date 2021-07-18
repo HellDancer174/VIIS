@@ -1,4 +1,5 @@
 ﻿using ElegantLib;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,21 +9,27 @@ using VIMVVM;
 
 namespace VIIS.Domain.Finance
 {
+    [JsonObject(MemberSerialization.OptIn)]
     public class Transaction: Notifier, IDocumentAsync, IEquatable<Transaction>
     {
-        protected string name;
-        protected decimal sale;
+        [JsonProperty] protected int id;
+        [JsonProperty] protected string name;
+        [JsonProperty] protected decimal sale;
 
-        public Transaction(string name, decimal sale)
+        public Transaction(string name, decimal sale): this(0, name, sale)
         {
-            this.name = name;
-            this.sale = sale;
         }
         public Transaction(): this(nameof(name), 0)
         {
         }
-        public Transaction(Transaction other): this(other.name, other.sale)
+        public Transaction(Transaction other): this(other.id, other.name, other.sale)
         {
+        }
+        public Transaction(int id, string name, decimal sale)
+        {
+            this.id = id;
+            this.name = name;
+            this.sale = sale;
         }
 
         public Transaction Sum(Transaction other)

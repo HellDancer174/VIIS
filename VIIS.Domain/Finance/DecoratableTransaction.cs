@@ -12,7 +12,7 @@ namespace VIIS.Domain.Finance
 
         public DecoratableTransaction(Transaction other) : base(other)
         {
-            this.other = new Transaction(other);
+            this.other = other; //Убрал new
         }
     }
 }

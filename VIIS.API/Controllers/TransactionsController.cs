@@ -1,0 +1,68 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using VIIS.API.Controllers.Base;
+using VIIS.API.Data.DBObjects;
+using VIIS.API.Finance;
+using VIIS.API.GlobalModel;
+using VIIS.Domain.Finance;
+
+namespace VIIS.API.Controllers
+{
+    [Produces("application/json")]
+    [Route("api/Transactions")]
+    public class TransactionsController : DBController
+    {
+        // GET: api/Transactions
+        [HttpGet]
+        public IEnumerable<Transaction> Get()
+        {
+            using (var context = new VIISDBContext())
+            {
+                return context.TransactionsTt.Select(entity => new DBTransaction(entity) as Transaction).ToArray();
+            }
+        }
+
+        // GET: api/Transactions/5
+        [HttpGet("{id}", Name = "Get")]
+        public string Get(int id)
+        {
+            return "value";
+        }
+        
+        // POST: api/Transactions
+        [HttpPost]
+        public ActionResult Post([FromBody]Transaction value)
+        {
+            using (var context = new VIISDBContext())
+            {
+                return Execute(new DBTransaction(value, new DBQuery<TransactionsTt>(context.TransactionsTt, context)));
+            }
+
+        }
+
+        // PUT: api/Transactions/5
+        [HttpPut("{id}")]
+        public ActionResult Put([FromBody]Transaction value)
+        {
+            using (var context = new VIISDBContext())
+            {
+                return Execute(new DBTransaction(value, new UpdatableDBQuery<TransactionsTt>(context.TransactionsTt, context)));
+            }
+
+        }
+
+        // DELETE: api/ApiWithActions/5
+        [HttpDelete("{id}")]
+        public ActionResult Delete([FromBody]Transaction value)
+        {
+            using (var context = new VIISDBContext())
+            {
+                return Execute(new DBTransaction(value, new RemovableDBQuery<TransactionsTt>(context.TransactionsTt, context)));
+            }
+        }
+    }
+}
