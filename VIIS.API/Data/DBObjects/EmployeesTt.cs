@@ -34,5 +34,6 @@ namespace VIIS.API.Data.DBObjects
         public PersonsTt Person { get; set; }
         public ICollection<OrdersTt> OrdersTt { get; set; }
         public ICollection<WorkDaysTt> WorkDaysTt { get; set; }
+        public ICollection<MastersCashTt> MastersCashTt { get; set; }
     }
 }

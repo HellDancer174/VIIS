@@ -210,6 +210,13 @@ namespace VIIS.API.Data.DBObjects
                 entity.Property(e => e.Value)
                     .HasColumnName("value")
                     .HasColumnType("decimal(18, 0)");
+
+                entity.HasOne(d => d.Employee)
+                    .WithMany(p => p.MastersCashTt)
+                    .HasForeignKey(d => d.MasterId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_MastersCash_TT_Employees_TT");
+
             });
 
             modelBuilder.Entity<OrdersTt>(entity =>

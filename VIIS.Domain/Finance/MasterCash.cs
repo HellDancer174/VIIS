@@ -1,4 +1,5 @@
 ﻿using ElegantLib;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,12 +10,13 @@ using VIMVVM;
 
 namespace VIIS.Domain.Finance
 {
+    [JsonObject(MemberSerialization.OptIn)]
     public class MasterCash: Notifier, IEquatable<Master>, IEquatable<MasterCash>, IDocumentAsync
     {
-        protected Master master;
-        protected DateTime startDate;
-        protected DateTime finishDate;
-        protected decimal value;
+        [JsonProperty] protected Master master;
+        [JsonProperty] protected DateTime startDate;
+        [JsonProperty] protected DateTime finishDate;
+        [JsonProperty] protected decimal value;
 
         public MasterCash(Master master, DateTime startDate, DateTime finishDate, decimal value)
         {
@@ -36,10 +38,11 @@ namespace VIIS.Domain.Finance
         {
             return (startDate.Year == monthDate.Year && startDate.Month == monthDate.Month) || (finishDate.Year == monthDate.Year && finishDate.Year == monthDate.Month);
         }
-        public bool CheckCollision(MasterCash other)
+        public bool HasCollision(DateTime otherStartDate, DateTime otherFinishDate)
         {
-            return (startDate >= other.startDate && startDate < other.finishDate) || (finishDate > other.startDate && finishDate <= other.finishDate);
+            return (startDate >= otherStartDate && startDate < otherFinishDate) || (finishDate > otherStartDate && finishDate <= otherFinishDate);
         }
+        public bool CheckCollision(MasterCash other) => HasCollision(other.startDate, other.finishDate);
 
         public bool Equals(MasterCash other)
         {
