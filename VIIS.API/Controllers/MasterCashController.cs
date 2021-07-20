@@ -40,7 +40,7 @@ namespace VIIS.API.Controllers
         
         // POST: api/MasterCash
         [HttpPost]
-        public ActionResult Post([FromBody]MasterCash value)
+        public ObjectResult Post([FromBody]MasterCash value)
         {
             using (var context = new VIISDBContext())
             {
@@ -48,15 +48,35 @@ namespace VIIS.API.Controllers
             }
         }
 
+        [HttpPost("MasterCashList")]
+        public ObjectResult Post([FromBody]IEnumerable<MasterCash> value)
+        {
+            using (var context = new VIISDBContext())
+            {
+                return Execute(new DBMasterCashList(value
+                    .Select(cash => new ValidDBMasterCash(new DBMasterCash(cash, context.MastersCashTt, new DBQuery<MastersCashTt>(context.MastersCashTt, context))))
+                    .ToArray()));
+            }
+        }
+
         // PUT: api/MasterCash/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+        public ObjectResult Put([FromBody]UpdateMasterCashViewModel value)
         {
+            var deleteResult = Delete(value.OldMasterCash);
+            if (deleteResult.StatusCode != Ok().StatusCode) return deleteResult;
+            var postResult = Post(value.NewMasterCash);
+            if (postResult.StatusCode != Ok().StatusCode)
+            {
+                Post(value.OldMasterCash);
+                return postResult;
+            }
+            else return postResult;
         }
         
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
-        public ActionResult Delete([FromBody]MasterCash value)
+        public ObjectResult Delete([FromBody]MasterCash value)
         {
             using (var context = new VIISDBContext())
             {
@@ -64,7 +84,7 @@ namespace VIIS.API.Controllers
             }
         }
 
-        protected ActionResult Execute(IDocument document)
+        protected ObjectResult Execute(IDocument document)
         {
             try
             {
@@ -79,7 +99,7 @@ namespace VIIS.API.Controllers
                 ModelState.AddModelError(string.Empty, ex.Message);
                 return BadRequest(ModelState);
             }
-            return Ok();
+            return Ok(string.Empty);
         }
     }
 }

@@ -31,6 +31,11 @@ namespace VIIS.API.Orders
             entity = new OrdersTt(id, dBClient.Key, dBMaster.Key, ordersStart, sale, Convert.ToInt32(isFinished), comment);
             dbServices = new DBServiceList(services.Select(service => new DBService(service, entity)).ToList(), entity, serviceQuery);
         }
+
+        public TDBOrder(TDBOrder dBOrder): this(dBOrder, dBOrder.query, dBOrder.serviceQuery)
+        {
+        }
+
         public TDBOrder(OrdersTt entity) :
         this(new Order(entity.Id, new TDBClient(entity.Client),
         entity.ServicesTt.Select(service => new Service(new DBServiceValue(service.ServiceValue), entity.Start, service.TimeSpan)).ToList(),

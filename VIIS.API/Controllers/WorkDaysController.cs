@@ -38,7 +38,7 @@ namespace VIIS.API.Controllers
             {
                 DBWorkDaysMasters document = new DBWorkDaysMasters(workDaysViewModel.Masters.Select(master => new DBWorkDaysMaster(master, context, workDaysViewModel.Month)).ToArray());
                 var actionResult = Execute(document);
-                if (actionResult == Ok() && !document.IsSuccess) return Ok(document.FailedMessage());
+                if (actionResult.StatusCode == Ok().StatusCode && !document.IsSuccess) return Ok(document.FailedMessage());
                 else return actionResult;
             }
         }

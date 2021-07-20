@@ -11,7 +11,7 @@ namespace VIIS.API.Controllers.Base
     [Produces("application/json")]
     public class DBController : Controller
     {
-        protected ActionResult Execute<T>(IDocument document, T OkValue)
+        protected ObjectResult Execute<T>(IDocument document, T OkValue)
         {
             try
             {
@@ -25,7 +25,7 @@ namespace VIIS.API.Controllers.Base
             return Ok(OkValue);
         }
 
-        protected ActionResult Execute(IDocument document) => Execute(document, string.Empty);
+        protected ObjectResult Execute(IDocument document) => Execute(document, string.Empty);
 
     }
 }

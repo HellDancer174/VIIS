@@ -28,6 +28,10 @@ namespace VIIS.Domain.Finance
         public MasterCash(MasterCash other): this(other.master, other.startDate, other.finishDate, other.value)
         {
         }
+        public MasterCash()
+        {
+            master = new Master();
+        }
 
         public bool Equals(Master other)
         {
@@ -40,7 +44,7 @@ namespace VIIS.Domain.Finance
         }
         public bool HasCollision(DateTime otherStartDate, DateTime otherFinishDate)
         {
-            return (startDate >= otherStartDate && startDate < otherFinishDate) || (finishDate > otherStartDate && finishDate <= otherFinishDate);
+            return (startDate >= otherStartDate && startDate <= otherFinishDate) || (finishDate >= otherStartDate && finishDate <= otherFinishDate);
         }
         public bool CheckCollision(MasterCash other) => HasCollision(other.startDate, other.finishDate);
 
