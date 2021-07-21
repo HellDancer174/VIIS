@@ -11,14 +11,17 @@ namespace VIIS.API.Finance
     public class ValidDBMasterCash : DBMasterCash
     {
         private readonly DBMasterCash primary;
+        private ValidID validID;
 
-        public ValidDBMasterCash(DBMasterCash other) : base(other)
+        public ValidDBMasterCash(DBMasterCash other, Func<int, bool> validateID) : base(other)
         {
+            validID = new ValidID("masterID", dBMaster.Key, validateID);
             this.primary = other;
         }
 
         public override void Transfer()
         {
+            validID.Validate();
             var monthCashes = mastersCashTts.Where(cash => CheckMonth(cash.FinishDate) && cash.MasterId == dBMaster.Key).ToArray();
             foreach (var cash in monthCashes)
             {

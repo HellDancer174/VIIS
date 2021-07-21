@@ -1,8 +1,10 @@
-﻿using System;
+﻿using ElegantLib.Validate;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using VIIS.API.Data.DBObjects;
+using VIIS.API.GlobalModel;
 
 namespace VIIS.API.Orders
 {
@@ -19,19 +21,14 @@ namespace VIIS.API.Orders
 
         public override void Transfer()
         {
-            try
+            new Catcher<ArgumentNullException>(() => context.EmployeesTt.Single(emp => emp.Id == entity.MasterId),
+                (ex) => throw new InvalidOperationException(String.Format("Мастера с id:{0} не найдено. Исключение:{1}.", entity.MasterId, ex.Message))).Execute();
+                            
+            var serviceValuesID = dbServices.Entities().Select(service => service.ServiceValueId).ToList();
+            foreach (var serviceID in serviceValuesID)
             {
-                context.EmployeesTt.Single(emp => emp.Id == entity.MasterId);
-                var serviceValuesID = dbServices.Entities().Select(service => service.ServiceValueId).ToList();
-                var findedServiceValuesID = context.ServiceValuesTs.Where(serviceValue => serviceValuesID.Contains(serviceValue.Id)).ToList();
-                foreach(var serviceID in serviceValuesID)
-                {
-                    if(!context.ServiceValuesTs.Si)
-                }
-            }
-            catch (Exception)
-            {
-                
+                new Catcher<ArgumentNullException>(() => context.ServiceValuesTs.Single(serviceValue => serviceValue.Id == serviceID),
+                (ex) => throw new InvalidOperationException(String.Format("Сервиса с id:{0} не найдено. Исключение:{1}.", serviceID, ex.Message))).Execute();
             }
             dBOrder.Transfer();
         }

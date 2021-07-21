@@ -50,7 +50,7 @@ namespace VIIS.API.Controllers
         {
             using (var context = new VIISDBContext())
             {
-                return Execute(new DBTransaction(value, new UpdatableDBQuery<TransactionsTt>(context.TransactionsTt, context)));
+                return Execute(new ValidDBTransaction(new DBTransaction(value, new UpdatableDBQuery<TransactionsTt>(context.TransactionsTt, context)), (id) => id > 0));
             }
 
         }
@@ -61,7 +61,7 @@ namespace VIIS.API.Controllers
         {
             using (var context = new VIISDBContext())
             {
-                return Execute(new DBTransaction(value, new RemovableDBQuery<TransactionsTt>(context.TransactionsTt, context)));
+                return Execute(new ValidDBTransaction(new DBTransaction(value, new RemovableDBQuery<TransactionsTt>(context.TransactionsTt, context)), (id) => id > 0));
             }
         }
     }

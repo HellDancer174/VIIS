@@ -82,6 +82,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Account\Models\Requests\MemoryAuthorizedJsonRequest.cs" />
+    <Compile Include="Account\ViewModels\LoginViewModel.cs" />
     <Compile Include="Customers\Models\ClientOfCustomers.cs" />
     <Compile Include="Customers\ViewModels\ViewClient.cs" />
     <Compile Include="Customers\ViewModels\ViewClients.cs" />

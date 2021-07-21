@@ -20,6 +20,10 @@ namespace VIIS.API.Finance
             this.query = query;
             entity = new TransactionsTt(id, name, sale);
         }
+        public DBTransaction(DBTransaction dBTransaction): this(dBTransaction, dBTransaction.query)
+        {
+
+        }
         public DBTransaction(TransactionsTt entity): this(new Transaction(entity.Id, entity.Name, entity.Sale), new AnyDBQuery<TransactionsTt>())
         {
         }

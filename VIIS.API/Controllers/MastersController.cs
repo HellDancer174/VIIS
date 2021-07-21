@@ -6,6 +6,7 @@ using ElegantLib;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using VIIS.API.Controllers.Base;
 using VIIS.API.Data.DBObjects;
 using VIIS.API.Employees.Models;
 using VIIS.API.GlobalModel;
@@ -17,16 +18,20 @@ namespace VIIS.API.Controllers
     [Produces("application/json")]
     [Route("api/Masters")]
     //[Authorize(AuthenticationSchemes = JwtAuthScheme.scheme)]
-    public class MastersController : Controller
+    public class MastersController : DBController
     {
         // GET: api/Masters
         [HttpGet]
         public IEnumerable<Master> Get()
         {
-            using (var context = new VIISDBContext())
+            return TryGet<IEnumerable<Master>>(() =>
             {
-                return new DBEmployees(context);
-            }
+                using (var context = new VIISDBContext())
+                {
+                    return new DBEmployees(context);
+                }
+            });
+
         }
 
         // GET: api/Masters/5
@@ -69,20 +74,20 @@ namespace VIIS.API.Controllers
             }
         }
 
-        private ActionResult Execute(IDocument model)
-        {
-            try
-            {
-                model.Transfer();
-            }
-            catch (Exception ex)
-            {
-                ModelState.AddModelError(string.Empty, ex.Message);
-                return BadRequest(ModelState);
-            }
-            return Ok();
+        //private ActionResult Execute(IDocument model)
+        //{
+        //    try
+        //    {
+        //        model.Transfer();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        ModelState.AddModelError(string.Empty, ex.Message);
+        //        return BadRequest(ModelState);
+        //    }
+        //    return Ok();
 
-        }
+        //}
 
     }
 }

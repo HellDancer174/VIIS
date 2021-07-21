@@ -44,7 +44,7 @@ namespace VIIS.API.Controllers
         {
             using (var context = new VIISDBContext())
             {
-                return Execute(new ValidDBMasterCash(new DBMasterCash(value, context.MastersCashTt, new DBQuery<MastersCashTt>(context.MastersCashTt, context))));
+                return Execute(new ValidDBMasterCash(new DBMasterCash(value, context.MastersCashTt, new DBQuery<MastersCashTt>(context.MastersCashTt, context)), (id) => true));
             }
         }
 
@@ -54,7 +54,7 @@ namespace VIIS.API.Controllers
             using (var context = new VIISDBContext())
             {
                 return Execute(new DBMasterCashList(value
-                    .Select(cash => new ValidDBMasterCash(new DBMasterCash(cash, context.MastersCashTt, new DBQuery<MastersCashTt>(context.MastersCashTt, context))))
+                    .Select(cash => new ValidDBMasterCash(new DBMasterCash(cash, context.MastersCashTt, new DBQuery<MastersCashTt>(context.MastersCashTt, context)), (id) => true))
                     .ToArray()));
             }
         }

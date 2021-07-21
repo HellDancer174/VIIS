@@ -18,18 +18,20 @@ namespace VIIS.API.Controllers
 {
     [Produces("application/json")]
     [Route("api/Orders")]
-    public class OrdersController : Controller
+    public class OrdersController : DBController
     {
         // GET: api/Orders
         [HttpGet]
         public IEnumerable<Order> Get()
         {
-            using (var context = new VIISDBContext())
+            return TryGet<IEnumerable<Order>>(() =>
             {
-                return new DBOrders(context);
-                //return new[] { new Order(new Master(), new DateTime()) };
-            }
-            //return new OrdersVM[]{ new OrdersVM(1, new Domain.Customers.Client(), new List<Domain.Services.Service>(), 2, "", new DateTime(), 500) };
+                using (var context = new VIISDBContext())
+                {
+                    return new DBOrders(context);
+                }
+            });
+
         }
 
         // GET: api/Orders/5
@@ -43,11 +45,10 @@ namespace VIIS.API.Controllers
         [HttpPost]
         public ActionResult Post([FromBody]Order value)
         {
-            //var obj = JsonConvert.DeserializeObject<Order>(value);
             using (var context = new VIISDBContext())
             {
-                return Execute(new AddOrUpdatableTDBOrder(value, 
-                    new DBQuery<OrdersTt>(context.OrdersTt, context), new DBQuery<ServicesTt>(context.ServicesTt, context)));
+                return Execute(new ValidDBOrder(new AddOrUpdatableTDBOrder(value, 
+                    new DBQuery<OrdersTt>(context.OrdersTt, context), new DBQuery<ServicesTt>(context.ServicesTt, context)), context));
             }
         }
 
@@ -57,8 +58,8 @@ namespace VIIS.API.Controllers
         {
             using (var context = new VIISDBContext())
             {
-                return Execute(new AddOrUpdatableTDBOrder(value,
-                    new UpdatableDBQuery<OrdersTt>(context.OrdersTt, context), new UpdateServicesDBQuery(context)));
+                return Execute(new ValidatableIDDBOrder(new ValidDBOrder(new AddOrUpdatableTDBOrder(value,
+                    new UpdatableDBQuery<OrdersTt>(context.OrdersTt, context), new UpdateServicesDBQuery(context)), context)));
             }
         }
         
@@ -68,27 +69,26 @@ namespace VIIS.API.Controllers
         {
             using (var context = new VIISDBContext())
             {
-                return Execute(new RemovableTDBOrder(value,
+                return Execute(new ValidatableIDDBOrder(new RemovableTDBOrder(value,
                     new RemovableDBQuery<OrdersTt>(context.OrdersTt, context),
-                    new RemovableDBQuery<ServicesTt>(context.ServicesTt, context)));
+                    new RemovableDBQuery<ServicesTt>(context.ServicesTt, context))));
             }
 
         }
 
-        protected ActionResult Execute(IDocument document)
-        {
-            try
-            {
-                document.Transfer();
-            }
-            catch (Exception ex)
-            {
-                ModelState.AddModelError(string.Empty, ex.Message);
-                if(ex.InnerException != null) ModelState.AddModelError(string.Empty, ex.InnerException.Message);
-                return BadRequest(ModelState);
-            }
-            return Ok();
-        }
-
+        //protected override ObjectResult Execute<T>(IDocument document, T OkValue)
+        //{
+        //    try
+        //    {
+        //        Transfer(document);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        ModelState.AddModelError(string.Empty, ex.Message);
+        //        if (ex.InnerException != null) ModelState.AddModelError(string.Empty, ex.InnerException.Message);
+        //        return BadRequest(ModelState);
+        //    }
+        //    return Ok(OkValue);
+        //}
     }
 }

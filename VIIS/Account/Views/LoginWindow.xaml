@@ -97,7 +97,7 @@
                 <PasswordBox CaretBrush="#FF83C917" FontSize="18"/>
             </StackPanel>
             <StackPanel>
-                <Button Margin="10, 0, 10, 0" Style="{StaticResource Blue}" Height="30">
+                <Button Margin="10, 0, 10, 0" Style="{StaticResource Blue}" Height="30" Command="{Binding LoginCommand}">
                     <TextBlock Text="Вход" FontSize="18"/>
                 </Button>
                 <Grid Margin="5">

@@ -20,10 +20,13 @@ namespace VIIS.API.Controllers
         [HttpGet]
         public IEnumerable<ServiceValue> Get()
         {
-            using (var context = new VIISDBContext())
+            return TryGet<IEnumerable<ServiceValue>>(() =>
             {
-                return new DBServiceValueList(context);
-            }
+                using (var context = new VIISDBContext())
+                {
+                    return new DBServiceValueList(context);
+                }
+            });
         }
 
         // GET: api/ServiceValue/5

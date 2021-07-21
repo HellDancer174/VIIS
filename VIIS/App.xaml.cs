@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ElegantLib.Authorize.Tokenize;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -13,5 +14,10 @@ namespace VIIS.App
     /// </summary>
     public partial class App : Application
     {
+        public static RefreshViewModel Token;
+        static App()
+        {
+            Token = new RefreshViewModel();
+        }
     }
 }

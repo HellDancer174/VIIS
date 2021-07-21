@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using VIIS.App.Account.ViewModels;
 
 namespace VIIS.App.Account.Views
 {
@@ -20,11 +21,15 @@ namespace VIIS.App.Account.Views
     /// </summary>
     public partial class LoginWindow : Window
     {
-        public LoginWindow()
+        public LoginWindow(LoginViewModel viewModel)
         {
             InitializeComponent();
+            DataContext = viewModel;
         }
+        //public LoginWindow(): this(new LoginViewModel())
+        //{
 
+        //}
         private void Exit_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             this.Close();
