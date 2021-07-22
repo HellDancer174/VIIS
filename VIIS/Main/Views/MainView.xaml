@@ -99,9 +99,13 @@
                 <RadioButton Style="{StaticResource MenuButton}" Tag="{StaticResource statistics}"
                              Command="{Binding Finance}"
                              Content="Финансы" FontFamily="/VIIS.App;component/Resources/#Champagne &amp; Limousines"/>
+                <RadioButton Style="{StaticResource MenuButton}" Tag="{StaticResource statistics}"
+                             Command="{Binding ServiceValues}"
+                             Content="Сервисы" FontFamily="/VIIS.App;component/Resources/#Champagne &amp; Limousines"/>
+
                 <RadioButton Style="{StaticResource MenuButton}" Tag="{StaticResource settings}"
                              Command="{Binding Settings}"
-                             Content="Настройки" FontFamily="/VIIS.App;component/Resources/#Champagne &amp; Limousines"/>
+                             Content="Пользователи" FontFamily="/VIIS.App;component/Resources/#Champagne &amp; Limousines"/>
             </StackPanel>
         </Grid>
         <Grid Grid.Column="1" Background="#FFE9F6FF">

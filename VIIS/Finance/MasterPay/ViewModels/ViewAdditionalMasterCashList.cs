@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using VIIS.App.Account.Models;
 using VIIS.App.Finance.ViewModels;
 using VIIS.Domain.Finance;
 using VIIS.Domain.Global;
@@ -38,19 +39,23 @@ namespace VIIS.App.Finance.MasterPay.ViewModels
 
         public ICommand СalcCommand => new RelayCommand((obj) =>
         {
-            Collection.Clear();
-            foreach (var master in masters)
+            new WindowCatcher<Exception>(() =>
             {
-                Collection.Add(new ViewMasterCash(master, orders, StartDate, FinishDate, new MastersPercent(Percent)));
-            }
-        }, (obj) => CanExecute());
+                Collection.Clear();
+                foreach (var master in masters)
+                {
+                    Collection.Add(new ViewMasterCash(master, orders, StartDate, FinishDate, new MastersPercent(Percent)));
+                }
+            }).Execute();
+        }, (obj) => CanExecute()); //Затраил!!!!!!
 
         private bool CanExecute() => FinishDate.Date > StartDate.Date && FinishDate > new DefaultDateTime().Value && StartDate > new DefaultDateTime().Value;
 
         public ICommand AdditionalSum => new RelayCommand(async (obj) =>
         {
-            await other.AddRange(Collection.Where(cash => cash.IsSelected).Select(cash => new ViewMasterCash(cash.Model())).ToArray(), StartDate, FinishDate);
-        }, (obj) => CanExecute() && Collection.Where(cash => cash.IsSelected).ToList().Count != 0);
+            new WindowCatcher<Exception>(async() =>
+            await other.AddRange(Collection.Where(cash => cash.IsSelected).Select(cash => new ViewMasterCash(cash.Model())).ToArray(), StartDate, FinishDate)).Execute();
+        }, (obj) => CanExecute() && Collection.Where(cash => cash.IsSelected).ToList().Count != 0); //Затраил!!!!!!
 
 
 

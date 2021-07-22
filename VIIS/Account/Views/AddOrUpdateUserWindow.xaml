@@ -31,25 +31,29 @@
     </Window.Resources>
     <Grid>
         <StackPanel Margin="10">
-            <TextBlock Text="Новый пользователь" Margin="5"/>
+            <TextBlock Text="{Binding Title}" Margin="5"/>
             <StackPanel Margin="5">
                 <TextBlock Text="Логин"/>
-                <TextBox/>
+                <TextBox IsEnabled="{Binding CanChangeLogin}" Text="{Binding Login}"/>
             </StackPanel>
             <StackPanel Margin="5">
-                <TextBlock Text="Пароль"/>
-                <PasswordBox/>
+                <TextBlock Text="Имя пользователя"/>
+                <TextBox Text="{Binding UserName}"/>
             </StackPanel>
             <StackPanel Margin="5">
-                <TextBlock Text="Подтвердите пароль"/>
-                <PasswordBox/>
+                <TextBlock Text="Пароль" />
+                <PasswordBox Password="{Binding Password}"/>
             </StackPanel>
             <StackPanel Margin="5">
+                <TextBlock Text="{Binding SecondPasswordName}"/>
+                <PasswordBox Password="{Binding SecondPassword}"/>
+            </StackPanel>
+            <!--<StackPanel Margin="5">
                 <TextBlock Text="Роль"/>
                 <ComboBox/>
-            </StackPanel>
-            <Button Margin="25,5,25,5" Style="{StaticResource Material}">
-                <TextBlock Text="Добавить пользователя"/>
+            </StackPanel>-->
+            <Button Margin="25,45,25,5" Style="{StaticResource Material}">
+                <TextBlock Text="{Binding SaveButtonName}"/>
             </Button>
         </StackPanel>
 

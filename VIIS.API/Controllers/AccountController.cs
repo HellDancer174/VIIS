@@ -42,6 +42,18 @@ namespace VIIS.API.Controllers
         }
 
         [HttpPost]
+        public async Task<IActionResult> ChangePassword(ChangePasswordViewModel model)
+        {
+            if (!ModelState.IsValid) return BadRequest();
+            var user = await _userManager.FindByEmailAsync(model.Email);
+            var result = await _userManager.ChangePasswordAsync(user, model.OldPassword, model.NewPassword);
+            if (result.Succeeded) return Ok();
+
+            AddErrors(result);
+            return BadRequest();
+        }
+
+        [HttpPost]
         public async Task<IActionResult> Register([FromBody] RegisterViewModel model)
         {
             if (ModelState.IsValid)
