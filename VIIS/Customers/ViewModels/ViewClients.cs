@@ -12,7 +12,7 @@ using VIMVVM;
 
 namespace VIIS.App.Customers.ViewModels
 {
-    public class ViewClients : ViewRepository<ViewClient, Client>
+    public class ViewClients : ViewUpdatableRepository<ViewClient, Client>
     {
         //private int _selectedIndex;
 
@@ -32,6 +32,13 @@ namespace VIIS.App.Customers.ViewModels
         {
             await RemoveViewAsync(Selected);
         });
+
+        public override async Task UpdateCollectionAsync()
+        {
+            await Task.CompletedTask;
+            Collection = new ObservableCollection<ViewClient>(this.Select(client => new ViewClient(client)).ToList());
+            ChangeProperty(nameof(Collection));
+        }
 
         //public override Task UpdateViewAsync(ViewClient oldItem, ViewClient item)
         //{

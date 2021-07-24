@@ -21,10 +21,13 @@ namespace VIIS.App.Account.Views
     /// </summary>
     public partial class LoginWindow : Window
     {
+        private IViewLogin viewLogin;
+
         public LoginWindow(LoginViewModel viewModel)
         {
             InitializeComponent();
             DataContext = viewModel;
+            viewLogin = viewModel;
         }
         //public LoginWindow(): this(new LoginViewModel())
         //{
@@ -53,6 +56,11 @@ namespace VIIS.App.Account.Views
         private void Minimize_Click(object sender, RoutedEventArgs e)
         {
             this.WindowState = WindowState.Minimized;
+        }
+
+        private async void Login_Click(object sender, RoutedEventArgs e)
+        {
+            await viewLogin.LogIn(SecretPass.Password);
         }
     }
 }

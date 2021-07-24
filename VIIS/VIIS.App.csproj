@@ -87,9 +87,13 @@
     <Compile Include="Account\Models\MemoryJwtAccount.cs" />
     <Compile Include="Account\Models\Requests\MemoryAuthorizedJsonRequest.cs" />
     <Compile Include="Account\Models\WindowCatcher.cs" />
+    <Compile Include="Account\ViewModels\IViewLogin.cs" />
+    <Compile Include="Account\ViewModels\IViewUserDetail.cs" />
     <Compile Include="Account\ViewModels\LoginViewModel.cs" />
     <Compile Include="Account\ViewModels\ViewChangePassword.cs" />
     <Compile Include="Account\ViewModels\ViewRegister.cs" />
+    <Compile Include="Account\ViewModels\ViewUser.cs" />
+    <Compile Include="Account\ViewModels\ViewUsers.cs" />
     <Compile Include="Customers\Models\ClientOfCustomers.cs" />
     <Compile Include="Customers\ViewModels\ViewClient.cs" />
     <Compile Include="Customers\ViewModels\ViewClients.cs" />
@@ -135,6 +139,7 @@
     <Compile Include="GlobalViewModel\ViewFilterableModel.cs" />
     <Compile Include="GlobalViewModel\ViewNewDetail.cs" />
     <Compile Include="GlobalViewModel\ViewRepository.cs" />
+    <Compile Include="GlobalViewModel\ViewUpdatableRepository.cs" />
     <Compile Include="GlobalViewModel\ViewWindowDetail.cs" />
     <Compile Include="OrdersJournal\Models\OrdersDecorators\JournalOrder.cs" />
     <Compile Include="OrdersJournal\OrderDetail\Models\IndexedService.cs" />
