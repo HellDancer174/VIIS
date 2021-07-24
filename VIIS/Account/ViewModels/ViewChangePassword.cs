@@ -7,6 +7,7 @@ using ElegantLib.Authorize;
 using ElegantLib.Authorize.Tokenize;
 using VIIS.App.Account.DataModels;
 using VIIS.App.Account.Models;
+using VIIS.Domain.Global;
 
 namespace VIIS.App.Account.ViewModels
 {
@@ -14,14 +15,14 @@ namespace VIIS.App.Account.ViewModels
     {
         private readonly RefreshViewModel token;
 
-        public ViewChangePassword(JwtAccount account, string email, string userName, string pass, RefreshViewModel token) : base("Изменить пароль", false, "Изменить", "Новый пароль", account, email, userName, pass)
+        public ViewChangePassword(JwtAccount account, User user, string pass, RefreshViewModel token) : base("Изменить пароль", false, "Изменить", "Новый пароль", account, user, pass)
         {
             this.token = token;
         }
 
-        protected override Task Save()
+        public override Task Save(string firstPass, string secondPass)
         {
-            new WindowCatcher<Exception>(async () => await account.ChangePassword(new VIISChangePasswordModel(Email, UserName, Password, SecondPassword), token)).Execute();
+            new WindowCatcher<Exception>(async () => await account.ChangePassword(new VIISChangePasswordModel(Email, UserName, firstPass, secondPass), token)).Execute();
             return Task.CompletedTask;
         }
     }
