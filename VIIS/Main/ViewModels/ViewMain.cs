@@ -25,10 +25,6 @@ using VIIS.App.GlobalViewModel;
 using VIIS.App.Finance.MasterPay.ViewModels;
 using VIIS.App.Staff.ViewModels;
 using VIIS.App.Services.ViewModels;
-using VIIS.App.Account.ViewModels;
-using VIIS.App.Account.Models;
-using ElegantLib.Requests;
-using System.Net.Http;
 
 namespace VIIS.App.Main.ViewModels
 {
@@ -94,6 +90,6 @@ namespace VIIS.App.Main.ViewModels
         public RelayCommand ServiceValues => new RelayCommand((obj) => Current = serviceValues);
         public RelayCommand Settings => new RelayCommand((obj) => Current = account);
 
-        public RelayCommand Exit => new RelayCommand((obj) => { new LoginWindow(new LoginViewModel(new MemoryJwtAccount(new HttpClient(), new URL("")))).Show(); view.Close(); });
+        public RelayCommand Exit => new RelayCommand((obj) => { new LoginWindow().Show(); view.Close(); });
     }
 }

@@ -8,27 +8,28 @@ using System.Text;
 using System.Threading.Tasks;
 using VIIS.App.Account.DataModels;
 using VIIS.App.Account.Models;
-using VIIS.Domain.Global;
 using VIMVVM;
 
 namespace VIIS.App.Account.ViewModels
 {
-    public class ViewRegister : User, IViewUserDetail
+    public class ViewRegister
     {
         protected readonly JwtAccount account;
 
-        public ViewRegister(string title, bool canChangeLogin, string saveButtonName, string secondPassName, JwtAccount account, User user, string pass): base(user)
+        public ViewRegister(string title, bool canChangeLogin, string saveButtonName, string secondPassName, JwtAccount account, string email, string username, string pass)
         {
             Title = title;
             CanChangeLogin = canChangeLogin;
             SaveButtonName = saveButtonName;
             SecondPasswordName = secondPassName;
             this.account = account;
+            Email = email;
+            UserName = username;
             Password = pass;
             SecondPassword = "";
-            SaveCommand = new RelayCommand((obj) => Save(Password, SecondPassword), (obj) => !(String.IsNullOrEmpty(Email) && String.IsNullOrEmpty(Password) && String.IsNullOrEmpty(UserName) && String.IsNullOrEmpty(SecondPassword)));
+            SaveCommand = new RelayCommand((obj) => Save(), (obj) => !(String.IsNullOrEmpty(Email) && String.IsNullOrEmpty(Password) && String.IsNullOrEmpty(UserName) && String.IsNullOrEmpty(SecondPassword)));
         }
-        public ViewRegister(JwtAccount account): this("Новый пользователь", true, "Добавить", "Подтвердить пароль", account, new User("", ""), "")
+        public ViewRegister(JwtAccount account): this("Новый пользователь", true, "Добавить", "Подтвердить пароль", account, "", "", "")
         {
         }
 
@@ -37,15 +38,15 @@ namespace VIIS.App.Account.ViewModels
         public string SecondPasswordName { get; }
         public string SaveButtonName { get; }
 
-        public string Email { get => email; set => email = value; }
-        public string UserName { get => name; set => name = value; }
+        public string Email { get; set; }
+        public string UserName { get; set; }
         public string Password { get; set; }
         public string SecondPassword { get; set; }
 
 
-        public virtual Task Save(string firstPass, string secondPass)
+        protected virtual Task Save()
         {
-            new WindowCatcher<Exception>(async () => await account.Register(new VIISRegisterModel(Email, UserName, firstPass, secondPass))).Execute();
+            new WindowCatcher<Exception>(async () => await account.Register(new VIISRegisterModel(Email, UserName, Password, SecondPassword))).Execute();
             return Task.CompletedTask;
         }
 

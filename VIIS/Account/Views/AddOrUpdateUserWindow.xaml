@@ -42,17 +42,17 @@
             </StackPanel>
             <StackPanel Margin="5">
                 <TextBlock Text="Пароль" />
-                <PasswordBox x:Name="FPassword" />
+                <PasswordBox Password="{Binding Password}"/>
             </StackPanel>
             <StackPanel Margin="5">
                 <TextBlock Text="{Binding SecondPasswordName}"/>
-                <PasswordBox x:Name="SPassword"/>
+                <PasswordBox Password="{Binding SecondPassword}"/>
             </StackPanel>
             <!--<StackPanel Margin="5">
                 <TextBlock Text="Роль"/>
                 <ComboBox/>
             </StackPanel>-->
-            <Button Margin="25,45,25,5" Style="{StaticResource Material}" Click="Save_Click">
+            <Button Margin="25,45,25,5" Style="{StaticResource Material}">
                 <TextBlock Text="{Binding SaveButtonName}"/>
             </Button>
         </StackPanel>

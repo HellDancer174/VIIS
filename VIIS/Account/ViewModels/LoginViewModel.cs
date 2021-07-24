@@ -6,12 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using VIIS.Domain.Global;
 using VIMVVM;
 
 namespace VIIS.App.Account.ViewModels
 {
-    public class LoginViewModel : IViewLogin
+    public class LoginViewModel
     {
         private readonly JwtAccount account;
         private readonly Action<RefreshViewModel> saveToken;
@@ -32,9 +31,9 @@ namespace VIIS.App.Account.ViewModels
         public string Password { get; set; }
 
 
-        public Task LogIn(string pass)
+        private Task LogIn()
         {
-            new Catcher<Exception>(async () => saveToken.Invoke(await account.Login(Login, pass)), (ex) => MessageBox.Show(ex.Message)).Execute();
+            new Catcher<Exception>(async () => saveToken.Invoke(await account.Login(Login, Password)), (ex) => MessageBox.Show(ex.Message)).Execute();
             return Task.CompletedTask;
         }
 
@@ -42,7 +41,7 @@ namespace VIIS.App.Account.ViewModels
         {
             get
             {
-                return new RelayCommand((obj) => LogIn(Password), (obj) => !(String.IsNullOrEmpty(Login) && String.IsNullOrEmpty(Password)));
+                return new RelayCommand((obj) => LogIn(), (obj) => !(String.IsNullOrEmpty(Login) && String.IsNullOrEmpty(Password)));
             }
         }
     }

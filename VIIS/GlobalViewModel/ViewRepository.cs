@@ -64,7 +64,5 @@ namespace VIIS.App.GlobalViewModel
         }
 
 
-
-
     }
 }

@@ -11,7 +11,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using VIIS.App.Account.ViewModels;
 
 namespace VIIS.App.Account.Views
 {
@@ -20,17 +19,9 @@ namespace VIIS.App.Account.Views
     /// </summary>
     public partial class AddOrUpdateUserWindow : Window
     {
-        private IViewUserDetail userDetail;
-
-        public AddOrUpdateUserWindow(IViewUserDetail userDetail)
+        public AddOrUpdateUserWindow()
         {
             InitializeComponent();
-            DataContext = this.userDetail = userDetail;
-        }
-
-        private async void Save_Click(object sender, RoutedEventArgs e)
-        {
-            await userDetail.Save(FPassword.Password, SPassword.Password);
         }
     }
 }
