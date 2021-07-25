@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using VIIS.App.Account.Models;
 using VIIS.Domain.Global;
-using VIIS.VIIS.Domain.Data;
+using VIIS.Domain.Data;
 using VIMVVM;
 
 namespace VIIS.App.Account.ViewModels

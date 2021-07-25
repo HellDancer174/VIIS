@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace VIIS.VIIS.Domain.Data
+namespace VIIS.Domain.Data
 {
     public class VIISRegisterModel : RegisterModel
     {
