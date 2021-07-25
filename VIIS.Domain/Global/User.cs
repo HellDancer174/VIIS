@@ -1,4 +1,5 @@
 ﻿using ElegantLib;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,10 +8,11 @@ using System.Threading.Tasks;
 
 namespace VIIS.Domain.Global
 {
+    [JsonObject(MemberSerialization.OptIn)]
     public class User : IEquatable<User>, IDocumentAsync
     {
-        protected string name;
-        protected string email;
+        [JsonProperty] protected string name;
+        [JsonProperty] protected string email;
 
         public User(string name, string email)
         {
@@ -49,7 +51,7 @@ namespace VIIS.Domain.Global
             return name;
         }
 
-        public Task TransferAsync()
+        public virtual Task TransferAsync()
         {
             throw new NotImplementedException();
         }

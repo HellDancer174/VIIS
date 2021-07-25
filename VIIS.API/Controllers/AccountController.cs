@@ -11,9 +11,13 @@ using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using VIIS.API.Account.ViewModels;
 using VIIS.API.Data;
+using VIIS.API.GlobalModel;
 using VIIS.API.JwtBearer.Models;
 using VIIS.API.JwtBearer.ViewModels;
 using VIIS.API.Services;
+using VIIS.Domain.Data;
+using VIIS.Domain.Global;
+using VIIS.VIIS.Domain.Data;
 
 namespace VIIS.API.Controllers
 {
@@ -42,11 +46,20 @@ namespace VIIS.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> ChangePassword(ChangePasswordViewModel model)
+        public async Task<IActionResult> ChangePassword(VIISChangePasswordModel model)
         {
             if (!ModelState.IsValid) return BadRequest();
             var user = await _userManager.FindByEmailAsync(model.Email);
             var result = await _userManager.ChangePasswordAsync(user, model.OldPassword, model.NewPassword);
+            if (model.UserName != user.UserName)
+            {
+                var renameResult = await _userManager.SetUserNameAsync(user, model.UserName);
+                if(!renameResult.Succeeded)
+                {
+                    AddErrors(renameResult);
+                    return BadRequest();
+                }
+            }
             if (result.Succeeded) return Ok();
 
             AddErrors(result);
@@ -54,11 +67,11 @@ namespace VIIS.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Register([FromBody] RegisterViewModel model)
+        public async Task<IActionResult> Register([FromBody] VIISRegisterModel model)
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email };
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -137,6 +150,27 @@ namespace VIIS.API.Controllers
             AddErrors(result);
             return BadRequest();
         }
+
+        [HttpGet]
+        public IEnumerable<User> GetUsers()
+        {
+            return _userManager.Users.Select(appUser => new DBUser(appUser, _userManager)).ToArray();
+        }
+
+        public async Task<ActionResult> RemoveUser([FromBody] User user)
+        {
+            try
+            {
+                await new RemovableDBUser(user, _userManager).TransferAsync();
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+            return Ok();
+        }
+
+
 
 
         private void AddErrors(IdentityResult result)

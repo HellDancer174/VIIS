@@ -5,8 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using ElegantLib.Authorize;
 using ElegantLib.Authorize.Tokenize;
-using VIIS.App.Account.DataModels;
 using VIIS.App.Account.Models;
+using VIIS.Domain.Data;
 using VIIS.Domain.Global;
 
 namespace VIIS.App.Account.ViewModels

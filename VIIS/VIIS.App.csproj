@@ -82,8 +82,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Account\DataModels\VIISChangePasswordModel.cs" />
-    <Compile Include="Account\DataModels\VIISRegisterModel.cs" />
     <Compile Include="Account\Models\MemoryJwtAccount.cs" />
     <Compile Include="Account\Models\Requests\MemoryAuthorizedJsonRequest.cs" />
     <Compile Include="Account\Models\WindowCatcher.cs" />

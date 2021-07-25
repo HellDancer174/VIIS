@@ -6,9 +6,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using VIIS.App.Account.DataModels;
 using VIIS.App.Account.Models;
 using VIIS.Domain.Global;
+using VIIS.VIIS.Domain.Data;
 using VIMVVM;
 
 namespace VIIS.App.Account.ViewModels

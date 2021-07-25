@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace VIIS.App.Account.DataModels
+namespace VIIS.Domain.Data
 {
     public class VIISChangePasswordModel : ChangePasswordModel
     {
