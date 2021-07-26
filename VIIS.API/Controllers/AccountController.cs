@@ -17,7 +17,6 @@ using VIIS.API.JwtBearer.ViewModels;
 using VIIS.API.Services;
 using VIIS.Domain.Data;
 using VIIS.Domain.Global;
-using VIIS.VIIS.Domain.Data;
 
 namespace VIIS.API.Controllers
 {
@@ -125,7 +124,7 @@ namespace VIIS.API.Controllers
             var refresh = new RefreshToken().Value();
             if (Helpers.UserNameRefreshToken.ContainsKey(username)) Helpers.UserNameRefreshToken[username] = refresh;
             else Helpers.UserNameRefreshToken.Add(username, refresh);
-            return Created("", new { token = new JwtSecurityTokenHandler().WriteToken(token), exp = token.ValidTo, refresh });
+            return Ok(new { AccessToken = new JwtSecurityTokenHandler().WriteToken(token), RefreshToken = refresh });
         }
 
         [HttpPost]

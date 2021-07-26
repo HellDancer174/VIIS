@@ -7,19 +7,22 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using VIIS.App.Account.Models.Requests;
+using VIIS.Domain.Account.Requests;
 
-namespace VIIS.App.Account.Models
+namespace VIIS.Domain.Account
 {
     public class MemoryJwtAccount : JwtAccount
     {
-        public MemoryJwtAccount(HttpClient client, URL accountUrl) : base(client, accountUrl)
+        private readonly Action<RefreshViewModel> saveToken;
+
+        public MemoryJwtAccount(HttpClient client, URL accountUrl, Action<RefreshViewModel> saveToken) : base(client, accountUrl)
         {
+            this.saveToken = saveToken;
         }
 
         protected override AuthorizedJsonRequest AuthorizedRequest(JsonRequest request, RefreshViewModel token)
         {
-            return new MemoryAuthorizedJsonRequest(request, token, this);
+            return new MemoryAuthorizedJsonRequest(request, token, this, saveToken);
         }
     }
 }

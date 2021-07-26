@@ -23,10 +23,10 @@ namespace VIIS.App.Customers.Views
     {
         private readonly ViewClients viewModel;
 
-        public ClientsView(): this(new ViewClients(new Domain.Customers.Clients()))
-        {
-            InitializeComponent();
-        }
+        //public ClientsView(): this(new ViewClients(new Domain.Customers.Clients()))
+        //{
+        //    InitializeComponent();
+        //}
 
         public ClientsView(ViewClients viewModel)
         {

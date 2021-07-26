@@ -29,6 +29,8 @@ using VIIS.App.Account.ViewModels;
 using VIIS.App.Account.Models;
 using ElegantLib.Requests;
 using System.Net.Http;
+using System.Net;
+using System.Net.Security;
 
 namespace VIIS.App.Main.ViewModels
 {
@@ -59,17 +61,16 @@ namespace VIIS.App.Main.ViewModels
         //}
 
         public ViewMain(Orders orders, Employees masters, Clients clients, ServiceValueList serviceValues, ViewTransactions transactions, Repository<MasterCash> cashes, MainView view):
-            this(new OrdersJournalView(new Journal(orders, masters, serviceValues, clients, transactions)), new ClientsView(new ViewClients(clients)), 
+            this(new OrdersJournalView(new Journal(orders, masters, serviceValues, clients, transactions)), new ClientsView(new ViewClients(clients, (token) => App.Token = token)), 
                 new EmployeesTabs(), 
                 new FinanceTabs(new ViewFinance(transactions, new ViewMasterCashList(cashes, transactions, masters.Select(master => new ViewEmployee(master)).ToList()), orders, masters)),
                 new ServicesView(new ViewServices(serviceValues)), new UsersWindow(), view)
         {
-
+            view.DataContext = this;
         }
 
         public ViewMain(MainView view) : this(new Orders(), new Employees(), new Clients(), new ServiceValueList(), new ViewTransactions(), new Repository<MasterCash>(new List<MasterCash>()), view)
         {
-
         }
 
         private Page current;
@@ -94,6 +95,11 @@ namespace VIIS.App.Main.ViewModels
         public RelayCommand ServiceValues => new RelayCommand((obj) => Current = serviceValues);
         public RelayCommand Settings => new RelayCommand((obj) => Current = account);
 
-        public RelayCommand Exit => new RelayCommand((obj) => { new LoginWindow(new LoginViewModel(new MemoryJwtAccount(new HttpClient(), new URL("")))).Show(); view.Close(); });
+        public RelayCommand Exit => new RelayCommand((obj) => 
+        {
+            new LoginWindow().Show(); view.Close();
+        });
+
+        public void ShowView() => view.Show();
     }
 }

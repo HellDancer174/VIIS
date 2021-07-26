@@ -47,8 +47,8 @@ namespace VIIS.API.Controllers
             }
         }
 
-        // PUT: api/Clients/5
-        [HttpPut("{id}")]
+        // PUT: api/Clients/
+        [HttpPut]
         public ActionResult Put([FromBody]Client value)
         {
             using (var context = new VIISDBContext())
@@ -58,8 +58,8 @@ namespace VIIS.API.Controllers
             //return Execute(new ValidDBClient(new UpdatableDBClient(new DBClient(value))));
         }
 
-        // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
+        // DELETE: api/ApiWithActions/
+        [HttpDelete]
         public ActionResult Delete([FromBody]Client value)
         {
             using (var context = new VIISDBContext())

@@ -5,11 +5,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VIMVVM;
 
 namespace VIIS.Domain.Global
 {
     [JsonObject(MemberSerialization.OptIn)]
-    public class User : IEquatable<User>, IDocumentAsync
+    public class User : Notifier, IEquatable<User>, IDocumentAsync
     {
         [JsonProperty] protected string name;
         [JsonProperty] protected string email;

@@ -2,11 +2,12 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:converters="clr-namespace:VIIS.App.GlobalViewModel.Converters"
-             StartupUri="Main\Views\MainView.xaml">
-             <!--StartupUri="Employees\Views\EmployeesTabs.xaml">-->
+             StartupUri="Account\Views\LoginWindow.xaml">
+
+            <!--StartupUri="Employees\Views\EmployeesTabs.xaml">-->
              <!--StartupUri="OrdersJournal\OrderDetail\Views\OrderDetail.xaml">-->
              <!--StartupUri="OrdersJournal\Views\OrdersJournal.xaml">-->
-             <!--StartupUri="Account\Views\LoginWindow.xaml">-->
+             <!--StartupUri="Main\Views\MainView.xaml">-->
     <Application.Resources>
         
         <ResourceDictionary>

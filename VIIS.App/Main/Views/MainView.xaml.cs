@@ -23,7 +23,7 @@ namespace VIIS.App.Main.Views
         public MainView()
         {
             InitializeComponent();
-            DataContext = new ViewMain(this);
+            //DataContext = new ViewMain(this);
         }
     }
 }

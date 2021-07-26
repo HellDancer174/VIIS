@@ -1,6 +1,8 @@
-﻿using System;
+﻿using ElegantLib.Requests;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -12,7 +14,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using VIIS.App.Account.Models;
 using VIIS.App.Account.ViewModels;
+using VIIS.Domain.Account;
 
 namespace VIIS.App.Account.Views
 {
@@ -23,16 +27,17 @@ namespace VIIS.App.Account.Views
     {
         private IViewLogin viewLogin;
 
-        public LoginWindow(LoginViewModel viewModel)
+        //public LoginWindow(LoginViewModel viewModel)
+        //{
+        //    InitializeComponent();
+        //    DataContext = viewModel;
+        //    viewLogin = viewModel;
+        //}
+        public LoginWindow()
         {
             InitializeComponent();
-            DataContext = viewModel;
-            viewLogin = viewModel;
+            DataContext = viewLogin = new LoginViewModel(new MemoryJwtAccount(new HttpClient(), new URL("https://localhost:44395/"), (token) => App.Token = token), this);
         }
-        //public LoginWindow(): this(new LoginViewModel())
-        //{
-
-        //}
         private void Exit_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             this.Close();

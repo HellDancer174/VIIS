@@ -86,8 +86,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Account\Models\MemoryJwtAccount.cs" />
-    <Compile Include="Account\Models\Requests\MemoryAuthorizedJsonRequest.cs" />
     <Compile Include="Account\Models\WindowCatcher.cs" />
     <Compile Include="Account\ViewModels\IViewLogin.cs" />
     <Compile Include="Account\ViewModels\IViewUserDetail.cs" />

@@ -44,11 +44,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Account\MemoryJwtAccount.cs" />
+    <Compile Include="Account\Requests\MemoryAuthorizedJsonRequest.cs" />
+    <Compile Include="Account\VIISJwtURL.cs" />
     <Compile Include="Customers\AnyClient.cs" />
     <Compile Include="Customers\Client.cs" />
     <Compile Include="Customers\Clients.cs" />
     <Compile Include="Customers\Decorators\ClientDecorator.cs" />
     <Compile Include="Customers\Decorators\ClientsDecorator.cs" />
+    <Compile Include="Customers\Decorators\InsertableClient.cs" />
+    <Compile Include="Customers\Decorators\RemovableClient.cs" />
+    <Compile Include="Customers\Decorators\UpdatableClient.cs" />
     <Compile Include="Data\VIISChangePasswordModel.cs" />
     <Compile Include="Data\VIISRegisterModel.cs" />
     <Compile Include="Finance\DecoratableTransaction.cs" />

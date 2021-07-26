@@ -43,7 +43,7 @@ namespace VIIS.App.GlobalViewModel
 
         public virtual RelayCommand Save => new RelayCommand(async (obj) => { await repository.UpdateViewAsync(oldViewModel, ViewModel);
             ViewModel.NotifySelector(); });
-        public virtual RelayCommand End => new RelayCommand(async (obj) => await repository.RemoveAsync(oldViewModel));
+        public virtual RelayCommand End => new RelayCommand(async (obj) => await repository.RemoveViewAsync(oldViewModel));
 
         public V ViewModel { get; }
     }

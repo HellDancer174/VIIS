@@ -18,8 +18,6 @@ namespace VIIS.App.Account.ViewModels
         public string Name { get => name; set => name = value; }
         public string Email { get => email; set => email = value; }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
         public User Model()
         {
             return new User(Name, Email);
