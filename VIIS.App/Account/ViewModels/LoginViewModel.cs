@@ -67,9 +67,19 @@ namespace VIIS.App.Account.ViewModels
         private async Task ShowViewMain()
         {
             var url = new VIISJwtURL();
-            var clients = await new DeserializableResponseMessage<IEnumerable<Client>>(
-                await new MemoryAuthorizedJsonRequest(new JsonRequest(new HttpClient(), url.ClientsUrl), App.Token, account, (accesstoken) => App.Token = accesstoken).Response()).DeserializedContent();
-            new ViewMain(new Orders(), new Employees(), new Clients(clients.ToList()), new ServiceValueList(), new ViewTransactions(), new Repository<MasterCash>(new List<MasterCash>()), new MainView()).ShowView();
+            IEnumerable<Client> clients = await TList<Client>(url, url.ClientsUrl);
+            IEnumerable<ServiceValue> services = await TList<ServiceValue>(url, url.ServiceValuesUrl);
+            IEnumerable<Master> masters = await TList<Master>(url, url.MasterssUrl);
+            IEnumerable<Transaction> transactions = await TList<Transaction>(url, url.TransactionsUrl);
+            IEnumerable<User> users = await TList<User>(url, url.UsersURL);
+            new ViewMain(new Orders(new Master()), new Employees(masters.ToList()), new Clients(clients.ToList()), new ServiceValueList(services.ToList()), new ViewTransactions(new Repository<Transaction>(transactions), saveToken),
+                new Repository<MasterCash>(new List<MasterCash>()), new ViewUsers(new Repository<User>(users), account, App.Token), new MainView(), saveToken).ShowView();
+        }
+
+        private async Task<IEnumerable<T>> TList<T>(VIISJwtURL url, string apiUrl)
+        {
+            return await new DeserializableResponseMessage<IEnumerable<T>>(
+                await new MemoryAuthorizedJsonRequest(new JsonRequest(new HttpClient(), apiUrl), App.Token, account, (accesstoken) => App.Token = accesstoken).Response()).DeserializedContent();
         }
 
         public RelayCommand LoginCommand

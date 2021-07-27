@@ -38,7 +38,7 @@ namespace VIIS.Domain.Services
             return name;
         }
 
-        public Task TransferAsync()
+        public virtual Task TransferAsync()
         {
             return Task.CompletedTask;
         }

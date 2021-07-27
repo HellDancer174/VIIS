@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using VIIS.App.Staff.ViewModels;
 
 namespace VIIS.App.Staff.Views
 {
@@ -20,9 +21,12 @@ namespace VIIS.App.Staff.Views
     /// </summary>
     public partial class EmployeesTabs : Page
     {
-        public EmployeesTabs()
+        private readonly ViewEmployeesTabs viewModel;
+
+        public EmployeesTabs(ViewEmployeesTabs viewModel)
         {
             InitializeComponent();
+            DataContext = this.viewModel = viewModel;
         }
     }
 }

@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using VIIS.App.Account.ViewModels;
 
 namespace VIIS.App.Account.Views
 {
@@ -19,9 +20,12 @@ namespace VIIS.App.Account.Views
     /// </summary>
     public partial class UsersWindow : Page
     {
-        public UsersWindow()
+        private readonly ViewUsers users;
+
+        public UsersWindow(ViewUsers users)
         {
             InitializeComponent();
+            DataContext = this.users = users;
         }
 
         private void DataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)

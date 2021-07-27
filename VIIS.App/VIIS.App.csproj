@@ -324,7 +324,6 @@
     <Compile Include="OrdersJournal\OrderDetail\Models\ViewTransferableClient.cs" />
     <Compile Include="OrdersJournal\OrderDetail\ViewModels\ViewClient.cs" />
     <Compile Include="OrdersJournal\OrderDetail\ViewModels\ExistingViewClient.cs" />
-    <Compile Include="GlobalViewModel\ViewName.cs" />
     <Compile Include="OrdersJournal\OrderDetail\ViewModels\ViewClients.cs" />
     <Compile Include="OrdersJournal\OrderDetail\ViewModels\OrderDetailVM.cs" />
     <Compile Include="OrdersJournal\OrderDetail\ViewModels\ViewService.cs" />

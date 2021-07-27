@@ -26,12 +26,12 @@ namespace VIIS.Domain.Orders
         public Orders(Orders other): base(other)
         {
         }
-        public Orders(): 
+        public Orders(Master testMaster): 
             base(new VirtualCollection<Order>(new List<Order>()
             {
-                new Order(new Client("Виктор", "Игнатьев", "", "265664699589"), new List<Service>() { new Service("Стрижка", 500, DateTime.Now.Date + new TimeSpan(9, 10, 0), new TimeSpan(0,30,0)) }, new Master(), "", DateTime.Now.Date + new TimeSpan(9,10,0)),
-                new Order(new Client("Виктор", "Кот", "", "16542389"), new List<Service>() { new Service("Стрижка", 500, DateTime.Now.Date + new TimeSpan(9,40,0), new TimeSpan(0,30,0)) }, new Master(),"", DateTime.Now.Date + new TimeSpan(9,40,0)),
-                new Order(new Client("Виктор", "Игнатов", "", "268596564"), new List<Service>() { new Service("Стрижка", 500, DateTime.Now.Date + new TimeSpan(10,10,0), new TimeSpan(0,30,0)) }, new Master(),"", DateTime.Now.Date + new TimeSpan(10,10,0))
+                new Order(new Client("Виктор", "Игнатьев", "", "265664699589"), new List<Service>() { new Service("Стрижка", 500, DateTime.Now.Date + new TimeSpan(9, 10, 0), new TimeSpan(0,30,0)) }, testMaster, "", DateTime.Now.Date + new TimeSpan(9,10,0)),
+                new Order(new Client("Виктор", "Кот", "", "16542389"), new List<Service>() { new Service("Стрижка", 500, DateTime.Now.Date + new TimeSpan(9,40,0), new TimeSpan(0,30,0)) }, testMaster,"", DateTime.Now.Date + new TimeSpan(9,40,0)),
+                new Order(new Client("Виктор", "Игнатов", "", "268596564"), new List<Service>() { new Service("Стрижка", 500, DateTime.Now.Date + new TimeSpan(10,10,0), new TimeSpan(0,30,0)) }, testMaster,"", DateTime.Now.Date + new TimeSpan(10,10,0))
 
             }))
         {

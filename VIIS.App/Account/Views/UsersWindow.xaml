@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         d:DesignHeight="450" d:DesignWidth="800"
         Title="" MinHeight="450" MinWidth="800">
-    <Page.Resources>
+    <!--<Page.Resources>
         <Style TargetType="TextBlock">
             <Setter Property="FontSize" Value="16"/>
             <Setter Property="FontFamily" Value="{StaticResource Champagne}"/>
@@ -32,7 +32,7 @@
         <Style TargetType="DataGrid">
             
         </Style>
-    </Page.Resources>
+    </Page.Resources>-->
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -44,20 +44,23 @@
                 <RowDefinition Height="10*"/>
                 <RowDefinition Height="90*"/>
             </Grid.RowDefinitions>
-            <TextBlock Grid.Row="0" Text="Пользователи" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <DataGrid Grid.Row="1" MouseDoubleClick="DataGrid_MouseDoubleClick">
-                
+            <TextBlock Grid.Row="0" Text="Пользователи" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource Default}"/>
+            <DataGrid Grid.Row="1" ItemsSource="{Binding Collection}" AutoGenerateColumns="False" SelectedItem="{Binding Selected}" FontFamily="/VIIS.App;component/Resources/#Champagne &amp; Limousines">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Имя" Binding="{Binding Name, Mode=OneWay}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Email" Binding="{Binding Email, Mode=OneWay}" IsReadOnly="True"/>
+                </DataGrid.Columns>
             </DataGrid>
         </Grid>
         <StackPanel Grid.Column="1" Margin="5">
-            <Button Margin="0,5,0,5" Style="{StaticResource Material}">
-                <TextBlock Text="Добавить"/>
+            <Button Margin="0,5,0,5" Style="{StaticResource Material}" Command="{Binding AddCommand}">
+                <TextBlock Text="Добавить" Style="{StaticResource Default}"/>
             </Button>
-            <Button Margin="0,5,0,5" Style="{StaticResource Material}">
-                <TextBlock Text="Изменить"/>
+            <Button Margin="0,5,0,5" Style="{StaticResource Material}" Command="{Binding ChangeCommand}">
+                <TextBlock Text="Изменить" Style="{StaticResource Default}"/>
             </Button>
-            <Button Margin="0,5,0,5" Style="{StaticResource Material}">
-                <TextBlock Text="Удалить"/>
+            <Button Margin="0,5,0,5" Style="{StaticResource Material}" Command="{Binding RemoveCommand}">
+                <TextBlock Text="Удалить" Style="{StaticResource Default}"/>
             </Button>
         </StackPanel>
     </Grid>

@@ -81,7 +81,7 @@ namespace VIIS.App.Staff.ViewModels
 
         public Master Model()
         {
-            return new Master(firstName, lastName, middleName, Phone, new Position(Position), workDaysList, Address, Passport, Detail, BirthDay, Email);
+            return new Master(masterID, id,firstName, lastName, middleName, Phone, new Position(Position), workDaysList, Address, Passport, Detail, BirthDay, Email);
         }
 
 

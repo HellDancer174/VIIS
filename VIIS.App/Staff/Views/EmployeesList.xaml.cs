@@ -27,7 +27,7 @@ namespace VIIS.App.Staff.Views
             InitializeComponent();
             DataContext = masters;
         }
-        public EmployeesList() : this(new ViewEmployees(new Employees()))
+        public EmployeesList() : this(new ViewEmployees(new Employees(), (token) => App.Token = token))
         {
         }
 

@@ -64,6 +64,9 @@
     <Compile Include="Finance\MasterCash.cs" />
     <Compile Include="Finance\Transaction.cs" />
     <Compile Include="Global\DataModels\UserModel.cs" />
+    <Compile Include="Global\Documents\InsertableDocument.cs" />
+    <Compile Include="Global\Documents\RemovableDocument.cs" />
+    <Compile Include="Global\Documents\UpdatableDocument.cs" />
     <Compile Include="Global\Person.cs" />
     <Compile Include="Global\Repository.cs" />
     <Compile Include="Global\User.cs" />

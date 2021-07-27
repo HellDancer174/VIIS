@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ElegantLib.Authorize.Tokenize;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -7,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using VIIS.App.GlobalViewModel;
 using VIIS.App.Staff.Views;
+using VIIS.Domain.Account;
 using VIIS.Domain.Global;
 using VIIS.Domain.Staff;
 using VIIS.Domain.Staff.Decorators;
@@ -14,9 +16,9 @@ using VIMVVM;
 
 namespace VIIS.App.Staff.ViewModels
 {
-    public class ViewEmployees : ViewRepository<ViewEmployee, Master>
+    public class ViewEmployees : ViewUpdatableRepository<ViewEmployee, Master>
     {
-        public ViewEmployees(Employees masters) : base(masters, new ObservableCollection<ViewEmployee>(masters.Select(master => new ViewEmployee(master)).ToList()))
+        public ViewEmployees(Employees masters, Action<RefreshViewModel> saveToken) : base(masters, saveToken, (master) => new ViewEmployee(master), new VIISJwtURL().MasterssUrl)
         {
             if (Collection.Count != 0) Selected = Collection.First();
         }

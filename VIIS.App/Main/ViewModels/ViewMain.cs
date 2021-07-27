@@ -31,6 +31,7 @@ using ElegantLib.Requests;
 using System.Net.Http;
 using System.Net;
 using System.Net.Security;
+using ElegantLib.Authorize.Tokenize;
 
 namespace VIIS.App.Main.ViewModels
 {
@@ -43,6 +44,7 @@ namespace VIIS.App.Main.ViewModels
         private readonly Page serviceValues;
         private readonly Page account;
         private readonly MainView view;
+        private readonly Action<RefreshViewModel> saveToken = (token) => App.Token = token;
 
         public ViewMain(Page journal, Page clients, Page staff, Page finance, Page serviceValues, Page account, MainView view)
         {
@@ -60,16 +62,16 @@ namespace VIIS.App.Main.ViewModels
 
         //}
 
-        public ViewMain(Orders orders, Employees masters, Clients clients, ServiceValueList serviceValues, ViewTransactions transactions, Repository<MasterCash> cashes, MainView view):
-            this(new OrdersJournalView(new Journal(orders, masters, serviceValues, clients, transactions)), new ClientsView(new ViewClients(clients, (token) => App.Token = token)), 
-                new EmployeesTabs(), 
+        public ViewMain(Orders orders, Employees masters, Clients clients, ServiceValueList serviceValues, ViewTransactions transactions, Repository<MasterCash> cashes , ViewUsers users, MainView view, Action<RefreshViewModel> saveToken) :
+            this(new OrdersJournalView(new Journal(orders, new Employees(), serviceValues, clients, transactions)), new ClientsView(new ViewClients(clients, saveToken)), 
+                new EmployeesTabs(new ViewEmployeesTabs(new EmployeesList(new ViewEmployees(masters, saveToken)), new WorkGraph(), new PayView())), 
                 new FinanceTabs(new ViewFinance(transactions, new ViewMasterCashList(cashes, transactions, masters.Select(master => new ViewEmployee(master)).ToList()), orders, masters)),
-                new ServicesView(new ViewServices(serviceValues)), new UsersWindow(), view)
+                new ServicesView(new ViewServices(serviceValues, saveToken)), new UsersWindow(users), view)
         {
             view.DataContext = this;
         }
 
-        public ViewMain(MainView view) : this(new Orders(), new Employees(), new Clients(), new ServiceValueList(), new ViewTransactions(), new Repository<MasterCash>(new List<MasterCash>()), view)
+        public ViewMain(MainView view) : this(new Orders(new Master()), new Employees(), new Clients(), new ServiceValueList(), new ViewTransactions(), new Repository<MasterCash>(new List<MasterCash>()), new ViewUsers(), view, (token) => App.Token = token)
         {
         }
 

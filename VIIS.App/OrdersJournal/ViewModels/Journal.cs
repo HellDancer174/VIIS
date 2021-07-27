@@ -35,7 +35,7 @@ namespace VIIS.App.OrdersJournal.ViewModels
             this.transactions = transactions;
             CurrentDate = DateTime.Now.Date;
         }
-        public Journal():this(new Orders(), new Employees(), new ServiceValueList(), new Clients(), new ViewTransactions())
+        public Journal():this(new Orders(new Master()), new Employees(), new ServiceValueList(), new Clients(), new ViewTransactions())
         {
         }
 

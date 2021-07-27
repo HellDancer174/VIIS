@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using VIMVVM;
 using VIMVVM.Detail;
 
@@ -16,7 +17,17 @@ namespace VIIS.App.GlobalViewModel
         {
         }
 
-        public override RelayCommand Save => new RelayCommand(async(obj) => await repository.AddViewAsync(ViewModel));
+        public override RelayCommand Save => new RelayCommand(async(obj) =>
+        {
+            try
+            {
+                await repository.AddViewAsync(ViewModel);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        });
 
         public override RelayCommand End => new RelayCommand((obj) => { });
     }

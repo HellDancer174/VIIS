@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using VIIS.App.Staff.ViewModels.PayViewModels;
+using VIIS.Domain.Staff;
 
 namespace VIIS.App.Staff.Views
 {
@@ -28,7 +29,7 @@ namespace VIIS.App.Staff.Views
             InitializeComponent();
             DataContext = this.viewModel = viewModel;
         }
-        public PayView(): this(new ViewMastersCashList(new Domain.Staff.Employees(), new Domain.Orders.Orders()))
+        public PayView(): this(new ViewMastersCashList(new Domain.Staff.Employees(), new Domain.Orders.Orders(new Master())))
         {
         }
 

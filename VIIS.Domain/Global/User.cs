@@ -20,6 +20,10 @@ namespace VIIS.Domain.Global
             this.name = name;
             this.email = email;
         }
+        public User():this("", "")
+        {
+
+        }
         public User(User other): this(other.name, other.email)
         {
         }

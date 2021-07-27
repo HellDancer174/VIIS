@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ElegantLib.Authorize.Tokenize;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -8,27 +9,29 @@ using System.Windows.Input;
 using VIIS.App.Finance.Models;
 using VIIS.App.Finance.Views;
 using VIIS.App.GlobalViewModel;
+using VIIS.Domain.Account;
 using VIIS.Domain.Finance;
 using VIIS.Domain.Global;
 using VIMVVM;
 
 namespace VIIS.App.Finance.ViewModels
 {
-    public class ViewTransactions : ViewRepository<ViewTransaction, Transaction>
+    public class ViewTransactions : ViewUpdatableRepository<ViewTransaction, Transaction>
     {
 
         private decimal proceeds;
         private decimal balance;
         private decimal cost;
 
-        public ViewTransactions(Repository<Transaction> other, ObservableCollection<ViewTransaction> collection) : base(other, collection)
+        public ViewTransactions(Repository<Transaction> other, Action<RefreshViewModel> saveToken) : 
+            base(other, saveToken, (transaction) => new ViewTransaction(transaction), new VIISJwtURL().TransactionsUrl)
         {
             CalcTotal();
         }
-        public ViewTransactions(Repository<Transaction> other) : this(other, new ObservableCollection<ViewTransaction>(other.Select(transact => new ViewTransaction(transact)).ToList()))
-        {
-        }
-        public ViewTransactions():this(new Repository<Transaction>(new Transaction[] { new Transaction(), new Transaction("pro", 5), new Transaction("dsp", 9) }))
+        //public ViewTransactions(Repository<Transaction> other) : this(other, new ObservableCollection<ViewTransaction>(other.Select(transact => new ViewTransaction(transact)).ToList()))
+        //{
+        //}
+        public ViewTransactions():this(new Repository<Transaction>(new Transaction[] { new Transaction(), new Transaction("pro", 5), new Transaction("dsp", 9) }), (token) => App.Token = token)
         {
         }
 

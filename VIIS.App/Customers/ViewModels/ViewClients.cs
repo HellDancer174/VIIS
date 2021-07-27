@@ -26,9 +26,7 @@ namespace VIIS.App.Customers.ViewModels
         //private readonly ObservableCollection<ViewClient> clientCollection;
 
         public ViewClients(Clients other, Action<RefreshViewModel> saveToken) : 
-            base(other, async(client, url) => await new DeserializableResponseMessage<IEnumerable<Client>>(
-                await new MemoryAuthorizedJsonRequest(new JsonRequest(client, url.ClientsUrl), App.Token, new MemoryJwtAccount(client, url, saveToken), saveToken).Response()).DeserializedContent(), 
-                (client) => new ViewClient(client))
+            base(other, saveToken, (client) => new ViewClient(client), new VIISJwtURL().ClientsUrl)
         {
             this.saveToken = saveToken;
             //clientCollection = new ObservableCollection<ViewClient>(this.Select(client => new ViewClient(client, this)).ToList());
@@ -44,24 +42,24 @@ namespace VIIS.App.Customers.ViewModels
             await RemoveViewAsync(Selected);
         });
 
-        public override async Task AddViewAsync(ViewClient item)
-        {
-            await AddAsync(new InsertableClient(item.Model(), saveToken, App.Token));
-            await UpdateCollectionAsync();
-        }
+        //public override async Task AddViewAsync(ViewClient item)
+        //{
+        //    await AddAsync(new InsertableClient(item.Model(), saveToken, App.Token));
+        //    await UpdateCollectionAsync();
+        //}
 
-        public override async Task RemoveViewAsync(ViewClient item)
-        {
-            await RemoveAsync(new RemovableClient(item.Model(), saveToken, App.Token));
-            await UpdateCollectionAsync();
-        }
+        //public override async Task RemoveViewAsync(ViewClient item)
+        //{
+        //    await RemoveAsync(new RemovableClient(item.Model(), saveToken, App.Token));
+        //    await UpdateCollectionAsync();
+        //}
 
-        public override async Task UpdateViewAsync(ViewClient oldItem, ViewClient item)
-        {
-            await Update(oldItem, new UpdatableClient(item.Model(), saveToken, App.Token));
-            await UpdateCollectionAsync();
+        //public override async Task UpdateViewAsync(ViewClient oldItem, ViewClient item)
+        //{
+        //    await Update(oldItem, new UpdatableClient(item.Model(), saveToken, App.Token));
+        //    await UpdateCollectionAsync();
 
-        }
+        //}
 
         //public override async Task UpdateCollectionAsync()
         //{

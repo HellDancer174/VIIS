@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ElegantLib.Authorize.Tokenize;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -6,18 +7,19 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using VIIS.App.GlobalViewModel;
+using VIIS.Domain.Account;
 using VIIS.Domain.Global;
 using VIIS.Domain.Services;
 using VIMVVM;
 
 namespace VIIS.App.Services.ViewModels
 {
-    public class ViewServices : ViewRepository<ViewServiceValue, ServiceValue>
+    public class ViewServices : ViewUpdatableRepository<ViewServiceValue, ServiceValue>
     {
-        public ViewServices(Repository<ServiceValue> other) : base(other, new ObservableCollection<ViewServiceValue>(other.Select(service => new ViewServiceValue(service)).ToList()))
+        public ViewServices(Repository<ServiceValue> other, Action<RefreshViewModel> saveToken) : base(other, saveToken, (service) => new ViewServiceValue(service), new VIISJwtURL().ServiceValuesUrl)
         {
         }
-        public ViewServices(): this(new ServiceValueList())
+        public ViewServices() : this(new ServiceValueList(), (token) => App.Token = token)
         {
         }
 

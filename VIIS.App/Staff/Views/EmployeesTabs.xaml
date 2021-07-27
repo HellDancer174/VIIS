@@ -9,9 +9,9 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="" MinWidth="800" MinHeight="450">
 
-    <Page.DataContext>
+    <!--<Page.DataContext>
         <ViewModels:ViewEmployeesTabs/>
-    </Page.DataContext>
+    </Page.DataContext>-->
 
     <Grid>
         <TabControl>

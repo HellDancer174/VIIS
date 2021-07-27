@@ -156,6 +156,7 @@ namespace VIIS.API.Controllers
             return _userManager.Users.Select(appUser => new DBUser(appUser, _userManager)).ToArray();
         }
 
+        [HttpDelete]
         public async Task<ActionResult> RemoveUser([FromBody] User user)
         {
             try

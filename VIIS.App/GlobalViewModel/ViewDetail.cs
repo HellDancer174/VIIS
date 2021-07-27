@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using VIMVVM;
 using VIMVVM.Detail;
 
@@ -41,9 +42,29 @@ namespace VIIS.App.GlobalViewModel
         public virtual string SaveName => saveName;
         public virtual string EndName => endName;
 
-        public virtual RelayCommand Save => new RelayCommand(async (obj) => { await repository.UpdateViewAsync(oldViewModel, ViewModel);
-            ViewModel.NotifySelector(); });
-        public virtual RelayCommand End => new RelayCommand(async (obj) => await repository.RemoveViewAsync(oldViewModel));
+        public virtual RelayCommand Save => new RelayCommand(async (obj) =>
+        {
+            try
+            {
+                await repository.UpdateViewAsync(oldViewModel, ViewModel);
+                ViewModel.NotifySelector();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        });
+        public virtual RelayCommand End => new RelayCommand(async (obj) =>
+        {
+            try
+            {
+                await repository.RemoveViewAsync(oldViewModel);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        });
 
         public V ViewModel { get; }
     }

@@ -24,25 +24,26 @@ namespace VIIS.App.Account.ViewModels
         private readonly RefreshViewModel token;
 
         public ViewUsers(Repository<User> other, JwtAccount account, RefreshViewModel token) : 
-            base(other,
-                async(client, url) => await new DeserializableResponseMessage<IEnumerable<User>>(
-                await new MemoryAuthorizedJsonRequest(new JsonRequest(client, url.UsersURL), App.Token, new MemoryJwtAccount(client, url, (accesstoken) => App.Token = accesstoken), (accesstoken) => App.Token = accesstoken).Response()).DeserializedContent(), 
-                (user) => new ViewUser(user))
+            base(other, (accesstoken) => App.Token = accesstoken, (user) => new ViewUser(user), new VIISJwtURL().UsersURL)
         {
             this.account = account;
             this.token = token;
         }
+        public ViewUsers():this(new Repository<User>(new List<User>()), new JwtAccount(new System.Net.Http.HttpClient(), new VIISJwtURL()), App.Token)
+        {
 
-        public override ICommand AddCommand => new RelayCommand((obj)=> new AddOrUpdateUserWindow(new ViewRegister(account)));
+        }
 
-        public override ICommand ChangeCommand => new RelayCommand((obj) => new AddOrUpdateUserWindow(new ViewChangePassword(account, Selected, "", token)));
+        public override ICommand AddCommand => new RelayCommand((obj)=> new AddOrUpdateUserWindow(new ViewRegister(account)).Show());
+
+        public override ICommand ChangeCommand => new RelayCommand((obj) => new AddOrUpdateUserWindow(new ViewChangePassword(account, Selected, "", token)).Show());
 
         public override ICommand RemoveCommand => new RelayCommand(async(obj) => await RemoveViewAsync(Selected));
 
-        public override async Task UpdateCollectionAsync()
-        {
-            await Task.CompletedTask;
-            Collection = new ObservableCollection<ViewUser>(this.Select(user => new ViewUser(user)).ToList());
-        }
+        //public override async Task UpdateCollectionAsync()
+        //{
+        //    await Task.CompletedTask;
+        //    Collection = new ObservableCollection<ViewUser>(this.Select(user => new ViewUser(user)).ToList());
+        //}
     }
 }
