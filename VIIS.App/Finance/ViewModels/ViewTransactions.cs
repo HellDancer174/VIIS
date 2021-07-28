@@ -98,11 +98,11 @@ namespace VIIS.App.Finance.ViewModels
         {
             foreach(var transact in viewTransactions)
             {
-                Collection.Add(transact);
-                this.Add(transact);
+                await AddAsync(transact.Model());
             }
-
-            await Task.CompletedTask; // отправить на сервер
+            await UpdateCollectionAsync();
+            CalcTotal();
+            //await Task.CompletedTask; // отправить на сервер
         }
     }
 }

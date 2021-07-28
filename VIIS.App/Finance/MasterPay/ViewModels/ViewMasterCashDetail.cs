@@ -6,22 +6,14 @@ using System.Threading.Tasks;
 using VIIS.App.GlobalViewModel;
 using VIIS.App.Staff.ViewModels;
 using VIIS.Domain.Finance;
-using VIIS.Domain.Staff;
-using VIMVVM;
 
 namespace VIIS.App.Finance.MasterPay.ViewModels
 {
-    public class ViewMasterCashDetail : ViewNewDetail<ViewMasterCashList, ViewMasterCash, MasterCash>
+    public class ViewMasterCashDetail : ViewDetail<ViewMasterCashList, ViewMasterCash, MasterCash>
     {
-        public ViewMasterCashDetail(ViewMasterCashList repository, List<ViewEmployee> masters): 
-            base(repository, new ViewAdditionalMasterCash(masters), new ViewAdditionalMasterCash(masters))
+        public ViewMasterCashDetail(ViewMasterCashList repository, ViewMasterCash viewModel, List<ViewEmployee> masters) : base(repository, 
+            new ViewAdditionalMasterCash(viewModel, masters), new ViewAdditionalMasterCash(viewModel, masters))
         {
         }
-
-        //public override RelayCommand Save => new RelayCommand(async (obj) =>
-        //{
-        //    await repository.UpdateViewAsync(oldViewModel, new ViewMasterCash(ViewModel.Model()));
-        //    ViewModel.NotifySelector();
-        //});
     }
 }

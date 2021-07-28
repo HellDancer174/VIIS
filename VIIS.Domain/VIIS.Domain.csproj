@@ -62,7 +62,9 @@
     <Compile Include="Finance\Decorators\DecoratableTransaction.cs" />
     <Compile Include="Finance\Decorators\MasterCashTransaction.cs" />
     <Compile Include="Finance\MasterCash.cs" />
+    <Compile Include="Finance\MasterCashList.cs" />
     <Compile Include="Finance\Transaction.cs" />
+    <Compile Include="Finance\UpdateMasterCashViewModel.cs" />
     <Compile Include="Global\DataModels\UserModel.cs" />
     <Compile Include="Global\Documents\InsertableDocument.cs" />
     <Compile Include="Global\Documents\RemovableDocument.cs" />

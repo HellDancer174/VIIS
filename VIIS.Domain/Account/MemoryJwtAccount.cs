@@ -20,6 +20,7 @@ namespace VIIS.Domain.Account
             this.saveToken = saveToken;
         }
 
+
         protected override AuthorizedJsonRequest AuthorizedRequest(JsonRequest request, RefreshViewModel token)
         {
             return new MemoryAuthorizedJsonRequest(request, token, this, saveToken);

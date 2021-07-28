@@ -15,6 +15,8 @@ namespace VIIS.Domain.Account
 
         public virtual string ClientsUrl => string.Format("{0}/api/Clients", url);
         public virtual string MasterssUrl => string.Format("{0}/api/Masters", url);
+        public virtual string MasterCashUrl => string.Format("{0}/api/MasterCash", url);
+        public virtual string MasterCashListUrl => string.Format("{0}/api/MasterCash/MasterCashList", url);
         public virtual string ServiceValuesUrl => string.Format("{0}/api/ServiceValue", url);
         public virtual string TransactionsUrl => string.Format("{0}/api/Transactions", url);
 

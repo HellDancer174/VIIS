@@ -109,6 +109,7 @@
     <Compile Include="Finance\MasterPay\ViewModels\ViewAdditionalMasterCashList.cs" />
     <Compile Include="Finance\MasterPay\ViewModels\ViewMasterCash.cs" />
     <Compile Include="Finance\MasterPay\ViewModels\ViewMasterCashDetail.cs" />
+    <Compile Include="Finance\MasterPay\ViewModels\ViewNewMasterCashDetail.cs" />
     <Compile Include="Finance\MasterPay\ViewModels\ViewMasterCashList.cs" />
     <Compile Include="Finance\MasterPay\ViewModels\WindowMasterCashDetail.cs" />
     <Compile Include="Finance\MasterPay\Views\MasterCashCommonView.xaml.cs">

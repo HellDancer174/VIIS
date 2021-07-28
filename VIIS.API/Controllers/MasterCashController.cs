@@ -60,7 +60,7 @@ namespace VIIS.API.Controllers
         }
 
         // PUT: api/MasterCash/5
-        [HttpPut("{id}")]
+        [HttpPut]
         public ObjectResult Put([FromBody]UpdateMasterCashViewModel value)
         {
             var deleteResult = Delete(value.OldMasterCash);
@@ -75,7 +75,7 @@ namespace VIIS.API.Controllers
         }
         
         // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
+        [HttpDelete]
         public ObjectResult Delete([FromBody]MasterCash value)
         {
             using (var context = new VIISDBContext())

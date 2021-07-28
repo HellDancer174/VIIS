@@ -20,6 +20,7 @@ namespace VIIS.App.Finance.MasterPay.ViewModels
         public ViewAdditionalMasterCash(MasterCash other, IEnumerable<ViewEmployee> masters) : base(other)
         {
             Masters = new ObservableCollection<ViewEmployee>(masters);
+            SelectedMaster = Masters.SingleOrDefault(master => master.Equals(this.master));
         }
 
 
@@ -32,7 +33,7 @@ namespace VIIS.App.Finance.MasterPay.ViewModels
 
         public override MasterCash Model()
         {
-            if (SelectedMaster == null) throw new NullReferenceException();
+            if (SelectedMaster == null) throw new InvalidOperationException();
             return new MasterCash(SelectedMaster, StartDate, FinishDate, Cash);
         }
 

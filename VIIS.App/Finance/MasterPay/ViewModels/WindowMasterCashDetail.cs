@@ -13,8 +13,12 @@ namespace VIIS.App.Finance.MasterPay.ViewModels
 {
     public class WindowMasterCashDetail : ViewWindowDetail<ViewMasterCashList, ViewMasterCash, MasterCash>
     {
-        public WindowMasterCashDetail(ViewMasterCashList repository, List<ViewEmployee> masters) : base(new ViewMasterCashDetail(repository, masters), new MasterCashDetailView())
+        public WindowMasterCashDetail(ViewMasterCashList repository, List<ViewEmployee> masters) : base(new ViewNewMasterCashDetail(repository, masters), new MasterCashDetailView())
         {
         }
+        public WindowMasterCashDetail(ViewMasterCashList repository, ViewMasterCash selected, List<ViewEmployee> masters) : base(new ViewMasterCashDetail(repository, selected, masters), new MasterCashDetailView())
+        {
+        }
+
     }
 }

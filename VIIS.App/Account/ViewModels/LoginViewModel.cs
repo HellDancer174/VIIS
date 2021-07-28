@@ -72,8 +72,9 @@ namespace VIIS.App.Account.ViewModels
             IEnumerable<Master> masters = await TList<Master>(url, url.MasterssUrl);
             IEnumerable<Transaction> transactions = await TList<Transaction>(url, url.TransactionsUrl);
             IEnumerable<User> users = await TList<User>(url, url.UsersURL);
+            IEnumerable<MasterCash> cashes = await TList<MasterCash>(url, url.MasterCashUrl);
             new ViewMain(new Orders(new Master()), new Employees(masters.ToList()), new Clients(clients.ToList()), new ServiceValueList(services.ToList()), new ViewTransactions(new Repository<Transaction>(transactions), saveToken),
-                new Repository<MasterCash>(new List<MasterCash>()), new ViewUsers(new Repository<User>(users), account, App.Token), new MainView(), saveToken).ShowView();
+                new Repository<MasterCash>(cashes), new ViewUsers(new Repository<User>(users), account, App.Token), new MainView(), saveToken).ShowView();
         }
 
         private async Task<IEnumerable<T>> TList<T>(VIISJwtURL url, string apiUrl)
