@@ -21,9 +21,9 @@ namespace VIIS.App.Staff.ViewModels
             this.graph = graph;
             this.pay = pay;
         }
-        public ViewEmployeesTabs(): this(new EmployeesList(), new WorkGraph(), new PayView())
-        {
-        }
+        //public ViewEmployeesTabs(): this(new EmployeesList(), new WorkGraph(), new PayView())
+        //{
+        //}
 
         public Page Employees => employees;
 

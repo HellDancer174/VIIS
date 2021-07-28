@@ -37,7 +37,7 @@ namespace VIIS.App.Main.ViewModels
 {
     public class ViewMain: Notifier
     {
-        private readonly Page journal;
+        private readonly Page journalPage;
         private readonly Page clients;
         private readonly Page staff;
         private readonly Page finance;
@@ -48,7 +48,7 @@ namespace VIIS.App.Main.ViewModels
 
         public ViewMain(Page journal, Page clients, Page staff, Page finance, Page serviceValues, Page account, MainView view)
         {
-            this.journal = journal;
+            this.journalPage = journal;
             this.clients = clients;
             this.staff = staff;
             this.finance = finance;
@@ -57,17 +57,28 @@ namespace VIIS.App.Main.ViewModels
             this.view = view;
             Current = journal;
         }
+        //public ViewMain(Journal journal, ViewClients clients, ViewEmployees masters, ViewWorkGraph viewWorkGraph, )
+        //{
+
+        //}
         //public ViewMain(MainView view): this(new OrdersJournalView(), new ClientsView(new ViewClients(new Clients())), new EmployeesTabs(), new FinanceView(new ViewTransactions()), new UsersWindow(), view)
         //{
 
         //}
 
-        public ViewMain(Orders orders, Employees masters, Clients clients, ServiceValueList serviceValues, ViewTransactions transactions, Repository<MasterCash> cashes , ViewUsers users, MainView view, Action<RefreshViewModel> saveToken) :
-            this(new OrdersJournalView(new Journal(orders, new Employees(), serviceValues, clients, transactions)), new ClientsView(new ViewClients(clients, saveToken)), 
-                new EmployeesTabs(new ViewEmployeesTabs(new EmployeesList(new ViewEmployees(masters, saveToken)), new WorkGraph(new ViewWorkGraph(masters, DateTime.Now)), new PayView())), 
-                new FinanceTabs(new ViewFinance(transactions, new ViewMasterCashList(cashes, saveToken, transactions, masters.Select(master => new ViewEmployee(master)).ToList()), orders, masters)),
-                new ServicesView(new ViewServices(serviceValues, saveToken)), new UsersWindow(users), view)
+        public ViewMain(Orders orders, Employees masters, Clients clients, ServiceValueList serviceValues, ViewTransactions transactions, Repository<MasterCash> cashes, ViewUsers users, MainView view, Action<RefreshViewModel> saveToken)
+            //this(new OrdersJournalView(new Journal(orders, new Employees(), serviceValues, clients, transactions)), new ClientsView(new ViewClients(clients, saveToken)), 
+            //    new EmployeesTabs(new ViewEmployeesTabs(new EmployeesList(new ViewEmployees(masters, saveToken, )), new WorkGraph(new ViewWorkGraph(masters, DateTime.Now)), new PayView())), 
+            //    new FinanceTabs(new ViewFinance(transactions, new ViewMasterCashList(cashes, saveToken, transactions, masters.Select(master => new ViewEmployee(master)).ToList()), orders, masters)),
+            //    new ServicesView(new ViewServices(serviceValues, saveToken)), new UsersWindow(users), view)
         {
+            Journal journal = new Journal(orders, new Employees(), serviceValues, clients, transactions);
+            journalPage = new OrdersJournalView(journal);
+            this.clients = new ClientsView(new ViewClients(clients, saveToken));
+            staff = new EmployeesTabs(new ViewEmployeesTabs(new EmployeesList(new ViewEmployees(masters, saveToken, journal)), new WorkGraph(new ViewWorkGraph(masters, DateTime.Now, journal)), new PayView()));
+            finance = new FinanceTabs(new ViewFinance(transactions, new ViewMasterCashList(cashes, saveToken, transactions, masters.Select(master => new ViewEmployee(master)).ToList()), orders, masters));
+            this.serviceValues = new ServicesView(new ViewServices(serviceValues, saveToken));
+            account = new UsersWindow(users);
             view.DataContext = this;
         }
 
@@ -90,7 +101,7 @@ namespace VIIS.App.Main.ViewModels
             }
         }
 
-        public RelayCommand Journal => new RelayCommand((obj) => Current = journal);
+        public RelayCommand Journal => new RelayCommand((obj) => Current = journalPage);
         public RelayCommand Staff => new RelayCommand((obj) => Current = staff);
         public RelayCommand Clients => new RelayCommand((obj) => Current = clients);
         public RelayCommand Finance => new RelayCommand((obj) => Current = finance);

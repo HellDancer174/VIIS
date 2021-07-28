@@ -18,7 +18,7 @@ using VIMVVM;
 
 namespace VIIS.App.OrdersJournal.ViewModels
 {
-    public class Journal: UpdatableOrders, INotifyPropertyChanged
+    public class Journal : UpdatableOrders, INotifyPropertyChanged, IJournal
     {
         private ViewJournalEmployees staff;
         private DateTime currentDate;

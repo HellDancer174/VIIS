@@ -153,6 +153,7 @@
     <Compile Include="OrdersJournal\OrderDetail\ViewModels\ViewNewOrderDetail.cs" />
     <Compile Include="OrdersJournal\OrderDetail\ViewModels\ViewServiceValue.cs" />
     <Compile Include="OrdersJournal\OrderDetail\ViewModels\WindowOrderDetail.cs" />
+    <Compile Include="OrdersJournal\ViewModels\IJournal.cs" />
     <Compile Include="Services\Model\ServiceValueOfViewService.cs" />
     <Compile Include="Services\ViewModels\BaseViewService.cs" />
     <Compile Include="Services\ViewModels\ViewNewServiceDetail.cs" />

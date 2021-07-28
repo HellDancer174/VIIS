@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using VIIS.App.GlobalViewModel;
+using VIIS.App.OrdersJournal.ViewModels;
 using VIIS.App.Staff.Views;
 using VIIS.Domain.Account;
 using VIIS.Domain.Global;
@@ -18,9 +19,12 @@ namespace VIIS.App.Staff.ViewModels
 {
     public class ViewEmployees : ViewUpdatableRepository<ViewEmployee, Master>
     {
-        public ViewEmployees(Employees masters, Action<RefreshViewModel> saveToken) : base(masters, saveToken, (master) => new ViewEmployee(master), new VIISJwtURL().MasterssUrl)
+        private readonly IJournal journal;
+
+        public ViewEmployees(Employees masters, Action<RefreshViewModel> saveToken, IJournal journal) : base(masters, saveToken, (master) => new ViewEmployee(master), new VIISJwtURL().MasterssUrl)
         {
             if (Collection.Count != 0) Selected = Collection.First();
+            this.journal = journal;
         }
 
         public override ICommand AddCommand => new RelayCommand((obj) => new ViewWindowStaffDetail(this));
@@ -29,6 +33,12 @@ namespace VIIS.App.Staff.ViewModels
         {
             await RemoveViewAsync(Selected);
         });
+
+        public override async Task UpdateCollectionAsync()
+        {
+            await base.UpdateCollectionAsync();
+            journal.ChangeStaff(new Employees(this.ToList()));
+        }
 
         //private ViewEmployee selected;
 

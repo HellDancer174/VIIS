@@ -27,9 +27,9 @@ namespace VIIS.App.Staff.Views
             InitializeComponent();
             DataContext = masters;
         }
-        public EmployeesList() : this(new ViewEmployees(new Employees(), (token) => App.Token = token))
-        {
-        }
+        //public EmployeesList() : this(new ViewEmployees(new Employees(), (token) => App.Token = token))
+        //{
+        //}
 
         private void DataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
