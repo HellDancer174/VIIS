@@ -36,8 +36,8 @@ namespace VIIS.App.Customers.ViewModels
 
 
         public override ICommand AddCommand => new RelayCommand((obj) => new ViewWindowClientDetail(this));
-        public override ICommand ChangeCommand => new RelayCommand((obj) => new ViewWindowClientDetail(new ViewClient(Selected), this));
-        public override ICommand RemoveCommand => new RelayCommand(async (obj) =>
+        public override ICommand ChangeCommand => Command((obj) => new ViewWindowClientDetail(new ViewClient(Selected), this));
+        public override ICommand RemoveCommand => Command(async (obj) =>
         {
             await RemoveViewAsync(Selected);
         });

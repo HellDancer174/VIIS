@@ -64,7 +64,7 @@ namespace VIIS.App.Main.ViewModels
 
         public ViewMain(Orders orders, Employees masters, Clients clients, ServiceValueList serviceValues, ViewTransactions transactions, Repository<MasterCash> cashes , ViewUsers users, MainView view, Action<RefreshViewModel> saveToken) :
             this(new OrdersJournalView(new Journal(orders, new Employees(), serviceValues, clients, transactions)), new ClientsView(new ViewClients(clients, saveToken)), 
-                new EmployeesTabs(new ViewEmployeesTabs(new EmployeesList(new ViewEmployees(masters, saveToken)), new WorkGraph(), new PayView())), 
+                new EmployeesTabs(new ViewEmployeesTabs(new EmployeesList(new ViewEmployees(masters, saveToken)), new WorkGraph(new ViewWorkGraph(masters, DateTime.Now)), new PayView())), 
                 new FinanceTabs(new ViewFinance(transactions, new ViewMasterCashList(cashes, saveToken, transactions, masters.Select(master => new ViewEmployee(master)).ToList()), orders, masters)),
                 new ServicesView(new ViewServices(serviceValues, saveToken)), new UsersWindow(users), view)
         {

@@ -24,10 +24,14 @@ namespace VIIS.App.Staff.Views
     {
         private ViewWorkGraph viewModels;
 
-        public WorkGraph()
+        public WorkGraph(ViewWorkGraph viewModel)
         {
             InitializeComponent();
-            DataContext = viewModels = new ViewWorkGraph(new Employees(), DateTime.Now);
+            DataContext = viewModels = viewModel;
+        }
+        public WorkGraph():this(new ViewWorkGraph(new Employees(), DateTime.Now))
+        {
+
         }
 
         private void Calendar_DisplayModeChanged(object sender, CalendarModeChangedEventArgs e)

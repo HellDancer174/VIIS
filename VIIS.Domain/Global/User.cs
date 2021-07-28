@@ -51,6 +51,10 @@ namespace VIIS.Domain.Global
             return hashCode;
         }
 
+        public bool IsAnyUser => String.IsNullOrEmpty(name) && String.IsNullOrEmpty(email);
+
+        public bool IsMyEmail(string email) => email == this.email;
+
         public override string ToString()
         {
             return name;

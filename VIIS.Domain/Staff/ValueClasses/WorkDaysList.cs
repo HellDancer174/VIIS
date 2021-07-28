@@ -12,7 +12,7 @@ namespace VIIS.Domain.Staff.ValueClasses
         public WorkDaysList(List<DateTime> dates): base(dates)
         {
         }
-        public WorkDaysList(): this(new List<DateTime> { DateTime.Now.Date })
+        public WorkDaysList(): this(new List<DateTime>() /*{ DateTime.Now.Date }*/)
         {
         }
 

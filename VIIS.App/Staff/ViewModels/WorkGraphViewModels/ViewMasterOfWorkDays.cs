@@ -5,10 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using VIIS.Domain.Staff;
 using VIIS.Domain.Staff.Decorators;
+using VIMVVM;
 
 namespace VIIS.App.Staff.ViewModels.WorkGraphViewModels
 {
-    public class ViewMasterOfWorkDays: DecoratableMaster
+    public class ViewMasterOfWorkDays: DecoratableMaster, IViewModel<Master>
     {
         private readonly List<ViewBooleanWorkDay> workDays;
         private readonly DateTime month;
@@ -35,5 +36,9 @@ namespace VIIS.App.Staff.ViewModels.WorkGraphViewModels
 
         public List<ViewBooleanWorkDay> WorkDays => workDays;
 
+        public Master Model()
+        {
+            return this;
+        }
     }
 }

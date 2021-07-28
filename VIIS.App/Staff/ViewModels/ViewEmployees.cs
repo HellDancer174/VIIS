@@ -24,8 +24,8 @@ namespace VIIS.App.Staff.ViewModels
         }
 
         public override ICommand AddCommand => new RelayCommand((obj) => new ViewWindowStaffDetail(this));
-        public override ICommand ChangeCommand => new RelayCommand((obj) => new ViewWindowStaffDetail(new ViewEmployee(Selected), this));
-        public override ICommand RemoveCommand => new RelayCommand(async(obj) => 
+        public override ICommand ChangeCommand => Command((obj) => new ViewWindowStaffDetail(new ViewEmployee(Selected), this));
+        public override ICommand RemoveCommand => Command(async(obj) => 
         {
             await RemoveViewAsync(Selected);
         });

@@ -70,7 +70,7 @@ namespace VIIS.API.Controllers
             using (var context = new VIISDBContext())
             {
                 return Execute(new ValidMaster(new RemovableDBMaster(value, new RemovableDBQuery<EmployeesTt>(context.EmployeesTt, context), new RemovableDBQuery<PassportsTt>(context.PassportsTt, context),
-                    new RemovableDBQuery<PersonsTt>(context.PersonsTt, context), new RemovableDBQuery<AddressesTt>(context.AddressesTt, context))));
+                    new RemovableDBQuery<PersonsTt>(context.PersonsTt, context), new RemovableDBQuery<AddressesTt>(context.AddressesTt, context), new OrdersController().Get())));
             }
         }
 

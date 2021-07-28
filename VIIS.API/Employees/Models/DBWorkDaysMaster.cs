@@ -30,7 +30,7 @@ namespace VIIS.API.Employees.Models
                 .Where(masterWorkDay =>
                 masterWorkDay.MasterId == masterID && masterWorkDay.WorkDate.Month == month.Month && masterWorkDay.WorkDate.Year == month.Year && !ordersDates.Contains(masterWorkDay.WorkDate))
                 .ToArray();
-            context.WorkDaysTt.RemoveRange(removableList);
+            context.WorkDaysTt.RemoveRange(removableList.Where(day => IsNotFail(day.WorkDate)).ToArray());
             context.SaveChanges();
             var monthDates = workDaysList.Where(day => IsNotFail(day)).ToList();
 

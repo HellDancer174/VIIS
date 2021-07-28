@@ -113,6 +113,8 @@ namespace VIIS.Domain.Orders
 
         public decimal Sale => sale;
 
+        public bool IsFinished { get => isFinished; }
+
         public override string ToString()
         {
             return String.Format("Заказ от {0}; Клиент - {1}; Мастер - {2}, Сервисы - {3}", ordersStart, person.ToString(), master.ToString(), services.Count);

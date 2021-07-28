@@ -8,6 +8,7 @@ using System.Net;
 using System.Net.Security;
 using System.Threading.Tasks;
 using System.Windows;
+using VIIS.Domain.Global;
 
 namespace VIIS.App
 {
@@ -17,9 +18,11 @@ namespace VIIS.App
     public partial class App : Application
     {
         public static RefreshViewModel Token { get; set; }
+        public static User CurrentUser { get; set; }
         static App()
         {
             Token = new RefreshViewModel();
+            CurrentUser = new User();
         }
         public App()
         {

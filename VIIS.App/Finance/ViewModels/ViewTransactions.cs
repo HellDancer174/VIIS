@@ -37,9 +37,9 @@ namespace VIIS.App.Finance.ViewModels
 
         public override ICommand AddCommand => new RelayCommand((obj) => { new ViewTransactionDetail(this); });
 
-        public override ICommand ChangeCommand => new RelayCommand((obj) => { new ViewTransactionDetail(this, new ViewTransaction(Selected)); });
+        public override ICommand ChangeCommand => Command((obj) => { new ViewTransactionDetail(this, new ViewTransaction(Selected)); });
 
-        public override ICommand RemoveCommand => new RelayCommand(async(obj) => { await RemoveViewAsync(Selected); CalcTotal(); });
+        public override ICommand RemoveCommand => Command(async(obj) => { await RemoveViewAsync(Selected); CalcTotal(); });
 
         public decimal Proceeds
         {

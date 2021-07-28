@@ -36,9 +36,14 @@ namespace VIIS.App.Account.ViewModels
 
         public override ICommand AddCommand => new RelayCommand((obj)=> new AddOrUpdateUserWindow(new ViewRegister(account)).Show());
 
-        public override ICommand ChangeCommand => new RelayCommand((obj) => new AddOrUpdateUserWindow(new ViewChangePassword(account, Selected, "", token)).Show());
+        public override ICommand ChangeCommand => base.Command((obj) => new AddOrUpdateUserWindow(new ViewChangePassword(account, Selected, "", token)).Show());
 
-        public override ICommand RemoveCommand => new RelayCommand(async(obj) => await RemoveViewAsync(Selected));
+        public override ICommand RemoveCommand => Command(async(obj) => await RemoveViewAsync(Selected));
+
+        protected override RelayCommand Command(Action<object> execute)
+        {
+            return new RelayCommand(execute, (obj) => Selected is ViewUser && !Selected.Equals(App.CurrentUser));
+        }
 
         //public override async Task UpdateCollectionAsync()
         //{

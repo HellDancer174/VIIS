@@ -39,7 +39,16 @@ namespace VIIS.App.Staff.ViewModels
 
         public RelayCommand Save => new RelayCommand(async(obj) => 
         {
-            await MastersList.SaveMonth();
+            try
+            {
+                await MastersList.SaveMonth();
+                await MastersList.UpdataCollection();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            Current = current;
             MessageBox.Show(String.Format("Обновлен график работы на {0}", MastersList.CurrentMonth));
         });
     }

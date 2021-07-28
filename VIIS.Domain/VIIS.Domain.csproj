@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Account\MemoryJwtAccount.cs" />
+    <Compile Include="Account\RemoveUserModel.cs" />
     <Compile Include="Account\Requests\MemoryAuthorizedJsonRequest.cs" />
     <Compile Include="Account\VIISJwtURL.cs" />
     <Compile Include="Customers\AnyClient.cs" />
@@ -105,6 +106,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\Service.cs" />
     <Compile Include="Staff\ValueClasses\WorkDaysList.cs" />
+    <Compile Include="Staff\WorkDaysViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\ElegantLib\ElegantLib\ElegantLib.csproj">

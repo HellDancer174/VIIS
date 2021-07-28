@@ -13,6 +13,7 @@ using VIIS.Domain.Account;
 using VIIS.Domain.Account.Requests;
 using VIIS.Domain.Global;
 using VIIS.Domain.Global.Documents;
+using VIMVVM;
 using VIMVVM.Detail;
 
 namespace VIIS.App.GlobalViewModel
@@ -100,5 +101,7 @@ namespace VIIS.App.GlobalViewModel
             await Update(oldItem.Model(), item.Model());
             await UpdateCollectionAsync();
         }
+
+        protected virtual RelayCommand Command(Action<object> execute) => new RelayCommand(execute, (obj) => Selected is V);
     }
 }
