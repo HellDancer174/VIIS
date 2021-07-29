@@ -34,7 +34,7 @@ namespace VIIS.App.OrdersJournal.OrderDetail.ViewModels
 
         public override string EndButtonName => otherDetail.EndButtonName;
 
-        public override RelayCommand ExecuteOrderCommand => new RelayCommand((obj) => { isFinished = true; Save.Execute(obj); base.ExecuteOrderCommand.Execute(obj); }, base.ExecuteOrderCommand.CanExecute);
+        public override RelayCommand ExecuteOrderCommand => new RelayCommand((obj) => { isFinished = true; Save.Execute(obj); otherDetail.ExecuteOrderCommand.Execute(obj); }, otherDetail.ExecuteOrderCommand.CanExecute);
 
         public override async Task SaveMethod(Order newOrder)
         {

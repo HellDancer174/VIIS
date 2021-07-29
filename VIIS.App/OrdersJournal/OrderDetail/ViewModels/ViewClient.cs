@@ -20,7 +20,7 @@ namespace VIIS.App.OrdersJournal.OrderDetail.ViewModels
         }
         public Client Model()
         {
-            return new Client(FirstName, LastName, MiddleName, Phone);
+            return this;
         }
 
 

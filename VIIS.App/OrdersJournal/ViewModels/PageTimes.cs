@@ -97,12 +97,12 @@ namespace VIIS.App.OrdersJournal.ViewModels
                 RemoveContent(pageOrder);
 
         }
-        public virtual void RemoveContent(Service service)
-        {
-            var indexed = new IndexedService(service);
-            validIndex(indexed.TimeIndex());
-            Content[indexed.TimeIndex() - startIndex].Remove(Content[indexed.TimeIndex() - startIndex].Single(pageService => pageService.Equals(service)));
-        }
+        //public virtual void RemoveContent(Service service)
+        //{
+        //    var indexed = new IndexedService(service);
+        //    validIndex(indexed.TimeIndex());
+        //    Content[indexed.TimeIndex() - startIndex].Remove(Content[indexed.TimeIndex() - startIndex].Single(pageService => pageService.Equals(service)));
+        //}
 
 
         public override int IndexOf(PageTime item)

@@ -134,6 +134,7 @@
     <Compile Include="Finance\Views\TransactionDetailView.xaml.cs">
       <DependentUpon>TransactionDetailView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GlobalViewModel\ApiList.cs" />
     <Compile Include="GlobalViewModel\ExtentedViewRepository.cs" />
     <Compile Include="GlobalViewModel\ViewDetail.cs" />
     <Compile Include="GlobalViewModel\RepositoryCommand.cs" />

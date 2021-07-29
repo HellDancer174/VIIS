@@ -53,7 +53,7 @@ namespace VIIS.API.Controllers
         }
 
         // PUT: api/Orders/5
-        [HttpPut("{id}")]
+        [HttpPut]
         public ActionResult Put([FromBody]Order value)
         {
             using (var context = new VIISDBContext())
@@ -64,7 +64,7 @@ namespace VIIS.API.Controllers
         }
         
         // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
+        [HttpDelete]
         public ActionResult Delete([FromBody]Order value)
         {
             using (var context = new VIISDBContext())

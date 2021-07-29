@@ -40,5 +40,10 @@ namespace VIIS.App.OrdersJournal.OrderDetail.ViewModels
         }
 
         public override RelayCommand End => new RelayCommand((obj) => { });
+
+        public override RelayCommand ExecuteOrderCommand => new RelayCommand((obj) =>
+        {
+            //await PostTransaction();
+        }, (obj) => false);
     }
 }

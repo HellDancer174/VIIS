@@ -14,7 +14,7 @@ using Newtonsoft.Json;
 namespace VIIS.Domain.Orders
 {
     [JsonObject(MemberSerialization.OptIn)]
-    public class Order: Notifier, IDocument, IEquatable<Order>
+    public class Order: Notifier, IDocument, IEquatable<Order>, IDocumentAsync
     {
         [JsonProperty("order_id")] protected readonly int id;
         [JsonProperty] protected readonly Client person;
@@ -118,6 +118,11 @@ namespace VIIS.Domain.Orders
         public override string ToString()
         {
             return String.Format("Заказ от {0}; Клиент - {1}; Мастер - {2}, Сервисы - {3}", ordersStart, person.ToString(), master.ToString(), services.Count);
+        }
+
+        public Task TransferAsync()
+        {
+            throw new NotImplementedException();
         }
     }
 }

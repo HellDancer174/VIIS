@@ -19,7 +19,7 @@ using VIMVVM;
 
 namespace VIIS.App.OrdersJournal.ViewModels
 {
-    public class WorkDaysPage : Notifier<string>
+    public class WorkDaysPage : Notifier
     {
         public Master CurrentMaster { get; set; }
 
@@ -34,7 +34,7 @@ namespace VIIS.App.OrdersJournal.ViewModels
             this.journalPages = journalPages;
             this.journal = journal;
             this.transactions = transactions;
-            if (journalPages.Count != 0) ChangeMaster(journalPages.Keys.First());
+            //if (journalPages.Count != 0) ChangeMaster(journalPages.Keys.First());
         }
         public WorkDaysPage(List<Master> masters, Journal journal, ViewRepository<ViewTransaction, Transaction> transactions) :
             this(masters.ToDictionary(master => master, master => new PageTimes(new TimeSpan(8, 0, 0), new TimeSpan(19, 0, 0), journal, transactions)), journal, transactions)
@@ -45,12 +45,26 @@ namespace VIIS.App.OrdersJournal.ViewModels
         }
         public void AddOrder(Order order, ServiceValueList serviceValueList, Clients clients)
         {
-            journalPages[order.KeyValue().Key].AddContent(new PageOrder(order, serviceValueList, clients));
+            try
+            {
+                journalPages[order.KeyValue().Key].AddContent(new PageOrder(order, serviceValueList, clients));
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                return;
+            }
         }
 
         public void RemoveOrder(Order order)
         {
-            journalPages[order.KeyValue().Key].RemoveContent(order);
+            try
+            {
+                journalPages[order.KeyValue().Key].RemoveContent(order);
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                return;
+            }
         }
 
         public void ChangeMaster(Master master)

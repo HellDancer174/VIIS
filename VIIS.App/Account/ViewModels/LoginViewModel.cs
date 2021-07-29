@@ -74,7 +74,9 @@ namespace VIIS.App.Account.ViewModels
             IEnumerable<User> users = await TList<User>(url, url.UsersURL);
             App.CurrentUser = users.Single(user => user.IsMyEmail(Login));
             IEnumerable<MasterCash> cashes = await TList<MasterCash>(url, url.MasterCashUrl);
-            new ViewMain(new Orders(new Master()), new Employees(masters.ToList()), new Clients(clients.ToList()), new ServiceValueList(services.ToList()), new ViewTransactions(new Repository<Transaction>(transactions), saveToken),
+            IEnumerable<Order> orders = await TList<Order>(url, url.OrdersUrl);
+
+            new ViewMain(new Orders(orders.ToList()), new Employees(masters.ToList()), new Clients(clients.ToList()), new ServiceValueList(services.ToList()), new ViewTransactions(new Repository<Transaction>(transactions), saveToken),
                 new Repository<MasterCash>(cashes), new ViewUsers(new Repository<User>(users), account, App.Token), new MainView(), saveToken).ShowView();
         }
 

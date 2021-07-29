@@ -26,7 +26,7 @@ namespace VIIS.App.OrdersJournal.OrderDetail.Models.Validatable
         {
             servicesOfJournal = services.Select(service => new ServiceOfJournal(service)).ToList();
             validSale = new ValidProperty<decimal>("Цена", sale, sale > 0);
-            validStart = new ValidProperty<DateTime>("Дата и время заказа", ordersStart, ordersStart != new DateTime());
+            validStart = new ValidProperty<DateTime>("Дата и время заказа", ordersStart, ordersStart != new DateTime() && ordersStart.TimeOfDay != new TimeSpan());
             validServices = new ValidProperty<List<ServiceOfJournal>>("Услуги", servicesOfJournal, servicesOfJournal.Count != 0);
             validMaster = new ValidProperty<Master>("Мастер", master, master.IsWork(ordersStart.Date));
             validClient = new ClientOfJournal(person);

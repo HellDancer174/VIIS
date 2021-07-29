@@ -85,7 +85,7 @@ namespace VIIS.App.OrdersJournal.OrderDetail.ViewModels
 
         private Order ValidOrder()
         {
-            Order newOrder = new Order(ClientNames.Model(), ViewServices.Select(viewService => new Service(viewService, OrdersStart, new TimeSpan(0, viewService.TimeSpan, 0))).ToList(), master, Comment, ordersStart, sale, isFinished);
+            Order newOrder = new Order(ClientNames.Model(), ViewServices.Select(viewService => new Service(viewService.SelectedService, OrdersStart, new TimeSpan(0, viewService.TimeSpan, 0))).ToList(), master, Comment, ordersStart, sale, isFinished);
             var validatableOrder = new OrderOfJournal(newOrder);
             validatableOrder.Safe();
             return newOrder;

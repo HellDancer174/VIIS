@@ -30,7 +30,7 @@ namespace VIIS.App.OrdersJournal.ViewModels
 
         public ViewJournalEmployees(Employees other, DateTime workDay, ServiceValueList serviceValueList, Clients clients, Journal journal, List<Order> orders, ViewRepository<ViewTransaction, Transaction> transactions) : base(other)
         {
-            var mastersPosition = new Position("Мастер - парикмахер");
+            var mastersPosition = new Position("Мастер-парикмахер");
             var manicurePosition = new Position("Мастер маникюра");
             var pedicurePosition = new Position("Мастер педикюра");
             Masters = this.Where(master => master.Equals(mastersPosition) && master.IsWork(workDay)).ToList();
@@ -43,7 +43,7 @@ namespace VIIS.App.OrdersJournal.ViewModels
             this.journal = journal;
             this.transactions = transactions;
             AddOrdersList(orders, serviceValueList, clients);
-            SelectedMaster = this.First();
+            SelectedMaster = this.FirstOrDefault(first => Masters.Contains(first)|| Manicure.Contains(first)|| Pedicure.Contains(first));
         }
 
         public List<Master> Manicure { get; }
@@ -56,6 +56,7 @@ namespace VIIS.App.OrdersJournal.ViewModels
             get => selectedMaster;
             set
             {
+                if (value == null) return;
                 selectedMaster = value;
                 DaysPage.ChangeMaster(selectedMaster);
             }
@@ -69,7 +70,7 @@ namespace VIIS.App.OrdersJournal.ViewModels
 
         public WorkDaysPage DaysPage => daysPage;
 
-        public RelayCommand CreateOrder => new RelayCommand((obj) => new WindowOrderDetail(new ViewNewOrderDetail(selectedMaster, workDay, journal, serviceValueList, clients, transactions), new OrderDetailView()));
+        public RelayCommand CreateOrder => new RelayCommand((obj) => new WindowOrderDetail(new ViewNewOrderDetail(selectedMaster, workDay, journal, serviceValueList, clients, transactions), new OrderDetailView()), (obj) => SelectedMaster is Master);
 
     }
 }

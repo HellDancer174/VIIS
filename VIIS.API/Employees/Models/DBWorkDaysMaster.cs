@@ -14,6 +14,7 @@ namespace VIIS.API.Employees.Models
         private readonly DateTime month;
         private List<DateTime> failedDatetime;
         private List<DateTime> ordersDates;
+        private DateTime[] oldWorkDays;
 
         public DBWorkDaysMaster(Master other, VIISDBContext context, DateTime month) : base(other)
         {
@@ -22,18 +23,25 @@ namespace VIIS.API.Employees.Models
             failedDatetime = new List<DateTime>();
             ordersDates = context.OrdersTt.Where(order => order.MasterId == masterID && order.Start.Month == month.Month && order.Start.Year == month.Year)
                 .Select(order => order.Start).ToList();
+            oldWorkDays = context.WorkDaysTt
+                .Where(masterWorkDay =>
+                masterWorkDay.MasterId == masterID && masterWorkDay.WorkDate.Month == month.Month && masterWorkDay.WorkDate.Year == month.Year)
+                .Select(entity => entity.WorkDate)
+                .ToArray();
         }
 
         public override void Transfer()
         {
             var removableList = context.WorkDaysTt
                 .Where(masterWorkDay =>
-                masterWorkDay.MasterId == masterID && masterWorkDay.WorkDate.Month == month.Month && masterWorkDay.WorkDate.Year == month.Year && !ordersDates.Contains(masterWorkDay.WorkDate))
+                masterWorkDay.MasterId == masterID && masterWorkDay.WorkDate.Month == month.Month && masterWorkDay.WorkDate.Year == month.Year && IsNotFail(masterWorkDay.WorkDate))
                 .ToArray();
-            context.WorkDaysTt.RemoveRange(removableList.Where(day => IsNotFail(day.WorkDate)).ToArray());
+            //context.WorkDaysTt.RemoveRange(removableList.Where(day => IsNotFail(day.WorkDate)).ToArray());
+            context.WorkDaysTt.RemoveRange(removableList);
             context.SaveChanges();
-            var monthDates = workDaysList.Where(day => IsNotFail(day)).ToList();
+            var monthDates = workDaysList.Where(day => IsNotFail(day)||!oldWorkDays.Contains(day)).ToList();
 
+            //context.WorkDaysTt.AddRange(monthDates.Select(day => new WorkDaysTt(masterID, day)).ToArray());
             context.WorkDaysTt.AddRange(monthDates.Select(day => new WorkDaysTt(masterID, day)).ToArray());
             context.SaveChanges();
         }

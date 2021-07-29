@@ -1,15 +1,22 @@
-﻿using System;
+﻿using ElegantLib.Authorize.Tokenize;
+using ElegantLib.Requests.JsonRequests;
+using ElegantLib.Responses;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using VIIS.App.Finance.ViewModels;
 using VIIS.App.GlobalViewModel;
 using VIIS.App.OrdersJournal.Models.OrdersDecorators;
+using VIIS.Domain.Account;
+using VIIS.Domain.Account.Requests;
 using VIIS.Domain.Customers;
 using VIIS.Domain.Finance;
+using VIIS.Domain.Global.Documents;
 using VIIS.Domain.Orders;
 using VIIS.Domain.Orders.Decorators;
 using VIIS.Domain.Services;
@@ -25,17 +32,23 @@ namespace VIIS.App.OrdersJournal.ViewModels
         private readonly Employees employees;
         private readonly ServiceValueList serviceValueList;
         private readonly Clients clients;
+        private readonly HttpClient httpClient = new HttpClient();
+        private readonly VIISJwtURL jwtURL = new VIISJwtURL();
         private readonly ViewRepository<ViewTransaction, Transaction> transactions;
+        private readonly Action<RefreshViewModel> saveToken;
 
-        public Journal(Orders orders, Employees employees, ServiceValueList serviceValueList, Clients clients, ViewRepository<ViewTransaction, Transaction> transactions) : base(orders)
+        public Journal(Orders orders, Employees employees, ServiceValueList serviceValueList, Clients clients, ViewRepository<ViewTransaction, Transaction> transactions, Action<RefreshViewModel> saveToken) 
+            : base(orders)
         {
             this.employees = employees;
             this.serviceValueList = serviceValueList;
             this.clients = clients;
             this.transactions = transactions;
-            CurrentDate = DateTime.Now.Date;
+            this.saveToken = saveToken;
+            currentDate = DateTime.Now.Date;
+            ChangeStaff(employees);
         }
-        public Journal():this(new Orders(new Master()), new Employees(), new ServiceValueList(), new Clients(), new ViewTransactions())
+        public Journal():this(new Orders(new Master()), new Employees(), new ServiceValueList(), new Clients(), new ViewTransactions(), (token) => App.Token = token)
         {
         }
 
@@ -59,16 +72,24 @@ namespace VIIS.App.OrdersJournal.ViewModels
             this.staff = staff;
             ChangeProperty(nameof(Staff));
         }
-        public void ChangeStaff(Employees masters)
+        public void ChangeStaff(Employees masters) => ChangeStaff(masters, serviceValueList, clients);
+
+        public void ChangeStaff(Employees masters, ServiceValueList serviceValues, Clients clients)
         {
-            ChangeStaff(new ViewJournalEmployees(masters, currentDate, serviceValueList, clients, this, this.Where(order => order.CheckDate(currentDate)).ToList(), transactions));
+            ChangeStaff(new ViewJournalEmployees(masters, currentDate, serviceValues, clients, this, this.Where(order => order.CheckDate(currentDate)).ToList(), transactions));
         }
-        public void ChangeStaff() => ChangeStaff(employees);
+        public void ChangeStaff()
+        {
+            var masters = new ApiList<Master>(jwtURL, jwtURL.MasterssUrl);
+            var services = new ApiList<ServiceValue>(jwtURL, jwtURL.ServiceValuesUrl);
+            var clients = new ApiList<Client>(jwtURL, jwtURL.ClientsUrl);
+            ChangeStaff(new Employees(masters), new ServiceValueList(services), new Clients(clients));
+        }
 
         public override async Task AddAsync(Order order)
         {
             //staff.DaysPage.AddOrder(order, serviceValueList, clients);
-            await base.AddAsync(order);
+            await new InsertableDocument(order, saveToken, App.Token, jwtURL.OrdersUrl).TransferAsync();
             await UpdateAsync();
         }
 
@@ -76,20 +97,28 @@ namespace VIIS.App.OrdersJournal.ViewModels
         {
             //staff.DaysPage.RemoveOrder(oldOrder);
             //staff.DaysPage.AddOrder(newOrder, serviceValueList, clients);
-            await base.Update(oldOrder, newOrder);
+            await new UpdatableDocument(newOrder, saveToken, App.Token, jwtURL.OrdersUrl).TransferAsync();
             await UpdateAsync();
         }
 
         public override async Task RemoveAsync(Order order)
         {
             //staff.DaysPage.RemoveOrder(order);
-            await base.RemoveAsync(order);
+            await new RemovableDocument(order, saveToken, App.Token, jwtURL.OrdersUrl).TransferAsync();
             await UpdateAsync();
         }
 
         protected override async Task UpdateAsync()
         {
-            await base.UpdateAsync();
+            this.Clear();
+            //var elements = await requestsFunc.Invoke(new HttpClient(), url);
+            var elements = await new DeserializableResponseMessage<IEnumerable<Order>>(
+                await new MemoryAuthorizedJsonRequest(new JsonRequest(httpClient, new VIISJwtURL().OrdersUrl), App.Token, new MemoryJwtAccount(httpClient, new VIISJwtURL(), saveToken), saveToken).Response()).DeserializedContent();
+            foreach (var element in elements)
+            {
+                this.Add(element);
+            }
+
             ChangeStaff();
         }
     }
