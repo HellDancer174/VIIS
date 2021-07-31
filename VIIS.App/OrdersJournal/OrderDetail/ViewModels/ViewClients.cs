@@ -15,18 +15,59 @@ namespace VIIS.App.OrdersJournal.OrderDetail.ViewModels
         private readonly NewClient newClientPage;
         private readonly ExistingClient existingClientPage;
         private readonly ViewClient newClient;
+        private ViewClient currentViewClient;
         private readonly ExistingViewClient existingClient;
+        private bool _isNew;
+        //private bool _isExist;
 
-        public ViewClients(ViewClient newClient, ExistingViewClient existingClient)
+        public ViewClients(ViewClient current, Clients clients)
         {
+            this.newClient = new ViewClient(new Client());
             this.newClientPage = new NewClient(newClient);
+            var existingClient = new ExistingViewClient(clients, current, this);
             this.existingClientPage = new ExistingClient(existingClient);
-            this.newClient = newClient;
             this.existingClient = existingClient;
         }
+        //public ViewClients(Clients clients):this(new ViewClient(new Client()), clients)
+        //{
+
+        //}
+
+        //public ViewClients(ViewClient newClient, Clients clients)
+        //{
+
+        //}
         public Page New => (Page)newClientPage;
 
         public Page Exist => (Page)existingClientPage;
+
+        public bool IsNew { get => _isNew; set { _isNew = value; ChangeProperty(); } }
+
+        public ViewClient CurrentViewClient
+        {
+            get => currentViewClient;
+            private set
+            {
+                currentViewClient = value;
+                newClientPage.DataContext = currentViewClient;
+            }
+        }
+
+        //public bool IsExist { get => _isExist; set { _isExist = value; ChangeProperty(); } }
+
+        public void ChangeClient(ViewClient client)
+        {
+            if (client.IsAnyClient)
+            {
+                CurrentViewClient = newClient;
+                IsNew = true;
+            }
+            else
+            {
+                CurrentViewClient = client;
+                IsNew = false;
+            }
+        }
 
         public override Client Model()
         {

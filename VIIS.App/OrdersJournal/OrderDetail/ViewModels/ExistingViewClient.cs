@@ -10,37 +10,43 @@ using VIMVVM;
 
 namespace VIIS.App.OrdersJournal.OrderDetail.ViewModels
 {
-    public class ExistingViewClient: ClientsDecorator
+    public class ExistingViewClient: ClientDecorator
     {
-        public ExistingViewClient(): this(new Clients())
-        {
-        }
+        //public ExistingViewClient(): this(new Clients())
+        //{
+        //}
 
-        public ExistingViewClient(Clients other) : base(other)
+        public ExistingViewClient(Clients other, ViewClients clientNames):base(other.First())
         {
-            Clients = new ObservableCollection<ViewClient>(this.Select(client => new ViewClient(client)).ToList());
+            this.clientNames = clientNames;
+            Clients = new ObservableCollection<ViewClient>(other.Select(client => new ViewClient(client)).ToList());
+            Clients.Add(new ViewClient(new AnyClient()));
+            Clear();
         }
-        public ExistingViewClient(Clients other, Client current): this(other)
+        public ExistingViewClient(Clients other, Client current, ViewClients clientNames) : this(other, clientNames)
         {
-            SelectedClient = new ViewClient(current);
+            if(current.IsNew) Clear();
+            else SelectedClient = Clients.FirstOrDefault(client => client.Equals(new ViewClient(current)));
         }
 
         public ObservableCollection<ViewClient> Clients { get; }
         private ViewClient selectedClient;
+        private readonly ViewClients clientNames;
+
         public ViewClient SelectedClient
         {
             get => selectedClient;
             set
             {
                 selectedClient = value;
+                if(selectedClient != null) clientNames.ChangeClient(selectedClient);
                 ChangeProperty();
             }
         }
 
-        public override void Clear()
+        public void Clear()
         {
-            base.Clear();
-            SelectedClient = new ViewClient(new AnyClient());
+            SelectedClient = Clients.FirstOrDefault(client => client.IsAnyClient);
         }
 
         public Client Model()

@@ -36,7 +36,7 @@
                                     <ControlTemplate>
                                         <Border Background="{TemplateBinding Background}" CornerRadius="20">
                                             <StackPanel>
-                                                <Button Margin="0,10,0,0" Content="Viktor Ignatev" FontFamily="/VIIS.App;component/Resources/#Champagne &amp; Limousines">
+                                                <Button Margin="0,10,0,0" Content="{Binding UserName}" FontFamily="/VIIS.App;component/Resources/#Champagne &amp; Limousines">
                                                     <Button.Style>
                                                         <Style TargetType="{x:Type Button}">
                                                             <Setter Property="Height" Value="50"/>

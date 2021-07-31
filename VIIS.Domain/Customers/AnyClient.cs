@@ -11,5 +11,7 @@ namespace VIIS.Domain.Customers
         public AnyClient():base("", "", "", "")
         {
         }
+
+        public override string FullName => "Клиент не выбран";
     }
 }

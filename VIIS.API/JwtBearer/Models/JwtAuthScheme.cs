@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace VIIS.API.JwtBearer.Models
 {
-    public static class JwtAuthScheme
+    public static class AuthSchemes
     {
-        public const string scheme = "Identity.Application," + JwtBearerDefaults.AuthenticationScheme;
+        public const string JwtScheme = "Identity.Application," + JwtBearerDefaults.AuthenticationScheme;
 
     }
 }

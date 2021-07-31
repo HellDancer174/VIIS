@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using VIIS.API.Controllers.Base;
 using VIIS.API.Data.DBObjects;
 using VIIS.API.GlobalModel;
+using VIIS.API.JwtBearer.Models;
 using VIIS.API.ServicesDir;
 using VIIS.Domain.Services;
 
@@ -14,6 +16,7 @@ namespace VIIS.API.Controllers
 {
     [Produces("application/json")]
     [Route("api/ServiceValue")]
+    [Authorize(AuthenticationSchemes = AuthSchemes.JwtScheme)]
     public class ServiceValueController : DBController
     {
         // GET: api/ServiceValue

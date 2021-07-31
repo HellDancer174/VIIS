@@ -23,6 +23,7 @@ namespace VIIS.App.OrdersJournal.OrderDetail.ViewModels
             return this;
         }
 
+        public bool IsAnyClient => String.IsNullOrEmpty(firstName) && String.IsNullOrEmpty(middleName) && String.IsNullOrEmpty(lastName) && IsNew;
 
 
         public void Clear()

@@ -2,18 +2,21 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using VIIS.API.Controllers.Base;
 using VIIS.API.Data.DBObjects;
 using VIIS.API.Employees;
 using VIIS.API.Employees.Models;
+using VIIS.API.JwtBearer.Models;
 using VIIS.Domain.Staff;
 
 namespace VIIS.API.Controllers
 {
     [Produces("application/json")]
     [Route("api/WorkDays")]
+    [Authorize(AuthenticationSchemes = AuthSchemes.JwtScheme)]
     public class WorkDaysController : DBController
     {
         // GET: api/WorkDays

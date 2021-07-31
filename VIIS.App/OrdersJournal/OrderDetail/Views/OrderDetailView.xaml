@@ -58,10 +58,10 @@
                         <materialDesign:TimePicker Grid.Column="2" SelectedTime="{Binding OrdersStart}" Is24Hours="True" FontFamily="/VIIS.App;component/Resources/#Champagne &amp; Limousines"/>
                     </Grid>
                     <TabControl Grid.Row="1" DataContext="{Binding ClientNames}">
-                        <TabItem Header="Новый">
-                            <Frame Content="{Binding New}"/>
+                        <TabItem Header="Текущий">
+                            <Frame Content="{Binding New}" IsEnabled="{Binding IsNew}"/>
                         </TabItem>
-                        <TabItem Header="Существующий">
+                        <TabItem Header="Выберите клиента">
                             <Frame Content="{Binding Exist}"/>
                         </TabItem>
                     </TabControl>

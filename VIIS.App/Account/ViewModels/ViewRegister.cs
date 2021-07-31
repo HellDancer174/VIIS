@@ -10,6 +10,7 @@ using VIIS.App.Account.Models;
 using VIIS.Domain.Global;
 using VIIS.Domain.Data;
 using VIMVVM;
+using System.Windows;
 
 namespace VIIS.App.Account.ViewModels
 {
@@ -26,7 +27,7 @@ namespace VIIS.App.Account.ViewModels
             this.account = account;
             Password = pass;
             SecondPassword = "";
-            SaveCommand = new RelayCommand((obj) => Save(Password, SecondPassword), (obj) => !(String.IsNullOrEmpty(Email) && String.IsNullOrEmpty(Password) && String.IsNullOrEmpty(UserName) && String.IsNullOrEmpty(SecondPassword)));
+            SaveCommand = new RelayCommand(async(obj) => await Save(Password, SecondPassword), (obj) => !(String.IsNullOrEmpty(Email) && String.IsNullOrEmpty(Password) && String.IsNullOrEmpty(UserName) && String.IsNullOrEmpty(SecondPassword)));
         }
         public ViewRegister(JwtAccount account): this("Новый пользователь", true, "Добавить", "Подтвердить пароль", account, new User("", ""), "")
         {
@@ -43,10 +44,16 @@ namespace VIIS.App.Account.ViewModels
         public string SecondPassword { get; set; }
 
 
-        public virtual Task Save(string firstPass, string secondPass)
+        public virtual async Task Save(string firstPass, string secondPass)
         {
-            new WindowCatcher<Exception>(async () => await account.Register(new VIISRegisterModel(Email, UserName, firstPass, secondPass))).Execute();
-            return Task.CompletedTask;
+            try
+            {
+                await account.Register(new VIISRegisterModel(Email, UserName, firstPass, secondPass));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         public RelayCommand SaveCommand { get; }

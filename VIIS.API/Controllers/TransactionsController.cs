@@ -2,18 +2,21 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using VIIS.API.Controllers.Base;
 using VIIS.API.Data.DBObjects;
 using VIIS.API.Finance;
 using VIIS.API.GlobalModel;
+using VIIS.API.JwtBearer.Models;
 using VIIS.Domain.Finance;
 
 namespace VIIS.API.Controllers
 {
     [Produces("application/json")]
     [Route("api/Transactions")]
+    [Authorize(AuthenticationSchemes = AuthSchemes.JwtScheme)]
     public class TransactionsController : DBController
     {
         // GET: api/Transactions

@@ -28,6 +28,10 @@ namespace VIIS.App.OrdersJournal.OrderDetail.ViewModels
             view.Show();
         }
 
+        //public WindowOrderDetail(Order order, Journal journal, ServiceValueList serviceValueList, Clients clients, ViewRepository<ViewTransaction, Transaction> transactions) : base(order, journal, serviceValueList, clients, transactions)
+        //{
+        //}
+
         public override RelayCommand End => new RelayCommand((obj) => { otherDetail.End.Execute(obj); view.Close(); });
 
         public override string SaveButtonName => otherDetail.SaveButtonName;

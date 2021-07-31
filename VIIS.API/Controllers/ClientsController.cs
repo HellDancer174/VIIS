@@ -17,7 +17,7 @@ namespace VIIS.API.Controllers
 {
     [Produces("application/json")]
     [Route("api/Clients")]
-    //[Authorize(AuthenticationSchemes = JwtAuthScheme.scheme)]
+    [Authorize(AuthenticationSchemes = AuthSchemes.JwtScheme)]
     public class ClientsController : DBController
     {
         // GET: api/Clients

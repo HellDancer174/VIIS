@@ -39,7 +39,7 @@ namespace VIIS.App.OrdersJournal.OrderDetail.Views
 
         private void TabControl_Unselected(object sender, RoutedEventArgs e)
         {
-            viewModel.ClientNames.Clear();
+            //viewModel.ClientNames.Clear();
         }
 
     }

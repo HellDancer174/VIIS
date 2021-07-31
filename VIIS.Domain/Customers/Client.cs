@@ -54,6 +54,8 @@ namespace VIIS.Domain.Customers
         {
         }
 
+
+        public virtual bool IsNew => id < 1;
         public virtual bool IsIncomplete => firstName == "" || lastName == "" || phone == "";
 
         public virtual string FullName => String.Format("{0} {1} {2}", lastName, firstName, middleName);
@@ -76,7 +78,7 @@ namespace VIIS.Domain.Customers
         }
         public bool Equals(Client other)
         {
-            return other.firstName == firstName && other.middleName == middleName && other.lastName == lastName;
+            return id == other.id /*other.firstName == firstName && other.middleName == middleName && other.lastName == lastName*/;
         }
 
         public override int GetHashCode()

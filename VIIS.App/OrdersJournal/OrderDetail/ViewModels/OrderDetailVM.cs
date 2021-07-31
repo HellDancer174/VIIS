@@ -34,12 +34,28 @@ namespace VIIS.App.OrdersJournal.OrderDetail.ViewModels
             this.clients = clients;
             this.transactions = transactions;
             this.serviceValueList = new ViewServiceValueList(serviceValueList);
-            ClientNames = new ViewClients(new ViewClient(person), new ExistingViewClient(clients));
+            ClientNames = new ViewClients(new ViewClient(person), clients);
             ViewServices = new ObservableCollection<ViewService>(services.Select(service => new ViewService(this.serviceValueList.ViewServices, service, this)));
-            Price = sale;
         }
-        public OrderDetailVM(OrderDetailVM other): this(other, other.journal, other.serviceValueList, other. clients, other.transactions)
+        public OrderDetailVM(OrderDetailVM other): this(other, other.journal, other.serviceValueList, other.clients, other.transactions)
         {
+        }
+        //public OrderDetailVM(OrderDetailVM other) : this(other, other.journal, other.clients, other.transactions, other.serviceValueList, other.ClientNames, other.ViewServices)
+        //{
+        //}
+
+        public OrderDetailVM(Order order, Journal journal, Clients clients, ViewRepository<ViewTransaction, Transaction> transactions, ViewServiceValueList serviceValueList, ViewClients clientNames, ObservableCollection<ViewService> viewServices):
+            base(order)
+        {
+            this.journal = journal;
+            this.clients = clients;
+            this.transactions = transactions;
+            this.serviceValueList = serviceValueList;
+            ClientNames = clientNames;
+            OrdersStart = ordersStart;
+            ViewServices = viewServices;
+            Price = sale;
+
         }
 
         public ViewClients ClientNames { get; private set; }
@@ -70,6 +86,7 @@ namespace VIIS.App.OrdersJournal.OrderDetail.ViewModels
             try
             {
                 newOrder = ValidOrder();
+                await SaveMethod(newOrder);
             }
             catch (ArgumentException)
             {
@@ -80,12 +97,11 @@ namespace VIIS.App.OrdersJournal.OrderDetail.ViewModels
                 MessageBox.Show(ex.Message);
                 return;
             }
-            await SaveMethod(newOrder);
         });
 
         private Order ValidOrder()
         {
-            Order newOrder = new Order(ClientNames.Model(), ViewServices.Select(viewService => new Service(viewService.SelectedService, OrdersStart, new TimeSpan(0, viewService.TimeSpan, 0))).ToList(), master, Comment, ordersStart, sale, isFinished);
+            Order newOrder = new Order(id, ClientNames.Model(), ViewServices.Select(viewService => new Service(viewService.SelectedService, OrdersStart, new TimeSpan(0, viewService.TimeSpan, 0))).ToList(), master, Comment, ordersStart, sale, isFinished);
             var validatableOrder = new OrderOfJournal(newOrder);
             validatableOrder.Safe();
             return newOrder;

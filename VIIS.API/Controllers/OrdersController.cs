@@ -13,11 +13,14 @@ using ElegantLib;
 using Newtonsoft.Json;
 using VIIS.Domain.Staff;
 using VIIS.API.ServicesDir;
+using Microsoft.AspNetCore.Authorization;
+using VIIS.API.JwtBearer.Models;
 
 namespace VIIS.API.Controllers
 {
     [Produces("application/json")]
     [Route("api/Orders")]
+    [Authorize(AuthenticationSchemes = AuthSchemes.JwtScheme)]
     public class OrdersController : DBController
     {
         // GET: api/Orders

@@ -17,6 +17,7 @@ namespace VIIS.API.Controllers
 {
     [Produces("application/json")]
     [Route("api/Masters")]
+    [Authorize(AuthenticationSchemes = AuthSchemes.JwtScheme)]
     //[Authorize(AuthenticationSchemes = JwtAuthScheme.scheme)]
     public class MastersController : DBController
     {

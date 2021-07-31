@@ -12,7 +12,7 @@ namespace VIIS.Domain.Orders.Decorators
 
         public OrderDecorator(Order other) : base(other)
         {
-            this.other = new Order(other);
+            this.other = other; // Убрал new
         }
     }
 }

@@ -75,17 +75,20 @@ namespace VIIS.App.Main.ViewModels
             Journal journal = new Journal(orders, masters, serviceValues, clients, transactions, saveToken);
             journalPage = new OrdersJournalView(journal);
             this.clients = new ClientsView(new ViewClients(clients, saveToken));
-            staff = new EmployeesTabs(new ViewEmployeesTabs(new EmployeesList(new ViewEmployees(masters, saveToken, journal)), new WorkGraph(new ViewWorkGraph(masters, DateTime.Now, journal)), new PayView()));
+            staff = new EmployeesTabs(new ViewEmployeesTabs(new EmployeesList(new ViewEmployees(masters, saveToken, journal)), new WorkGraph(new ViewWorkGraph(masters, DateTime.Now, journal))));
             finance = new FinanceTabs(new ViewFinance(transactions, new ViewMasterCashList(cashes, saveToken, transactions, masters.Select(master => new ViewEmployee(master)).ToList()), orders, masters));
             this.serviceValues = new ServicesView(new ViewServices(serviceValues, saveToken));
             account = new UsersWindow(users);
             this.view = view;
             this.view.DataContext = this;
+            Current = journalPage;
         }
 
         public ViewMain(MainView view) : this(new Orders(new Master()), new Employees(), new Clients(), new ServiceValueList(), new ViewTransactions(), new Repository<MasterCash>(new List<MasterCash>()), new ViewUsers(), view, (token) => App.Token = token)
         {
         }
+
+        public string UserName { get => App.CurrentUser.ToString(); }
 
         private Page current;
         public Page Current

@@ -21,6 +21,7 @@ using VIIS.Domain.Global;
 namespace VIIS.API.Controllers
 {
     [Route("[controller]/[action]")]
+    [Authorize(AuthenticationSchemes = AuthSchemes.JwtScheme)]
     public class AccountController : Controller
     {
         private readonly SignInManager<ApplicationUser> _signInManager;
@@ -93,6 +94,7 @@ namespace VIIS.API.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public async Task<IActionResult> Login([FromBody] JwtLoginViewModel model)
         {
             if (ModelState.IsValid)
@@ -128,6 +130,7 @@ namespace VIIS.API.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public IActionResult Refresh([FromBody] RefreshViewModel model)
         {
             var handler = new JwtSecurityTokenHandler();

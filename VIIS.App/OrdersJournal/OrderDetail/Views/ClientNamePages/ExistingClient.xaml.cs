@@ -27,8 +27,8 @@ namespace VIIS.App.OrdersJournal.OrderDetail.Views.ClientNamePages
             InitializeComponent();
             DataContext = this.viewModel = viewModel;
         }
-        public ExistingClient(): this(new ExistingViewClient())
-        {
-        }
+        //public ExistingClient(): this(new ExistingViewClient())
+        //{
+        //}
     }
 }

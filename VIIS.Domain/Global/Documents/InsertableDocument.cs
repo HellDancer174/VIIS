@@ -1,5 +1,6 @@
 ﻿using ElegantLib;
 using ElegantLib.Authorize.Tokenize;
+using ElegantLib.Requests;
 using ElegantLib.Requests.JsonRequests;
 using Newtonsoft.Json;
 using System;
@@ -36,7 +37,8 @@ namespace VIIS.Domain.Global.Documents
 
         public virtual async Task TransferAsync()
         {
-            await new MemoryAuthorizedJsonRequest(request, token, new MemoryJwtAccount(new HttpClient(), new VIISJwtURL(), saveToken), saveToken).Response();
+            var response = await new MemoryAuthorizedJsonRequest(request, token, new MemoryJwtAccount(new HttpClient(), new VIISJwtURL(), saveToken), saveToken).Response();
+            if (!response.IsSuccessStatusCode) throw new HttpResponseException(response);
         }
     }
 }

@@ -11,11 +11,14 @@ using VIIS.Domain.Finance;
 using ElegantLib;
 using VIIS.API.Finance;
 using VIIS.API.GlobalModel;
+using Microsoft.AspNetCore.Authorization;
+using VIIS.API.JwtBearer.Models;
 
 namespace VIIS.API.Controllers
 {
     [Produces("application/json")]
     [Route("api/MasterCash")]
+    [Authorize(AuthenticationSchemes = AuthSchemes.JwtScheme)]
     public class MasterCashController : Controller
     {
         // GET: api/MasterCash
