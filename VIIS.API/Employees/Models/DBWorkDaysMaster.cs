@@ -39,7 +39,7 @@ namespace VIIS.API.Employees.Models
             //context.WorkDaysTt.RemoveRange(removableList.Where(day => IsNotFail(day.WorkDate)).ToArray());
             context.WorkDaysTt.RemoveRange(removableList);
             context.SaveChanges();
-            var monthDates = workDaysList.Where(day => IsNotFail(day)||!oldWorkDays.Contains(day)).ToList();
+            var monthDates = workDaysList.Where(day => day.Year == month.Year && day.Month == month.Month && (IsNotFail(day)||!oldWorkDays.Contains(day))).ToList();
 
             //context.WorkDaysTt.AddRange(monthDates.Select(day => new WorkDaysTt(masterID, day)).ToArray());
             context.WorkDaysTt.AddRange(monthDates.Select(day => new WorkDaysTt(masterID, day)).ToArray());

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using VIIS.App.Finance.ViewModels;
 using VIIS.App.GlobalViewModel;
 using VIIS.App.OrdersJournal.Models.OrdersDecorators;
@@ -72,5 +73,6 @@ namespace VIIS.App.OrdersJournal.ViewModels
 
         public RelayCommand CreateOrder => new RelayCommand((obj) => new WindowOrderDetail(new ViewNewOrderDetail(selectedMaster, workDay, journal, serviceValueList, clients, transactions), new OrderDetailView()), (obj) => SelectedMaster is Master);
 
+        public virtual ICommand RefreshCommand => new RelayCommand(async (obj) => await journal.UpdateAsync());
     }
 }

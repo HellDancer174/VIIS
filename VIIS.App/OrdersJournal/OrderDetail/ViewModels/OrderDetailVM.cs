@@ -36,13 +36,19 @@ namespace VIIS.App.OrdersJournal.OrderDetail.ViewModels
             this.serviceValueList = new ViewServiceValueList(serviceValueList);
             ClientNames = new ViewClients(new ViewClient(person), clients);
             ViewServices = new ObservableCollection<ViewService>(services.Select(service => new ViewService(this.serviceValueList.ViewServices, service, this)));
+            Price = sale;
         }
-        public OrderDetailVM(OrderDetailVM other): this(other, other.journal, other.serviceValueList, other.clients, other.transactions)
-        {
-        }
-        //public OrderDetailVM(OrderDetailVM other) : this(other, other.journal, other.clients, other.transactions, other.serviceValueList, other.ClientNames, other.ViewServices)
+        //public OrderDetailVM(Order order, Journal journal, ServiceValueList serviceValueList, Clients clients, ViewRepository<ViewTransaction, Transaction> transactions) : 
+        //    this(order, journal, clients, transactions, new ViewServiceValueList(serviceValueList), new ViewClients(new ViewClient(person), clients),
+        //        new ObservableCollection<ViewService>(services.Select(service => new ViewService(this.serviceValueList.ViewServices, service, this))))
         //{
         //}
+        //public OrderDetailVM(OrderDetailVM other): this(other, other.journal, other.serviceValueList, other.clients, other.transactions)
+        //{
+        //}
+        public OrderDetailVM(OrderDetailVM other) : this(other, other.journal, other.clients, other.transactions, other.serviceValueList, other.ClientNames, other.ViewServices)
+        {
+        }
 
         public OrderDetailVM(Order order, Journal journal, Clients clients, ViewRepository<ViewTransaction, Transaction> transactions, ViewServiceValueList serviceValueList, ViewClients clientNames, ObservableCollection<ViewService> viewServices):
             base(order)

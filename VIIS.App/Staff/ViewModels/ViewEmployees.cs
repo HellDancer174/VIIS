@@ -40,6 +40,7 @@ namespace VIIS.App.Staff.ViewModels
             journal.ChangeStaff(new Employees(this.ToList()));
         }
 
+        public override ICommand RefreshCommand => new RelayCommand(async(obj) => await base.UpdateCollectionAsync());
         //private ViewEmployee selected;
 
         //public new ViewEmployee Selected

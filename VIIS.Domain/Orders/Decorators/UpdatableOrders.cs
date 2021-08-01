@@ -16,7 +16,7 @@ namespace VIIS.Domain.Orders.Decorators
         {
         }
 
-        protected virtual async Task UpdateAsync()
+        public virtual async Task UpdateAsync()
         {
             await Task.CompletedTask;
         }

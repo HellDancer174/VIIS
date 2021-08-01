@@ -108,7 +108,7 @@ namespace VIIS.App.OrdersJournal.ViewModels
             await UpdateAsync();
         }
 
-        protected override async Task UpdateAsync()
+        public override async Task UpdateAsync()
         {
             this.Clear();
             //var elements = await requestsFunc.Invoke(new HttpClient(), url);

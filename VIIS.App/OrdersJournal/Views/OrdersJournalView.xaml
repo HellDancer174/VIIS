@@ -100,11 +100,16 @@
             <Border Grid.Column="1" Grid.Row="1" BorderBrush="#FFCFCFCF" BorderThickness="3,0,0,0">
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="90*"/>
+                        <RowDefinition Height="8*"/>
+                        <RowDefinition Height="85*"/>
                         <RowDefinition Height="7*"/>
                         <RowDefinition Height="3*"/>
                     </Grid.RowDefinitions>
-                    <StackPanel Margin="10,0,0,0" Grid.Row="0">
+                    <Button Style="{StaticResource Material}" Command="{Binding RefreshCommand}" 
+                        Margin="10,0" Height="30" Background="#FFFAFAFA" Foreground="Black">
+                        <TextBlock Text="Обновить" Style="{StaticResource Default}" FontSize="10"/>
+                    </Button>
+                    <StackPanel Margin="10,0,0,0" Grid.Row="1">
                         <TextBlock Text="Парикмахеры" Style="{StaticResource Header}"/>
                         <ListBox ItemsSource="{Binding Masters}" SelectedItem="{Binding SelectedMaster}"/>
                         <TextBlock Text="Маникюр" Style="{StaticResource Header}"/>
@@ -112,7 +117,8 @@
                         <TextBlock Text="Педикюр" Style="{StaticResource Header}"/>
                         <ListBox ItemsSource="{Binding Pedicure}" SelectedItem="{Binding SelectedMaster}"/>
                     </StackPanel>
-                    <Button VerticalAlignment="Center" Style="{StaticResource Material}" Command="{Binding CreateOrder}" Grid.Row="1" Margin="10,0">
+                    <Button VerticalAlignment="Center" Style="{StaticResource Material}" Command="{Binding CreateOrder}"
+                            Grid.Row="2" Margin="10,0">
                         <TextBlock Text="Добавить" FontSize="18" Style="{StaticResource Default}"/>
                     </Button>
                 </Grid>

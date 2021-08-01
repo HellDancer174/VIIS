@@ -21,16 +21,23 @@
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
                 <Border BorderThickness="2" BorderBrush="Black">
-                    <DataGrid ItemsSource="{Binding Collection}" AutoGenerateColumns="False" SelectedItem="{Binding Selected}" FontFamily="/VIIS.App;component/Resources/#Champagne &amp; Limousines">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="Должность" Binding="{Binding Position, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" CanUserReorder="False"/>
-                            <DataGridTextColumn Header="ФИО" Binding="{Binding FullName, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"/>
-                            <DataGridTextColumn Header="Дата рождения" Binding="{Binding BirthDay, Converter={StaticResource DateConverter}, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"/>
-                            <DataGridTextColumn Header="Телефон" Binding="{Binding Phone, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"/>
-                            <DataGridTextColumn Header="Email" Binding="{Binding Email, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"/>
-                        </DataGrid.Columns>
-                    </DataGrid>
+                    <ScrollViewer>
+                        <DataGrid ItemsSource="{Binding Collection}" AutoGenerateColumns="False" SelectedItem="{Binding Selected}" FontFamily="/VIIS.App;component/Resources/#Champagne &amp; Limousines">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Должность" Binding="{Binding Position, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" CanUserReorder="False"/>
+                                <DataGridTextColumn Header="ФИО" Binding="{Binding FullName, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"/>
+                                <DataGridTextColumn Header="Дата рождения" Binding="{Binding BirthDay, Converter={StaticResource DateConverter}, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"/>
+                                <DataGridTextColumn Header="Телефон" Binding="{Binding Phone, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"/>
+                                <DataGridTextColumn Header="Email" Binding="{Binding Email, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </ScrollViewer>
                 </Border>
+                <Button Style="{StaticResource Material}" Command="{Binding RefreshCommand}" 
+                        HorizontalAlignment="Right" VerticalAlignment="Top"
+                        Margin="0,2,20,0" Height="35" Background="#FFFAFAFA" Foreground="Black">
+                    <TextBlock Text="Обновить" Style="{StaticResource Default}"/>
+                </Button>
 
             </Grid>
             <Grid Grid.Row="1">

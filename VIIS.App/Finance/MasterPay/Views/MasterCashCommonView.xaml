@@ -14,13 +14,20 @@
             <RowDefinition Height="20*"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
-            <DataGrid ItemsSource="{Binding Collection}" SelectedItem="{Binding Selected}" AutoGenerateColumns="False" FontFamily="{StaticResource Champagne}">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Мастер" Binding="{Binding MasterName}" IsReadOnly="True"/>
-                    <DataGridTextColumn Header="Заработная плата" Binding="{Binding Cash}" IsReadOnly="True"/>
-                    <DataGridTextColumn Header="Расчетный период" Binding="{Binding DateSpan}" IsReadOnly="True"/>
-                </DataGrid.Columns>
-            </DataGrid>
+            <ScrollViewer>
+                <DataGrid ItemsSource="{Binding Collection}" SelectedItem="{Binding Selected}" AutoGenerateColumns="False" FontFamily="{StaticResource Champagne}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Мастер" Binding="{Binding MasterName}" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Заработная плата" Binding="{Binding Cash}" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Расчетный период" Binding="{Binding DateSpan}" IsReadOnly="True"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </ScrollViewer>
+            <Button Style="{StaticResource Material}" Command="{Binding RefreshCommand}" 
+                        HorizontalAlignment="Right" VerticalAlignment="Top"
+                        Margin="0,0,18,0" Height="35" Background="#FFFAFAFA" Foreground="Black">
+                <TextBlock Text="Обновить" Style="{StaticResource Default}"/>
+            </Button>
         </Grid>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>

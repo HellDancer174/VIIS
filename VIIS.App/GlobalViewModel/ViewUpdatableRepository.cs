@@ -9,6 +9,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using VIIS.Domain.Account;
 using VIIS.Domain.Account.Requests;
 using VIIS.Domain.Global;
@@ -102,6 +103,7 @@ namespace VIIS.App.GlobalViewModel
             await UpdateCollectionAsync();
         }
 
+        public virtual ICommand RefreshCommand => new RelayCommand(async (obj) => await UpdateCollectionAsync());
         protected virtual RelayCommand Command(Action<object> execute) => new RelayCommand(execute, (obj) => Selected is V);
     }
 }

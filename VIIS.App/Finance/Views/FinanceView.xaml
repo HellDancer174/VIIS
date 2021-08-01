@@ -62,12 +62,22 @@
                     </Grid>
                 </Border>
             </Grid>
-            <DataGrid Grid.Row="1" ItemsSource="{Binding Collection}" AutoGenerateColumns="False" SelectedItem="{Binding Selected, UpdateSourceTrigger=PropertyChanged}" FontFamily="/VIIS.App;component/Resources/#Champagne &amp; Limousines">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Название" Binding="{Binding Name}" IsReadOnly="True"/>
-                    <DataGridTextColumn Header="Цена" Binding="{Binding Price}" IsReadOnly="True"/>
-                </DataGrid.Columns>
-            </DataGrid>
+            <Grid Grid.Row="1" >
+                <ScrollViewer>
+                    <DataGrid ItemsSource="{Binding Collection}" AutoGenerateColumns="False" SelectedItem="{Binding Selected, UpdateSourceTrigger=PropertyChanged}" FontFamily="/VIIS.App;component/Resources/#Champagne &amp; Limousines">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Название" Binding="{Binding Name}" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Цена" Binding="{Binding Price}" IsReadOnly="True"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </ScrollViewer>
+                <Button Style="{StaticResource Material}" Command="{Binding RefreshCommand}" 
+                        HorizontalAlignment="Right" VerticalAlignment="Top"
+                        Margin="0,0,18,0" Height="35" Background="#FFFAFAFA" Foreground="Black">
+                    <TextBlock Text="Обновить" Style="{StaticResource Default}"/>
+                </Button>
+            </Grid>
+            
             <Grid Grid.Row="2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
