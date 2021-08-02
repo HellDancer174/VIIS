@@ -31,5 +31,10 @@ namespace VIIS.App.Finance.Views
         public FinanceView(): this(new ViewTransactions())
         {
         }
+
+        private void Calendar_DisplayModeChanged(object sender, CalendarModeChangedEventArgs e)
+        {
+            if (Calendar.DisplayMode == CalendarMode.Month) Calendar.DisplayMode = CalendarMode.Year;
+        }
     }
 }

@@ -25,14 +25,17 @@
                         </DataGrid>
                     </ScrollViewer>
                 </Border>
-                <Button Style="{StaticResource Material}" Command="{Binding RefreshCommand}" 
-                        HorizontalAlignment="Right" VerticalAlignment="Top"
-                        Margin="0,2,20,0" Height="35" Background="#FFFAFAFA" Foreground="Black">
-                    <TextBlock Text="Обновить" Style="{StaticResource Default}"/>
-                </Button>
             </Grid>
             <Grid Grid.Column="1">
-                <StackPanel VerticalAlignment="Center">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="15*"/>
+                    <RowDefinition Height="85*"/>
+                </Grid.RowDefinitions>
+                <Button Style="{StaticResource Material}" Command="{Binding RefreshCommand}" 
+                        Margin="10" Background="#FFFAFAFA" Foreground="Black">
+                    <TextBlock Text="Обновить" Style="{StaticResource Default}"/>
+                </Button>
+                <StackPanel VerticalAlignment="Center" Grid.Row="1">
                     <Button Style="{StaticResource Material}" Command="{Binding AddCommand}" Margin="10">
                         <TextBlock Text="Добавить" Style="{StaticResource Default}"/>
                     </Button>

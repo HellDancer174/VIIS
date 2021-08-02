@@ -93,7 +93,13 @@ namespace VIIS.App.GlobalViewModel
             {
                 this.Add(element);
             }
-            Collection = new ObservableCollection<V>(this.Select(element => viewSelector.Invoke(element)).ToList());
+            ChangeCollection();
+        }
+        protected virtual void ChangeCollection() => ChangeCollection(this);
+
+        protected void ChangeCollection(IEnumerable<T> elements)
+        {
+            Collection = new ObservableCollection<V>(elements.Select(element => viewSelector.Invoke(element)).ToList());
             ChangeProperty(nameof(Collection));
         }
 

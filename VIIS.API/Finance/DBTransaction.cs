@@ -18,13 +18,13 @@ namespace VIIS.API.Finance
         public DBTransaction(Transaction other, DBQuery<TransactionsTt> query) : base(other)
         {
             this.query = query;
-            entity = new TransactionsTt(id, name, sale);
+            entity = new TransactionsTt(id, name, sale, date);
         }
         public DBTransaction(DBTransaction dBTransaction): this(dBTransaction, dBTransaction.query)
         {
 
         }
-        public DBTransaction(TransactionsTt entity): this(new Transaction(entity.Id, entity.Name, entity.Sale), new AnyDBQuery<TransactionsTt>())
+        public DBTransaction(TransactionsTt entity): this(new Transaction(entity.Id, entity.Name, entity.Sale, entity.Date.GetValueOrDefault(new DateTime(1900,01,01))), new AnyDBQuery<TransactionsTt>())
         {
         }
 

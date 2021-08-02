@@ -15,21 +15,27 @@ namespace VIIS.Domain.Finance
         [JsonProperty] protected int id;
         [JsonProperty] protected string name;
         [JsonProperty] protected decimal sale;
+        [JsonProperty] protected DateTime date;
 
-        public Transaction(string name, decimal sale): this(0, name, sale)
+
+        public Transaction(string name, decimal sale, DateTime date): this(0, name, sale, date)
         {
         }
-        public Transaction(): this(nameof(name), 0)
+        public Transaction(string name, decimal sale) : this(name, sale, DateTime.Now)
         {
         }
-        public Transaction(Transaction other): this(other.id, other.name, other.sale)
+        public Transaction(): this(nameof(name), 0, DateTime.Now)
         {
         }
-        public Transaction(int id, string name, decimal sale)
+        public Transaction(Transaction other): this(other.id, other.name, other.sale, other.date)
+        {
+        }
+        public Transaction(int id, string name, decimal sale, DateTime date)
         {
             this.id = id;
             this.name = name;
             this.sale = sale;
+            this.date = date;
         }
 
         public Transaction Sum(Transaction other)
@@ -39,12 +45,17 @@ namespace VIIS.Domain.Finance
         
         public Transaction Sum(Transaction other, string name)
         {
-            return new Transaction(name, sale + other.sale);
+            return new Transaction(name, sale + other.sale, DateTime.Now);
         }
 
         public bool IsCost()
         {
             return sale < 0;
+        }
+
+        public bool IsInMonth(DateTime month)
+        {
+            return date.Month == month.Month && date.Year == month.Year;
         }
 
         public decimal Sale => sale;

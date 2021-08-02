@@ -71,10 +71,10 @@
                     <RowDefinition Height="95*"/>
                 </Grid.RowDefinitions>
                 <Button Style="{StaticResource Material}" Command="{Binding RefreshCommand}" 
-                        Margin="10,0" Grid.Row="0" Height="18" VerticalAlignment="Center" HorizontalAlignment="Left" Background="#FFFAFAFA" Foreground="Black">
+                        Margin="10,0" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Left" Background="#FFFAFAFA" Foreground="Black">
                     <TextBlock Text="Обновить" Style="{StaticResource Default}" FontSize="10"/>
                 </Button>
-                <Grid DataContext="{Binding DaysPage}" Margin="5,0" Grid.Row="1" Background="White">
+                <Grid DataContext="{Binding DaysPage}" Grid.Row="1">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="5*"/>

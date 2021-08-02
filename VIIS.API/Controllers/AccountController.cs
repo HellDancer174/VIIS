@@ -162,7 +162,7 @@ namespace VIIS.API.Controllers
         [HttpDelete]
         public async Task<ActionResult> RemoveUser([FromBody] User user)
         {
-            // НЕльзя удалить самого себя и MainRole
+            // НЕльзя удалить самого себя
             try
             {
                 await new RemovableDBUser(user, _userManager).TransferAsync();

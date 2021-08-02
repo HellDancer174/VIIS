@@ -374,6 +374,11 @@ namespace VIIS.API.Data.DBObjects
                 entity.Property(e => e.Sale)
                     .HasColumnName("sale")
                     .HasColumnType("decimal(18, 0)");
+
+                entity.Property(e => e.Date)
+                .HasColumnName("date")
+                .HasColumnType("datetime");
+
             });
 
             modelBuilder.Entity<WorkDaysTt>(entity =>

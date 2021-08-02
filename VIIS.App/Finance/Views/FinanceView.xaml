@@ -18,7 +18,7 @@
             <ColumnDefinition Width="70*"/>
             <ColumnDefinition Width="240"/>
         </Grid.ColumnDefinitions>
-        <Calendar Grid.Column="1" DisplayMode="Year"/>
+        <Calendar Name="Calendar" Grid.Column="1" DisplayDate="{Binding Month}" DisplayModeChanged="Calendar_DisplayModeChanged" DisplayMode="Year"/>
         <Grid Grid.Column="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="20*"/>
@@ -71,11 +71,6 @@
                         </DataGrid.Columns>
                     </DataGrid>
                 </ScrollViewer>
-                <Button Style="{StaticResource Material}" Command="{Binding RefreshCommand}" 
-                        HorizontalAlignment="Right" VerticalAlignment="Top"
-                        Margin="0,0,18,0" Height="35" Background="#FFFAFAFA" Foreground="Black">
-                    <TextBlock Text="Обновить" Style="{StaticResource Default}"/>
-                </Button>
             </Grid>
             
             <Grid Grid.Row="2">
@@ -83,14 +78,19 @@
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
+                    <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <Button Style="{StaticResource Material}" Command="{Binding AddCommand}" Grid.Column="0" Margin="10">
+                <Button Style="{StaticResource Material}" Command="{Binding RefreshCommand}" 
+                        Margin="10"  Background="#FFFAFAFA" Foreground="Black">
+                    <TextBlock Text="Обновить" Style="{StaticResource Default}"/>
+                </Button>
+                <Button Style="{StaticResource Material}" Command="{Binding AddCommand}" Grid.Column="1" Margin="10">
                     <TextBlock Text="Добавить" Style="{StaticResource Default}"/>
                 </Button>
-                <Button Style="{StaticResource Material}" Command="{Binding ChangeCommand}" Grid.Column="1" Margin="10">
+                <Button Style="{StaticResource Material}" Command="{Binding ChangeCommand}" Grid.Column="2" Margin="10">
                     <TextBlock Text="Редактировать" Style="{StaticResource Default}"/>
                 </Button>
-                <Button Style="{StaticResource Material}" Command="{Binding RemoveCommand}" Grid.Column="2" Margin="10">
+                <Button Style="{StaticResource Material}" Command="{Binding RemoveCommand}" Grid.Column="3" Margin="10">
                     <TextBlock Text="Удалить" Style="{StaticResource Default}"/>
                 </Button>
             </Grid>

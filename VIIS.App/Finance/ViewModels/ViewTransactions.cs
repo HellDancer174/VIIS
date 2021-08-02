@@ -22,24 +22,36 @@ namespace VIIS.App.Finance.ViewModels
         private decimal proceeds;
         private decimal balance;
         private decimal cost;
+        private DateTime month;
 
-        public ViewTransactions(Repository<Transaction> other, Action<RefreshViewModel> saveToken) : 
+        public ViewTransactions(Repository<Transaction> other, Action<RefreshViewModel> saveToken) :
             base(other, saveToken, (transaction) => new ViewTransaction(transaction), new VIISJwtURL().TransactionsUrl)
         {
-            CalcTotal();
+            //CalcTotal();
+            Month = DateTime.Now;
         }
         //public ViewTransactions(Repository<Transaction> other) : this(other, new ObservableCollection<ViewTransaction>(other.Select(transact => new ViewTransaction(transact)).ToList()))
         //{
         //}
-        public ViewTransactions():this(new Repository<Transaction>(new Transaction[] { new Transaction(), new Transaction("pro", 5), new Transaction("dsp", 9) }), (token) => App.Token = token)
+        public ViewTransactions() : this(new Repository<Transaction>(new Transaction[] { new Transaction(), new Transaction("pro", 5), new Transaction("dsp", 9) }), (token) => App.Token = token)
         {
+        }
+
+        public DateTime Month
+        {
+            get => month;
+            set
+            {
+                month = value;
+                ChangeCollection();
+            }
         }
 
         public override ICommand AddCommand => new RelayCommand((obj) => { new ViewTransactionDetail(this); });
 
         public override ICommand ChangeCommand => Command((obj) => { new ViewTransactionDetail(this, new ViewTransaction(Selected)); });
 
-        public override ICommand RemoveCommand => Command(async(obj) => { await RemoveViewAsync(Selected); CalcTotal(); });
+        public override ICommand RemoveCommand => Command(async (obj) => { await RemoveViewAsync(Selected); CalcTotal(); });
 
         public decimal Proceeds
         {
@@ -76,7 +88,7 @@ namespace VIIS.App.Finance.ViewModels
 
         public void CalcTotal()
         {
-            var sum = new SumTransaction(this);
+            var sum = new SumTransaction(Collection);
             Proceeds = sum.Summary();
             Cost = sum.Cost();
             Balance = Proceeds - Cost;
@@ -85,24 +97,30 @@ namespace VIIS.App.Finance.ViewModels
         public override async Task AddViewAsync(ViewTransaction item)
         {
             await base.AddViewAsync(item);
-            CalcTotal();
+            //CalcTotal();
         }
 
         public override async Task RemoveViewAsync(ViewTransaction item)
         {
             await base.RemoveViewAsync(item);
-            CalcTotal();
+            //CalcTotal();
         }
 
         public async Task AddRange(IEnumerable<ViewTransaction> viewTransactions)
         {
-            foreach(var transact in viewTransactions)
+            foreach (var transact in viewTransactions)
             {
                 await AddAsync(transact.Model());
             }
             await UpdateCollectionAsync();
-            CalcTotal();
+            //CalcTotal();
             //await Task.CompletedTask; // отправить на сервер
+        }
+
+        protected override void ChangeCollection()
+        {
+            ChangeCollection(this.Where(trancact => trancact.IsInMonth(month)).ToArray());
+            CalcTotal();
         }
     }
 }

@@ -25,12 +25,10 @@ namespace VIIS.App.GlobalViewModel
             this.jwtURL = jwtURL;
             this.apiUrl = apiUrl;
             this.saveToken = saveToken;
-            //TList().Wait();
             Task.Run(async () =>
             {
                 this.AddRange(await TList());
             }).Wait();
-            //this.AddRange(collection);
         }
         public ApiList(VIISJwtURL jwtURL, string apiUrl, Action<RefreshViewModel> saveToken):this(new MemoryJwtAccount(new HttpClient(), jwtURL, saveToken), jwtURL, apiUrl, saveToken)
         {
