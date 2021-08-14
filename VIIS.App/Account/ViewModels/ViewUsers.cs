@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using VIIS.App.Account.Models;
 using VIIS.App.Account.Views;
@@ -23,22 +24,32 @@ namespace VIIS.App.Account.ViewModels
         private readonly JwtAccount account;
         private readonly RefreshViewModel token;
 
-        public ViewUsers(Repository<User> other, JwtAccount account, RefreshViewModel token) : 
-            base(other, (accesstoken) => App.Token = accesstoken, (user) => new ViewUser(user), new VIISJwtURL().UsersURL)
+        public ViewUsers(Repository<User> other, JwtAccount account, RefreshViewModel token, VIISJwtURL jwtURL) : 
+            base(other, (accesstoken) => App.Token = accesstoken, (user) => new ViewUser(user), jwtURL.UsersURL, jwtURL.LoginURL, jwtURL.ChangePasswordURL, jwtURL.RemoveUserURL)
         {
             this.account = account;
             this.token = token;
         }
-        public ViewUsers():this(new Repository<User>(new List<User>()), new JwtAccount(new System.Net.Http.HttpClient(), new VIISJwtURL()), App.Token)
+        public ViewUsers():this(new Repository<User>(new List<User>()), new JwtAccount(new System.Net.Http.HttpClient(), new VIISJwtURL()), App.Token, new VIISJwtURL())
         {
 
         }
 
-        public override ICommand AddCommand => new RelayCommand((obj)=> new AddOrUpdateUserWindow(new ViewRegister(account)).Show());
+        public override ICommand AddCommand => new RelayCommand((obj)=> new AddOrUpdateUserWindow(new ViewRegister(account, this)).Show());
 
-        public override ICommand ChangeCommand => base.Command((obj) => new AddOrUpdateUserWindow(new ViewChangePassword(account, Selected, "", token)).Show());
+        public override ICommand ChangeCommand => base.Command((obj) => new AddOrUpdateUserWindow(new ViewChangePassword(account, Selected, "", token, this)).Show());
 
-        public override ICommand RemoveCommand => Command(async(obj) => await RemoveViewAsync(Selected));
+        public override ICommand RemoveCommand => Command(async(obj) => 
+        {
+            try
+            {
+                await RemoveViewAsync(Selected);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        });
 
         protected override RelayCommand Command(Action<object> execute)
         {

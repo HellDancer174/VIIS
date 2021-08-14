@@ -76,7 +76,7 @@ namespace VIIS.App.OrdersJournal.OrderDetail.ViewModels
         public virtual string SaveButtonName => "Сохранить";
         public virtual string EndButtonName => "Удалить";
 
-        public RelayCommand Add => new RelayCommand((obl) => ViewServices.Add(new ViewService(serviceValueList.ViewServices, new Service(new ServiceValue()), this)));
+        public RelayCommand Add => new RelayCommand((obl) => { ViewServices.Add(new ViewService(serviceValueList.ViewServices, new Service(new ServiceValue()), this)); ChangeProperty(nameof(ServicesPrice)); });
         public RelayCommand Remove => new RelayCommand((obl) => 
         {
             if (ViewServices.Count == 0) return;

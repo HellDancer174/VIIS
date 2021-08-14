@@ -32,6 +32,7 @@ using System.Net.Http;
 using System.Net;
 using System.Net.Security;
 using ElegantLib.Authorize.Tokenize;
+using VIIS.Domain.Account;
 
 namespace VIIS.App.Main.ViewModels
 {
@@ -44,6 +45,7 @@ namespace VIIS.App.Main.ViewModels
         private readonly Page serviceValues;
         private readonly Page account;
         private readonly MainView view;
+        private readonly JwtAccount jwtAccount = new JwtAccount(new HttpClient(), new VIISJwtURL());
         private readonly Action<RefreshViewModel> saveToken = (token) => App.Token = token;
 
         public ViewMain(Page journal, Page clients, Page staff, Page finance, Page serviceValues, Page account, MainView view)
@@ -112,8 +114,9 @@ namespace VIIS.App.Main.ViewModels
         public RelayCommand ServiceValues => new RelayCommand((obj) => Current = serviceValues);
         public RelayCommand Settings => new RelayCommand((obj) => Current = account);
 
-        public RelayCommand Exit => new RelayCommand((obj) => 
+        public RelayCommand Exit => new RelayCommand(async(obj) => 
         {
+            await jwtAccount.LogOut(App.Token);
             new LoginWindow().Show(); view.Close();
         });
 

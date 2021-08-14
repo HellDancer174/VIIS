@@ -5,6 +5,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -28,13 +29,15 @@ namespace VIIS.API.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IEmailSender _emailSender;
         private readonly ILogger _logger;
+        private readonly IHttpContextAccessor httpContextAccessor;
 
-        public AccountController(SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager, IEmailSender emailSender, ILogger<AccountController> logger)
+        public AccountController(SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager, IEmailSender emailSender, ILogger<AccountController> logger, IHttpContextAccessor httpContextAccessor)
         {
             _signInManager = signInManager;
             this._userManager = userManager;
             this._emailSender = emailSender;
             _logger = logger;
+            this.httpContextAccessor = httpContextAccessor;
         }
 
         [HttpPost]
@@ -42,11 +45,11 @@ namespace VIIS.API.Controllers
         {
             await _signInManager.SignOutAsync();
             _logger.LogInformation("User logged out.");
-            return RedirectToPage("/Index");
+            return Ok();
         }
 
         [HttpPost]
-        public async Task<IActionResult> ChangePassword(VIISChangePasswordModel model)
+        public async Task<IActionResult> ChangePassword([FromBody] VIISChangePasswordModel model)
         {
             if (!ModelState.IsValid) return BadRequest();
             var user = await _userManager.FindByEmailAsync(model.Email);
@@ -165,11 +168,15 @@ namespace VIIS.API.Controllers
             // НЕльзя удалить самого себя
             try
             {
+                var currentUser = await _userManager.FindByEmailAsync(httpContextAccessor.HttpContext.User.Claims
+                    .FirstOrDefault(c => c.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"|| c.Type == "Sub")?.Value);
+                var appUser = await _userManager.FindByNameAsync(user.ToString());
+                if (currentUser.Id == appUser.Id) return BadRequest(String.Format("{0} находится в системе", user));
                 await new RemovableDBUser(user, _userManager).TransferAsync();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return BadRequest();
+                return BadRequest(ex.Message);
             }
             return Ok();
         }

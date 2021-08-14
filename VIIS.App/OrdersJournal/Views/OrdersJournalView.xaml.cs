@@ -15,7 +15,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using VIIS.App.OrdersJournal.ViewModels;
 using VIIS.App.OrdersJournal.ViewModels.DecoratedJournalTimes;
-using VIIS.App.OrdersJournal.ViewModels.Fake;
 using VIIS.Domain.Orders;
 using VIIS.Domain.Staff;
 

@@ -30,7 +30,15 @@ namespace VIIS.App.Account.Views
 
         private async void Save_Click(object sender, RoutedEventArgs e)
         {
-            await userDetail.Save(FPassword.Password, SPassword.Password);
+            try
+            {
+                await userDetail.Save(FPassword.Password, SPassword.Password);
+                Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

@@ -22,7 +22,7 @@ namespace VIIS.App.OrdersJournal.ViewModels
 {
     public class ViewJournalEmployees: EmployeesDecorator
     {
-        private readonly WorkDaysPage daysPage;
+        private readonly ViewWorkDay daysPage;
         private readonly DateTime workDay;
         private readonly ServiceValueList serviceValueList;
         private readonly Clients clients;
@@ -37,7 +37,7 @@ namespace VIIS.App.OrdersJournal.ViewModels
             Masters = this.Where(master => master.Equals(mastersPosition) && master.IsWork(workDay)).ToList();
             Manicure = this.Where(master => master.Equals(manicurePosition) && master.IsWork(workDay)).ToList();
             Pedicure = this.Where(master => master.Equals(pedicurePosition) && master.IsWork(workDay)).ToList();
-            daysPage = new WorkDaysPage(this.ToList(), journal, transactions);
+            daysPage = new ViewWorkDay(this.ToList(), journal, transactions);
             this.workDay = workDay;
             this.serviceValueList = serviceValueList;
             this.clients = clients;
@@ -69,7 +69,7 @@ namespace VIIS.App.OrdersJournal.ViewModels
                 daysPage.AddOrder(order, serviceValueList, clients);
         }
 
-        public WorkDaysPage DaysPage => daysPage;
+        public ViewWorkDay DaysPage => daysPage;
 
         public RelayCommand CreateOrder => new RelayCommand((obj) => new WindowOrderDetail(new ViewNewOrderDetail(selectedMaster, workDay, journal, serviceValueList, clients, transactions), new OrderDetailView()), (obj) => SelectedMaster is Master);
 

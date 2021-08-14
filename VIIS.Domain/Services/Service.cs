@@ -50,7 +50,7 @@ namespace VIIS.Domain.Services
         //    var otherFinish = other.ordersStart + timeSpan;
         //    return !(ordersStart >= other.ordersStart && ordersStart < otherFinish) && !(finish > other.ordersStart && finish <= otherFinish);
         //}
-        public TimeSpan TimesSummary(TimeSpan other)
+        public TimeSpan TimesSum(TimeSpan other)
         {
             return this.timeSpan + other;
         }

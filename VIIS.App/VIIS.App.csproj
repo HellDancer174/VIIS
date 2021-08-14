@@ -339,9 +339,8 @@
     <Compile Include="OrdersJournal\OrderDetail\Views\OrderDetailView.xaml.cs">
       <DependentUpon>OrderDetailView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="OrdersJournal\ViewModels\Fake\FakePage.cs" />
     <Compile Include="OrdersJournal\ViewModels\Journal.cs" />
-    <Compile Include="OrdersJournal\ViewModels\WorkDaysPage.cs" />
+    <Compile Include="OrdersJournal\ViewModels\ViewWorkDay.cs" />
     <Compile Include="OrdersJournal\ViewModels\MastersPage.cs" />
     <Compile Include="OrdersJournal\ViewModels\PageOrder.cs" />
     <Compile Include="OrdersJournal\ViewModels\PageTime.cs" />

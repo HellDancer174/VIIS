@@ -11,14 +11,16 @@ using VIIS.Domain.Global;
 using VIIS.Domain.Data;
 using VIMVVM;
 using System.Windows;
+using VIIS.App.GlobalViewModel;
 
 namespace VIIS.App.Account.ViewModels
 {
     public class ViewRegister : User, IViewUserDetail
     {
         protected readonly JwtAccount account;
+        private readonly ViewUpdatableRepository<ViewUser, User> repository;
 
-        public ViewRegister(string title, bool canChangeLogin, string saveButtonName, string secondPassName, JwtAccount account, User user, string pass): base(user)
+        public ViewRegister(string title, bool canChangeLogin, string saveButtonName, string secondPassName, JwtAccount account, User user, string pass, ViewUpdatableRepository<ViewUser, User> repository) : base(user)
         {
             Title = title;
             CanChangeLogin = canChangeLogin;
@@ -26,10 +28,22 @@ namespace VIIS.App.Account.ViewModels
             SecondPasswordName = secondPassName;
             this.account = account;
             Password = pass;
+            this.repository = repository;
             SecondPassword = "";
-            SaveCommand = new RelayCommand(async(obj) => await Save(Password, SecondPassword), (obj) => !(String.IsNullOrEmpty(Email) && String.IsNullOrEmpty(Password) && String.IsNullOrEmpty(UserName) && String.IsNullOrEmpty(SecondPassword)));
+            SaveCommand = new RelayCommand(async(obj) =>
+            {
+                try
+                {
+                    await Save(Password, SecondPassword);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+
+            }, (obj) => !(String.IsNullOrEmpty(Email) && String.IsNullOrEmpty(Password) && String.IsNullOrEmpty(UserName) && String.IsNullOrEmpty(SecondPassword)));
         }
-        public ViewRegister(JwtAccount account): this("Новый пользователь", true, "Добавить", "Подтвердить пароль", account, new User("", ""), "")
+        public ViewRegister(JwtAccount account, ViewUpdatableRepository<ViewUser, User> repository) : this("Новый пользователь", true, "Добавить", "Подтвердить пароль", account, new User("", ""), "", repository)
         {
         }
 
@@ -46,14 +60,13 @@ namespace VIIS.App.Account.ViewModels
 
         public virtual async Task Save(string firstPass, string secondPass)
         {
-            try
-            {
-                await account.Register(new VIISRegisterModel(Email, UserName, firstPass, secondPass));
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            await ExecuteSave(firstPass, secondPass);
+            await repository.UpdateCollectionAsync();
+        }
+
+        protected virtual async Task ExecuteSave(string firstPass, string secondPass)
+        {
+            await account.Register(new VIISRegisterModel(Email, UserName, firstPass, secondPass));
         }
 
         public RelayCommand SaveCommand { get; }

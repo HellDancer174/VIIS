@@ -58,7 +58,7 @@ namespace VIIS.App.OrdersJournal.ViewModels
         {
             var ordersFinish = ordersStart;
             foreach (var service in services)
-                ordersFinish = ordersFinish.Date + service.TimesSummary(ordersFinish.TimeOfDay);
+                ordersFinish = ordersFinish.Date + service.TimesSum(ordersFinish.TimeOfDay);
             return ordersFinish;
         }
 

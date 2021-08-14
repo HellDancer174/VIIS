@@ -63,15 +63,6 @@ namespace VIIS.Domain.Orders
 
         }
 
-
-        //public bool CheckYourSelf(Order other)
-        //{
-        //    var finish = OrdersFinish();
-        //    var otherFinish = other.OrdersFinish();
-        //    return !(ordersStart >= other.ordersStart && ordersStart < otherFinish) && !(finish > other.ordersStart && finish <= otherFinish);
-
-        //    return !client.Equals(other.client) && !master.Equals(other.master);
-        //}
         public bool CheckDate(DateTime date) => ordersStart.Date == date.Date;
 
         public string MasterName()

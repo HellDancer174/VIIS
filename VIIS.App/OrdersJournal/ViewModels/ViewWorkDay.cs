@@ -19,7 +19,7 @@ using VIMVVM;
 
 namespace VIIS.App.OrdersJournal.ViewModels
 {
-    public class WorkDaysPage : Notifier
+    public class ViewWorkDay : Notifier
     {
         public Master CurrentMaster { get; set; }
 
@@ -29,18 +29,18 @@ namespace VIIS.App.OrdersJournal.ViewModels
         private readonly Journal journal;
         private readonly ViewRepository<ViewTransaction, Transaction> transactions;
 
-        public WorkDaysPage(Dictionary<Master, PageTimes> journalPages, Journal journal, ViewRepository<ViewTransaction, Transaction> transactions)
+        public ViewWorkDay(Dictionary<Master, PageTimes> journalPages, Journal journal, ViewRepository<ViewTransaction, Transaction> transactions)
         {
             this.journalPages = journalPages;
             this.journal = journal;
             this.transactions = transactions;
             //if (journalPages.Count != 0) ChangeMaster(journalPages.Keys.First());
         }
-        public WorkDaysPage(List<Master> masters, Journal journal, ViewRepository<ViewTransaction, Transaction> transactions) :
+        public ViewWorkDay(List<Master> masters, Journal journal, ViewRepository<ViewTransaction, Transaction> transactions) :
             this(masters.ToDictionary(master => master, master => new PageTimes(new TimeSpan(8, 0, 0), new TimeSpan(19, 0, 0), journal, transactions)), journal, transactions)
         {
         }
-        public WorkDaysPage(WorkDaysPage other) : this(other.journalPages, other.journal, other.transactions)
+        public ViewWorkDay(ViewWorkDay other) : this(other.journalPages, other.journal, other.transactions)
         {
         }
         public void AddOrder(Order order, ServiceValueList serviceValueList, Clients clients)
