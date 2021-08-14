@@ -46,7 +46,7 @@ namespace VIIS.Domain.Finance
         {
             return (startDate >= otherStartDate && startDate <= otherFinishDate) || (finishDate >= otherStartDate && finishDate <= otherFinishDate);
         }
-        public bool CheckCollision(MasterCash other) => HasCollision(other.startDate, other.finishDate);
+        public bool CheckCollision(MasterCash other) => master.Equals(other.master) && HasCollision(other.startDate, other.finishDate);
 
         public bool Equals(MasterCash other)
         {

@@ -68,6 +68,7 @@ namespace VIIS.App.Finance.MasterPay.ViewModels
         {
             if (finishDate.Month != startDate.Month || finishDate.Year != startDate.Year) throw new ArgumentException("Начало и конец периода должны быть в одном месяце");
             var monthCollection = Collection.Where(cash => cash.CheckMonth(finishDate)).ToList();
+            //var masterListOfMonthCollection = monthCollection.ToDictionary(cash => cash.MasterName);
             foreach(var cash in viewMasterCashes)
             {
                 foreach(var otherCash in monthCollection)
