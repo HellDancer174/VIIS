@@ -8,6 +8,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using VIIS.App.Finance.ViewModels;
 using VIIS.App.GlobalViewModel;
@@ -88,24 +89,55 @@ namespace VIIS.App.OrdersJournal.ViewModels
 
         public override async Task AddAsync(Order order)
         {
-            //staff.DaysPage.AddOrder(order, serviceValueList, clients);
-            await new InsertableDocument(order, saveToken, App.Token, jwtURL.OrdersUrl).TransferAsync();
-            await UpdateAsync();
+            //try
+            //{
+                staff.DaysPage.AddOrder(order, serviceValueList, clients);
+                await new InsertableDocument(order, saveToken, App.Token, jwtURL.OrdersUrl).TransferAsync();
+            //}
+            //catch (Exception ex)
+            //{
+            //    throw;
+            //    MessageBox.Show(ex.Message);
+            //}
+            //finally
+            //{
+                await UpdateAsync();
+            //}
         }
 
         public override async Task Update(Order oldOrder, Order newOrder)
         {
-            //staff.DaysPage.RemoveOrder(oldOrder);
-            //staff.DaysPage.AddOrder(newOrder, serviceValueList, clients);
-            await new UpdatableDocument(newOrder, saveToken, App.Token, jwtURL.OrdersUrl).TransferAsync();
-            await UpdateAsync();
+            try
+            {
+                staff.DaysPage.RemoveOrder(oldOrder);
+                staff.DaysPage.AddOrder(newOrder, serviceValueList, clients);
+                await new UpdatableDocument(newOrder, saveToken, App.Token, jwtURL.OrdersUrl).TransferAsync();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                await UpdateAsync();
+            }
         }
 
         public override async Task RemoveAsync(Order order)
         {
-            //staff.DaysPage.RemoveOrder(order);
-            await new RemovableDocument(order, saveToken, App.Token, jwtURL.OrdersUrl).TransferAsync();
-            await UpdateAsync();
+            //try
+            //{
+                staff.DaysPage.RemoveOrder(order);
+                await new RemovableDocument(order, saveToken, App.Token, jwtURL.OrdersUrl).TransferAsync();
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show(ex.Message);
+            //}
+            //finally
+            //{
+                await UpdateAsync();
+            //}
         }
 
         public override async Task UpdateAsync()
@@ -121,5 +153,10 @@ namespace VIIS.App.OrdersJournal.ViewModels
 
             ChangeStaff();
         }
+
+        //private void ValidOrder(Order newOrder)
+        //{
+        //    foreach(var order in this)
+        //}
     }
 }

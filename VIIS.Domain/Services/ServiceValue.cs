@@ -46,13 +46,23 @@ namespace VIIS.Domain.Services
 
         public bool Equals(ServiceValue other)
         {
-            return name == other.name && sale == other.sale;
+            return id == other.id;
+            //return name == other.name && sale == other.sale;
         }
 
         public override bool Equals(object obj)
         {
             var other = obj as ServiceValue;
             return other != null && Equals(other);
+        }
+
+        public override int GetHashCode()
+        {
+            var hashCode = 279293300;
+            hashCode = hashCode * -1521134295 + id.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(name);
+            hashCode = hashCode * -1521134295 + sale.GetHashCode();
+            return hashCode;
         }
     }
 }

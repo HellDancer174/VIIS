@@ -57,7 +57,8 @@ namespace VIIS.Domain.Services
 
         public bool Equals(Service other)
         {
-            return other.ordersStart == ordersStart && other.timeSpan == timeSpan && other.name == name;
+            return id == other.id;
+/*            return other.ordersStart == ordersStart && other.timeSpan == timeSpan && other.name == name*/;
         }
 
         public int CompareTo(Service other)
@@ -68,6 +69,22 @@ namespace VIIS.Domain.Services
         public virtual void Transfer()
         {
             return;
+        }
+
+        public override bool Equals(object obj)
+        {
+            var service = obj as Service;
+            return obj is Service && Equals(service);
+        }
+
+        public override int GetHashCode()
+        {
+            return id.GetHashCode();
+            //var hashCode = -1661691646;
+            //hashCode = hashCode * -1521134295 + base.GetHashCode();
+            //hashCode = hashCode * -1521134295 + ordersStart.GetHashCode();
+            //hashCode = hashCode * -1521134295 + EqualityComparer<TimeSpan>.Default.GetHashCode(timeSpan);
+            //return hashCode;
         }
     }
 }

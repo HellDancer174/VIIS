@@ -57,14 +57,15 @@ namespace VIIS.App.OrdersJournal.ViewModels
             if (!item.IsOwnerIndex(timeIndex)) throw new ArgumentOutOfRangeException(String.Format("timeIndex content-а не соответствует timeIndex-у коллекции"));
             foreach(var element in Content)
             {
-                if (!element.CheckOrders(item)) throw new ArgumentException(String.Format("Конфликт заказов: {0}; {1}", element.ToString(), item.ToString()));
+                if (item.HasCollision(element)) throw new ArgumentException(String.Format("Конфликт заказов: {0}; {1}", element.ToString(), item.ToString()));
             }
             Content.Add(item);
+            base.Add(item);
         }
 
         public override bool Remove(PageOrder item)
         {
-            return Content.Remove(item);
+            return Content.Remove(item) && base.Remove(item);
         }
 
         public override void Sort()

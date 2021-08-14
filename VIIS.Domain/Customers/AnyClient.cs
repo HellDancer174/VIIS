@@ -8,7 +8,7 @@ namespace VIIS.Domain.Customers
 {
     public class AnyClient: Client
     {
-        public AnyClient():base("", "", "", "")
+        public AnyClient():base(-1,"", "", "", "")
         {
         }
 

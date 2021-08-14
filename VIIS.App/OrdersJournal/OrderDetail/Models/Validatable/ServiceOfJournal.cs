@@ -13,10 +13,12 @@ namespace VIIS.App.OrdersJournal.OrderDetail.Models.Validatable
     public class ServiceOfJournal : ServiceDecorator
     {
         private ValidProperty<TimeSpan> validTimespan;
+        private ValidProperty<int> validID;
 
         public ServiceOfJournal(Service other) : base(other)
         {
             validTimespan = new ValidProperty<TimeSpan>(String.Format("Продолжительность сервиса {0}", ToString()), timeSpan, timeSpan != new TimeSpan());
+            validID = new ValidProperty<int>(String.Format("Идентификатор сервиса {0}", ToString()), id, id > 0);
         }
 
         public Service Safe()
@@ -35,6 +37,7 @@ namespace VIIS.App.OrdersJournal.OrderDetail.Models.Validatable
         public Service UnSafe()
         {
             validTimespan.Validate();
+            validID.Validate();
             return this;
         }
     }

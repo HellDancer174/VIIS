@@ -72,11 +72,13 @@ namespace VIIS.App.OrdersJournal.OrderDetail.ViewModels
         public override Client Model()
         {
             var anyClient = new AnyClient();
-            var newModel = newClient.Model();
-            var existingModel = existingClient.Model();
-            if (newModel.Equals(anyClient) && !existingModel.Equals(anyClient)) return existingModel;
-            else if (!newModel.Equals(anyClient) && existingModel.Equals(anyClient)) return newModel;
-            else throw new InvalidOperationException(String.Format("Выберите одного клиента: Новый - {0}, Существующий - {1}", newClient.ToString(), existingClient.ToString()));
+            //var newModel = newClient.Model();
+            var currentClient = CurrentViewClient.Model();
+            //var existingModel = existingClient.Model();
+            if (!currentClient.Equals(anyClient)) return currentClient;
+            else throw new InvalidOperationException(anyClient.FullName);
+            //else if (!newModel.Equals(anyClient) && existingModel.Equals(anyClient)) return newModel;
+            //else throw new InvalidOperationException(String.Format("Выберите одного клиента: Новый - {0}, Существующий - {1}", newClient.ToString(), existingClient.ToString()));
         }
 
         public void Clear()

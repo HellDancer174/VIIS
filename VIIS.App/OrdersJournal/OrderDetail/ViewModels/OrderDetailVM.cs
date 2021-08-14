@@ -94,10 +94,10 @@ namespace VIIS.App.OrdersJournal.OrderDetail.ViewModels
                 newOrder = ValidOrder();
                 await SaveMethod(newOrder);
             }
-            catch (ArgumentException)
-            {
-                return;
-            }
+            //catch (ArgumentException)
+            //{
+            //    return;
+            //}
             catch(Exception ex)
             {
                 MessageBox.Show(ex.Message);

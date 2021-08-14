@@ -20,17 +20,17 @@ namespace VIIS.App.OrdersJournal.OrderDetail.Views
     /// </summary>
     public partial class OrderDetailView : Window
     {
-        private OrderDetailVM viewModel;
+        //private OrderDetailVM viewModel;
         public OrderDetailView()
         {
             InitializeComponent();
             //DataContext = viewModel = new OrderDetailVM();
         }
-        public OrderDetailView(OrderDetailVM viewModel)
-        {
-            InitializeComponent();
-            DataContext = this.viewModel = viewModel;
-        }
+        //public OrderDetailView(OrderDetailVM viewModel)
+        //{
+        //    InitializeComponent();
+        //    DataContext = this.viewModel = viewModel;
+        //}
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {

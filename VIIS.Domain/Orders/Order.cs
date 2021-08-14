@@ -70,6 +70,8 @@ namespace VIIS.Domain.Orders
             return master.FullName;
         }
 
+        public DateTime Finish => OrdersFinish();
+
         public virtual KeyValuePair<Master, Order> KeyValue()
         {
             return new KeyValuePair<Master, Order>(master, this);
@@ -77,7 +79,7 @@ namespace VIIS.Domain.Orders
 
         public virtual void Transfer()
         {
-            person.TransferAsync();
+            return;
         }
 
         public bool Equals(Order other)
@@ -93,6 +95,14 @@ namespace VIIS.Domain.Orders
         public bool IsOwner(Master master)
         {
             return this.master.Equals(master);
+        }
+
+        public bool HasCollision(Order other)
+        {
+            var finish = OrdersFinish();
+            var otherFinish = other.OrdersFinish();
+            return (ordersStart >= other.ordersStart && ordersStart < otherFinish) || (finish > other.ordersStart && finish <= otherFinish);
+            //return (startDate >= otherStartDate && startDate <= otherFinishDate) || (finishDate >= otherStartDate && finishDate <= otherFinishDate);
         }
 
         public decimal CashOfMaster(MastersPercent percent)
@@ -115,5 +125,14 @@ namespace VIIS.Domain.Orders
         {
             throw new NotImplementedException();
         }
+
+        protected DateTime OrdersFinish()
+        {
+            var ordersFinish = ordersStart;
+            foreach (var service in services)
+                ordersFinish = ordersFinish.Date + service.TimesSum(ordersFinish.TimeOfDay);
+            return ordersFinish;
+        }
+
     }
 }

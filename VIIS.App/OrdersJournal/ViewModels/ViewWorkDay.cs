@@ -45,26 +45,14 @@ namespace VIIS.App.OrdersJournal.ViewModels
         }
         public void AddOrder(Order order, ServiceValueList serviceValueList, Clients clients)
         {
-            try
-            {
-                journalPages[order.KeyValue().Key].AddContent(new PageOrder(order, serviceValueList, clients));
-            }
-            catch (ArgumentOutOfRangeException)
-            {
-                return;
-            }
+ 
+            journalPages[order.KeyValue().Key].AddContent(new PageOrder(order, serviceValueList, clients));
+            
         }
 
         public void RemoveOrder(Order order)
         {
-            try
-            {
                 journalPages[order.KeyValue().Key].RemoveContent(order);
-            }
-            catch (ArgumentOutOfRangeException)
-            {
-                return;
-            }
         }
 
         public void ChangeMaster(Master master)

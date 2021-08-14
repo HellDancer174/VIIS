@@ -65,6 +65,9 @@ namespace VIIS.App.OrdersJournal.ViewModels
         public virtual void AddContent(PageOrder order)
         {
             validIndex(order.ContentIndex());
+            foreach (var pageTime in Content)
+                foreach (var element in pageTime.Content)
+                    if (order.HasCollision(element)) throw new ArgumentOutOfRangeException(String.Format("Конфликт заказов: {0}; {1}. Ближайшее время {2}", element.ToString(), order.ToString(), element.Finish.AddMinutes(1)));
             Content[order.ContentIndex() - startIndex].Add(order);
             Content[order.ContentIndex() - startIndex].Sort();
         }

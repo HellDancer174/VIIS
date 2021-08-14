@@ -46,21 +46,22 @@ namespace VIIS.App.OrdersJournal.ViewModels
             return index == ordersStart.TimeOfDay.Hours;
         }
 
-        public bool CheckOrders(PageOrder other)
-        {
-            var finish = OrdersFinish();
-            var otherFinish = other.OrdersFinish();
-            return !(ordersStart >= other.ordersStart && ordersStart < otherFinish) && !(finish > other.ordersStart && finish <= otherFinish);
+        //public bool HasCollision(PageOrder other)
+        //{
+        //    var finish = OrdersFinish();
+        //    var otherFinish = other.OrdersFinish();
+        //    return (ordersStart >= other.ordersStart && ordersStart < otherFinish) || (finish > other.ordersStart && finish <= otherFinish);
+        //    //return (startDate >= otherStartDate && startDate <= otherFinishDate) || (finishDate >= otherStartDate && finishDate <= otherFinishDate);
 
-        }
+        //}
 
-        protected DateTime OrdersFinish()
-        {
-            var ordersFinish = ordersStart;
-            foreach (var service in services)
-                ordersFinish = ordersFinish.Date + service.TimesSum(ordersFinish.TimeOfDay);
-            return ordersFinish;
-        }
+        //protected DateTime OrdersFinish()
+        //{
+        //    var ordersFinish = ordersStart;
+        //    foreach (var service in services)
+        //        ordersFinish = ordersFinish.Date + service.TimesSum(ordersFinish.TimeOfDay);
+        //    return ordersFinish;
+        //}
 
         public virtual void ShowDetail(Journal journal, ViewRepository<ViewTransaction, Transaction> transactions)
         {

@@ -65,8 +65,15 @@ namespace VIIS.App.OrdersJournal.ViewModels
 
         public void AddOrdersList(List<Order> orders, ServiceValueList serviceValueList, Clients clients)
         {
-            foreach (var order in orders)
-                daysPage.AddOrder(order, serviceValueList, clients);
+            try
+            {
+                foreach (var order in orders)
+                    daysPage.AddOrder(order, serviceValueList, clients);
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                return;
+            }
         }
 
         public ViewWorkDay DaysPage => daysPage;
