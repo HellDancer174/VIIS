@@ -20,11 +20,13 @@ namespace VIIS.App.Staff.ViewModels
     public class ViewEmployees : ViewUpdatableRepository<ViewEmployee, Master>
     {
         private readonly IJournal journal;
+        private readonly IViewWorkGraph workGraph;
 
-        public ViewEmployees(Employees masters, Action<RefreshViewModel> saveToken, IJournal journal) : base(masters, saveToken, (master) => new ViewEmployee(master), new VIISJwtURL().MasterssUrl)
+        public ViewEmployees(Employees masters, Action<RefreshViewModel> saveToken, IJournal journal, IViewWorkGraph workGraph) : base(masters, saveToken, (master) => new ViewEmployee(master), new VIISJwtURL().MasterssUrl)
         {
             if (Collection.Count != 0) Selected = Collection.First();
             this.journal = journal;
+            this.workGraph = workGraph;
         }
 
         public override ICommand AddCommand => new RelayCommand((obj) => new ViewWindowStaffDetail(this));
@@ -37,6 +39,7 @@ namespace VIIS.App.Staff.ViewModels
         public override async Task UpdateCollectionAsync()
         {
             await base.UpdateCollectionAsync();
+            await workGraph.UpdateCollectionAsync();
             journal.ChangeStaff(new Employees(this.ToList()));
         }
 

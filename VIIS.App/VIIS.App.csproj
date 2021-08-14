@@ -136,6 +136,7 @@
     </Compile>
     <Compile Include="GlobalViewModel\ApiList.cs" />
     <Compile Include="GlobalViewModel\ExtentedViewRepository.cs" />
+    <Compile Include="GlobalViewModel\IUpdatableCollection.cs" />
     <Compile Include="GlobalViewModel\ViewDetail.cs" />
     <Compile Include="GlobalViewModel\RepositoryCommand.cs" />
     <Compile Include="GlobalViewModel\ViewFilterableModel.cs" />
@@ -177,6 +178,7 @@
     <Compile Include="Staff\ViewModels\EmployeesViewModels\ViewAddress.cs" />
     <Compile Include="Staff\ViewModels\EmployeesViewModels\ViewEmployeeDetail.cs" />
     <Compile Include="Staff\ViewModels\EmployeesViewModels\ViewPassport.cs" />
+    <Compile Include="Staff\ViewModels\IViewWorkGraph.cs" />
     <Compile Include="Staff\ViewModels\PayViewModels\ViewMastersCashList.cs" />
     <Compile Include="Staff\ViewModels\ViewEmployee.cs" />
     <Compile Include="Staff\ViewModels\ViewStaffDetail.cs" />

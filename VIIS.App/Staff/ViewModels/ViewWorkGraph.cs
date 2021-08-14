@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using VIIS.App.GlobalViewModel;
 using VIIS.App.OrdersJournal.ViewModels;
 using VIIS.App.Staff.ViewModels.WorkGraphViewModels;
 using VIIS.App.Staff.Views;
@@ -12,7 +13,7 @@ using VIMVVM;
 
 namespace VIIS.App.Staff.ViewModels
 {
-    public class ViewWorkGraph: Notifier
+    public class ViewWorkGraph : Notifier, IUpdatableCollection, IViewWorkGraph
     {
         private DateTime current;
         private readonly IJournal journal;
@@ -45,7 +46,7 @@ namespace VIIS.App.Staff.ViewModels
             try
             {
                 await MastersList.SaveMonth();
-                await MastersList.UpdataCollection();
+                await MastersList.UpdateCollectionAsync();
             }
             catch (Exception ex)
             {
@@ -55,5 +56,11 @@ namespace VIIS.App.Staff.ViewModels
             MessageBox.Show(String.Format("Обновлен график работы на {0}", MastersList.CurrentMonth));
             journal.ChangeStaff(MastersList);
         });
+
+        public async Task UpdateCollectionAsync()
+        {
+            await MastersList.UpdateCollectionAsync();
+            MastersList.ChangeMonth(current);
+        }
     }
 }

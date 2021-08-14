@@ -6,9 +6,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
-using VIIS.App.Staff.Views;
+using VIIS.App.GlobalViewModel;
 using VIIS.Domain.Account;
 using VIIS.Domain.Account.Requests;
 using VIIS.Domain.Global.Documents;
@@ -17,7 +16,7 @@ using VIIS.Domain.Staff.Decorators;
 
 namespace VIIS.App.Staff.ViewModels.WorkGraphViewModels
 {
-    public class ViewMastersList: EmployeesDecorator
+    public class ViewMastersList: EmployeesDecorator, IUpdatableCollection
     {
         private List<int> columnNames;
         private List<ViewMasterOfWorkDays> mastersWorkDays;
@@ -53,7 +52,7 @@ namespace VIIS.App.Staff.ViewModels.WorkGraphViewModels
         public string CurrentMonth { get; private set; }
         public List<int> ColumnNames => columnNames;
 
-        public async Task UpdataCollection()
+        public async Task UpdateCollectionAsync()
         {
             this.Clear();
             //var elements = await requestsFunc.Invoke(new HttpClient(), url);

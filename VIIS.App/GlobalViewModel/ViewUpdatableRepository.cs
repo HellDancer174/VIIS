@@ -19,8 +19,7 @@ using VIMVVM.Detail;
 
 namespace VIIS.App.GlobalViewModel
 {
-    public abstract class ViewUpdatableRepository<V, T>: ViewRepository<V, T>
-     where V : T, IDetailedViewModel<T> where T : IDocumentAsync
+    public abstract class ViewUpdatableRepository<V, T> : ViewRepository<V, T>, IUpdatableCollection where V : T, IDetailedViewModel<T> where T : IDocumentAsync
     {
         private readonly Action<RefreshViewModel> saveToken;
         private readonly Func<T, V> viewSelector;

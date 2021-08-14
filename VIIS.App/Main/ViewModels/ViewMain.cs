@@ -77,7 +77,8 @@ namespace VIIS.App.Main.ViewModels
             Journal journal = new Journal(orders, masters, serviceValues, clients, transactions, saveToken);
             journalPage = new OrdersJournalView(journal);
             this.clients = new ClientsView(new ViewClients(clients, saveToken));
-            staff = new EmployeesTabs(new ViewEmployeesTabs(new EmployeesList(new ViewEmployees(masters, saveToken, journal)), new WorkGraph(new ViewWorkGraph(masters, DateTime.Now, journal))));
+            ViewWorkGraph workGraph = new ViewWorkGraph(masters, DateTime.Now, journal);
+            staff = new EmployeesTabs(new ViewEmployeesTabs(new EmployeesList(new ViewEmployees(masters, saveToken, journal, workGraph)), new WorkGraph(workGraph)));
             finance = new FinanceTabs(new ViewFinance(transactions, new ViewMasterCashList(cashes, saveToken, transactions, masters.Select(master => new ViewEmployee(master)).ToList()), orders, masters));
             this.serviceValues = new ServicesView(new ViewServices(serviceValues, saveToken));
             account = new UsersWindow(users);
