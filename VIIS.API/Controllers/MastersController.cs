@@ -21,6 +21,7 @@ namespace VIIS.API.Controllers
     //[Authorize(AuthenticationSchemes = JwtAuthScheme.scheme)]
     public class MastersController : DBController
     {
+        protected override string ExMessage => "Мастер присутствует в заказе";
         // GET: api/Masters
         [HttpGet]
         public IEnumerable<Master> Get()

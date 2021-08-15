@@ -19,6 +19,7 @@ namespace VIIS.API.Controllers
     [Authorize(AuthenticationSchemes = AuthSchemes.JwtScheme)]
     public class ServiceValueController : DBController
     {
+        protected override string ExMessage => "Сервис присутствует в заказе";
         // GET: api/ServiceValue
         [HttpGet]
         public IEnumerable<ServiceValue> Get()

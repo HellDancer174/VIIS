@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using ElegantLib;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace VIIS.API.Controllers.Base
 {
@@ -21,7 +22,10 @@ namespace VIIS.API.Controllers.Base
             }
             catch (Exception ex)
             {
-                ModelState.AddModelError("", ex.Message);
+                string message = string.Empty;
+                if (ex is DbUpdateException) message = ExMessage;
+                else message = ex.Message;
+                ModelState.AddModelError("", message);
                 if (ex.InnerException != null) ModelState.AddModelError(string.Empty, ex.InnerException.Message);
                 return BadRequest(ModelState);
             }
@@ -41,6 +45,8 @@ namespace VIIS.API.Controllers.Base
                 return default(T);
             }
         }
+
+        protected virtual string ExMessage => "";
 
     }
 }

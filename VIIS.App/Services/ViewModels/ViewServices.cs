@@ -27,7 +27,7 @@ namespace VIIS.App.Services.ViewModels
 
         public override ICommand ChangeCommand => Command((obj) => new ViewServiceDetail(this, new ViewServiceValue(Selected)));
 
-        public override ICommand RemoveCommand => Command(async(obj) => await RemoveViewAsync(Selected));
+        //public override ICommand RemoveCommand => Command(async(obj) => await RemoveViewAsync(Selected));
 
 
     }

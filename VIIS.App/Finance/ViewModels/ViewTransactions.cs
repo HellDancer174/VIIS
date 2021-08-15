@@ -51,7 +51,7 @@ namespace VIIS.App.Finance.ViewModels
 
         public override ICommand ChangeCommand => Command((obj) => { new ViewTransactionDetail(this, new ViewTransaction(Selected)); });
 
-        public override ICommand RemoveCommand => Command(async (obj) => { await RemoveViewAsync(Selected); CalcTotal(); });
+        //public override ICommand RemoveCommand => Command(async (obj) => { await RemoveViewAsync(Selected); CalcTotal(); });
 
         public decimal Proceeds
         {
@@ -120,6 +120,12 @@ namespace VIIS.App.Finance.ViewModels
         protected override void ChangeCollection()
         {
             ChangeCollection(this.Where(trancact => trancact.IsInMonth(month)).ToArray());
+            CalcTotal();
+        }
+
+        public override async Task UpdateCollectionAsync()
+        {
+            await base.UpdateCollectionAsync();
             CalcTotal();
         }
     }

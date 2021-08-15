@@ -48,7 +48,7 @@ namespace VIIS.Domain.Staff
             this.detail = detail;
             this.birthday = birthday;
         }
-        public Master(): this("Валентина", "Игнатьева", "Иониктовна", "", new Position(), new WorkDaysList(), new Address(), new Passport(), new EmployeeDetail(), DateTime.Now.Date, "@mail")
+        public Master(): this("FirstName", "LastName", "MiddleName", "", new Position(), new WorkDaysList(), new Address(), new Passport(), new EmployeeDetail(), DateTime.Now.Date, "@mail")
         {
         }
 

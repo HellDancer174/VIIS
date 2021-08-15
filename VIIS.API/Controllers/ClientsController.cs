@@ -20,6 +20,7 @@ namespace VIIS.API.Controllers
     [Authorize(AuthenticationSchemes = AuthSchemes.JwtScheme)]
     public class ClientsController : DBController
     {
+        protected override string ExMessage => "На клиента оформлен заказ, либо он является нашим сотрудником";
         // GET: api/Clients
         [HttpGet]
         public IEnumerable<Client> Get()
@@ -67,6 +68,8 @@ namespace VIIS.API.Controllers
                 return Execute(new ValidDBClient(new RemovableTDBClient(value, new RemovableDBQuery<PersonsTt>(context.PersonsTt, context), new RemovableDBQuery<AddressesTt>(context.AddressesTt, context))));
             }
         }
+
+
 
     }
 }

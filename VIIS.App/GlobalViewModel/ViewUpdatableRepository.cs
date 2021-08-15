@@ -9,6 +9,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using VIIS.Domain.Account;
 using VIIS.Domain.Account.Requests;
@@ -109,6 +110,32 @@ namespace VIIS.App.GlobalViewModel
         }
 
         public virtual ICommand RefreshCommand => new RelayCommand(async (obj) => await UpdateCollectionAsync());
+
+        public override ICommand RemoveCommand => Command(async (obj) =>
+        {
+            try
+            {
+                await RemoveViewAsync(Selected);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        });
+
         protected virtual RelayCommand Command(Action<object> execute) => new RelayCommand(execute, (obj) => Selected is V);
+
+        //protected virtual void Try(Action action)
+        //{
+        //    try
+        //    {
+        //        action.Invoke();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show(ex.Message);
+        //    }
+        //}
+
     }
 }

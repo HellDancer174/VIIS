@@ -16,7 +16,7 @@ namespace VIIS.Domain.Staff.ValueClasses
         {
             this.position = position;
         }
-        public Position(): this("Мастер - парикмахер")
+        public Position(): this("Мастер-парикмахер")
         {
         }
 

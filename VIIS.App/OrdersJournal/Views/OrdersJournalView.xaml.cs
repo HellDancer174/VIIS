@@ -35,5 +35,11 @@ namespace VIIS.App.OrdersJournal.Views
             DataContext = this.journal = journal;
         }
 
+
+        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var listBox = sender as ListBox;
+            listBox.SelectedIndex = -1;
+        }
     }
 }

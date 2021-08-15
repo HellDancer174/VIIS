@@ -8,6 +8,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using VIIS.App.Account.Models;
 using VIIS.App.GlobalViewModel;
@@ -39,7 +40,14 @@ namespace VIIS.App.Customers.ViewModels
         public override ICommand ChangeCommand => Command((obj) => new ViewWindowClientDetail(new ViewClient(Selected), this));
         public override ICommand RemoveCommand => Command(async (obj) =>
         {
-            await RemoveViewAsync(Selected);
+            try
+            {
+                await RemoveViewAsync(Selected);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         });
 
         //public override async Task AddViewAsync(ViewClient item)

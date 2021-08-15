@@ -54,7 +54,7 @@ namespace VIIS.App.OrdersJournal.ViewModels
         private Master selectedMaster;
         public Master SelectedMaster
         {
-            get => selectedMaster;
+            get => null;
             set
             {
                 if (value == null) return;
@@ -62,6 +62,7 @@ namespace VIIS.App.OrdersJournal.ViewModels
                 DaysPage.ChangeMaster(selectedMaster);
             }
         }
+
 
         public void AddOrdersList(List<Order> orders, ServiceValueList serviceValueList, Clients clients)
         {
@@ -78,7 +79,7 @@ namespace VIIS.App.OrdersJournal.ViewModels
 
         public ViewWorkDay DaysPage => daysPage;
 
-        public RelayCommand CreateOrder => new RelayCommand((obj) => new WindowOrderDetail(new ViewNewOrderDetail(selectedMaster, workDay, journal, serviceValueList, clients, transactions), new OrderDetailView()), (obj) => SelectedMaster is Master);
+        public RelayCommand CreateOrder => new RelayCommand((obj) => new WindowOrderDetail(new ViewNewOrderDetail(selectedMaster, workDay, journal, serviceValueList, clients, transactions), new OrderDetailView()), (obj) => selectedMaster is Master);
 
         public virtual ICommand RefreshCommand => new RelayCommand(async (obj) => await journal.UpdateAsync());
     }

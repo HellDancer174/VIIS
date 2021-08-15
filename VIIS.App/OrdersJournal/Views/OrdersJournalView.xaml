@@ -119,11 +119,11 @@
                     </Grid.RowDefinitions>
                     <StackPanel Margin="10,0,0,0" Grid.Row="0">
                         <TextBlock Text="Парикмахеры" Style="{StaticResource Header}"/>
-                        <ListBox ItemsSource="{Binding Masters}" SelectedItem="{Binding SelectedMaster}"/>
+                        <ListBox ItemsSource="{Binding Masters}" SelectedItem="{Binding SelectedMaster}" SelectionChanged="ListBox_SelectionChanged"/>
                         <TextBlock Text="Маникюр" Style="{StaticResource Header}"/>
-                        <ListBox ItemsSource="{Binding Manicure}" SelectedItem="{Binding SelectedMaster}"/>
+                        <ListBox ItemsSource="{Binding Manicure}" SelectedItem="{Binding SelectedMaster}" SelectionChanged="ListBox_SelectionChanged"/>
                         <TextBlock Text="Педикюр" Style="{StaticResource Header}"/>
-                        <ListBox ItemsSource="{Binding Pedicure}" SelectedItem="{Binding SelectedMaster}"/>
+                        <ListBox ItemsSource="{Binding Pedicure}" SelectedItem="{Binding SelectedMaster}" SelectionChanged="ListBox_SelectionChanged"/>
                     </StackPanel>
                     <Button VerticalAlignment="Center" Style="{StaticResource Material}" Command="{Binding CreateOrder}"
                             Grid.Row="1" Margin="10,0">
