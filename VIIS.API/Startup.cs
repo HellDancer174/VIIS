@@ -50,6 +50,7 @@ namespace VIIS.API
             // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=532713
             services.AddSingleton<IEmailSender, EmailSender>();
             services.AddHttpContextAccessor();
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
