@@ -46,7 +46,7 @@ namespace VIIS.App.OrdersJournal.OrderDetail.ViewModels
         //public OrderDetailVM(OrderDetailVM other): this(other, other.journal, other.serviceValueList, other.clients, other.transactions)
         //{
         //}
-        public OrderDetailVM(OrderDetailVM other) : this(other, other.journal, other.clients, other.transactions, other.serviceValueList, other.ClientNames, other.ViewServices)
+        public OrderDetailVM(OrderDetailVM orderDetail) : this(orderDetail.other, orderDetail.journal, orderDetail.clients, orderDetail.transactions, orderDetail.serviceValueList, orderDetail.ClientNames, orderDetail.ViewServices)
         {
         }
 
