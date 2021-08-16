@@ -36,7 +36,7 @@ namespace VIIS.App.Account.Views
         public LoginWindow()
         {
             InitializeComponent();
-            DataContext = viewLogin = new LoginViewModel(new MemoryJwtAccount(new HttpClient(), new URL("https://localhost:44395/"), (token) => App.Token = token), this);
+            DataContext = viewLogin = new LoginViewModel(new MemoryJwtAccount(new HttpClient(), new VIISJwtURL(), (token) => App.Token = token), this);
         }
         private void Exit_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {

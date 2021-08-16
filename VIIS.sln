@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VIIS.API", "VIIS.API\VIIS.A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VIIS.App", "VIIS.App\VIIS.App.csproj", "{CCD8557F-DA19-4D0D-A536-AFAC926024A9}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "VIIS.Setup", "VIIS.Setup\VIIS.Setup.vdproj", "{A96C6D78-3D98-42BC-A279-020D7D775D3A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,8 @@ Global
 		{CCD8557F-DA19-4D0D-A536-AFAC926024A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CCD8557F-DA19-4D0D-A536-AFAC926024A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CCD8557F-DA19-4D0D-A536-AFAC926024A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A96C6D78-3D98-42BC-A279-020D7D775D3A}.Debug|Any CPU.ActiveCfg = Debug
+		{A96C6D78-3D98-42BC-A279-020D7D775D3A}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -9,7 +9,7 @@ namespace VIIS.Domain.Account
 {
     public class VIISJwtURL : JwtURL
     {
-        public VIISJwtURL() : base("http://viis.u0992410.plsk.regruhosting.ru/"/*"https://localhost:44395"*/)
+        public VIISJwtURL() : base("http://viis.u0992410.plsk.regruhosting.ru"/*"https://localhost:44395"*/)
         {
         }
 
