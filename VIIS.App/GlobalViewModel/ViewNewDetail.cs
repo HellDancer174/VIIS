@@ -17,18 +17,29 @@ namespace VIIS.App.GlobalViewModel
         {
         }
 
-        public override RelayCommand Save => new RelayCommand(async(obj) =>
-        {
-            try
-            {
-                await repository.AddViewAsync(ViewModel);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        });
+        //public override RelayCommand Save => new RelayCommand(async(obj) =>
+        //{
+        //    //try
+        //    //{
+        //        await repository.AddViewAsync(ViewModel);
+        //    //}
+        //    //catch (Exception ex)
+        //    //{
+        //    //    MessageBox.Show(ex.Message);
+        //    //    throw;
+        //    //}
+        //});
 
-        public override RelayCommand End => new RelayCommand((obj) => { });
+        //public override RelayCommand End => new RelayCommand((obj) => { });
+
+        public override Task EndAsync()
+        {
+            return Task.CompletedTask;
+        }
+
+        public override async Task SaveAsync()
+        {
+            await repository.AddViewAsync(ViewModel);
+        }
     }
 }

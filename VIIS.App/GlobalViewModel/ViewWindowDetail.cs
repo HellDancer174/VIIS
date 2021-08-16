@@ -25,8 +25,59 @@ namespace VIIS.App.GlobalViewModel
             repository.Selected = default(V);
         }
 
-        public override RelayCommand Save => new RelayCommand((obj) => { other.Save.Execute(obj); view.Close(); });
+        public override async Task SaveAsync()
+        {
+            try
+            {
+                await other.SaveAsync();
+                view.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return;
+            }
+        }
 
-        public override RelayCommand End => new RelayCommand((obj) => { other.End.Execute(obj); view.Close(); });
+        public override async Task EndAsync()
+        {
+            try
+            {
+                await other.EndAsync();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return;
+            }
+        }
+
+        //public override RelayCommand Save => new RelayCommand((obj) => 
+        //{
+        //    try
+        //    {
+        //        other.Save.Execute(obj);
+        //        view.Close();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show(ex.Message);
+        //        return;
+        //    }
+        //});
+
+        //public override RelayCommand End => new RelayCommand((obj) => 
+        //{
+        //    try
+        //    {
+        //        other.End.Execute(obj);
+        //        view.Close();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show(ex.Message);
+        //        return;
+        //    }
+        //});
     }
 }

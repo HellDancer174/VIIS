@@ -113,7 +113,7 @@
                                     <ContentPresenter />
                                 </ControlTemplate>
                             </Button.Template>
-                            <TextBlock Text="Регистрация" Style="{StaticResource Register}" TextDecorations="Underline" FontSize="14"/>
+                            <!--<TextBlock Text="Регистрация" Style="{StaticResource Register}" TextDecorations="Underline" FontSize="14"/>-->
                         </Button>
                     </Grid>
                 </Grid>

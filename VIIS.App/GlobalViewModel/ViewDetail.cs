@@ -44,27 +44,40 @@ namespace VIIS.App.GlobalViewModel
 
         public virtual RelayCommand Save => new RelayCommand(async (obj) =>
         {
-            try
-            {
-                await repository.UpdateViewAsync(oldViewModel, ViewModel);
-                ViewModel.NotifySelector();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            //try
+            //{
+            await SaveAsync();
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show(ex.Message);
+            //    throw;
+            //}
         });
+
+        public virtual async Task SaveAsync()
+        {
+            await repository.UpdateViewAsync(oldViewModel, ViewModel);
+            ViewModel.NotifySelector();
+        }
+
         public virtual RelayCommand End => new RelayCommand(async (obj) =>
         {
-            try
-            {
-                await repository.RemoveViewAsync(oldViewModel);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            //try
+            //{
+            await EndAsync();
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show(ex.Message);
+            //    throw;
+            //}
         });
+
+        public virtual async Task EndAsync()
+        {
+            await repository.RemoveViewAsync(oldViewModel);
+        }
 
         public V ViewModel { get; }
     }
