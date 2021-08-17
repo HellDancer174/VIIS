@@ -47,14 +47,15 @@ namespace VIIS.App.Staff.ViewModels
             {
                 await MastersList.SaveMonth();
                 await MastersList.UpdateCollectionAsync();
+                Current = current;
+                MessageBox.Show(String.Format("Обновлен график работы на {0}", MastersList.CurrentMonth));
+                journal.ChangeStaff(MastersList);
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+                return;
             }
-            Current = current;
-            MessageBox.Show(String.Format("Обновлен график работы на {0}", MastersList.CurrentMonth));
-            journal.ChangeStaff(MastersList);
         });
 
         public async Task UpdateCollectionAsync()
