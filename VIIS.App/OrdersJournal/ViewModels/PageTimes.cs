@@ -29,7 +29,7 @@ namespace VIIS.App.OrdersJournal.ViewModels
             this.finishIndex = finishIndex;
             validIndex = (index) =>
             {
-                if (index >= finishIndex || index <= startIndex)
+                if (index > finishIndex || index < startIndex)
                     throw new ArgumentOutOfRangeException(String.Format("index должен быть >= {0} и {1} <=", startIndex, finishIndex));
             };
         }
