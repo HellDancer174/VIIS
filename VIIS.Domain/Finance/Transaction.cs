@@ -84,5 +84,10 @@ namespace VIIS.Domain.Finance
             hashCode = hashCode * -1521134295 + sale.GetHashCode();
             return hashCode;
         }
+
+        public override string ToString()
+        {
+            return name;
+        }
     }
 }
