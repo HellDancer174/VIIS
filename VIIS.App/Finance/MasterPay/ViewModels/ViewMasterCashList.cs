@@ -83,7 +83,7 @@ namespace VIIS.App.Finance.MasterPay.ViewModels
         {
             await base.RemoveViewAsync(item);
             var transact = item.Transaction;
-            await transactions.AddViewAsync(new ViewTransaction(new Transaction(String.Format("Возврат транзакции ${0}$", transact), 0 - transact.Sale)));
+            await transactions.AddViewAsync(new ViewTransaction(new Transaction(String.Format("Возврат транзакции ${0}$", transact.ToString()), 0 - transact.Sale)));
         }
 
         public override async Task AddViewAsync(ViewMasterCash item)
