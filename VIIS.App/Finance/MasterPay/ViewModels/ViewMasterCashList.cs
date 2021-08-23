@@ -50,7 +50,14 @@ namespace VIIS.App.Finance.MasterPay.ViewModels
 
         public override ICommand RemoveCommand => new RelayCommand(async (obj) =>
         {
-            await RemoveViewAsync(Selected);
+            try
+            {
+                await RemoveViewAsync(Selected);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }, (obj) => Selected is ViewMasterCash);
 
         public async Task AddRange(IEnumerable<ViewMasterCash> viewMasterCashes)
