@@ -387,17 +387,17 @@
     <Resource Include="Resources\VIIS_Logo.ico" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\ElegantLib\ElegantLib\ElegantLib.csproj">
+    <ProjectReference Include="..\ElegantLib\ElegantLib.csproj">
       <Project>{4aefdb59-cad9-4fd0-954e-f2c686200a55}</Project>
       <Name>ElegantLib</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\VIMVVM\VIMVVM\VIMVVM.csproj">
-      <Project>{b6da2fa6-aca9-4881-bd84-de94bfed2286}</Project>
-      <Name>VIMVVM</Name>
     </ProjectReference>
     <ProjectReference Include="..\VIIS.Domain\VIIS.Domain.csproj">
       <Project>{ed40e2cf-c64a-474e-8e47-e5394889285d}</Project>
       <Name>VIIS.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VIMVVM\VIMVVM.csproj">
+      <Project>{b6da2fa6-aca9-4881-bd84-de94bfed2286}</Project>
+      <Name>VIMVVM</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

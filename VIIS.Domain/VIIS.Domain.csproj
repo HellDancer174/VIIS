@@ -110,17 +110,17 @@
     <Compile Include="Staff\WorkDaysViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\ElegantLib\ElegantLib\ElegantLib.csproj">
-      <Project>{4AEFDB59-CAD9-4FD0-954E-F2C686200A55}</Project>
-      <Name>ElegantLib</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\VIMVVM\VIMVVM\VIMVVM.csproj">
-      <Project>{B6DA2FA6-ACA9-4881-BD84-DE94BFED2286}</Project>
-      <Name>VIMVVM</Name>
-    </ProjectReference>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <ProjectReference Include="..\ElegantLib\ElegantLib.csproj">
+      <Project>{4aefdb59-cad9-4fd0-954e-f2c686200a55}</Project>
+      <Name>ElegantLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VIMVVM\VIMVVM.csproj">
+      <Project>{b6da2fa6-aca9-4881-bd84-de94bfed2286}</Project>
+      <Name>VIMVVM</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
