@@ -24,6 +24,7 @@ namespace VIIS.App.OrdersJournal.OrderDetail.Views
         public OrderDetailView()
         {
             InitializeComponent();
+            Owner = App.Current.MainWindow;
             //DataContext = viewModel = new OrderDetailVM();
         }
         //public OrderDetailView(OrderDetailVM viewModel)
@@ -32,15 +33,15 @@ namespace VIIS.App.OrdersJournal.OrderDetail.Views
         //    DataContext = this.viewModel = viewModel;
         //}
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
+        //private void Button_Click(object sender, RoutedEventArgs e)
+        //{
+        //    this.Close();
+        //}
 
-        private void TabControl_Unselected(object sender, RoutedEventArgs e)
-        {
-            //viewModel.ClientNames.Clear();
-        }
+        //private void TabControl_Unselected(object sender, RoutedEventArgs e)
+        //{
+        //    //viewModel.ClientNames.Clear();
+        //}
 
     }
 }

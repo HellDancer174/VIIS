@@ -30,6 +30,12 @@ namespace VIIS.App.OrdersJournal.ViewModels
             this.serviceValueList = serviceValueList;
             this.clients = clients;
         }
+        public PageOrder(PageOrder pageOrder): base(pageOrder.other)
+        {
+            viewClient = pageOrder.viewClient;
+            serviceValueList = pageOrder.serviceValueList;
+            clients = pageOrder.clients;
+        }
 
         public string Customer => viewClient.FullName;
         public string Phone => viewClient.Phone;

@@ -32,7 +32,8 @@ namespace VIIS.App.OrdersJournal.ViewModels
                 selected = value;
                 if (selected != null)
                 {
-                    selected.ShowDetail(journal, transactions);
+                    new PageOrder(selected).ShowDetail(journal, transactions);
+                    //selected.ShowDetail(journal, transactions);
                     selected = null;
                 } 
             }
