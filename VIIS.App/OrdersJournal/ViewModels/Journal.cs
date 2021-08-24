@@ -12,7 +12,7 @@ using System.Windows;
 using System.Windows.Input;
 using VIIS.App.Finance.ViewModels;
 using VIIS.App.GlobalViewModel;
-using VIIS.App.OrdersJournal.Models.OrdersDecorators;
+using VIIS.App.OrdersJournal.Views;
 using VIIS.Domain.Account;
 using VIIS.Domain.Account.Requests;
 using VIIS.Domain.Customers;
@@ -37,8 +37,9 @@ namespace VIIS.App.OrdersJournal.ViewModels
         private readonly VIISJwtURL jwtURL = new VIISJwtURL();
         private readonly ViewRepository<ViewTransaction, Transaction> transactions;
         private readonly Action<RefreshViewModel> saveToken;
+        private readonly Window owner;
 
-        public Journal(Orders orders, Employees employees, ServiceValueList serviceValueList, Clients clients, ViewRepository<ViewTransaction, Transaction> transactions, Action<RefreshViewModel> saveToken) 
+        public Journal(Orders orders, Employees employees, ServiceValueList serviceValueList, Clients clients, ViewRepository<ViewTransaction, Transaction> transactions, Action<RefreshViewModel> saveToken, Window window) 
             : base(orders)
         {
             this.employees = employees;
@@ -46,10 +47,11 @@ namespace VIIS.App.OrdersJournal.ViewModels
             this.clients = clients;
             this.transactions = transactions;
             this.saveToken = saveToken;
+            this.owner = window;
             currentDate = DateTime.Now.Date;
             ChangeStaff(employees);
         }
-        public Journal():this(new Orders(new Master()), new Employees(), new ServiceValueList(), new Clients(), new ViewTransactions(), (token) => App.Token = token)
+        public Journal():this(new Orders(new Master()), new Employees(), new ServiceValueList(), new Clients(), new ViewTransactions(), (token) => App.Token = token, new Main.Views.MainView())
         {
         }
 
@@ -77,7 +79,7 @@ namespace VIIS.App.OrdersJournal.ViewModels
 
         public void ChangeStaff(Employees masters, ServiceValueList serviceValues, Clients clients)
         {
-            ChangeStaff(new ViewJournalEmployees(masters, currentDate, serviceValues, clients, this, this.Where(order => order.CheckDate(currentDate)).ToList(), transactions));
+            ChangeStaff(new ViewJournalEmployees(masters, currentDate, serviceValues, clients, this, this.Where(order => order.CheckDate(currentDate)).ToList(), transactions, owner));
         }
         public void ChangeStaff()
         {

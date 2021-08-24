@@ -21,11 +21,15 @@ namespace VIIS.App.OrdersJournal.OrderDetail.Views
     public partial class OrderDetailView : Window
     {
         //private OrderDetailVM viewModel;
-        public OrderDetailView()
+        public OrderDetailView(Window owner)
         {
             InitializeComponent();
-            Owner = App.Current.MainWindow;
+            Owner = owner;
             //DataContext = viewModel = new OrderDetailVM();
+        }
+        public OrderDetailView():this(App.Current.MainWindow)
+        {
+
         }
         //public OrderDetailView(OrderDetailVM viewModel)
         //{

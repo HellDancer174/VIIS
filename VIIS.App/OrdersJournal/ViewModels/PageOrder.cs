@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using VIIS.App.Finance.ViewModels;
 using VIIS.App.GlobalViewModel;
-using VIIS.App.OrdersJournal.Models.OrdersDecorators;
 using VIIS.App.OrdersJournal.OrderDetail.ViewModels;
 using VIIS.App.OrdersJournal.OrderDetail.Views;
 using VIIS.App.Services.ViewModels;
@@ -23,18 +23,21 @@ namespace VIIS.App.OrdersJournal.ViewModels
         private readonly ViewClient viewClient;
         private readonly ServiceValueList serviceValueList;
         private readonly Clients clients;
+        private readonly Window owner;
 
-        public PageOrder(Order other, ServiceValueList serviceValueList, Clients clients) : base(other)
+        public PageOrder(Order other, ServiceValueList serviceValueList, Clients clients, Window owner) : base(other)
         {
             viewClient = new ViewClient(person);
             this.serviceValueList = serviceValueList;
             this.clients = clients;
+            this.owner = owner;
         }
         public PageOrder(PageOrder pageOrder): base(pageOrder.other)
         {
             viewClient = pageOrder.viewClient;
             serviceValueList = pageOrder.serviceValueList;
             clients = pageOrder.clients;
+            owner = pageOrder.owner;
         }
 
         public string Customer => viewClient.FullName;
@@ -71,7 +74,7 @@ namespace VIIS.App.OrdersJournal.ViewModels
 
         public virtual void ShowDetail(Journal journal, ViewRepository<ViewTransaction, Transaction> transactions)
         {
-            new WindowOrderDetail(new OrderDetailVM(this, journal, serviceValueList, clients, transactions), new OrderDetailView());
+            new WindowOrderDetail(new OrderDetailVM(this, journal, serviceValueList, clients, transactions), new OrderDetailView(owner));
         }
         public override string ToString()
         {

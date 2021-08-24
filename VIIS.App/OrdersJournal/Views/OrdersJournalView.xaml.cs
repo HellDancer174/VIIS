@@ -28,6 +28,7 @@ namespace VIIS.App.OrdersJournal.Views
         private Journal journal;
         public OrdersJournalView():this(new Journal())
         {
+            //InitializeComponent();
         }
         public OrdersJournalView(Journal journal)
         {

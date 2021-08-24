@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using VIIS.App.Finance.ViewModels;
 using VIIS.App.GlobalViewModel;
-using VIIS.App.OrdersJournal.Models.OrdersDecorators;
 using VIIS.App.OrdersJournal.OrderDetail.Models;
 using VIIS.Domain.Customers;
 using VIIS.Domain.Finance;

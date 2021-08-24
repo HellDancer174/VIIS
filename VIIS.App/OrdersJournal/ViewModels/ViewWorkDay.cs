@@ -5,9 +5,9 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using VIIS.App.Finance.ViewModels;
 using VIIS.App.GlobalViewModel;
-using VIIS.App.OrdersJournal.Models.OrdersDecorators;
 using VIIS.App.OrdersJournal.OrderDetail.ViewModels;
 using VIIS.App.OrdersJournal.OrderDetail.Views;
 using VIIS.Domain.Customers;
@@ -28,25 +28,27 @@ namespace VIIS.App.OrdersJournal.ViewModels
         protected Dictionary<Master, PageTimes> journalPages;
         private readonly Journal journal;
         private readonly ViewRepository<ViewTransaction, Transaction> transactions;
+        private readonly Window owner;
 
-        public ViewWorkDay(Dictionary<Master, PageTimes> journalPages, Journal journal, ViewRepository<ViewTransaction, Transaction> transactions)
+        public ViewWorkDay(Dictionary<Master, PageTimes> journalPages, Journal journal, ViewRepository<ViewTransaction, Transaction> transactions, Window owner)
         {
             this.journalPages = journalPages;
             this.journal = journal;
             this.transactions = transactions;
+            this.owner = owner;
             //if (journalPages.Count != 0) ChangeMaster(journalPages.Keys.First());
         }
-        public ViewWorkDay(List<Master> masters, Journal journal, ViewRepository<ViewTransaction, Transaction> transactions) :
-            this(masters.ToDictionary(master => master, master => new PageTimes(new TimeSpan(8, 0, 0), new TimeSpan(19, 0, 0), journal, transactions)), journal, transactions)
+        public ViewWorkDay(List<Master> masters, Journal journal, ViewRepository<ViewTransaction, Transaction> transactions, Window window) :
+            this(masters.ToDictionary(master => master, master => new PageTimes(new TimeSpan(8, 0, 0), new TimeSpan(19, 0, 0), journal, transactions)), journal, transactions, window)
         {
         }
-        public ViewWorkDay(ViewWorkDay other) : this(other.journalPages, other.journal, other.transactions)
+        public ViewWorkDay(ViewWorkDay other) : this(other.journalPages, other.journal, other.transactions, other.owner)
         {
         }
         public void AddOrder(Order order, ServiceValueList serviceValueList, Clients clients)
         {
  
-            journalPages[order.KeyValue().Key].AddContent(new PageOrder(order, serviceValueList, clients));
+            journalPages[order.KeyValue().Key].AddContent(new PageOrder(order, serviceValueList, clients, owner));
             
         }
 

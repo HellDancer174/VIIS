@@ -143,7 +143,6 @@
     <Compile Include="GlobalViewModel\ViewRepository.cs" />
     <Compile Include="GlobalViewModel\ViewUpdatableRepository.cs" />
     <Compile Include="GlobalViewModel\ViewWindowDetail.cs" />
-    <Compile Include="OrdersJournal\Models\OrdersDecorators\JournalOrder.cs" />
     <Compile Include="OrdersJournal\OrderDetail\Models\IndexedService.cs" />
     <Compile Include="OrdersJournal\OrderDetail\Models\NamingClient.cs" />
     <Compile Include="OrdersJournal\OrderDetail\Models\DetailTransferableOrder.cs" />
@@ -321,10 +320,6 @@
     <Compile Include="Main\Views\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="OrdersJournal\Models\EmployeesDecorators\GroupedEmployees.cs" />
-    <Compile Include="OrdersJournal\Models\OrdersDecorators\ViewTransferableOrder.cs" />
-    <Compile Include="OrdersJournal\Models\OrdersDecorators\ViewTransferableService.cs" />
-    <Compile Include="OrdersJournal\Models\OrdersDecorators\ViewTrasferableOrders.cs" />
     <Compile Include="OrdersJournal\OrderDetail\Models\ViewTransferableClient.cs" />
     <Compile Include="OrdersJournal\OrderDetail\ViewModels\ViewClient.cs" />
     <Compile Include="OrdersJournal\OrderDetail\ViewModels\ExistingViewClient.cs" />
